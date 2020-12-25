@@ -1,0 +1,23 @@
+{
+  "name": "basic_expand",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wumo1016/basic_expand.git"
+  },
+  "keywords": [],
+  "author": "wuyibo <760478279wyb@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wumo1016/basic_expand/issues"
+  },
+  "homepage": "https://github.com/wumo1016/basic_expand#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

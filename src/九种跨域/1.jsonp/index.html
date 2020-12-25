@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function jsonp({ url, params, cb }){
+      return new Promise((r, j) => {
+        const script = document.createElement('script')
+        window[cb] = function(data){ 
+          r(data)
+          document.body.removeChild(script)
+        }
+        params = { ...params, cb }
+        const paramsList = []
+        for (const key in params) {
+          paramsList.push(`${key}=${params[key]}`)
+        }
+        script.src = `${url}?${paramsList.join('&')}`
+        document.body.appendChild(script)
+      })
+    }
+    // jsonp({
+    //   url: 'https://www.baidu.com/sugrec',
+    //   params: {
+    //     prod: 'pc',
+    //     wd: '123456'
+    //   },
+    //   cb: 'show'
+    // }).then(res => {
+    //   console.log(res)
+    // })
+    jsonp({
+      url: 'http://localhost:3000/test',
+      params: {
+        wd: 'love'
+      },
+      cb: 'show'
+    }).then(res => {
+      console.log(res)
+    })
+  </script>
+</body>
+
+</html>
