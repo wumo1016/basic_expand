@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  a页面
+
+  a和b是同域的 http://localhost:3000/a.html http://localhost:3000/b.html
+  c的独立的 http://localhost:4000/c.html
+  a获取c的数据，则跨域  iframe的src改变的瞬间，name不会改变
+
+  <iframe src="http://localhost:4000/c.html" frameborder="0" id="iframe" onload="load()"></iframe>
+
+  <script>
+    let first = true
+
+    function load() {
+      if (first) {
+        const iframe = document.querySelector('#iframe')
+        iframe.src = 'http://localhost:3000/b.html'
+        first = false
+      } else {
+        console.log(iframe.contentWindow.name)
+      }
+    }
+  </script>
+
+</body>
+
+</html>
