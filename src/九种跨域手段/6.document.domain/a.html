@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  a页面
+  <!-- 
+    域名 一级域名www.baidu.com  二级域名 music.baidu.com
+    可以到本地文件hosts中添加域名 C:\Windows\System32\drivers\etc\hosts
+    添加以下内容
+    127.0.0.1 a.wumo.com
+    127.0.0.1 b.wumo.com
+    a页面 http://a.wumo.com:3000/a.html
+    b页面 http://b.wumo.com:3000/b.html
+   -->
+
+   <iframe src="http://b.wumo.com:3000/b.html" frameborder="0" id="iframe" onload="load()"></iframe>
+
+   <script>
+    document.domain = 'wumo.com'
+    function load() {
+      const iframe = document.querySelector('#iframe')
+      console.log(iframe.contentWindow.test)
+    }
+  </script>
+</body>
+</html>
