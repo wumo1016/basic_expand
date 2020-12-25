@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  a页面
+
+  <!-- 
+    路径后的hash值可以用来通信
+    a想获取c页面的数据
+    a给c传一个hash值 c收到hash后 c再把hash值传给b b将结果放到a的hash值中
+   -->
+  <!--  -->
+
+  <iframe src="http://localhost:4000/c.html#test" frameborder="0" id="iframe"></iframe>
+
+  <script>
+    location.hash = ''
+    window.onhashchange = function () {
+      console.log('a页面', location.hash)
+    }
+  </script>
+
+</body>
+
+</html>
