@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  hello
+  <script>
+    document.cookie = 'name=wyb'
+    const ajax = new XMLHttpRequest()
+    ajax.withCredentials = true // 必须携带cookie
+    ajax.open('GET', 'http://localhost:4000/test', true)
+    // 设置的头必须后端允许，否则会报错
+    ajax.setRequestHeader('name', 'wyb')
+    ajax.onreadystatechange = function(){
+      if(ajax.readyState === 4){
+        if(ajax.status >= 200 && ajax.status < 300 || ajax.status === 304){
+          console.log(ajax.response)
+          console.log(ajax.getResponseHeader('name'))
+        }
+      }
+    }
+    ajax.send()
+
+  </script>
+</body>
+</html>
