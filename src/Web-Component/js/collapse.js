@@ -18,9 +18,9 @@ class Collapse extends HTMLElement {
       }
       .wm_collapse{
         width: 100%;
+        border-bottom: 1px solid #ebebeb;
       }
     `
-
     shadow.appendChild(style)
     shadow.appendChild(cloneTemp)
 

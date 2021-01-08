@@ -14,6 +14,9 @@ class CollapseItem extends HTMLElement {
       :host{
         width: 100%;
       }
+      .wm_collapse_item{
+        overflow: hidden;
+      }
       .title{
         height: 40px;
         line-height: 40px;
@@ -25,7 +28,8 @@ class CollapseItem extends HTMLElement {
       }
       .content{
         font-size: 14px;
-        padding-bottom: 20px;
+        transition: all .5s;
+        height: auto;
       }
     `
 
@@ -36,10 +40,11 @@ class CollapseItem extends HTMLElement {
     this.titleEle.addEventListener('click', e => {
       document.querySelector('wm-collapse').dispatchEvent(new CustomEvent('activeChange', {
         detail: {
-          name: this.name,
+          name: this.name
         }
       }))
     })
+    this.height = this.shadowRoot.querySelector('.content').clientHeight
   }
 
   // 监控什么属性变化
@@ -63,7 +68,7 @@ class CollapseItem extends HTMLElement {
     }
     if (this.activeList && this.name) {
       this.isShow = this.activeList.includes(this.name)
-      this.shadowRoot.querySelector('.content').style.display = this.isShow ? 'block' : 'none'
+      this.shadowRoot.querySelector('.content').style.height = this.isShow ? (this.height ? `${this.height + 20}px` : 'auto') : 0
     }
   }
 }
