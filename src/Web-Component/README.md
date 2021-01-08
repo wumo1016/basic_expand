@@ -19,3 +19,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/CSS/var()
 ### :root
 https://developer.mozilla.org/zh-CN/docs/Web/CSS/:root
 > 这个 CSS 伪类匹配文档树的根元素
+
+### CustomEvent
+https://developer.mozilla.org/zh-CN/docs/Web/API/CustomEvent/CustomEvent
+> 设置自定义事件
