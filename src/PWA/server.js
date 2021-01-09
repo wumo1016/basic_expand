@@ -15,8 +15,8 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname)));
 app.use(express.static(path.join(__dirname, 'public')))
 app.get('/api/list', (req, res) => {
-    let start = Math.floor(Math.random() * (list.length - 20));
-    res.json(list.slice(start, start + 20));
+    let start = Math.floor(Math.random() * (list.length - 10));
+    res.json(list.slice(start, start + 10));
 });
 app.post('/add-sub', (req, res) => {
     subs.push(req.body);
