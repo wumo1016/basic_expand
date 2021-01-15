@@ -15,8 +15,10 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname)));
 app.use(express.static(path.join(__dirname, 'public')))
 app.get('/api/list', (req, res) => {
-    let start = Math.floor(Math.random() * (list.length - 10));
-    res.json(list.slice(start, start + 10));
+    const origin = req.headers.origin
+    res.setHeader('Access-Control-Allow-Origin', origin)
+    let start = Math.floor(Math.random() * (list.length - 15));
+    res.json(list.slice(start, start + 15));
 });
 app.post('/add-sub', (req, res) => {
     subs.push(req.body);
