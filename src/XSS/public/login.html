@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="panel panel-danger">
+            <div class="panel-heading">
+              <h3>登录</h3>
+            </div>
+            <div class="panel-body">
+              <form onsubmit="login(event)">
+                <div class="from_group">
+                  <label for="username" class="control-label">用户名</label>
+                  <input type="text" id="username" class="form-control" value="wyb"></input>
+                </div>
+                <div class="from_group">
+                  <label for="password" class="control-label">密码</label>
+                  <input type="password" id="password" class="form-control" value="123"></input>
+                </div>
+                <div class="from_group">
+                  <input type="submit" value="登录" class="btn btn-primary"></input>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script>
+    function login(e){
+      e.preventDefault()
+      const username = $('#username').val()
+      const password = $('#password').val()
+      $.post('/api/login', { username, password }).then(res => {
+        if(res.code === 0){
+          // location.href = '/welcome'
+          // location.href = '/'
+          location.href = '/comment.html'
+        } else {
+          alert(res.error)
+        }
+      })
+    }
+  </script>
+</body>
+
+</html>

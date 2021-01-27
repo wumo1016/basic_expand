@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" id='web'> <button id="add">添加图片</button>
+  <div class="box"></div>
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script>
+    // 不基于后端 DOM-Based
+    // xxx" onerror="alert(1) 输入框内容
+    // "> <script> alert(1) <\/script>  输入框内容 将\去掉
+    $('#add').on('click', function(){
+      // $('.box').html(`<img src="${$('#web').val()}" />`)
+      // 也可以转义输入内容
+      $('.box').html(`<img src="${encodeURI($('#web').val())}" />`)
+    })
+  </script>
+</body>
+
+</html>

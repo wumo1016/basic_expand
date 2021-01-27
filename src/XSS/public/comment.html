@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="panel panel-danger">
+            <div class="panel-heading">
+              <h3>评论</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="list-group"></ul>
+            </div>
+            <div class="panel-fotter">
+              <form onsubmit="addlist(event)">
+                <div class="from_group">
+                  <label for="content" class="control-label">用户名</label>
+                  <input type="text" id="content" class="form-control"></input>
+                </div>
+                <div class="from_group">
+                  <input type="submit" value="发表" class="btn btn-primary"></input>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script>
+    function getList() {
+      $.get('/api/list').then(res => {
+        if (res.code === 0) {
+          let html = ''
+          res.data.forEach(data => {
+            html += `<li class="list-group-item">${data.username}：${data.content}</li>`
+          })
+          $('.list-group').html(html)
+        } else {
+          alert(res.error)
+        }
+      })
+    }
+    getList()
+
+    // 1.前端传递给服务器的时候，过滤
+    // 2.服务器接收的时候过滤
+    // 3.服务器返回的时候过滤
+
+    function encodeHTML(str) {
+      return str.replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+    }
+
+    function addlist(e) {
+      e.preventDefault()
+      const content = $('#content').val()
+      $.post('/api/addlist', {
+        content: encodeHTML(content)
+      }).then(res => {
+        if (res.code === 0) {
+          getList()
+        } else {
+          location.href = '/login.html'
+        }
+      })
+    }
+  </script>
+</body>
+
+</html>
