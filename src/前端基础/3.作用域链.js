@@ -17,15 +17,17 @@ function one() {
 }
 
 var a = 2
-var outer_two = one()
-outer_two()
+// var outer_two = one()
+// outer_two()
 
 
 /* 
 执行上下文有两个阶段，编译阶段和执行阶段
 
-1.编译阶段 会全局寻找var声明和函数声明 进行变量提升
-(如果是var 提升到顶部，赋值undefined 如果是函数声明 直接提升并赋值 *先将所有函数声明提升到顶部，再提升var)
+1.编译阶段(变量提升 确定作用域链 确定this执行) 
+----会全局寻找var声明和函数声明 进行变量提升
+----如果是 var 提升到顶部，赋值undefined 如果是函数声明 直接提升并赋值 
+----先将所有函数声明提升到顶部，再提升var，扫描两遍
 globalExecutionContextVo = {
   one: `()=>{}`,
   a: undefined,
@@ -36,7 +38,7 @@ globalExecutionContext = {
   scopeChain: [globalExecutionContextVo]
 }
 
-2.执行阶段
+2.执行阶段(变量赋值 代码执行)
 globalExecutionContext.VO.a = 2
 
 函数one的编译阶段
@@ -71,7 +73,7 @@ twoExecutionContext = {
 
 */
 
-/* 
+/*
 function test(){
   debugger
   var m = 1
