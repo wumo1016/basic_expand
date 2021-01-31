@@ -38,6 +38,11 @@ class CollapseItem extends HTMLElement {
 
     this.titleEle = shadow.querySelector('.title')
     this.titleEle.addEventListener('click', e => {
+      /* 创建自定义事件2
+      const e = document.createEvent('HTMLEvents')
+      e.initEvent(type, true, true)
+      el.dispatchEvent(e)
+      */
       document.querySelector('wm-collapse').dispatchEvent(new CustomEvent('activeChange', {
         detail: {
           name: this.name
