@@ -35,5 +35,5 @@ new new Foo().getName(); // 3
 /* new new Foo().getName()
 1. new new Foo().getName()   执行 new Foo()  =>  返回Foo的实例
 2. new f.getName()   执行成员访问 f.getName 返回一个函数 
-2. new fun(){ console.log(3); } ()   最后执行这个函数
+3. new fun(){ console.log(3); } ()   最后执行这个函数
 */
