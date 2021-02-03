@@ -39,7 +39,7 @@ new new Foo().getName(); // 3
 */
 
 /* 
-优先级： arguments > 函数声明 > 变量声明
+ 优先级： arguments > 函数声明 > 变量声明
 */
 function test(a){
   function a(){
@@ -48,6 +48,6 @@ function test(a){
   var a = function(){
     console.log(2);
   }
-  a()
+  console.log(a);
 }
-test(function() {console.log(3);})
+test(3) // 3 function(){ console.log(3) }
