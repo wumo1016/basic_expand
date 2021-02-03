@@ -37,3 +37,17 @@ new new Foo().getName(); // 3
 2. new f.getName()   执行成员访问 f.getName 返回一个函数 
 3. new fun(){ console.log(3); } ()   最后执行这个函数
 */
+
+/* 
+优先级： arguments > 函数声明 > 变量声明
+*/
+function test(a){
+  function a(){
+    console.log(1);
+  }
+  var a = function(){
+    console.log(2);
+  }
+  a()
+}
+test(function() {console.log(3);})
