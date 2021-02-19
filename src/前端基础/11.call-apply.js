@@ -23,6 +23,9 @@ Function.prototype.myCall = function (ctx, ...args) {
 }
 fn1.myCall.myCall(fn2)
 
+// 先执行 myCall(fn2)
+// 再执行 fn1.myCall 对应的函数，此时已经没有参数，而this是fn2，所以最终执行的是fn2
+
 Function.prototype.myapply = function (ctx, args) {
   let result
   if (ctx) {
