@@ -30,35 +30,3 @@ getThis.call(person, 'call') // obj-person
 getThis.apply(person, ['apply']) // obj-person
 getThis.bind(person)('bind'); // obj-person
 
-// 手动实现一个 call apply bind
-(function (prototype) {
-  prototype.myCall = function (ctx, ...args) {
-    ctx._$ = this
-    const result = ctx._$(...args)
-    delete ctx._$
-    return result
-  }
-})(Function.prototype);
-getThis.myCall(person, 'myCall');
-
-(function (prototype) {
-  prototype.myApply = function (ctx, args) {
-    ctx._$ = this
-    const result = ctx._$(...args)
-    delete ctx._$
-    return result
-  }
-})(Function.prototype);
-getThis.myApply(person, ['myApply']);
-
-(function (prototype) {
-  prototype.myBind = function (ctx, ...args1) {
-    ctx._$ = this
-    return (...args2) => {
-      const result = ctx._$(...args1, ...args2)
-      delete ctx._$
-      return result
-    }
-  }
-})(Function.prototype);
-getThis.myBind(person, 'myBind')()
