@@ -48,7 +48,7 @@ function test2() {
   console.log(JSON.stringify(arr).replace(/\[|\]/g, '').split(',').map(v => Number(v)));
   // 4
   let arr1 = arr
-  while(arr1.some(v => Array.isArray(v))){
+  while (arr1.some(v => Array.isArray(v))) {
     arr1 = [].concat(...arr1)
   }
   console.log(arr1);
@@ -57,21 +57,28 @@ function test2() {
 // test2()
 
 /* ------------------ 3.实现一个不可变对象 --------------------------- */
-function test3(){
+function test3() {
   // 1.不可扩展(不能添加新的属性)
-  let obj1 = { name: 'wyb' }
+  let obj1 = {
+    name: 'wyb'
+  }
   obj1.age = 18
   Object.preventExtensions(obj1) // 阻止扩展
   obj1.height = 180
   console.log(obj1); // {name: "wyb", age: 18}
   // 2.密封(不能添加新的也不能删除老的)
-  let obj2 = { name: 'wyb', age: 18 }
+  let obj2 = {
+    name: 'wyb',
+    age: 18
+  }
   delete obj2.name
   Object.seal(obj2)
   delete obj2.age
   console.log(obj2); // {age: 18}
   // 3.冻结(不能新增、删除、修改)
-  let obj3 = { name: 'wyb' }
+  let obj3 = {
+    name: 'wyb'
+  }
   obj3.name = 'test'
   Object.freeze(obj3)
   obj3.name = 'wyb'
@@ -79,7 +86,43 @@ function test3(){
 
   // ** 以上都是浅控制
 }
-test3()
+// test3()
+
+/* ---------------------- 4.如何让 (a == 1 && a == 2 && a == 3) 的值为true ----------------------- */
+
+function test4() {
+  // 1
+  /* let value = 1
+  Object.defineProperty(window, 'a', {
+    get() {
+      return value++
+    }
+  }) */
+  // 2
+  /* let i = 1
+  let a = {
+    [Symbol.toPrimitive]: () => i++,
+    valueOf: () => i++,
+    toString: () => i++
+  } */
+  // 3
+  /* let value = 1
+  let a = new Proxy({}, {
+    get() {
+      return () => value++
+    }
+  }) */
+  // 4
+  let a = [1, 2, 3]
+  a.valueOf = a.shift
+  a.toString = a.shift
+
+  if (a == 1 && a == 2 && a == 3) {
+    console.log('成功啦');
+  }
+
+}
+// test4()
 
 
 
