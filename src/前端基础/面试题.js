@@ -124,7 +124,29 @@ function test4() {
 }
 // test4()
 
+/* -------------------- 5.实现一个柯里化函数 ----------------- */
 function test5(){
-
+  // add(1)(2)(3, 4)  => 10
+  // function add(...args1){
+  //   let total = args1.reduce((a, b) => a + b)
+  //   function plus(...args2){
+  //     total += args2.reduce((a, b) => a + b)
+  //     return plus
+  //   }
+  //   plus.toString = function(){
+  //     return total
+  //   }
+  //   return plus
+  // }
+  function add(...args){
+    const _add = add.bind(null, ...args)
+    _add.toString = function(){
+      return args.reduce((a, b) => a + b)
+    }
+    return _add
+  }
+  alert(add(1)(2)(3, 4, 5));
 }
+
 test5()
+
