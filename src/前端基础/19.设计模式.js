@@ -37,23 +37,23 @@
 (function () {
 
   class Observer { // 观察者
-    constructor(who){
+    constructor(who) {
       this.who = who
     }
-    update(state){
+    update(state) {
       console.log(this.who + state);
     }
   }
 
   class Subject { // 被观察者
-    constructor(){
+    constructor() {
       this.state = '开心'
       this.list = []
     }
-    attach(ob){
+    attach(ob) {
       this.list.push(ob)
     }
-    setState(state){ // 更新自己的状态
+    setState(state) { // 更新自己的状态
       this.state = state
       this.list.forEach(ob => ob.update(state))
     }
@@ -68,7 +68,7 @@
 
   subject.setState('难受')
 
-})();
+});
 
 
 
