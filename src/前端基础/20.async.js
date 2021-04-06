@@ -71,8 +71,9 @@
   }
 
   var it = read();
-  it.next(); // 1
-  it.next(); // 2
+  // 给next传递参数时 它的参数会给上一次yield的返回值
+  it.next(); // 1 第一次next传递的next是没有意义的
+  it.next(); // 2 
   it.next(); // 3
 
   let {
@@ -81,4 +82,30 @@
   } = it.next();
   console.log(value, done);
 
+});
+
+(function () {
+  function* read() { // 生成器 它执行的结果叫迭代器 直接调用这个函数是不会执行里面的代码的
+    let a = yield 1;
+    console.log(a);
+    let b = yield 2;
+    console.log(b);
+    let c = yield 3;
+    console.log(c);
+  }
+
+  let it = read()
+
+  let value, done
+  do {
+    let { value: x, done: y } = it.next(value)
+    value = x
+    done = y
+  } while (!done)
+
+});
+
+
+(function(){
+  
 })();
