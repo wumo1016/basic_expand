@@ -30,7 +30,8 @@
         }
       }
       let it = {}
-      it.next = function () {
+      it.next = function (v) { // 下一个next传入的值 会作为上一个yield语句返回的值
+        context.sent = v
         let value = interatorFn(context)
         return {
           value,
@@ -41,31 +42,37 @@
     },
   }
 
-  var _marked = regeneratorRuntime.mark(read);
+  "use strict";
+
+  var _marked = /*#__PURE__*/ regeneratorRuntime.mark(read);
 
   function read() {
+    var a, b, c;
     return regeneratorRuntime.wrap(function read$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            console.log(1);
-            _context.next = 3;
-            return 1;
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return 1;
 
-          case 3:
-            console.log(2);
-            _context.next = 6;
-            return 2;
+        case 2:
+          a = _context.sent;
+          console.log('a', a);
+          _context.next = 6;
+          return 2;
 
-          case 6:
-            console.log(3);
-            _context.next = 9;
-            return 3;
+        case 6:
+          b = _context.sent;
+          console.log('b', b);
+          _context.next = 10;
+          return 3;
 
-          case 9:
-          case "end":
-            return _context.stop();
-        }
+        case 10:
+          c = _context.sent;
+          console.log('c', c);
+
+        case 12:
+        case "end":
+          return _context.stop();
       }
     }, _marked);
   }
@@ -98,7 +105,10 @@
 
   let value, done
   do {
-    let { value: x, done: y } = it.next(value)
+    let {
+      value: x,
+      done: y
+    } = it.next(value)
     value = x
     done = y
   } while (!done)
@@ -106,6 +116,81 @@
 });
 
 
-(function(){
-  
+// 先读a.txt 再读b.txt
+(function () {
+
+  const util = require('util');
+  const fs = require('fs')
+  let readFile = util.promisify(fs.readFile)
+
+  function* read() {
+    let data = yield readFile('a.txt', 'utf8')
+    data = yield readFile(data, 'utf8')
+    return data
+  }
+
+  // 原生写法
+  {
+    let it = read()
+    let {
+      value,
+      done
+    } = it.next()
+    value.then(data => {
+      let {
+        value,
+        done
+      } = it.next(data)
+      value.then(data => {
+        let {
+          value,
+          done
+        } = it.next(data)
+        console.log(value, done); // b.txt true
+      })
+    })
+  }
+  // TJ co 利用co库
+  {
+    const co = require('co')
+    co(read()).then(data => {
+      console.log(data); // b.txt
+    }).catch(e => {
+      console.log(e);
+    })
+    // 手写简易co库
+    function myco(it) {
+      return new Promise((resolve, reject) => {
+        function next(data) {
+          const {
+            value,
+            done
+          } = it.next(data)
+          if (done) {
+            resolve(value)
+          } else {
+            Promise.resolve(value).then(next, reject)
+          }
+        }
+        next()
+      })
+    }
+    myco(read()).then(data => {
+      console.log(data); // b.txt
+    }).catch(e => {
+      console.log(e);
+    })
+  }
+  // async await 写法 == generator + co
+  {
+    async function read() {
+      let data = await readFile('a.txt', 'utf8')
+      data = await readFile(data, 'utf8')
+      return data
+    }
+    read().then(data => {
+      console.log(data); // b.txt
+    })
+  }
+
 })();
