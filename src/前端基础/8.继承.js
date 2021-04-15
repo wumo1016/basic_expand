@@ -1,5 +1,4 @@
 
-
 function _extends(Child, Father) {
   Child.__proto__ = Father;//继承静态属性的方法
   function Temp() {
