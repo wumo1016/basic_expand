@@ -19,7 +19,7 @@ Function.prototype.myCall = function (ctx, ...args) {
     result = ctx._$(...args)
     delete ctx._$
   } else {
-    result = this()
+    result = this(...args)
   }
   return result
 }
@@ -35,21 +35,22 @@ Function.prototype.myapply = function (ctx, args) {
     result = ctx._$(...args)
     delete ctx._$
   } else {
-    result = this()
+    result = this(...args)
   }
+  return result
 }
 
 Function.prototype.mybind = function (ctx, ...args1) {
   let func = this
   return function (...args2) {
-    if(!ctx){
+    if (!ctx) {
       return func(...args2)
     }
     return func.call(ctx, ...args1, ...args2)
   }
 }
 
-function fn3(){
+function fn3() {
   console.log(this, arguments);
 }
 const obj = {
