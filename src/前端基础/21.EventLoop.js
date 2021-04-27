@@ -13,7 +13,7 @@
 // 事件循环：宏任务=>微任务=>GPU渲染=>宏任务...
 
 // 宏任务：界面渲染、script脚本、setTimeout、setInterval、postMessage、MessageChannel、setImmediate(ID) 事件 ajax
-// 微任务：promise.then、MutationObserver
+// 微任务：promise.nextTick、promise.then、MutationObserver
 
 // 当前宏任务中创建的微任务，在当前宏任务执行完后，优先清除自己的微任务队列，再执行其他的宏任务
 // 微任务中再次创建微任务，直接在当前队列中清除
