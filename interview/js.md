@@ -33,3 +33,8 @@
   - writable：是否可以通过赋值运算符改变
   - get
   - set
+
+## 深拷贝
+  - JSON.parse(JSON.strigfy(obj))
+    - 会忽略undefined、symbol、函数
+    - 不能解决循环引用问题，会直接报错
