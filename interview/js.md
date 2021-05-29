@@ -64,6 +64,76 @@
 ## 事件模型
   - 事件发生的三个阶段 事件捕获阶段 + 事件处理阶段 + 事件冒泡阶段
   - 阻止冒泡：
-    - 标准：e.stopPropagation()
-    - IE：window.event.cancelBubble = false
+    - 标准：`e.stopPropagation()`
+    - IE：`window.event.cancelBubble = false`
   - 阻止捕获：
+    - 标准：e.preventDefault()
+    - IE：`window.event.returnValue`
+
+## 内存泄露
+  - 介绍：不再需要使用的变量存在于内存中
+  - 哪些操作会导致内存泄漏
+    - 意外的全局变量：`a = 123`
+    - 闭包使用不当
+
+## ["1", "2", "3"].map(parseInt)的答案?
+  - map函数传入三个参数：ele、index、arr
+  - parseInt接收两个参数：string、radix
+    - radix值必须介于2-35之间 默认10 写0也表示10
+      - radix如果不满足就返回NaN
+      - string如果不满足对应进制的值 也返回NaN
+
+## 箭头函数
+  - 内部this是定义时就确定的(外部块的this) 而不是使用时
+  - 不能当作构造函数 所以不能new
+  - 没有arguments对象 可以使用rest参数代替
+  - 不能使用yield命令 也就是不能当作generator函数
+
+## caller与callee的区别
+  - caller
+    - 如果fn1在全局做作用域中被调用
+    ```
+    function fn1() {
+      console.log(fn1.caller); // null
+    }
+    fn1()
+    ```
+    - 如果fn1在fn2中被调用 就返回fn2
+    ```
+    function fn1() {
+      console.log(fn1.caller); // fn2
+    }
+    function fn2(params) {
+      fn1()
+    }
+    fn2()
+    ```
+  - callee
+    - arguments对象的一个属性 返回当前正在被执行的函数
+
+  ## JSON.parse(JSON.stringfy(obj))的弊端
+    - 会忽略undefined、symbol、函数
+    ```
+    let obj = {
+      age: undefined,
+      sex: Symbol('male'),
+      jobs: function () {},
+    }
+    console.log(JSON.parse(JSON.stringify(obj))) // {}
+    ```
+    - 不能解决循环引用问题 会直接报错
+    ```
+    let obj = {
+      b: {
+        c: 2
+      }
+    }
+    obj.b.c = obj.b
+    console.log(JSON.parse(JSON.stringify(obj)))
+    ```
+## 遍历对象的方法
+  - for in
+  - Object.keys
+  - Object.getOwnPropertyNames
+  - Reflect.ownKeys (返回对象的所有属性)
+
