@@ -138,3 +138,39 @@
   - 用于扩展全局插件
   - 如果传入的是个函数 则直接调用 如果是对象且有install函数 则调用install'函数
   - 还会在Vue._installedPlugins上缓存组件 防止一个插件被注册多次
+
+## hash路由和history路由模式的原理
+  - hash
+    - 原理：通过监听hashChange事件
+    - 缺点：不美观
+  - history
+    - 原理：通过pushState事件改变url
+    - 缺点：刷新会出现404
+    - nginx配置 `try_files $uri $uri/ index.html`
+
+## slot插槽
+  - 普通插槽
+  - 具名插槽
+  - 作用域插槽
+
+## v-model原理
+  - input：value+input事件
+  - 组件：对应组件attrs的属性 并添加默认input事件(model中定义)
+
+## vue源码使用了那些设计模式
+  - 发布订阅 $on $emit
+  - 观察者模式：没个属性都有一个dep 每个dep保存了对应的watcher
+  - 策略模式：margeOptions 组件的data、生命周期等的合并
+  - 代理模式：提供一个代理对象 并有对象控制对源对象的引用 _data _props
+  - 单例模式：比如vue的插件 一个vue只会有一个插件实例
+  - 工厂模式：比如虚拟节点的创建 传入不同的参数即可
+
+## vue与raect的相似与区别
+  - 相似
+    - 都使用了虚拟dom
+    - 都提倡组件化
+    - 都是props来进行父子间的传值
+  - 区别
+    - 写法上：vue采用接近html模板的写法 而react推荐使用jsx写法
+    - react改变数据就必须使用setState、而vue可以直接通过this改变
+    - vue主要实现了双向绑定、而react的数据流是单向的
