@@ -39,8 +39,26 @@
   - 通配符(*)、标签、类(.)、id(#)、子代(ul>li)、后代(ul li)、兄弟(.nav~div)、相邻(下一个兄弟)(.nav+div)
   - 属性选择器(input[name="name"])、伪类、伪元素
   - 可继承：font-size、font-family、color
+  - css3中用单冒号:表示伪类 用双冒号::表示伪元素 但是为了兼容已有写法 有些浏览器也可以使用单冒号表示伪元素
 
 ## css3
   - 圆角(border-radius)、阴影(box-shadow)、转换(transfrom)、渐变(linear-gradient)、媒体查询
   - 新增伪类：
     - :nth-child(n) :nth-of-type(n) :first-of-type :last-of-type :disabled :checked
+
+## position:fixed 在android下无效怎么处理
+  - 因为移动端浏览器默认的viewport叫做layoutviewport
+  - 在移动端显示时，因为layoutviewport的宽度大于移动端屏幕的宽度，所以页面会出现滚动条左右移动
+  - 而fixed的元素是相对layoutviewport来固定位置的，而不是移动端屏幕来固定位置的，所以会出现感觉fixed无效的情况。
+  - 解决
+    - `<metaname="viewport"content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/> `
+
+## transition和animation的区别
+  - transition关注的是css属性的变化 属性值和时间是一个三次贝塞尔曲线
+  - animation关注的是元素本身 动画更加灵活
+    - name：需要绑定的keyframe名称
+    - duration：完成动画所需要的时间
+    - time-function：规定动画的速度曲线 linear(匀速) ease(低速->加快->慢) ease-in(低速开始) ease-out(低速结束) ease-in-out(低速开始和结束)
+    - delay：动画开始之前的延迟
+    - iteration-count：动画播放的次数 infinite(无限次)
+    - direction：是否反向播放 normal(正常) alternate(反向)
