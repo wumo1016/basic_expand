@@ -47,3 +47,32 @@
     - 防范：
       - 通过设置http响应头 设置本网页不能通过iframe显示
       - 通过js检测 如果当前页面是通过iframe显示的 直接隐藏所有内容
+
+## linux常见命令
+  - `ls` 查看当前目录下所有的文件和文件夹
+  - `cd xx` 进入xx目录
+  - `cd ..` 返回上一目录
+  - `cd /` 返回根目录
+  - `mkdir xx` 创建xx文件夹
+  - `mkdir -p a/b/c` 递归创建目录
+  - `touch xx` 创建xx文件
+  - `rm -f xx` 删除文件xx
+  - `rm -rf xx` 删除文件夹xx
+  - `which xx` 查看xx文件所在路径
+
+## docker常用命令
+  - 查看docker信息
+    - `docker version` 查看docker版本
+    - `docker info` 查看docker信息
+  - 镜像操作
+    - `docker search image_name` 检索镜像
+    - `docker pull name` 下载镜像
+    - `docker images` 列出所有已下载镜像
+    - `docker rmi name -f` 删除镜像
+  - 容器操作
+    - `docker run --name 容器名 -p 映射端口:容器端口 -d 镜像名` 创建容器
+    - `docker ps` 查看当前正在运行的容器
+    - `docker ps -a` 查看所有容器
+    - `docker start name/ID` 启动容器
+    - `docker stop name/ID` 停止容器
+    - `docker rm name/ID` 删除容器
