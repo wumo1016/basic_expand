@@ -1,4 +1,4 @@
-## 从输入url到页面加载完成 发生了什么
+## 从输入url到页面加载完成 发生了什么(3+6)
   - DNS解析url 将url解析成ip地址
   - 和ip建立tcp连接 发送http请求
   - 服务器接收到请求 返回拼接好的http响应
@@ -44,7 +44,7 @@
 
 ## 强缓存与协商缓存
   - 强缓存 直接设置过期时间 未到期直接使用缓存
-    - 设置Cache-Control=max-age=xxx(Expires)
+    - 设置Cache-Control：max-age=xxx(Expires)
   - 协商缓存
     - 设置响应头 Last-Modified-Since
     - 下一次请求头带上 If-Modified-Since 然后与最后修改时间对比 相同就返回304
