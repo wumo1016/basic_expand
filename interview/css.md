@@ -62,3 +62,9 @@
     - delay：动画开始之前的延迟
     - iteration-count：动画播放的次数 infinite(无限次)
     - direction：是否反向播放 normal(正常) alternate(反向)
+
+## rgba的a和opacity有什么区别
+  - opacity
+    - 作用于元素以及元素内的所有内容的透明度
+  - rgba
+    - 只作用于元素的颜色和背景色
