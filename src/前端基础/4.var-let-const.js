@@ -139,3 +139,13 @@ console.log(getValue('a', fnEC), getValue('b', fnEC), getValue('c', fnEC), getVa
   }
   // console.log(aaaaa); // Uncaught ReferenceError: aaaaa is not defined
 }
+
+
+var a = 10;
+(function () {
+    console.log(a)
+    a = 5
+    console.log(window.a)
+    var a = 20;
+    console.log(a)
+})();

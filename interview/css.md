@@ -4,6 +4,7 @@
   - @import
     - `@import(url)`
   - 区别
+    - link属于html标签 @import在css中使用
     - 加载时机：link会遇到就加载，而@import是在页面加载后再加载
     - 兼容性：@import是css2.1后才提出来的
 
