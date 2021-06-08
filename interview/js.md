@@ -71,7 +71,7 @@
     - 意外的全局变量：`a = 123`
     - 闭包使用不当
 
-## ["1", "2", "3"].map(parseInt)的答案?
+## ["1", "2", "3"].map(parseInt)的答案? [1, NaN, NaN]
   - map函数传入三个参数：ele、index、arr
   - parseInt接收两个参数：string、radix
     - radix值必须介于2-35之间 默认10 写0也表示10
