@@ -1,0 +1,1 @@
+- 在calc中使用scss变量 使用 `#{}` 包裹 例如: `height: calc(100% - #{$height})`
