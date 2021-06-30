@@ -184,3 +184,6 @@
 ## mutation与action的区别
   - mutation：主要用于修改状态 必须同步执行
   - action：执行业务代码 可以异步执行 但修改状态需要通过mutation
+
+## Vuex 怎么知道 state 是通过 mutation 修改还是外部直接修改的
+  - 在Store实例中有一个变量committing，使用$watch监控state的变化，判断如果committing为false，则就是外部直接修改的 因为在使用commit提交修改的时候 内部使用了一个函数对mutation函数进行了包装 执行mutation函数之前将committing设置为true mutation函数执行完毕时候 再将committing设置为false

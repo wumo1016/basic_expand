@@ -79,10 +79,10 @@
       - string如果不满足对应进制的值 也返回NaN
 
 ## 箭头函数
-  - 内部this是定义时就确定的(外部块的this) 而不是使用时
-  - 不能当作构造函数 所以不能new
-  - 没有arguments对象 可以使用rest参数代替
-  - 不能使用yield命令 也就是不能当作generator函数
+  - 不能被绑定this 使用this时 会自动捕获上下文中的this 作为自己的this
+  - 没有arguments参数 使用rest参数代替
+  - 不能作为构造函数 不能被new
+  - 不能使用yield命令 就是不能当作generator函数
 
 ## caller与callee的区别
   - caller
