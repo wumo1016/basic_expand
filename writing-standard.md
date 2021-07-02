@@ -16,4 +16,4 @@
   // good
   const baz = Array.from(foo, func);
   ```
-- 7.15
+- 15.1
