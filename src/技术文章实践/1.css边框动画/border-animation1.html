@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- 原文连接： https://juejin.cn/post/6918921604160290830 -->
+<!-- 边框动画 1-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./index.css">
+  <title>Document</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+    }
+
+    :root {
+      --border-color: rgb(85, 85, 196);
+    }
+
+    .box1 {
+      margin: auto;
+      width: 200px;
+      height: 200px;
+      border: 1px solid gray;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .box1::before,
+    .box1::after {
+      content: '';
+      position: absolute;
+      transition: 0.3s ease-in-out;
+    }
+
+    .box1::before {
+      top: -5px;
+      left: -5px;
+      border-top: 1px solid var(--border-color);
+      width: 20px;
+      border-left: 1px solid var(--border-color);
+      height: 20px;
+    }
+
+    .box1::after {
+      bottom: -5px;
+      right: -5px;
+      border-bottom: 1px solid var(--border-color);
+      width: 20px;
+      border-right: 1px solid var(--border-color);
+      height: 20px;
+    }
+
+    .box1:hover::before {
+      width: calc(100% + 9px);
+      height: calc(100% + 9px);
+    }
+
+    .box1:hover::after {
+      width: calc(100% + 9px);
+      height: calc(100% + 9px);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box1"></div>
+</body>
+
+</html>
