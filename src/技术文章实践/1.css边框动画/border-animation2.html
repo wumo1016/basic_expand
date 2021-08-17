@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- 原文连接： https://juejin.cn/post/6918921604160290830 -->
+<!-- 边框动画 1-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./base.css">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+    }
+
+    :root {
+      --border-color: rgb(85, 85, 196);
+    }
+
+    .box {
+      margin: auto;
+      width: 200px;
+      height: 200px;
+      cursor: pointer;
+      background:
+        linear-gradient(90deg, #333 50%, transparent 0) repeat-x,
+        linear-gradient(90deg, #333 50%, transparent 0) repeat-x,
+        linear-gradient(0deg, #333 50%, transparent 0) repeat-y,
+        linear-gradient(0deg, #333 50%, transparent 0) repeat-y;
+      background-size: 4px 1px, 4px 1px, 1px 4px, 1px 4px;
+      background-position: 0 0, 0 100%, 0 0, 100% 0;
+    }
+
+    .box:hover {
+      animation: animation1 .1s infinite linear;
+    }
+
+    @keyframes animation1 {
+      100% {
+        background-position: 4px 0, -4px 100%, 0 -4px, 100% 4px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+</body>
+
+</html>
