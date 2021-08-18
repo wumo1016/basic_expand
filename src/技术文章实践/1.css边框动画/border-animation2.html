@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- 原文连接： https://juejin.cn/post/6918921604160290830 -->
-<!-- 边框动画 1-->
+<!-- 虚线边框动画 -->
 
 <head>
   <meta charset="UTF-8">
@@ -24,17 +24,23 @@
       width: 200px;
       height: 200px;
       cursor: pointer;
-      background:
-        linear-gradient(90deg, #333 50%, transparent 0) repeat-x,
-        linear-gradient(90deg, #333 50%, transparent 0) repeat-x,
-        linear-gradient(0deg, #333 50%, transparent 0) repeat-y,
-        linear-gradient(0deg, #333 50%, transparent 0) repeat-y;
-      background-size: 4px 1px, 4px 1px, 1px 4px, 1px 4px;
-      background-position: 0 0, 0 100%, 0 0, 100% 0;
+      /* border: 1px solid var(--border-color); */
+      outline: 1px solid var(--border-color);
+      outline-offset: -1px;
+      animation: animation1 .1s infinite linear;
     }
 
     .box:hover {
-      animation: animation1 .1s infinite linear;
+      /* border: none; */
+      outline: none;
+      /* transparent 0: 0表示颜色之间不渐变 */
+      background:
+        linear-gradient(90deg, var(--border-color) 50%, transparent 0) repeat-x,
+        linear-gradient(90deg, var(--border-color) 50%, transparent 0) repeat-x,
+        linear-gradient(0deg, var(--border-color) 50%, transparent 0) repeat-y,
+        linear-gradient(0deg, var(--border-color) 50%, transparent 0) repeat-y;
+      background-size: 4px 1px, 4px 1px, 1px 4px, 1px 4px;
+      background-position: 0 0, 0 100%, 0 0, 100% 0;
     }
 
     @keyframes animation1 {

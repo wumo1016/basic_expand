@@ -15,6 +15,25 @@
   - inset: 陷入效果
   - outset: 突出效果
 
+## background
+
+- background-size
+  - 关键字
+    - cover: 覆盖背景区 多余得会被裁剪
+    - contain: 缩放背景图以完全显示 部分背景可能留白
+  - 一个值: 指定图片得宽度 高度隐式为 auto
+  - 两个值: 指定图片得宽高
+  - 多个值: 可以使用逗号隔开多个值 以设置多重背景
+- background-position
+  - 关键字
+    - center: 居中
+    - top,left,bottom,right: 把项目放置哪一个边缘 另一个维度则默认是 50%
+  - 两个值: 用于设置 x、y 坐标
+  - 多个值: 可以使用逗号隔开多个值 以设置多重背景
+- 注意事项
+  - 被指定多个背景层时 可以使用逗号分隔每个背景层
+  - background-size 和只能紧接着 background-position 出现 以`/`分隔 如 `center center / 50% 50%`
+
 ## :root
 
 - 代表根元素
@@ -23,3 +42,11 @@
 
 - 声明 css 变量 必须以`--`开头
 - 声明的变量只能在作用域 dom 作用域内使用
+
+## outline
+
+- 与 border 类似
+- 区别
+  - outline 不占据空间
+  - outline 通常是矩形 也可以是非矩形
+- outline-offset: 设置轮廓偏移
