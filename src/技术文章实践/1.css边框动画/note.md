@@ -47,6 +47,17 @@
   - outline 通常是矩形 也可以是非矩形
 - outline-offset: 设置轮廓偏移
 
+## clip-path
+
+- 裁剪元素的显示区域 区域内可显示 区域外隐藏
+- 使用形状裁剪
+  - inset
+    - 长方形 距离边缘的距离 一个值 两个值 四个值
+    - 示例: `clip-path: inset(50px);`
+  - circle
+    - 圆形 第一个参数定义半径 `at x y`表示中心点位置 可选 默认中心
+    - 示例: `clip-path: circle(50px at 100px 0);`
+
 ## css3
 
 - :root: 代表根元素

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- 原文连接： https://juejin.cn/post/6918921604160290830 -->
+<!-- 虚线边框动画 -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./base.css">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+    }
+
+    .box {
+      margin: auto;
+      width: 200px;
+      height: 120px;
+      position: relative;
+    }
+
+    .box::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      border: 2px solid gold;
+      animation: clippath1 5s infinite linear;
+    }
+
+    .box::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      border: 2px solid gold;
+      animation: clippath2 5s infinite linear;
+    }
+
+    @keyframes clippath1 {
+
+      0%,
+      100% {
+        clip-path: inset(0 0 90% 0);
+      }
+
+      25% {
+        clip-path: inset(0 0 0 90%);
+      }
+
+      50% {
+        clip-path: inset(90% 0 0 0);
+      }
+
+      75% {
+        clip-path: inset(0 90% 0 0);
+      }
+    }
+
+    @keyframes clippath2 {
+
+      0%,
+      100% {
+        clip-path: inset(90% 0 0 0);
+      }
+
+      25% {
+        clip-path: inset(0 90% 0 0);
+      }
+
+      50% {
+        clip-path: inset(0 0 90% 0);
+      }
+
+      75% {
+        clip-path: inset(0 0 0 90%);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+</body>
+
+</html>
