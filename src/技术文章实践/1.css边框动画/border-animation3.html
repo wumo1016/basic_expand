@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- 原文连接： https://juejin.cn/post/6918921604160290830 -->
+<!-- 虚线边框动画 -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./base.css">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+    }
+
+    .box {
+      margin: auto;
+      width: 200px;
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .box::after {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background:
+        linear-gradient(red, red),
+        linear-gradient(yellow, yellow),
+        linear-gradient(blue, blue),
+        linear-gradient(green, green);
+      background-position: 0 0, 100% 0, 0 100%, 100% 100%;
+      background-repeat: no-repeat;
+      background-size: 50% 50%;
+      animation: rotate 4s infinite linear;
+    }
+
+    .box::before {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 3px;
+      right: 3px;
+      bottom: 3px;
+      background: #fff;
+      z-index: 1;
+    }
+
+    @keyframes rotate {
+      100% {
+        transform: rotate(1turn);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+</body>
+
+</html>

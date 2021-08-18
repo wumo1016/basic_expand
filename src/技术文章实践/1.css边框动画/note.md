@@ -34,10 +34,6 @@
   - 被指定多个背景层时 可以使用逗号分隔每个背景层
   - background-size 和只能紧接着 background-position 出现 以`/`分隔 如 `center center / 50% 50%`
 
-## :root
-
-- 代表根元素
-
 ## css 变量
 
 - 声明 css 变量 必须以`--`开头
@@ -50,3 +46,8 @@
   - outline 不占据空间
   - outline 通常是矩形 也可以是非矩形
 - outline-offset: 设置轮廓偏移
+
+## css3
+
+- :root: 代表根元素
+- 1turn: 代表一圈
