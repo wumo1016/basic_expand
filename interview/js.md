@@ -2,7 +2,7 @@
   - 创建一个新对象 并将目标对象的__proto__设置为构造函数的prototype
   - 执行构造函数 并将this指向这个新对象
   - 返回这个新对象
-  ```
+  ```javascript
     function _new(classzz, ...args){
       const obj = Object.create(classzz.prototype)
       classzz.call(obj, ...args)
@@ -13,7 +13,7 @@
   - 创建一个新函数
   - 将这个函数的原型对象设置为传入的对象
   - 返回新函数的实例
-  ```
+  ```javascript
   function _create(obj){
     function fn(){}
     fn.prototype = obj
@@ -41,7 +41,7 @@
     - 应用：滚动加载更多、高频点击、表单重复提交
 
 ## 自执行函数
-  ```
+  ```javascript
   ;(function b() {
     b = 123
     console.log(b)
@@ -87,14 +87,14 @@
 ## caller与callee的区别
   - caller
     - 如果fn1在全局做作用域中被调用
-    ```
+    ```javascript
     function fn1() {
       console.log(fn1.caller); // null
     }
     fn1()
     ```
     - 如果fn1在fn2中被调用 就返回fn2
-    ```
+    ```javascript
     function fn1() {
       console.log(fn1.caller); // fn2
     }
@@ -108,7 +108,7 @@
 
   ## JSON.parse(JSON.stringfy(obj))的弊端
     - 会忽略undefined、symbol、函数
-    ```
+    ```javascript
     let obj = {
       age: undefined,
       sex: Symbol('male'),
@@ -117,7 +117,7 @@
     console.log(JSON.parse(JSON.stringify(obj))) // {}
     ```
     - 不能解决循环引用问题 会直接报错
-    ```
+    ```javascript
     let obj = {
       b: {
         c: 2
