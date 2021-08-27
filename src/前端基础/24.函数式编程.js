@@ -4,6 +4,7 @@
  * 3.纯函数
  * 4.函数柯里化
  * 5.组合函数
+ * 6.PointFree
  */
 
 /**
@@ -129,7 +130,7 @@
  *
  */
 
-!(function () {
+!function () {
   const _ = require('lodash')
 
   let str = 'hello'
@@ -149,10 +150,32 @@
   console.log(flowed(str))
   // 自己实现flow
   function flow(...fns) {
-    return fns.reduce((a, b) => (...args) => b(a(...args)))
+    return fns.reduce(
+      (a, b) =>
+        (...args) =>
+          b(a(...args))
+    )
   }
   let myflow = flow(add1, add2, add3)
   console.log(myflow(str))
+}
+
+/**
+ * Pointfree: 把数据处理的过程先定义成一种与参数无关的合成运算
+ * 先定义处理过程 再传入参数
+ */
+!(function () {
+  const _ = require('lodash/fp')
+
+  function buyHouse(money) {
+    return money - 100
+  }
+  function buyCar(money) {
+    return money - 100
+  }
+  const fn = _.compose(buyCar, buyHouse)
+  console.log(fn(500));
+
 })()
 
 // !(function () {})()
