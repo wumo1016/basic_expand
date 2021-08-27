@@ -3,6 +3,7 @@
  * 2.高阶函数
  * 3.纯函数
  * 4.函数柯里化
+ * 5.组合函数
  */
 
 /**
@@ -99,8 +100,8 @@
 /**
  * 函数柯里化
  */
-!(function () {
-  let _ = require('lodash')
+!function () {
+  const _ = require('lodash')
 
   function add(a, b, c) {
     return a + b + c
@@ -121,6 +122,37 @@
     }
     return curried
   }
+}
+
+/**
+ * 组合
+ *
+ */
+
+!(function () {
+  const _ = require('lodash')
+
+  let str = 'hello'
+  function add1(str) {
+    return str + 1
+  }
+  function add2(str) {
+    return str + 2
+  }
+  function add3(str) {
+    return str + 3
+  }
+  // 手工组合
+  console.log(add3(add2(add1(str)))) // hello123
+  // 使用lodash的flow
+  let flowed = _.flow(add1, add2, add3)
+  console.log(flowed(str))
+  // 自己实现flow
+  function flow(...fns) {
+    return fns.reduce((a, b) => (...args) => b(a(...args)))
+  }
+  let myflow = flow(add1, add2, add3)
+  console.log(myflow(str))
 })()
 
 // !(function () {})()
