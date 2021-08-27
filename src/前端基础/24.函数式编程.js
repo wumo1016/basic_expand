@@ -2,6 +2,7 @@
  * 1.编程范式
  * 2.高阶函数
  * 3.纯函数
+ * 4.函数柯里化
  */
 
 /**
@@ -62,10 +63,10 @@
  *
  * 优点
  * 1.可以缓存 lodash的memoize缓存 只要参数一致 结果就会被缓存
- * 2.可测试
+ * 2.可测试 (单元测试)
  */
 
-!(function () {
+!function () {
   function add(a, b) {
     return a + b
   }
@@ -93,7 +94,33 @@
     }
     return memoized
   }
-  
+}
+
+/**
+ * 函数柯里化
+ */
+!(function () {
+  let _ = require('lodash')
+
+  function add(a, b, c) {
+    return a + b + c
+  }
+
+  // let curry1 = _.curry(add)
+  let curry1 = curry(add)
+  console.log(curry1(1, 2, 3))
+  console.log(curry1(1)(2, 3))
+  console.log(curry1(1)(2)(3))
+
+  // 自己实现 curry
+  function curry(func) {
+    let argLen = func.length // 形参的个数
+    let curried = (...args) => {
+      if (args.length >= argLen) return func(...args)
+      return (...rest) => curried(...args, ...rest)
+    }
+    return curried
+  }
 })()
 
 // !(function () {})()
