@@ -5,6 +5,7 @@
  * 4.函数柯里化
  * 5.组合函数
  * 6.PointFree
+ * 7.容器 有指向容器
  */
 
 /**
@@ -164,7 +165,7 @@
  * Pointfree: 把数据处理的过程先定义成一种与参数无关的合成运算
  * 先定义处理过程 再传入参数
  */
-!(function () {
+!function () {
   const _ = require('lodash/fp')
 
   function buyHouse(money) {
@@ -174,8 +175,73 @@
     return money - 100
   }
   const fn = _.compose(buyCar, buyHouse)
-  console.log(fn(500));
+  console.log(fn(500))
+}
 
+/**
+ * Container: 如果一个对象内部能够持有一个值 我们就称为它为一个容器
+ * Point Container: 如果一个容器内部有of方法 我们就称它为有指向的容器
+ */
+!(function () {
+  // 容器
+  class Container {
+    constructor(value) {
+      this.value = value
+    }
+  }
+  const container = new Container('wyb')
+  console.log(container.value)
+  // 有指向容器 添加一个of方法 用来返回生产我想要的实例
+  class PointContainer {
+    constructor(value) {
+      this.value = value
+    }
+    static of(value) {
+      return new PointContainer(value)
+    }
+  }
+  const pointContainer = PointContainer.of('wyb')
+  console.log(pointContainer.value)
+  // 函子 如果有指向容器再有一个map方法 可以接收一个函数 返回值是一个同类型的对象
+  class FunctorContainer {
+    constructor(value) {
+      this.value = value
+    }
+    static of(value) {
+      return new FunctorContainer(value)
+    }
+    map(fn) {
+      return new FunctorContainer(fn(this.value))
+    }
+  }
+  const functorContainer = FunctorContainer.of('wyb')
+    .map(value => value + 1)
+    .map(value => value + 2)
+    .map(value => value + 3)
+  console.log(functorContainer.value)
+
+  // Either 函子: 内部有两个值 left值和right值
+  // 左值只会在右值不存在的情况下生效
+  class Either {
+    constructor(left, right) {
+      this.left = left
+      this.right = right
+    }
+    static of(left, right) {
+      return new Either(left, right)
+    }
+    map(fn) {
+      return this.right
+        ? Either.of(this.left, fn(this.right))
+        : Either.of(fn(this.left), this.right)
+    }
+    get value() {
+      return this.right || this.left
+    }
+  }
+  // Either 函子示例1：处理默认值
+  // let response = { name: 'wyb', gender: null }
+  let response = { name: 'wyb', gender: '女' }
+  let either = Either.of('男', response.gender).map(value => `性别: ${value}`)
+  console.log(either.value)
 })()
-
-// !(function () {})()
