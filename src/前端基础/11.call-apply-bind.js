@@ -13,6 +13,7 @@ function fn2() {
 }
 
 Function.prototype.myCall = function (ctx, ...args) {
+  console.log(this, 123)
   let result
   if (ctx) {
     ctx._$ = this
@@ -21,12 +22,22 @@ Function.prototype.myCall = function (ctx, ...args) {
   } else {
     result = this(...args)
   }
+  console.log(result, 'result')
   return result
 }
-// fn1.myCall.myCall(fn2)
+fn1.myCall.myCall(fn2)
 
-// 先执行 myCall(fn2)
-// 再执行 fn1.myCall 对应的函数，此时已经没有参数，而this是fn2，所以最终执行的是fn2
+/* 最终一共执行了两次mycall函数
+1.第一次
+执行 fn.myCall(fn2)
+此时 ctx = fn2 ctx有值 所以走if
+谁调用this就是谁 所以此时this是fn 故 ctx._$ = fn (fn是一个mycall函数)
+然后下一步执行 ctx._$ 由于fn也是一个mycall函数 所以执行第二遍mycall函数
+2.第二次
+ctx._$ = function mycall(){}
+此时没有参数 所有走else
+所以直接调用 this() 而此时的this就是 ctx(fn2) 所以最终执行的是fn2
+*/
 
 Function.prototype.myapply = function (ctx, args) {
   let result
@@ -51,10 +62,10 @@ Function.prototype.mybind = function (ctx, ...args1) {
 }
 
 function fn3() {
-  console.log(this, arguments);
+  console.log(this, arguments)
 }
 const obj = {
   name: 'wyb'
 }
-fn3.bind()(2, 3)
-fn3.mybind()(2, 3)
+// fn3.bind()(2, 3)
+// fn3.mybind()(2, 3)
