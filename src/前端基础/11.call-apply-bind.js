@@ -2,27 +2,24 @@
   call 的速度比apply更高
 */
 
-function fn1(x, y) {
-  this.x = x
-  this.y = y
-  console.log(1, this)
+function fn1() {
+  console.log(1, arguments)
 }
 
 function fn2() {
-  console.log(2, this)
+  console.log(2, arguments)
 }
 
 Function.prototype.myCall = function (ctx, ...args) {
-  console.log(this, 123)
   let result
   if (ctx) {
+    if (typeof ctx !== 'object') ctx = new Object(ctx)
     ctx._$ = this
     result = ctx._$(...args)
     delete ctx._$
   } else {
     result = this(...args)
   }
-  console.log(result, 'result')
   return result
 }
 fn1.myCall.myCall(fn2)
@@ -42,6 +39,7 @@ ctx._$ = function mycall(){}
 Function.prototype.myapply = function (ctx, args) {
   let result
   if (ctx) {
+    if (typeof ctx !== 'object') ctx = new Object(ctx)
     ctx._$ = this
     result = ctx._$(...args)
     delete ctx._$
