@@ -1,5 +1,5 @@
 /* --------------- 1.原型链继承 -------------------- */
-// 缺点：父类上的所有引用属性将会被所有子类共享
+// 缺点：父类构造函数中定义的引用属性将会被共享
 ;(function () {
   function Parent() {
     this.names = []
@@ -35,6 +35,7 @@
 })
 
 /* --------------- 3.组合继承 -------------------- */
+// 构造函数中的引用属性不会被共享
 ;(function () {
   function Parent() {
     this.names = []
@@ -59,6 +60,7 @@
 })
 
 /* --------------- 4.原型式继承 -------------------- */
+// 无法继承构造函数中的属性
 ;(function () {
   function createObj(o) {
     function F() {}
@@ -66,18 +68,25 @@
     return new F()
   }
 
-  const obj = {
-    names: [],
-    age: 0
+  function Parent() {
+    this.test1 = 1
   }
-  const obj1 = createObj(obj)
-  const obj2 = createObj(obj)
-  obj1.names.push('wyb')
-  obj1.age = 18
-  console.log(obj1.names) // [ 'wyb' ]
-  console.log(obj2.names) // [ 'wyb' ]
-  console.log(obj1.age) // 18
-  console.log(obj2.age) // 0
+  Parent.prototype.test2 = 2
+
+  function Child() {
+    this.test3 = 3
+  }
+  Child.prototype.test4 = 4
+
+  Child.prototype = createObj(Parent.prototype)
+  Child.prototype.constructor = Child
+
+  const o1 = new Child()
+
+  console.log(o1.test1)
+  console.log(o1.test2)
+  console.log(o1.test3)
+  console.log(o1.test4)
 })
 
 /* --------------- 5.寄生式继承 -------------------- */
