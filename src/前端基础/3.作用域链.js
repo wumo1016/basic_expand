@@ -20,7 +20,6 @@ var a = 2
 // var outer_two = one()
 // outer_two()
 
-
 /* 
 执行上下文有两个阶段，编译阶段和执行阶段
 
