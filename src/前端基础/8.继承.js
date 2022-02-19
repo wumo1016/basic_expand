@@ -1,11 +1,12 @@
 /* --------------- 1.原型链继承 -------------------- */
-// 缺点：父类构造函数中定义的引用属性将会被共享
+// 缺点：1.父类构造函数中定义的引用属性将会被共享 2.不能通过子类构造函数向父类构造函数传参
 ;(function () {
   function Parent() {
     this.names = []
   }
   function Child() {}
   Child.prototype = new Parent()
+  Child.prototype.constructor = Child
 
   const child1 = new Child()
   child1.names.push(123)

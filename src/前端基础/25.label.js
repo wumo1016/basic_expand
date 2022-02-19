@@ -1,4 +1,5 @@
 // 使用 break [label] 可直接跳出外部循环 continue效果相同
+// while 语句前也可以加 label
 
 !(function () {
   test1: for (let i = 0; i < 10; i++) {
