@@ -123,3 +123,24 @@
   Child.prototype = Object.create(Parent.prototype)
   Child.prototype.constructor = Child
 })()
+
+/* ---------------------- 静态属性或方法继承 -------------------------  */ {
+}
+;(function () {
+  const extendStatics = (function (Child, Parent) {
+    return (
+      Object.setPrototypeOf ||
+      ({ __proto__: [] } instanceof Array &&
+        function (a, b) {
+          a.__proto__ = b
+        }) ||
+      function (a, b) {
+        for (const key in b) {
+          if (Object.hasOwnProperty.call(b, key)) {
+            a[key] = b[key]
+          }
+        }
+      }
+    )(Child, Parent)
+  })()
+})
