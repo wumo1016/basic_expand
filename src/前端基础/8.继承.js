@@ -119,7 +119,7 @@
     Parent.call(this)
   }
   // Child.prototype = createObj(Parent.prototype) // 等同于使用 Object.create
-  // Child.prototype = setPrototypeOf({}, Parent.prototype)
+  // Child.prototype = Object.setPrototypeOf(Child.prototype, Parent.prototype) // 可以保留
   Child.prototype = Object.create(Parent.prototype)
   Child.prototype.constructor = Child
 })()
