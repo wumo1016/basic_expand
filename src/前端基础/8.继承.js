@@ -35,8 +35,9 @@
   console.log(child1.age) // undefined
 })
 
-/* --------------- 3.组合继承 -------------------- */
-// 构造函数中的引用属性不会被共享
+/* --------------- 3.组合继承(原型链继承+冒充继承) -------------------- */
+// 优点：构造函数中的引用属性不会被共享
+// 缺点：1.组合继承调用了两次父类构造函数 2.new Parent的时候为属性值赋值无意义 分配内存空间 浪费内存
 ;(function () {
   function Parent() {
     this.names = []
@@ -104,7 +105,7 @@
 })
 
 /* --------------- 6.寄生组合式继承 -------------------- */
-// 组合继承调用了两次父类构造函数
+// 因为组合继承调用了两次父类构造函数
 ;(function () {
   function createObj(o) {
     function F() {}
@@ -117,6 +118,8 @@
   function Child() {
     Parent.call(this)
   }
-  Child.prototype = createObj(Parent.prototype) // 等同于使用 Object.create
+  // Child.prototype = createObj(Parent.prototype) // 等同于使用 Object.create
+  // Child.prototype = setPrototypeOf({}, Parent.prototype)
+  Child.prototype = Object.create(Parent.prototype)
   Child.prototype.constructor = Child
 })()
