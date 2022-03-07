@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="container"></div>
+  <script>
+    const startTime = Date.now()
+    const count = 100000
+
+    let index = 0
+    function load() {
+      if (index < count) {
+        // setTimeout(() => {
+        requestAnimationFrame(() => {
+          for (let i = 0; i < 1000; i++) {
+            const li = document.createElement('li')
+            li.innerHTML = index + i
+            container.appendChild(li)
+          }
+          index += 1000
+          load()
+        })
+      } else {
+        console.log(`总时间：${Date.now() - startTime}`);
+      }
+    }
+    load()
+
+  </script>
+</body>
+
+</html>
