@@ -11,7 +11,6 @@
         v-for="(item, index) in visableData"
         :key="item.id"
         :vid="item.index"
-        ref="items"
       >
         <div class="item">{{ item.id }} {{ item.value }}</div>
       </div>
@@ -42,15 +41,22 @@ const end = ref(props.remain)
 const visableData = computed(() => {
   return props.items.slice(start.value, end.value)
 })
+
+const offset = ref(0)
+
+const handleScroll = () => {
+  start.value = viewport.value.scrollTop / props.size >> 0
+  end.value = start.value + props.remain
+  offset.value = start.value * props.size
+}
 </script>
 
 <style>
 .viewport {
   overflow-y: scroll;
   position: relative;
-  border: 1px solid lue;
+  border: 1px solid blue;
 }
-
 .scroll-list {
   position: absolute;
   top: 0;
