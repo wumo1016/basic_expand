@@ -4,14 +4,15 @@
     <!-- 自己构造一个滚动条 -->
     <div class="scrollBar" ref="scrollBar"></div>
     <div
+      ref="scrollList"
       class="scroll-list"
       :style="{ transform: `translate3d(0,${offset}px,0)` }"
     >
       <div
+        class="scoll_item"
         v-for="(item, index) in visableData"
         :key="item.id"
         :vid="item.index"
-        :ref="getDom"
       >
         <div class="item">{{ item.id }} {{ item.value }}</div>
       </div>
@@ -38,12 +39,7 @@ const props = defineProps({
 // dom
 const viewport = ref(null)
 const scrollBar = ref(null)
-
-const scrollItem = ref([])
-const getDom = el => {
-  scrollItem.value.push(el)
-}
-
+const scrollList = ref(null)
 // 缓存高度 等滚动的时候 渲染页面的时候获取真实dom的高度 来更新缓存的内容 然后重新计算高度
 const positions = ref([])
 const cacheList = () => {
@@ -61,15 +57,11 @@ onMounted(() => {
   cacheList()
 })
 
-onBeforeUpdate(() => {
-  scrollItem.value = []
-})
-
 onUpdated(async () => {
   await nextTick()
   // 页面渲染完成后 需要根据当前展示的数据 更新缓存区的内容
   // 根据当前显示的 更新缓存中的 height top bottom 更新滚动条的高度
-  let nodes = scrollItem.value
+  let nodes = scrollList.value.querySelectorAll('.scoll_item')
   if (!(nodes && nodes.length > 0)) {
     return
   }
