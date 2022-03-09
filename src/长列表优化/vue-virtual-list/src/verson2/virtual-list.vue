@@ -94,7 +94,7 @@ onUpdated(async () => {
   // this.offset = positions.value[this.start - this.prevCount]? positions.value[this.start - this.prevCount].top : 0;
 })
 
-// 开始结束索引az
+// 开始结束索引
 const start = ref(0)
 const end = ref(props.remain)
 // 前置和后置数据
