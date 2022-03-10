@@ -71,3 +71,9 @@ export const tableData = [
     date: '2016-10-04'
   }
 ]
+
+export const orderBy = {
+  // name: true,
+  age: 'asc',
+  address: 'desc'
+}

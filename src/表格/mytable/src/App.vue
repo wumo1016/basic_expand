@@ -3,9 +3,12 @@
     :columns="columns"
     :data="tableData"
     :selectedData="selectedData"
+    :orderBy="OrderBy"
     stripe
     border
     @changeData="changeData"
+    @changeOrderBy="changeOrderBy"
+    :height="200"
   ></wm-table>
 
   {{ selectedData }}
@@ -13,12 +16,17 @@
 
 <script setup>
 import { ref } from 'vue'
-import { columns, tableData } from './mock'
+import { columns, tableData, orderBy } from './mock'
 import WmTable from './wm-table.vue'
 
 const selectedData = ref([])
 const changeData = value => {
   selectedData.value = value
+}
+
+const OrderBy = ref(orderBy)
+const changeOrderBy = value => {
+  OrderBy.value = value
 }
 </script>
 
