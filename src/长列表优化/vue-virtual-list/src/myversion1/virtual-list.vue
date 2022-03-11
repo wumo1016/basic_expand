@@ -32,23 +32,23 @@ const startIndex = ref(0)
 const endIndex = ref(props.remain)
 const offset = ref(0) // 偏移量
 
+const refScroll = ref(null)
+onMounted(() => {
+  // 设置总高
+  refScroll.value.style.height = props.items.length * props.size + 'px'
+})
+// 计算可视区数据
 const visualData = computed(() => {
   return props.items.slice(
     startIndex.value - prevNum.value,
     endIndex.value + postNum.value
   )
 })
-// 前置和后置预渲染
+// 前置和后置数量
 const prevNum = computed(() => Math.min(startIndex.value, 10))
 const postNum = computed(() =>
   Math.min(props.items.length - endIndex.value, 10)
 )
-
-const refScroll = ref(null)
-onMounted(() => {
-  // 设置总高
-  refScroll.value.style.height = props.items.length * props.size + 'px'
-})
 
 const minStartIndex = computed(() => props.items.length - props.remain)
 // 滚动事件

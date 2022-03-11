@@ -10,8 +10,8 @@
       <div
         v-for="item in visualData"
         :key="item.id"
+        :vid="item.index"
         class="box_item"
-        :style="{ height: `${size}px` }"
       >
         {{ item.id }} ---- {{ item.value }}
       </div>
@@ -31,9 +31,14 @@ const props = defineProps({
 const startIndex = ref(0)
 const endIndex = ref(props.remain)
 const offset = ref(0) // 偏移量
+const cacheList = []
 
+// 当前显示的数据
+const itemList = computed(() =>
+  props.items.map((v, index) => ({ ...v, index }))
+)
 const visualData = computed(() => {
-  return props.items.slice(
+  return itemList.value.slice(
     startIndex.value - prevNum.value,
     endIndex.value + postNum.value
   )
@@ -43,29 +48,71 @@ const prevNum = computed(() => Math.min(startIndex.value, 10))
 const postNum = computed(() =>
   Math.min(props.items.length - endIndex.value, 10)
 )
-
+// dom
 const refScroll = ref(null)
 const refVisual = ref(null)
+
+// 滚动事件
+const getStartIndex = value => {
+  let start = 0,
+    end = cacheList.value.length - 1
+  let temp = null
+  while (start <= end) {
+    const mid = ((start + end) / 2) >> 0
+    const midVal = cacheList.value[mid].bottom
+    if (value === midVal) {
+      return mid
+    } else if (value < midVal) {
+      temp = mid
+      end = mid - 1
+    } else {
+      start = mid + 1
+    }
+  }
+  return temp
+}
+const handleScroll = e => {
+  const scrollTop = e.target.scrollTop
+  startIndex.value = getStartIndex(scrollTop)
+  endIndex.value = startIndex.value + props.remain
+  offset.value = cacheList.value[startIndex.value - prevNum.value]?.top || 0
+}
+
 onMounted(() => {
   // 设置总高
   refScroll.value.style.height = props.items.length * props.size + 'px'
-  console.log(refVisual.value.childNodes)
+  // 缓存数据
+  cacheList.value = itemList.value.map((item, index) => {
+    return {
+      index: item.index,
+      height: props.size,
+      top: props.size * index,
+      bottom: props.size * (index + 1)
+    }
+  })
 })
 
 onUpdated(() => {
-  console.log(refVisual.value.childNodes)
+  const children = [...refVisual.value.children]
+  let max = 0
+  for (const child of children) {
+    const rect = child?.getBoundingClientRect()
+    const vid = child.getAttribute('vid')
+    max = vid
+    const cur = cacheList.value[vid]
+    cur.top = cacheList.value[vid - 1]?.bottom || 0
+    cur.height = rect.height
+    cur.bottom = cur.top + cur.height
+  }
+  const len = cacheList.value.length
+  for (let i = max; i < len; i++) {
+    const cur = cacheList.value[i]
+    cur.top = cacheList.value[i - 1].bottom
+    cur.bottom = cur.top + cur.height
+  }
+  refScroll.value.style.height =
+    cacheList.value[cacheList.value.length - 1].bottom + 'px'
 })
-
-const minStartIndex = computed(() => props.items.length - props.remain)
-// 滚动事件
-const handleScroll = e => {
-  const scrollTop = e.target.scrollTop
-  const value = (scrollTop / props.size) >> 0
-  startIndex.value = value > minStartIndex.value ? minStartIndex.value : value
-  endIndex.value = startIndex.value + props.remain
-  // 设置偏移量
-  offset.value = (startIndex.value - prevNum.value) * props.size
-}
 </script>
 
 <style>

@@ -1,5 +1,5 @@
 <template>
-  <VirtualList :size="80" :remain="20" :items="items" variable />
+  <VirtualList :size="80" :remain="20" :items="items" />
 </template>
 
 <script setup>

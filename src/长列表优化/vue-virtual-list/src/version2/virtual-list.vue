@@ -143,7 +143,6 @@ onUpdated(async () => {
   })
   scrollBar.value.style.height =
     positions.value[positions.value.length - 1].bottom + 'px'
-  // this.offset = positions.value[this.start - this.prevCount]? positions.value[this.start - this.prevCount].top : 0;
 })
 </script>
 
