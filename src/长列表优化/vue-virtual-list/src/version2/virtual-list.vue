@@ -44,47 +44,12 @@ const scrollList = ref(null)
 const positions = ref([])
 const cacheList = () => {
   positions.value = props.items.map((item, index) => ({
+    index,
     top: index * props.size,
     height: props.size,
     bottom: (index + 1) * props.size
   }))
 }
-// 这是可视区的高 和 滚动条的高
-onMounted(() => {
-  viewport.value.style.height = props.size * props.remain + 'px'
-  scrollBar.value.style.height = props.size * props.items.length + 'px'
-  // 加载完毕后 需要缓存每一项的高度
-  cacheList()
-})
-
-onUpdated(async () => {
-  await nextTick()
-  // 页面渲染完成后 需要根据当前展示的数据 更新缓存区的内容
-  // 根据当前显示的 更新缓存中的 height top bottom 更新滚动条的高度
-  let nodes = scrollList.value.querySelectorAll('.scoll_item')
-  if (!(nodes && nodes.length > 0)) {
-    return
-  }
-  nodes.forEach(node => {
-    let rect = node.getBoundingClientRect()
-    let height = rect.height
-    let index = +node.getAttribute('vid')
-    let oldHeight = positions.value[index].height
-    let val = oldHeight - height
-    if (val) {
-      // 先更新自己
-      positions.value[index].bottom = positions.value[index].bottom - val
-      positions.value[index].height = height
-      for (let i = index + 1; i < positions.value.length; i++) {
-        positions.value[i].top = positions.value[i - 1].bottom
-        positions.value[i].bottom = positions.value[i].bottom - val
-      }
-    }
-  })
-  scrollBar.value.style.height =
-    positions.value[positions.value.length - 1].bottom + 'px'
-  // this.offset = positions.value[this.start - this.prevCount]? positions.value[this.start - this.prevCount].top : 0;
-})
 
 // 开始结束索引
 const start = ref(0)
@@ -97,8 +62,9 @@ const postCount = computed(() => {
   return Math.min(props.items.length - end.value, props.remain)
 })
 // 显示的数据
+const list = computed(() => props.items.map((v, index) => ({ ...v, index })))
 const visableData = computed(() => {
-  return props.items.slice(
+  return list.value.slice(
     start.value - prevCount.value,
     end.value + postCount.value
   )
@@ -133,13 +99,52 @@ const handleScroll = () => {
     start.value = getStartIndex(scrollTop)
     end.value = start.value + props.remain
     const target = positions.value[start.value - prevCount.value]
-    offset.value = (target && target.top) || 0
+    offset.value = target ? target.top : 0
   } else {
-    start.value = (viewport.value.scrollTop / props.size) >> 0
+    start.value = (scrollTop / props.size) >> 0
     end.value = start.value + props.remain
-    offset.value = start.value * props.size - props.size * prevCount.value
+    offset.value =
+      scrollTop - (scrollTop % props.size) - props.size * prevCount.value
   }
 }
+
+// 这是可视区的高 和 滚动条的高
+onMounted(() => {
+  viewport.value.style.height = props.size * props.remain + 'px'
+  scrollBar.value.style.height = props.size * props.items.length + 'px'
+  end.value = start.value + props.remain
+  // 加载完毕后 需要缓存每一项的高度
+  cacheList()
+})
+
+onUpdated(async () => {
+  await nextTick()
+  // 页面渲染完成后 需要根据当前展示的数据 更新缓存区的内容
+  // 根据当前显示的 更新缓存中的 height top bottom 更新滚动条的高度
+  let nodes = scrollList.value.querySelectorAll('.scoll_item')
+  if (!(nodes && nodes.length > 0)) {
+    return
+  }
+  nodes.forEach(node => {
+    let rect = node.getBoundingClientRect()
+    let height = rect.height
+    let index = +node.getAttribute('vid')
+    let oldHeight = positions.value[index].height
+    let val = oldHeight - height
+    if (val) {
+      // 先更新自己
+      positions.value[index].bottom = positions.value[index].bottom - val
+      positions.value[index].height = height
+      for (let i = index + 1; i < positions.value.length; i++) {
+        positions.value[i].top = positions.value[i - 1].bottom
+        positions.value[i].bottom = positions.value[i].bottom - val
+      }
+    }
+  })
+  scrollBar.value.style.height =
+    positions.value[positions.value.length - 1].bottom + 'px'
+  // this.offset = positions.value[this.start - this.prevCount]? positions.value[this.start - this.prevCount].top : 0;
+})
 </script>
 
 <style>
