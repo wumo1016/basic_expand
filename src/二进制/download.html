@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button onclick="download()">下载json</button>
+  <script>
+    function download() {
+      const str = JSON.stringify({ hello: "world" });
+      const blob = new Blob([str], { type: 'application/json' });
+      const objectURL = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.download = 'hello.json'; // 下载文件名
+      a.rel = 'noopener';
+      a.href = objectURL;
+      a.dispatchEvent(new MouseEvent('click')); // 手动触发鼠标点击事件
+      URL.revokeObjectURL(objectURL); // 回收blob 有助于垃圾回收
+    }
+  </script>
+</body>
+
+</html>

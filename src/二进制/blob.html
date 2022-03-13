@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let debug = { name: 'zhufeng' }
+    let str = JSON.stringify(debug)
+    console.log('str', str)
+
+    const blob = new Blob([str], { type: 'application/json' })
+    console.log('blob.size', blob.size)
+
+    function readBlob(blob, type) {
+      return new Promise(resolve => {
+        const reader = new FileReader()
+        reader.onload = function (event) {
+          resolve(event.target.result)
+        }
+        switch (type) {
+          case 'ArrayBuffer':
+            reader.readAsArrayBuffer(blob)
+            break
+          case 'DataURL':
+            reader.readAsDataURL(blob)
+            break
+          case 'Text':
+            reader.readAsText(blob, 'UTF-8')
+            break
+          default:
+            break
+        }
+      })
+    }
+
+    readBlob(blob, 'ArrayBuffer').then(buffer => {
+      console.log('buffer', buffer)
+    })
+    readBlob(blob, 'DataURL').then(base64String => {
+      console.log('base64String', base64String)
+    })
+    readBlob(blob, 'Text').then(text => {
+      console.log('text', text)
+    })
+  </script>
+</body>
+
+</html>
