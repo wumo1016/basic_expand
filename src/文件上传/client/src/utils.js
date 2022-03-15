@@ -31,6 +31,6 @@ export function request(options) {
       }
     }
 
-    xhr.send()
+    xhr.send(options.data)
   })
 }
