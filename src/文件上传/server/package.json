@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env PORT=8000 nodemon --exec ts-node --files ./www.ts",
-    "utils": "ts-node ./src/utils.ts"
+    "utils": "ts-node ./utils.ts"
   },
   "keywords": [],
   "author": "",
