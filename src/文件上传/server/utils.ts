@@ -59,10 +59,10 @@ export const mergeChunks = async (
       })
     })
   )
-  await fs.rmdir(chunkDir) // 移除临时目录
+  await fs.rmdirSync(chunkDir, { recursive: true }) // 移除临时目录
 }
 
-mergeChunks('test.jpg')
+// mergeChunks('test.jpg')
 
 /* 
 export const splitChunks = async (
