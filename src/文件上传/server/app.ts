@@ -37,18 +37,6 @@ app.post('/merge/:fileName', async (req, res) => {
   const { fileName } = req.params
   const defaultSize = 1024 * 1024 * 100
   await mergeChunks(fileName, defaultSize)
-  // const chunkDir = path.resolve(publicPath, fileName)
-  // const fileList = await fs.readdir(chunkDir)
-  // let start = 0
-  // await Promise.all(
-  //   fileList.map(name => {
-  //     const rs = fs.createReadStream(path.resolve(chunkDir, name))
-  //     rs.pipe(
-  //       fs.createWriteStream(path.resolve(publicPath, fileName), { start })
-  //     )
-  //     start += defaultSize
-  //   })
-  // )
   res.json({ success: true })
 })
 
