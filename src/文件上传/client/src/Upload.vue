@@ -83,7 +83,7 @@ const handleUpload = async () => {
   message.info('上传成功')
 }
 
-onUnmounted(() => URL.revokeObjectURL(url.value))
+// onUnmounted(() => URL.revokeObjectURL(imgUrl.value))
 </script>
 
 <style lang="scss">
