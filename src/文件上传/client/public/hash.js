@@ -5,17 +5,24 @@ self.onmessage = async e => {
   let percent = 0 // 当前进度
   let perPercent = 100 / partList.length
   const buffers = await Promise.all(
-    partList.map(
-      ({ chunk, size }) =>
-        new Promise(resolve => {
-          const reader = new FileReader()
-          reader.readAsArrayBuffer(chunk)
-          reader.onload = ev => {
-            percent += perPercent
-            self.postMessage({ percent: Number(percent.toFixed(2)) })
-            resolve(ev.target.result)
-          }
-        })
+    partList.map(({ chunk, size }) =>
+      // 方法1
+      // new Promise(resolve => {
+      //   const reader = new FileReader()
+      //   reader.readAsArrayBuffer(chunk)
+      //   reader.onload = ev => {
+      //     percent += perPercent
+      //     self.postMessage({ percent: Number(percent.toFixed(2)) })
+      //     resolve(ev.target.result)
+      //   }
+      // })
+
+      // 方法2
+      chunk.arrayBuffer().then(buffer => {
+        percent += perPercent
+        self.postMessage({ percent: Number(percent.toFixed(2)) })
+        return buffer
+      })
     )
   )
   buffers.forEach(buffer => spark.append(buffer))
