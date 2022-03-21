@@ -23,6 +23,7 @@ const splitChunks = async (filename, size = defaultSize) => {
       path.resolve(tempFileDir, `${filename}-${i++}`)
     )
     ws.write(chunk)
+    ws.on('end', () => ws.close())
   })
 }
 // splitChunks('test.png')

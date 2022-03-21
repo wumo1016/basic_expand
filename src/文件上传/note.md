@@ -1,2 +1,18 @@
 - 分片上传
+  - 客户端分割
+    - 选择文件后会获一个 File 对象 File 对象基于 Bolb 对象
+    - 根据默认大小对 File 进行分割 获取一个 `ChunkList` 每个 chunk 名字后需要拼接一个索引 以便在服务端排序
+    - 然后对 `ChunkList` 循环调取上传接口 可以使用 `Promise.all`
+    - 待所有分片上传完成后 调用 `merge` 接口
+  - 服务端合并
+    - 服务在接收每个分片时 将每个分片文件写入到以文件名为标识的临时文件夹内
+    - merge 的时候 读取临时文件内的所有文件 按索引进行排序
+    - 然后创建一个目标文件 每次从指定文件的指定位置进行写入 最终形成一个完整文件(node 实现: 每次创建一个可读流读取指定文件 然后将其 pipe 到一个可写流(指定目标文件)中)
 - 断点续传
+  - 计算文件 hash 然后循环 `chunkList` 设置初始值 已加载 `loaded: 0` 已加载百分比 `percent: 0`
+  - 发送请求 验证是否已上传(通过 hash 验证) 如果已经上传 服务需要返回一个 list 包含已经上传的 `chunkName, chunkSize`
+  - 然后客户端通过服务器验证的结果 如果服务器存在完整的 则直接设置每个 chunk 的 `loaded: chunk.size, percent: 100`
+  - 否则通过返回的 list 处理 chunkList
+    - 没有在 list 中的 直接返回 true
+    - item.size < chunk.size 需要部分上传 需要设置 `loaded: item.size, percent: item.size / chunk.size`
+  - 然后发起并发请求 请求中可以接收 上传进度 `xhr.upload.onprogress` 一个函数 参数 `e.loaded` 为已经上传的值 由此可以计算上传百分比
