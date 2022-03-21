@@ -8,7 +8,7 @@ import fs from 'fs-extra'
 // import multiparty from 'multiparty' // 处理上传文件的
 import { mergeChunks } from './utils'
 
-// const publicPath = path.resolve(__dirname, 'public')
+const publicPath = path.resolve(__dirname, 'public')
 const tempPath = path.resolve(__dirname, 'temp')
 
 const app = express()
@@ -18,18 +18,25 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(express.static(path.resolve(__dirname, 'public')))
 
-app.post('/upload/:fileName/:chunkName', async (req, res, _next) => {
-  const { fileName, chunkName } = req.params
+app.post('/upload/:fileName/:chunkName/:start', async (req, res) => {
+  let { fileName, chunkName, start }: any = req.params
+  start = isNaN(start) ? 0 : Number(start)
   const chunkDir = path.resolve(tempPath, fileName)
-  const exist = fs.existsSync(chunkDir)
-  if (!exist) {
+  if (!(await fs.pathExists(chunkDir))) {
     await fs.mkdirs(chunkDir)
   }
   const chunkFilePath = path.resolve(chunkDir, chunkName)
-  const ws = fs.createWriteStream(chunkFilePath, { start: 0, flags: 'a' })
+  const ws = fs.createWriteStream(chunkFilePath, { start, flags: 'a' })
   req.pipe(ws)
   req.on('end', () => {
     res.json({ success: true })
+  })
+  req.on('error', () => {
+    ws.close()
+  })
+  // 取消请求后 需要关闭可写流 不然后续无法删除文件
+  req.on('close', () => {
+    ws.close()
   })
 })
 
@@ -37,19 +44,39 @@ app.post('/merge/:fileName', async (req, res) => {
   const { fileName } = req.params
   const defaultSize = 1024 * 1024 * 100
   await mergeChunks(fileName, defaultSize)
-  // const chunkDir = path.resolve(publicPath, fileName)
-  // const fileList = await fs.readdir(chunkDir)
-  // let start = 0
-  // await Promise.all(
-  //   fileList.map(name => {
-  //     const rs = fs.createReadStream(path.resolve(chunkDir, name))
-  //     rs.pipe(
-  //       fs.createWriteStream(path.resolve(publicPath, fileName), { start })
-  //     )
-  //     start += defaultSize
-  //   })
-  // )
   res.json({ success: true })
+})
+
+app.get('/verify/:fileName', async (req, res): Promise<any> => {
+  const { fileName } = req.params
+  // 已经存在原文件
+  const exist1 = await fs.pathExists(path.resolve(publicPath, fileName))
+  if (exist1) {
+    return res.json({
+      success: true,
+      needUpload: false
+    })
+  }
+  const chunkDir = path.resolve(tempPath, fileName)
+  let uploadList: any[] = []
+  const exist2 = await fs.pathExists(chunkDir)
+  if (exist2) {
+    uploadList = await fs.readdir(chunkDir)
+    uploadList = await Promise.all(
+      uploadList.map(async name => {
+        const stat = await fs.stat(path.resolve(chunkDir, name))
+        return {
+          chunkName: name,
+          size: stat.size // 当前文件的大小
+        }
+      })
+    )
+  }
+  res.json({
+    success: true,
+    needUpload: true,
+    uploadList
+  })
 })
 
 /* 

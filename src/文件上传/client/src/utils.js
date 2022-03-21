@@ -31,6 +31,8 @@ export function request(options) {
         }
       }
     }
+    if (options.onProgress) xhr.upload.onprogress = options.onProgress
+    if (options.setXhr) options.setXhr(xhr)
 
     xhr.send(options.data)
   })
