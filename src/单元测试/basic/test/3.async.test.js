@@ -1,4 +1,4 @@
-import { getData, getPromiseData } from '../3.async'
+import { getData, getPromiseData, getData1 } from '../3.async'
 
 jest.useFakeTimers()
 
@@ -26,11 +26,21 @@ describe('测试异步方法', () => {
 
   // 但是如果时间太长就会直接强制退出 jest.setTimeout
   // 可以使用模拟timer
-  it('测试getData', done => {
-    getData(data => {
+  // it('测试getData', done => {
+  //   getData(data => {
+  //     expect(data).toEqual({ name: 'wyb' })
+  //     done()
+  //   })
+  //   jest.runAllTimers()
+  // })
+
+  // 测试 setInterval
+  it('测试getData1', done => {
+    getData1(data => {
       expect(data).toEqual({ name: 'wyb' })
       done()
     })
-    jest.runAllTimers()
+    // jest.advanceTimersByTime(4000) // 比setInterval间隔时间大一点可以
+    jest.runOnlyPendingTimers() // 只运行当前等待的 timer 可以针对任何时间
   })
 })

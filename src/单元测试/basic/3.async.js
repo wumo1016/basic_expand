@@ -10,6 +10,12 @@ export function getPromiseData() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({ name: 'wyb' })
-    }, 3000)
+    }, 4000)
   })
+}
+
+export function getData1(cb) {
+  setInterval(() => {
+    cb({ name: 'wyb' })
+  }, 5000)
 }
