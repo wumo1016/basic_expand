@@ -4,7 +4,8 @@
   "description": "",
   "main": "1.qs.js",
   "scripts": {
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "cover": "jest --coverage"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +15,8 @@
     "@babel/preset-env": "^7.16.11",
     "@types/jest": "^27.4.1",
     "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "axios": "^0.26.1"
   }
 }
