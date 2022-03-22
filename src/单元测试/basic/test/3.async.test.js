@@ -1,4 +1,4 @@
-import { getData, getPromiseData, getData1 } from '../3.async'
+import { getData, getPromiseData, getData1 } from '../src/3.async'
 
 jest.useFakeTimers()
 

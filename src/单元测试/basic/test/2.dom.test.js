@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { removeNode } from '../2.dom'
+import { removeNode } from '../src/2.dom'
 
 describe('测试dom库', () => {
   it('测试删除节点', () => {
