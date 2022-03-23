@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div>hello</div>
+    <div>world</div>
+    <!-- js 和 css 可以并行加载 但是还是需要等待js执行完毕 继续解析剩余dom -->
+
+
+    <!-- 所以js放在页面的底部 放置阻塞DOM 渲染 -->
+    <!-- css放顶部 防止页面重绘 -->
+    <script src="./index.js"></script>
+    
+</body>
+</html>
