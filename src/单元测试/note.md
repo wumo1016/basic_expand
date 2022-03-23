@@ -32,15 +32,12 @@
 - `jest --watch` 只监控变化的文件 但是它是基于git监控文件变化的 所以需要有git仓库
 - `jest --watchAll` 里面有各种选项 进行各种测试
 
-
 ## 测试覆盖率
 - `npx jest --init` 生成一个配置文件
 - 配置一个脚本命令 `jest --coverage`
 
 ## 要素
-- 匹配器 断言
-- describe it
+- describe it 匹配器(expect) 断言(相等、不相等)
 - 异步测试: done方法 async+await
-- 定时器测试
-- 接口测试 mock方法 mock接口
-
+- 定时器测试: 自己mock一个timer
+- 接口测试: mock方法 mock接口
