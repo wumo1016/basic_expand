@@ -9,3 +9,12 @@
 - 网络进程
 - GPU进程
 - 插件进程
+
+## 渲染流程
+- 解析html和css 同步进行
+  - 浏览器无法直接使用HTML 需要将HTML转化成 `DOM Tree` 可以直接通过 `document` 拿到 => dom树
+  - 浏览器无法直接使用纯文本的css样式 需要将其解析成 `styleSheets` 可以通过 `document.styleSheets` 拿到 => css树
+- 计算出DOM树中每个节点的样式(Attachment) => dom树
+- 创建渲染树(Render Tree) 将DOM树中的可见节点 添加到布局树中 计算节点位置 => 布局树
+- 根据布局树 进行分层(定位属性、透明属性、transform等等) => 图层树
+- 将不同图层进行绘制 然后通过合成线程处理 产生最终的页面 并显示
