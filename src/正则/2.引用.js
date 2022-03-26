@@ -1,11 +1,17 @@
+/* ----------------------------------------- 普通捕获组引用 ----------------------------------------- */
 /* 
-\1表示对第1个括号中的引用
-\2表示对第2个括号中的引用
+- \n表示第n个捕获组 从1开始
 */
 ;(function () {
-  // 所以它匹配的就是 aa-zz AA-ZZ 的连续字母
-  function containsRepeatingLetter(str) {
-    return /([a-zA-Z])\1/.test(str)
-  }
-  console.log(containsRepeatingLetter('asdsddfsef'))
-})()
+  console.log(/([a-zA-Z])\1/.test('abcc')) // true
+  console.log(/([a-zA-Z])\1/.test('abc')) // false
+})
+
+/* ----------------------------------------- 具名捕获组引用 ----------------------------------------- */
+/* 
+- \k + 尖括号 + 捕获组名
+- 索引引用依然有效
+*/
+;(function () {
+  console.log(/(?<name>[a-zA-Z])\k<name>/.test('abcc')) // true
+})

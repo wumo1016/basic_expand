@@ -19,9 +19,9 @@
 - NaN等于0
 */
 ;(function () {
-  console.log('a'.repeat(3)); // aaa
-  console.log('a'.repeat(2.8)); // aaa
-  console.log('a'.repeat(-0.2)); // ''
+  console.log('a'.repeat(3)) // aaa
+  console.log('a'.repeat(2.8)) // aaa
+  console.log('a'.repeat(-0.2)) // ''
 })
 
 /* ----------------------------------------- padStart padEnd ----------------------------------------- */
@@ -43,3 +43,6 @@
   console.log('wyb'.at(0)) // w
   console.log('wyb'.at(-1)) // b
 })
+
+/* ----------------------------------------- 四个字符串方法都可以使用正则 match replace search split  ----------------------------------------- */
+;(function () {})
