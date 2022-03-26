@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div style="background-color: red;width: 100px;height: 100px;">hello</div>
+  <!-- 有意义的内容 -->
+  <h1 elementtiming="meaningful">舞墨</h1>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      let total = 0
+      for (let i = 0; i < 1000000; i++) {
+        total += i
+      }
+      // console.log(total);
+    })
+
+    setTimeout(() => {
+      const {
+        fetchStart, // 开始访问
+        requestStart, // 请求开始
+        responseStart, // 响应开始
+        responseEnd, // 响应结束
+        domInteractive, // dom可交互的时间点
+        domContentLoadedEventEnd, // dom加载完毕 包括执行 domcontentLoaded 的时间
+        loadEventStart // 所有资源加载完毕
+      } = performance.timing
+
+      const TTFB = responseStart - requestStart // 首字节返回的时间 反应服务器的处理能力
+      const TTI = domInteractive - fetchStart // 整个可交互的时长
+      const DCL = domContentLoadedEventEnd - fetchStart // dom整个加载完毕
+      const L = loadEventStart - fetchStart // 所有资源加载完毕所用的时长
+      console.log('TTFB', TTFB);
+      console.log('TTI', TTI);
+      console.log('DCL', DCL);
+      console.log('L', L);
+
+      const paint = performance.getEntriesByType('paint')
+      const FP = paint[0].startTime
+      const FCP = paint[1].startTime
+      // console.log(paint);
+      console.log('FP', FP);
+      console.log('FCP', FCP);
+
+
+    }, 1000)
+
+    // 监控有意义的元素
+    new PerformanceObserver((entryList, observer) => {
+      const FMP = entryList.getEntries()[0].startTime
+      setTimeout(() => {
+        console.log('FMP', FMP);
+      }, 1000)
+      observer.disconnect() // 监控完后断开连接
+    }).observe({ entryTypes: ['element'] })
+
+    // 监控最大的元素
+    new PerformanceObserver((entryList, observer) => {
+      const LCP = entryList.getEntries()[0].startTime
+      setTimeout(() => {
+        console.log('LCP', LCP);
+      }, 1000)
+      observer.disconnect()
+    }).observe({ entryTypes: ['largest-contentful-paint'] })
+
+    // 监控首次交互的时间
+    new PerformanceObserver((entryList, observer) => {
+      const PET = entryList.getEntries()[0]
+      setTimeout(() => {
+        console.log('FID', PET.processingStart - PET.startTime);
+      }, 1000)
+      observer.disconnect()
+    }).observe({ entryTypes: ['first-input'], buffered: true })
+
+  </script>
+</body>
+
+</html>
