@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+
+        // console.log(app.offsetTop); // 不停的再触发布局
+        // 强制同步布局
+        function reflow() {
+            let el = document.getElementById('app');
+            let node = document.createElement('h1');
+            node.innerHTML = 'hello';
+            el.appendChild(node);
+            // console.log(app.offsetTop); // 执行的时候会强制重新布局
+
+        }
+        window.addEventListener('load', function () {
+            reflow();
+        });
+
+
+        // 如果下面的写法 每次都会从新布局 性能极差
+        // function reflow() {
+        //     let el = document.getElementById('app');
+        //     let node = document.createElement('h1');
+        //     node.innerHTML = 'hello';
+        //     el.appendChild(node);
+        // }
+        // window.addEventListener('load', function() {
+        //     for (let i = 0; i < 100; i++) {
+        //         reflow();
+        //     }
+        // });
+    </script>
+</body>
+
+</html>

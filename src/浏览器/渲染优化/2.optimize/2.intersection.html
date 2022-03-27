@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            display: block
+        }
+    </style>
+</head>
+
+<body>
+    <img src="./images/loading.jpg" data-src="./images/1.jpg" style="width: 200px;height:300px;">
+    <img src="./images/loading.jpg" data-src="./images/2.jpg" style="width: 200px;height:300px;">
+    <img src="./images/loading.jpg" data-src="./images/3.jpg" style="width: 200px;height:300px;">
+    <img src="./images/loading.jpg" data-src="./images/4.jpg" style="width: 200px;height:300px;">
+    <img src="./images/loading.jpg" data-src="./images/5.jpg" style="width: 200px;height:300px;">
+    <img src="./images/loading.jpg" data-src="./images/6.jpg" style="width: 200px;height:300px;">
+    <img src="./images/loading.jpg" data-src="./images/7.jpg" style="width: 200px;height:300px;">
+    <img src="./images/loading.jpg" data-src="./images/8.jpg" style="width: 200px;height:300px;">
+    <img src="./images/loading.jpg" data-src="./images/9.jpg" style="width: 200px;height:300px;">
+    <img src="./images/loading.jpg" data-src="./images/10.jpg" style="width: 200px;height:300px;">
+
+    <script>
+        const observer = new IntersectionObserver(function (changes) {
+            changes.forEach(function (element, index) {
+                console.log(element);
+                if (element.intersectionRatio > 0) {
+                    observer.unobserve(element.target);
+                    element.target.src = element.target.dataset.src;
+                }
+            });
+        });
+        function initObserver() {
+            const listItems = document.querySelectorAll('img');
+            listItems.forEach(function (item) {
+                observer.observe(item);
+            });
+        }
+        initObserver();
+    </script>
+</body>
+
+</html>

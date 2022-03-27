@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Web Font Sample</title>
+    <style type="text/css" media="screen, print">
+        @font-face {
+            font-family: "Bmy";
+            src: url("./HelloQuincy.ttf");
+            font-display: block;
+            /* block 3s 内不显示, 如果没加载完毕用默认的   */
+            /* swap 显示老字体 在替换 */
+            /* fallback 缩短不显示时间， 如果没加载完毕用默认的 ，和block类似*/
+            /* optional 替换可能用字体 可能不替换*/
+        }
+
+        body {
+            font-family: "Bmy"
+        }
+    </style>
+</head>
+
+<body>
+    hello zhufeng~~~
+</body>
+
+</html>

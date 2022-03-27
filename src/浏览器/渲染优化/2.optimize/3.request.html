@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        #box {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 100px;
+            height: 100px;
+            background: orange;
+        }
+    </style>
+    <div id="box"></div>
+    <script>
+        /* example 1 */
+        // const element = document.getElementById('box');
+        // function move() {
+        //     element.style.left = element.offsetLeft + 1 + 'px';
+        //     if (element.offsetLeft > 800) {
+        //         clearInterval(timer);
+        //     }
+        // }
+        // const timer = setInterval(move, 10);  // 16.6  setInterval => settimeout
+
+        /* example 2 */
+        const element = document.getElementById('box');
+        let start;
+        function step(timestamp) {
+            if (start === undefined)
+                start = timestamp;
+            const elapsed = timestamp - start;
+            element.style.transform = 'translateX(' + Math.min(0.1 * elapsed, 800) + 'px)';
+            if (elapsed < 2000) {
+                window.requestAnimationFrame(step);
+            }
+        }
+        window.requestAnimationFrame(step);
+
+        /* example 3 */
+        function sleep(d) {
+            for (var t = Date.now(); Date.now() - t <= d;);
+        }
+        const tasks = [
+            () => {
+                console.log("task1");
+                sleep(10);
+            },
+            () => {
+                console.log("task2");
+                sleep(10);
+            },
+            () => {
+                console.log("task3");
+                sleep(10);
+            },
+        ];
+        // requestIdleCallback(taskLoop, { timeout: 1000 })
+        requestIdleCallback(taskLoop)
+        function taskLoop(deadline) {
+            console.log('本帧剩余时间', deadline.timeRemaining());
+            while ((deadline.timeRemaining() > 1 || deadline.didTimeout) && tasks.length > 0) {
+                performUnitOfWork();
+            }
+            if (tasks.length > 0) {
+                console.log(`只剩下${deadline.timeRemaining()}ms,时间片到了等待下次空闲时间的调度`);
+                requestIdleCallback(taskLoop);
+            }
+        }
+        function performUnitOfWork() {
+            tasks.shift()();
+        }
+    </script>
+</body>
+
+</html>
