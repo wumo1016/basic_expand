@@ -18,3 +18,12 @@
 - 创建渲染树(Render Tree) 将DOM树中的可见节点 添加到布局树中 计算节点位置 => 布局树
 - 根据布局树 进行分层(定位属性、透明属性、transform等等) => 图层树
 - 将不同图层进行绘制 然后通过合成线程处理 产生最终的页面 并显示
+
+## 请求头
+- User-Agent(用户代理)
+  - 判断浏览器类型 以便做兼容处理
+  - 判断是否为移动端
+    - PC:     `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36`
+    - Mobile: `Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Mobile Safari/537.36`
+  - 表示H5容器 方便调用H5容器特定接口(比如微信的嵌入网页)
+  - 不安全 容易伪装
