@@ -69,3 +69,9 @@
     - 作用于元素以及元素内的所有内容的透明度
   - rgba
     - 只作用于元素的颜色和背景色
+
+## 解决 img 5px 间距的问题
+  - 设置img-box的`font-size: 0`
+  - 设置图片样式`display: block`
+  - 设置图片样式`vertical-align: bottom`
+  - 给父元素设置`line-height: 5px`
