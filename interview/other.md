@@ -1,10 +1,10 @@
 ## 模块化的区别以及好处
-  - AMD(define定义 require获取) ---- 浏览器环境
-  - CMD(都使用define定义 使用define的回调函数的参数exports定义 参数require获取 ) ---- 浏览器环境
-  - COMMONJS(module.exports exports require)  ---- node环境
-  - UMD ---- 通用(AMD CMD COMMONJS)
-  - ESM ---- ES6规范(import export export default)
-  
+  - 分类
+    - AMD(define定义 require获取) ---- 浏览器环境
+    - CMD(都使用define定义 使用define的回调函数的参数exports定义 参数require获取 ) ---- 浏览器环境
+    - COMMONJS(module.exports exports require)  ---- node环境
+    - UMD ---- 通用(AMD CMD COMMONJS)
+    - ESM ---- ES6规范(import export export default)
   - 模块化的好处
     - 避免命名冲突
     - 结构清晰 降低耦合
@@ -15,19 +15,16 @@
     - webpack配置多进程打包
     - 打包时缩小文件搜索范围
   - 资源加载阶段
+    - dns-prefetch
     - 减少http请求
-    - 压缩文件 上传服务器时先压缩一遍 服务器也开始gzip压缩
-    - 静态资源使用cdn
-    - 设置缓存策略
+    - 合理设置缓存
+    - 资源合并与压缩
+    - 使用cdn加速
   - 页面渲染阶段
     - css在上 js在下
     - 加载css时使用link而不是@import
     - 不影响显示的js文件使用defer或async异步加载
-
-  - 减少http请求
-  - 合理设置缓存
-  - 资源合并与压缩
-  - 图片懒加载
+    - 图片懒加载
 
 ## git常用操作
   - `git add xxx` 将本地文件添加到暂存区
