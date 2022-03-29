@@ -1,15 +1,17 @@
-## 从输入url到页面加载完成 发生了什么(3+6)
-  - 网络请求
-    - DNS解析url 将url解析成ip地址
-    - 和ip建立tcp连接 发送http请求
-    - 服务器接收到请求 返回拼接好的http响应
+## 从输入url到页面加载完成 发生了什么(2+3+5)
+  - url解析
+  - 检查资源缓存
+    - 使用缓存
+    - 网路请求
+      - DNS解析(将url解析成ip)
+      - 建立TCP链接 发起http请求
+      - 服务器收到请求 并返回响应结果
   - 浏览器渲染
-    - 浏览器收到首屏html 开始渲染
-    - 解析html为dom
-    - 解析css为css-tree
-    - dom+css生成render-tree
-    - 加载js文件
-    - 执行js
+    - 解析html => `dom-tree`(document) 解析css => `css-tree`(document.styleSheets)
+    - 构建`render-tree`: 将`css-tree`合并到`dom-tree`上 计算每个dom节点的样式
+    - 构建`layout-tree`: 将可见的元素添加到布局树中 计算每个dom节点的位置
+    - 构建`layer-tree`: 根据元素的定位属性、层级属性等构建层级树
+    - 绘制页面: 根据不同的图层树进行绘制 最终合并成一个页面
 
 ## 从输入url到页面加载完成 发生了什么(细化版)
   - 网络请求
