@@ -47,3 +47,6 @@ body {
 - `[attr*=value]`: 选择带有属性attr值`包含`value的元素
 - `[attr]`: 选择所有带有属性attr的元素
 - `[attr=value]`: 选择带有属性attr值为value的元素
+
+## position
+- fixed: 当祖先元素的transform、filter、perspective等属于不为none时 容器由视口改为该祖先
