@@ -75,3 +75,8 @@
   - 设置图片样式`display: block`
   - 设置图片样式`vertical-align: bottom`
   - 给父元素设置`line-height: 5px`
+
+## 伪类和伪元素的区别
+  - 伪类: 表示被选中元素的某种状态(:hover :focus)
+  - 伪元素: 表示被选择元素的某个部分(:before :after)
+  - 区别: 核心区别在于，是否创造了“新的元素”

@@ -23,16 +23,20 @@
       color: pink
     }
 
-    a[href~=qq] {
-      color: pink;
-    }
-
     div[test] {
       color: blue;
     }
 
     div[test=a] {
       color: red;
+    }
+
+    .test::first-letter {
+      color: blue;
+    }
+
+    .test::first-line {
+      color: yellow;
     }
   </style>
 </head>
@@ -46,6 +50,10 @@
   <div test>1</div>
   <div test>2</div>
   <div test="a">2</div>
+
+  <div class="test" style="width: 100px;">
+    阿卡点卡还得啊肯德基的话是独立访客数量分局书记副书记附件是肥肉
+  </div>
 </body>
 
 </html>
