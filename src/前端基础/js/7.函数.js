@@ -122,4 +122,35 @@
   foo() // 100
   x = 100
   foo() // 101
+})
+
+/* ----------------------------------------- length属性 ----------------------------------------- */
+/* 
+- 返回没有指定默认值的参数个数
+*/
+;(function () {
+  function test(name, age = 18) {
+    console.log(test.length) // 1
+  }
+  test()
+})()
+
+/* ----------------------------------------- 箭头函数 ----------------------------------------- */
+/* 
+- 由于对象不构成单独的作用域 所以在对象箭头函数的this就指向上层作用域
+- 如果在事件回调函数使用到this 也不能使用箭头函数
+*/
+;(function () {
+  // 错误使用1
+  const obj = {
+    age: 9,
+    jumps: () => {
+      this.age--
+    }
+  }
+  // 错误使用2
+  var button = document.getElementById('press')
+  button.addEventListener('click', () => {
+    this.classList.toggle('on')
+  })
 })()

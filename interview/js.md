@@ -79,7 +79,11 @@
       - string如果不满足对应进制的值 也返回NaN
 
 ## 箭头函数
-  - 不能被绑定this 使用this时 会自动捕获上下文中的this 作为自己的this
+  - 没有自己的this对象(
+    - 普通函数内部this执行运行时所在的对象
+    - 头内部的this直接指向定义时上层作用域的this
+    - 说箭头函数的this在定义时就已经确定 后期即使通过call等也无法更改
+    - 其实在编译的时候 箭头函数的this都被被变成一个变量(_this) _this = 上层作用域的this
   - 没有arguments参数 使用rest参数代替
   - 不能作为构造函数 不能被new
   - 不能使用yield命令 就是不能当作generator函数
