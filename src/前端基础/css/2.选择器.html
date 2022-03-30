@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    a[href^=https] {
+      color: red
+    }
+
+    a[href$=store] {
+      color: green
+    }
+
+    a[href*=aaa] {
+      color: pink
+    }
+
+    a[href~=qq] {
+      color: pink;
+    }
+
+    div[test] {
+      color: blue;
+    }
+
+    div[test=a] {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="https://www.baidu.com">q</a>
+  <a href="http://www.wuyibo.store">e</a>
+  <a href="http://www.aaa.qq">a</a>
+  <a href="http://www.aaa.qq">b</a>
+
+  <div test>1</div>
+  <div test>2</div>
+  <div test="a">2</div>
+</body>
+
+</html>

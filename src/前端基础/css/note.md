@@ -40,3 +40,10 @@ body {
   filter: grayscale(1);
 }
 ```
+
+## 选择器
+- `[attr^=value]`: 选择带有属性attr值`开头`为value的元素
+- `[attr$=value]`: 选择带有属性attr值`结尾`为value的元素
+- `[attr*=value]`: 选择带有属性attr值`包含`value的元素
+- `[attr]`: 选择所有带有属性attr的元素
+- `[attr=value]`: 选择带有属性attr值为value的元素
