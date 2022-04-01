@@ -6,12 +6,12 @@
       - DNS解析(将url解析成ip)
       - 建立TCP链接 发起http请求
       - 服务器收到请求 并返回响应结果
-  - 浏览器渲染
+  - 浏览器渲染 `Parse HTML => Parse Stylesheet => Recalculate Style => Layout => Update Layer Tree => Paint => Composite Layers`
     - 解析html => `dom-tree`(document) 解析css => `css-tree`(document.styleSheets)
     - 构建`render-tree`: 将`css-tree`合并到`dom-tree`上 计算每个dom节点的样式
     - 构建`layout-tree`: 将可见的元素添加到布局树中 计算每个dom节点的位置
-    - 构建`layer-tree`: 根据元素的定位属性、层级属性等构建层级树
-    - 绘制页面: 根据不同的图层树进行绘制 最终合并成一个页面
+    - 构建`layer-tree`: 根据元素的定位属性、层级属性等构建层级树 绘制各个图层
+    - 合并: 合并图层
 
 ## preload、prefetch有什么区别
   - preload: 以高优先级加载资源 常用于当前页面立即使用的资源
