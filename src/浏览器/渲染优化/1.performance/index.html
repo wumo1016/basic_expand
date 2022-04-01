@@ -39,8 +39,8 @@
       const L = loadEventStart - fetchStart // 所有资源加载完毕所用的时长
       console.log('TTFB', TTFB);
       console.log('TTI', TTI);
-      console.log('DCL', DCL);
       console.log('L', L);
+      console.log('DCL', DCL);
 
       const paint = performance.getEntriesByType('paint')
       const FP = paint[0].startTime

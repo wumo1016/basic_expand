@@ -6,22 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./index.css">
-
 </head>
 
 <body>
     <div>hello</div>
     <script>
         let s = 0
-        for (let i = 0; i < 100000000; i++) {
+        for (let i = 0; i < 1000; i++) {
             s += i;
         }
     </script>
     <div>world</div>
-    <!-- js会阻塞dom解析   需要暂停DOM解析去执行javascript 
-         js可能会操作样式,所以需要等待样式加载完成 -->
-    <!-- 在继续加载 -->
-    <!-- js阻塞html解析 阻塞渲染， js 要等上面的css加载完毕，保证页面js可以操作样式 -->
+    <!-- js会阻塞后面dom的解析与渲染  -->
+    <!-- 但js可能会操作样式 所以需要等待样式加载完毕后才会执行js-->
 </body>
 
-</html> 
+</html>
