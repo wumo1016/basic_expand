@@ -25,6 +25,7 @@
     <img src="./images/loading.jpg" data-src="./images/10.jpg" style="width: 200px;height:300px;">
 
     <script>
+        // 如果元素在视口内就替换为真实地址
         const observer = new IntersectionObserver(function (changes) {
             changes.forEach(function (element, index) {
                 console.log(element);

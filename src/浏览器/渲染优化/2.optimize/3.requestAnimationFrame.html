@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        #box {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 100px;
+            height: 100px;
+            background: orange;
+        }
+    </style>
+    <div id="box"></div>
+    <script>
+        /* example 1 */
+        // const element = document.getElementById('box');
+        // function move() {
+        //     element.style.left = element.offsetLeft + 1 + 'px';
+        //     if (element.offsetLeft > 600) {
+        //         clearInterval(timer);
+        //     }
+        // }
+        // const timer = setInterval(move, 10);  // 16.6  setInterval => settimeout
+
+        /* example 2 */
+        const element = document.getElementById('box');
+        function move() {
+            element.style.left = element.offsetLeft + 1 + 'px';
+            if (element.offsetLeft < 600) {
+                window.requestAnimationFrame(move)
+            }
+        }
+        window.requestAnimationFrame(move)
+    </script>
+</body>
+
+</html>
