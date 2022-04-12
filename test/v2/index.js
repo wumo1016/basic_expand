@@ -225,6 +225,10 @@ function dealTopData(data, root) {
       // 倾斜的
       if (isOdd(dep)) {
         if (index === 0) {
+          if (!item.x) {
+            item.x = parent.x - (NODE_WIDTH + NODE_PADDING * 2)
+            item.y = parent.y
+          }
         } else {
         }
       } else {
@@ -233,6 +237,7 @@ function dealTopData(data, root) {
           item.x = parent.x - F_HSpace
           item.y = parent.y - F_HSpace
         } else {
+
         }
       }
       /* 递归 */
