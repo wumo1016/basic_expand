@@ -1,4 +1,10 @@
-const mockData1 = {
+/*
+ * @Description:
+ * @Author: wyb
+ * @LastEditors: wyb
+ * @LastEditTime: 2022-04-12 16:38:00
+ */
+const mockData = {
   name: '管道脱落',
   fontColor: '',
   lineColor: '',
@@ -269,161 +275,6 @@ const mockData1 = {
           link: ''
         }
       ]
-    }
-  ]
-}
-
-const mockData2 = {
-  name: '管道脱落',
-  fontColor: '',
-  lineColor: '',
-  link: '',
-  children: [
-    {
-      name: '病人',
-      fontColor: '',
-      lineColor: '',
-      link: '',
-      children: [
-        {
-          name: '精神因素',
-          fontColor: '',
-          lineColor: '',
-          link: 'http://www.baidu.com'
-        },
-        {
-          name: '依从性差',
-          fontColor: '',
-          lineColor: '',
-          link: ''
-        },
-        {
-          name: '知识缺乏',
-          fontColor: '',
-          lineColor: '',
-          link: ''
-        }
-      ]
-    },
-    {
-      name: '医生护士',
-      fontColor: '',
-      lineColor: '',
-      link: '',
-      children: [
-        {
-          name: '安全告知不到位',
-          fontColor: '',
-          lineColor: '',
-          link: ''
-        },
-        {
-          name: '未及时发现安全隐患',
-          fontColor: '',
-          lineColor: '',
-          link: ''
-        },
-        {
-          name: '违反管道护理常规',
-          fontColor: '',
-          lineColor: '',
-          link: ''
-        },
-        {
-          name: '约束措施、无力、不当',
-          fontColor: '',
-          lineColor: '',
-          link: ''
-        }
-      ]
-    },
-    {
-      name: '家属',
-      fontColor: '',
-      lineColor: '',
-      link: '',
-      children: [
-        {
-          children: [],
-          name: '粗心大意',
-          fontColor: '',
-          lineColor: '',
-          link: ''
-        },
-        {
-          name: '家属随意终止约束',
-          fontColor: '',
-          lineColor: '',
-          link: ''
-        }
-      ]
-    },
-    {
-      name: '管理',
-      fontColor: '',
-      lineColor: '',
-      link: '',
-      children: [
-        {
-          name: '质量问题',
-          fontColor: '',
-          lineColor: '',
-          link: ''
-        },
-        {
-          children: [],
-          name: '培训不足',
-          fontColor: '',
-          lineColor: '',
-          link: ''
-        },
-        {
-          name: '监管不足',
-          fontColor: '',
-          lineColor: '',
-          link: ''
-        },
-        {
-          children: [],
-          name: '护士人力不足',
-          fontColor: '',
-          lineColor: '',
-          link: ''
-        }
-      ]
-    }
-  ]
-}
-
-const mockData = {
-  name: '管道脱落',
-  fontColor: '',
-  lineColor: '',
-  link: '',
-  children: [
-    {
-      name: '病人',
-      fontColor: '',
-      lineColor: '',
-      link: ''
-    },
-    {
-      name: '医生护士',
-      fontColor: '',
-      lineColor: '',
-      link: ''
-    },
-    {
-      name: '家属',
-      fontColor: '',
-      lineColor: '',
-      link: ''
-    },
-    {
-      name: '管理',
-      fontColor: '',
-      lineColor: '',
-      link: ''
     }
   ]
 }
