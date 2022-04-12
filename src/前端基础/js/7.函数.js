@@ -133,7 +133,7 @@
     console.log(test.length) // 1
   }
   test()
-})()
+})
 
 /* ----------------------------------------- 箭头函数 ----------------------------------------- */
 /* 
@@ -153,4 +153,23 @@
   button.addEventListener('click', () => {
     this.classList.toggle('on')
   })
+})
+
+/* ----------------------------------------- arguments ----------------------------------------- */
+/* 
+- 参数变量和 arguments 是双向绑定的
+- 改变参数变量，arguments 中的值会立即改变；而改变 arguments 中的值，参数变量也会对应改变
+*/
+;(function () {
+  function sidEffecting(ary) {
+    ary[0] = ary[2]
+  }
+  function bar(a, b, c) {
+    c = 10
+    console.log(arguments);
+    sidEffecting(arguments)
+    console.log(arguments);
+    return a + b + c
+  }
+  console.log(bar(1, 1, 1));
 })()
