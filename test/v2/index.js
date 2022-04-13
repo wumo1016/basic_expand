@@ -1,8 +1,17 @@
 const NODE_HEIGHT = 30
 const NODE_WIDTH = 120
-const NODE_PADDING = 20
-const F_HSpace = 30
-const F_VSpace = 40
+
+const NODE_WIDTH_ARROR = NODE_WIDTH
+const X_NODE_WIDTH = NODE_WIDTH_ARROR / 2 // 70
+const X_NODE_HEIGHT = X_NODE_WIDTH * Math.sqrt(3)
+
+const F_HSpace = 20
+const F_VSpace = F_HSpace * Math.sqrt(3)
+
+const ROOT_F_HSpace = 50
+const ROOT_F_VSpace = ROOT_F_HSpace * Math.sqrt(3)
+
+const TILT_NO_CHILD_WIDTH = 35 // 倾斜线没有子节点时的宽度
 
 G6.registerNode(
   'my-node',
@@ -40,11 +49,11 @@ G6.registerNode(
       const subGroup = group.addGroup({
         id: 'my-group'
       })
-
+      // 文本
       const text = subGroup.addShape('text', {
         attrs: {
-          x: ctx.topPosition ? -20 : -10,
-          y: 0,
+          x: -ctx._textOffsetX,
+          y: -ctx._textOffsetY || 0,
           text: ctx.name,
           textAlign: 'right',
           textBaseline: 'middle',
@@ -52,15 +61,15 @@ G6.registerNode(
         },
         name: 'key-text'
       })
-
+      // 指引线
       subGroup.addShape('path', {
         attrs: {
           startArrow: {
             path: 'M 0,0 L 4,2 L 4,-2 Z'
           },
           path: [
-            ['M', ctx.topPosition ? -10 : 2, 10],
-            ['L', -ctx.width, 10]
+            ['M', ctx._lineOffset, 10],
+            ['L', -ctx._lineLong, 10]
           ],
           stroke: '#000',
           lineWidth: 2
@@ -68,7 +77,8 @@ G6.registerNode(
         name: 'path-shape'
       })
 
-      subGroup.rotate((Math.PI / 180) * ctx.rotate)
+      subGroup.rotate((Math.PI / 180) * ctx._rotate)
+
       return subGroup
     }
   },
@@ -92,7 +102,7 @@ const graph = new G6.Graph({
   },
   defaultEdge: {
     style: {
-      lineWidth: 2,
+      lineWidth: 3,
       stroke: '#000'
     }
   }
@@ -114,19 +124,8 @@ function dealData(root) {
   root.y = container.offsetHeight / 2
   root.x = container.offsetWidth - 100
   root.rootHead = true
-  root.rootTail = true
 
-  dealFirst(root.children, root)
-
-  const target = {
-    x: root.x - 500,
-    y: root.y,
-    id: '2',
-    name: '',
-    rootTail: true
-  }
-
-  const nodes = [root, target]
+  const nodes = [root]
   const edges = [
     {
       source: '2',
@@ -134,25 +133,11 @@ function dealData(root) {
     }
   ]
 
-  // const loop = list => {
-  //   list.map(item => {
-  //     nodes.push(item)
-  //     if (item.children?.length) loop(item.children)
-  //   })
-  // }
-  // loop(root.children)
-
-  return {
-    nodes,
-    edges
-  }
-}
-
-function dealFirst(list, root) {
   const topList = []
   const bottomList = []
 
-  list.map((item, index) => {
+  ;(root.children || []).forEach((item, index) => {
+    item._rootChild = true
     if (index % 2) {
       bottomList.push(item)
     } else {
@@ -161,99 +146,319 @@ function dealFirst(list, root) {
   })
 
   if (topList.length) {
-    topList[0].x = root.x - 50
+    topList[0].x = root.x - 100
     topList[0].y = root.y
   }
 
   if (bottomList.length) {
-    bottomList[0].x = root.x - 10
+    bottomList[0].x = root.x - 150
     bottomList[0].y = root.y
   }
 
-  this.dealTopData(topList, root)
+  dealTopData(topList, root, nodes)
+  dealBottomData(bottomList, root, nodes)
 
-  // let prev
-  // topList.forEach((item, index) => {
-  //   if (index === 0) {
-  //     item.x = root.x - 50
-  //     item.width = 100
-  //     item.xdis = 80
-  //   } else {
-  //     item.x = prev.x - prev.xdis
-  //     item.width = 100
-  //     item.xdis = 80
-  //   }
-  //   item.y = root.y
-  //   item.rotate = 60
-  //   item.topPosition = true
-  //   prev = item
-  // })
+  const rootTailNode = {
+    x: root.x - getRootWidth(topList, bottomList),
+    y: root.y,
+    id: '2',
+    name: '',
+    rootTail: true
+  }
+  nodes.push(rootTailNode)
 
-  // bottomList.forEach((item, index) => {
-  //   if (index === 0) {
-  //     item.x = root.x - 100
-  //     item.width = 100
-  //     item.xdis = 80
-  //   } else {
-  //     item.x = prev.x - prev.xdis
-  //     item.width = 100
-  //     item.xdis = 80
-  //   }
-  //   item.y = root.y
-  //   item.rotate = -60
-  //   item.bottomPosition = true
-  //   prev = item
-  // })
-
-  // console.log(topList)
-  // console.log(bottomList)
+  return {
+    nodes,
+    edges
+  }
 }
 
-/* 
-线宽 lineWidth
-
-
-*/
-
-function dealTopData(data, root) {
+function dealTopData(data, root, nodes) {
   const isOdd = num => !!(num % 2)
-  const loop = (list, parent, dep = 1) => {
-    list.forEach((item, index) => {
+  const loop = (list, dep = 1) => {
+    list.forEach(item => {
       /* 节点深度 */
       item._dep = dep
-      /* 处理节点坐标 */
-      // 倾斜的
+      /* 设置旋转角度、文本偏移 */
       if (isOdd(dep)) {
-        if (index === 0) {
-          if (!item.x) {
-            item.x = parent.x - (NODE_WIDTH + NODE_PADDING * 2)
-            item.y = parent.y
-          }
+        item._rotate = 60
+        item._textOffsetX = 10
+      } else {
+        item._rotate = 0
+        item._textOffsetX = 20
+      }
+      if (item._rootChild) {
+        item._textOffsetX = 20
+      }
+      /* 递归 */
+      if (item.children?.length) {
+        loop(item.children, dep + 1)
+      }
+      /* 设置宽高 */
+      if (item.children?.length) {
+        // 斜
+        if (isOdd(dep)) {
+          let childsHeight =
+            item.children.reduce((total, cur) => total + cur._totalHeight, 0) +
+            30
+          item._totalHeight = Math.max(X_NODE_HEIGHT, childsHeight)
+          item._totalWidth = Math.max(
+            ...item.children.map((item, index) => {
+              return item._totalWidth + F_HSpace * (index + 1)
+            })
+          )
         } else {
+          // 直
+          // 子宽度的和
+          item._totalWidth =
+            NODE_WIDTH +
+            item.children.reduce(
+              (total, cur) =>
+                total +
+                (cur.children?.length ? cur._totalWidth : TILT_NO_CHILD_WIDTH),
+              0
+            )
+          // 子高度最大的
+          item._totalHeight =
+            Math.max(...item.children.map(v => v._totalHeight)) + 15
+        }
+      } else {
+        // 斜线
+        if (isOdd(dep)) {
+          item._totalWidth = X_NODE_WIDTH
+          item._totalHeight = X_NODE_HEIGHT
+        } else {
+          // 直线
+          item._totalWidth = NODE_WIDTH
+          item._totalHeight = NODE_HEIGHT
+        }
+      }
+    })
+  }
+  loop(data)
+
+  setTopPosition(data, root, nodes)
+}
+
+function setTopPosition(data, root, nodes) {
+  const isOdd = num => !!(num % 2)
+  const loop = (list, parent) => {
+    list.forEach((item, index) => {
+      // 倾斜的
+      if (isOdd(item._dep)) {
+        if (!item.x) {
+          if (index === 0) {
+            item.x = parent.x - NODE_WIDTH
+          } else {
+            const prev = list[index - 1]
+            item.x =
+              prev.x -
+              (prev.children?.length ? prev._totalWidth : TILT_NO_CHILD_WIDTH)
+          }
+          item.y = parent.y
         }
       } else {
         // 直的
         if (index === 0) {
-          item.x = parent.x - F_HSpace
-          item.y = parent.y - F_HSpace
+          if (parent._rootChild) {
+            item.x = parent.x - ROOT_F_HSpace
+            item.y = parent.y - ROOT_F_VSpace
+          } else {
+            item.x = parent.x - F_HSpace
+            item.y = parent.y - F_VSpace
+          }
         } else {
-
+          const prev = list[index - 1]
+          item.y = prev.y - prev._totalHeight
+          item.x = prev.x - prev._totalHeight / Math.sqrt(3)
         }
       }
-      /* 递归 */
-      if (item.children?.length) {
-        loop(item.children, item, dep + 1)
-      }
-      /*  */
-      if (isOdd(dep)) {
-        item._rotate = 60
+      nodes.push(item)
+
+      if (item.children?.length) loop(item.children, item)
+
+      /* 处理线长、线偏移量 */
+      const last = item.children?.[item.children.length - 1]
+      let _lineLong
+      // 斜的
+      if (isOdd(item._dep)) {
+        if (item._rootChild) {
+          item._lineOffset = -10
+        } else {
+          item._lineOffset = 2
+        }
+        const childWidth = item.x - last?.x || 0
+        _lineLong =
+          Math.max(X_NODE_WIDTH, childWidth) * 2 +
+          (X_NODE_WIDTH > childWidth ? 0 : 30)
       } else {
-        item._rotate = 0
+        // 直的
+        item._lineOffset = -10
+        if (last) {
+          _lineLong = item.x - last.x + 20
+        } else {
+          _lineLong = X_NODE_WIDTH * 2
+        }
       }
+      item._lineLong = _lineLong
     })
   }
   loop(data, root)
-  console.log(data)
+  // console.log(data)
+}
+
+function dealBottomData(data, root, nodes) {
+  const isOdd = num => !!(num % 2)
+  const loop = (list, dep = 1) => {
+    list.forEach(item => {
+      /* 节点深度 */
+      item._dep = dep
+      /* 设置旋转角度、文本偏移 */
+      if (isOdd(dep)) {
+        item._rotate = -60
+        item._textOffsetX = 25
+        item._textOffsetY = -20
+      } else {
+        item._rotate = 0
+        item._textOffsetX = 10
+      }
+      if (item._rootChild) {
+        item._textOffsetX = 15
+      }
+      /* 递归 */
+      if (item.children?.length) {
+        loop(item.children, dep + 1)
+      }
+      /* 设置宽高 */
+      if (item.children?.length) {
+        // 斜
+        if (isOdd(dep)) {
+          let childsHeight =
+            item.children.reduce((total, cur) => total + cur._totalHeight, 0) +
+            30
+          item._totalHeight = Math.max(X_NODE_HEIGHT, childsHeight)
+          item._totalWidth = Math.max(
+            ...item.children.map((item, index) => {
+              return item._totalWidth + F_HSpace * (index + 1)
+            })
+          )
+        } else {
+          // 直
+          // 子宽度的和
+          item._totalWidth =
+            NODE_WIDTH +
+            item.children.reduce(
+              (total, cur) =>
+                total +
+                (cur.children?.length ? cur._totalWidth : TILT_NO_CHILD_WIDTH),
+              0
+            )
+          // 子高度最大的
+          item._totalHeight =
+            Math.max(...item.children.map(v => v._totalHeight)) + NODE_HEIGHT
+        }
+      } else {
+        // 斜线
+        if (isOdd(dep)) {
+          item._totalWidth = X_NODE_WIDTH
+          item._totalHeight = X_NODE_HEIGHT
+        } else {
+          // 直线
+          item._totalWidth = NODE_WIDTH
+          item._totalHeight = NODE_HEIGHT
+        }
+      }
+    })
+  }
+  loop(data)
+
+  setBottomPosition(data, root, nodes)
+}
+
+function setBottomPosition(data, root, nodes) {
+  const isOdd = num => !!(num % 2)
+  const loop = (list, parent) => {
+    list.forEach((item, index) => {
+      // 倾斜的
+      if (isOdd(item._dep)) {
+        if (!item.x) {
+          if (index === 0) {
+            item.x = parent.x - NODE_WIDTH
+          } else {
+            const prev = list[index - 1]
+            item.x =
+              prev.x -
+              (prev.children?.length ? prev._totalWidth : TILT_NO_CHILD_WIDTH)
+          }
+          item.y = parent.y
+        }
+      } else {
+        // 直的
+        if (index === 0) {
+          if (parent._rootChild) {
+            item.x = parent.x - ROOT_F_HSpace
+            item.y = parent.y + ROOT_F_VSpace
+          } else {
+            item.x = parent.x - F_HSpace
+            item.y = parent.y + F_VSpace
+          }
+        } else {
+          const prev = list[index - 1]
+          item.y = prev.y + prev._totalHeight
+          item.x = prev.x - prev._totalHeight / Math.sqrt(3)
+        }
+      }
+      nodes.push(item)
+
+      if (item.children?.length) loop(item.children, item)
+
+      /* 处理线长、线偏移量 */
+      const last = item.children?.[item.children.length - 1]
+      let _lineLong
+      // 斜的
+      if (isOdd(item._dep)) {
+        if (item._rootChild) {
+          item._lineOffset = 3
+        } else {
+          item._lineOffset = -10
+        }
+        const childWidth = item.x - last?.x || 0
+        _lineLong =
+          Math.max(X_NODE_WIDTH, childWidth) * 2 +
+          (X_NODE_WIDTH > childWidth ? 0 : 30)
+      } else {
+        // 直的
+        item._lineOffset = 3
+        if (last) {
+          _lineLong = item.x - last.x + 20
+        } else {
+          _lineLong = X_NODE_WIDTH * 2
+        }
+      }
+      item._lineLong = _lineLong
+    })
+  }
+  loop(data, root)
+  // console.log(data)
+}
+
+/**
+ * @Author: wyb
+ * @Descripttion: 获取根宽度
+ * @param {*}
+ */
+function getRootWidth(topList, bottomList) {
+  const topListWidth = topList.reduce(
+    (total, cur) =>
+      total + (cur.children?.length ? cur._totalWidth : TILT_NO_CHILD_WIDTH),
+    0
+  )
+  const bottomListWidth = bottomList.reduce(
+    (total, cur) =>
+      total + (cur.children?.length ? cur._totalWidth : TILT_NO_CHILD_WIDTH),
+    0
+  )
+  return Math.max(topListWidth, bottomListWidth) + 200
 }
 
 // https://blog.csdn.net/xiaoxiangzi520/article/details/103926013
