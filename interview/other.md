@@ -84,3 +84,6 @@
     - `docker start name/ID` 启动容器
     - `docker stop name/ID` 停止容器
     - `docker rm name/ID` 删除容器
+
+## pnpm的优点
+  - 解决体积过大的问题
