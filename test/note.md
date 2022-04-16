@@ -1,3 +1,6 @@
+- _rootHead: 是否是根头节点
+- _rootTail: 是否是根尾节点
+- _rootChild: 是否是根孩子节点
 - _dep: 节点深度
 - _rotate: 节点旋转角度
 - _totalWidth: 节点总宽

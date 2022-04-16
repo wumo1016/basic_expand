@@ -1,21 +1,14 @@
 const NODE_HEIGHT = 30
 const NODE_WIDTH = 100
-
 const X_NODE_WIDTH = NODE_WIDTH / 2
 const X_NODE_HEIGHT = X_NODE_WIDTH * Math.sqrt(3)
-
 const F_HSpace = 20
 const F_VSpace = F_HSpace * Math.sqrt(3)
-
 const ROOT_F_HSpace = 50
 const ROOT_F_VSpace = ROOT_F_HSpace * Math.sqrt(3)
-
 const TILT_NO_CHILD_WIDTH = 35 // 倾斜线没有子节点时的宽度
-
 const MAIN_Space = 40 // 主线间隔
-
 const lineColor = '#424f58'
-
 const canvas = document.createElement('canvas')
 
 G6.registerNode('my-node', {
@@ -112,42 +105,8 @@ G6.registerNode('my-node', {
   }
 })
 
-const container = document.querySelector('#container')
-const graph = new G6.Graph({
-  container,
-  width: container.offsetWidth,
-  height: container.offsetHeight,
-  fitCenter: true,
-  renderer: 'canvas',
-  modes: {
-    default: [
-      {
-        type: 'drag-canvas',
-        allowDragOnItem: true
-      }
-    ]
-  },
-  defaultEdge: {
-    style: {
-      lineWidth: 5,
-      stroke: lineColor
-    }
-  }
-})
-
-graph.node(node => {
-  return {
-    type: 'my-node'
-  }
-})
-
 let topList = []
 let bottomList = []
-
-const finalData = dealData(mockData)
-
-graph.data(finalData) // { nodes: [], edges: [] }
-graph.render()
 
 function dealData(root) {
   root.id = '1'
@@ -533,5 +492,3 @@ function getVNodeSize(node) {
 function getLineWidth(dep) {
   return Math.max(4 - dep * 0.5, 2)
 }
-
-// https://blog.csdn.net/xiaoxiangzi520/article/details/103926013
