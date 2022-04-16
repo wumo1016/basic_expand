@@ -38,40 +38,6 @@
 
   <script>
 
-    const container = document.querySelector('#container')
-    const graph = new G6.Graph({
-      container,
-      width: container.offsetWidth,
-      height: container.offsetHeight,
-      fitCenter: true,
-      renderer: 'canvas',
-      modes: {
-        default: [
-          {
-            type: 'drag-canvas',
-            allowDragOnItem: true
-          }
-        ]
-      },
-      defaultEdge: {
-        style: {
-          lineWidth: 5,
-          stroke: '#424f58'
-        }
-      }
-    })
-
-    graph.node(node => {
-      return {
-        type: 'my-node'
-      }
-    })
-
-    const finalData = dealData(mockData)
-
-    graph.data(finalData)
-    graph.render()
-
   </script>
 </body>
 
