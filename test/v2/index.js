@@ -13,71 +13,100 @@ const ROOT_F_VSpace = ROOT_F_HSpace * Math.sqrt(3)
 
 const TILT_NO_CHILD_WIDTH = 35 // 倾斜线没有子节点时的宽度
 
+const lineColor = '#424f58'
+
 G6.registerNode(
   'my-node',
   {
     draw(ctx, group) {
       const { rootHead, rootTail } = ctx
-      if (rootHead) {
-        const text = group.addShape('text', {
-          attrs: {
-            name: 'key-text',
-            x: 0,
-            y: 0,
-            text: '这是头',
-            textAlign: 'right',
-            textBaseline: 'middle',
-            fill: '#000'
-          }
-        })
-        return text
-      } else if (rootTail) {
-        const text = group.addShape('text', {
-          attrs: {
-            name: 'key-text',
-            x: 0,
-            y: 0,
-            text: '这是尾巴',
-            textAlign: 'right',
-            textBaseline: 'middle',
-            fill: '#000'
-          }
-        })
-        return text
-      }
 
       const subGroup = group.addGroup({
         id: 'my-group'
       })
-      // 文本
-      const text = subGroup.addShape('text', {
-        attrs: {
-          x: -ctx._textOffsetX,
-          y: -ctx._textOffsetY || 0,
-          text: ctx.name,
-          textAlign: 'right',
-          textBaseline: 'middle',
-          fill: '#000'
-        },
-        name: 'key-text'
-      })
-      // 指引线
-      subGroup.addShape('path', {
-        attrs: {
-          startArrow: {
-            path: 'M 0,0 L 4,2 L 4,-2 Z'
-          },
-          path: [
-            ['M', ctx._lineOffset, 10],
-            ['L', -ctx._lineLong, 10]
-          ],
-          stroke: '#000',
-          lineWidth: 2
-        },
-        name: 'path-shape'
-      })
 
-      subGroup.rotate((Math.PI / 180) * ctx._rotate)
+      if (rootHead) {
+        const width = 170
+        const height = 150
+        const halfHeight = height / 2
+        // 指引线  rx ry x-axis-rotation large-arc-flag sweep-flag x y
+        // x半径 y半径 旋转角度 大弧/小狐 顺时针/逆时针 终点x 终点y
+        subGroup.addShape('path', {
+          attrs: {
+            path: [
+              ['M', 0, 0],
+              ['L', 0, -halfHeight],
+              ['M', 0, -halfHeight],
+              ['A', width, halfHeight, 0, 0, 1, 0, halfHeight],
+              ['M', 0, halfHeight],
+              ['L', 0, 0]
+            ],
+            stroke: '#424f58',
+            fill: '#424f58',
+            lineWidth: 2
+          },
+          name: 'path-shape'
+        })
+        const text = subGroup.addShape('text', {
+          attrs: {
+            x: 10,
+            y: 0,
+            text: ctx.name,
+            textAlign: 'left',
+            textBaseline: 'middle',
+            fill: '#fff',
+            fontSize: 16
+          },
+          name: 'path-text'
+        })
+      } else if (rootTail) {
+        const width = 30
+        const height = 8
+        subGroup.addShape('path', {
+          attrs: {
+            path: [
+              ['M', 0, 0],
+              ['A', width, height, 45, 1, 0, -width * 2, 0],
+              ['M', 0, 0],
+              ['A', width, height, -45, 0, 1, -width * 2, 0]
+            ],
+            stroke: '#424f58',
+            fill: '#424f58',
+            lineWidth: 2
+          },
+          name: 'path-shape'
+        })
+      } else {
+        // 文本
+        const text = subGroup.addShape('text', {
+          attrs: {
+            x: -ctx._textOffsetX,
+            y: -ctx._textOffsetY || 0,
+            text: ctx.name,
+            textAlign: 'right',
+            textBaseline: 'middle',
+            fill: '#000'
+          },
+          name: 'key-text'
+        })
+        // 指引线
+        subGroup.addShape('path', {
+          attrs: {
+            startArrow: {
+              path: 'M 0,0 L 4,2 L 4,-2 Z'
+            },
+            path: [
+              ['M', ctx._lineOffset, 10],
+              ['L', -ctx._lineLong, 10]
+            ],
+            stroke: lineColor,
+            lineWidth: 2
+          },
+          name: 'path-shape'
+        })
+
+        subGroup.rotate((Math.PI / 180) * ctx._rotate)
+      }
 
       return subGroup
     }
@@ -102,8 +131,8 @@ const graph = new G6.Graph({
   },
   defaultEdge: {
     style: {
-      lineWidth: 3,
-      stroke: '#000'
+      lineWidth: 5,
+      stroke: lineColor
     }
   }
 })
