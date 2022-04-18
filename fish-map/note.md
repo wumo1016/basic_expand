@@ -1,3 +1,5 @@
+## 鱼骨图
+
 - _rootHead: 是否是根头节点
 - _rootTail: 是否是根尾节点
 - _rootChild: 是否是根孩子节点
