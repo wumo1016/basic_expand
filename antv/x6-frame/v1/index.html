@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #container {
+      width: 98vh;
+      height: 90vh;
+      margin: 20px auto;
+      border: 1px solid gray;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="container"></div>
+
+  <script src="../x6(1.31.3).min.js"></script>
+  <script src="./mock.js"></script>
+  <script src="./util.js"></script>
+
+  <script>
+
+    const data = mockData
+
+    const graph = new X6.Graph({
+      container: document.getElementById('container'),
+      panning: true, // 画布是否可拖动
+    })
+
+    const frameUtil = new X6FrameUtil()
+
+    // const parent = graph.addNode({
+    //   x: 40,
+    //   y: 40,
+    //   width: 360,
+    //   height: 160,
+    //   zIndex: 1,
+    //   label: 'Parent',
+    //   attrs: {
+    //     label: {
+    //       fontSize: 12,
+    //       refX: 0,
+    //       refX2: 5,
+    //       refY: 0,
+    //       refY2: 5,
+    //       textAnchor: 'start',
+    //       textVerticalAnchor: 'top',
+    //     },
+    //     body: {
+    //       fill: '#fffbe6',
+    //       stroke: '#ffe7ba',
+    //     },
+    //   },
+    // })
+
+    // const child1 = graph.createNode({
+    //   x: 80,
+    //   y: 100,
+    //   width: 80,
+    //   height: 40,
+    //   label: 'Child1',
+    //   zIndex: 10,
+    //   attrs: {
+    //     label: {
+    //       fill: '#fff',
+    //       fontSize: 12
+    //     },
+    //     body: {
+    //       stroke: 'none',
+    //       fill: '#3199FF',
+    //     },
+    //   },
+    // })
+
+    // const child2 = graph.createNode({
+    //   x: 280,
+    //   y: 80,
+    //   width: 240,
+    //   height: 80,
+    //   label: 'Child2',
+    //   zIndex: 10,
+    //   attrs: {
+    //     body: {
+    //       stroke: 'none',
+    //       fill: '#47C769',
+    //     },
+    //     label: {
+    //       fill: '#fff',
+    //       fontSize: 12,
+    //     },
+    //   },
+    // })
+
+    // const child3 = graph.createNode({
+    //   x: 420,
+    //   y: 90,
+    //   width: 80,
+    //   height: 40,
+    //   label: 'Child3',
+    //   zIndex: 11,
+    //   attrs: {
+    //     body: {
+    //       stroke: 'none',
+    //       fill: 'yellow',
+    //     },
+    //     label: {
+    //       fill: '#000',
+    //       fontSize: 12,
+    //     },
+    //   },
+    // })
+
+
+    // parent.addChild(child1)
+    // parent.addChild(child2)
+    // child2.addChild(child3)
+
+    // const embedPadding = 20
+
+    // graph.on('node:change:size', ({ node, options }) => {
+    //   if (options.skipParentHandler) {
+    //     return
+    //   }
+    //   const children = node.getChildren()
+    //   if (children && children.length) {
+    //     node.prop('originSize', node.getSize())
+    //   }
+    // })
+
+    // graph.on('node:change:position', ({ node, options }) => {
+    //   if (options.skipParentHandler) {
+    //     return
+    //   }
+
+    //   const children = node.getChildren()
+    //   if (children && children.length) {
+    //     node.prop('originPosition', node.getPosition())
+    //   }
+
+    //   const parent = node.getParent()
+    //   if (parent && parent.isNode()) {
+    //     let originSize = parent.prop('originSize')
+    //     if (originSize == null) {
+    //       originSize = parent.getSize()
+    //       parent.prop('originSize', originSize)
+    //     }
+
+    //     let originPosition = parent.prop('originPosition')
+    //     if (originPosition == null) {
+    //       originPosition = parent.getPosition()
+    //       parent.prop('originPosition', originPosition)
+    //     }
+
+    //     let x = originPosition.x
+    //     let y = originPosition.y
+    //     let cornerX = originPosition.x + originSize.width
+    //     let cornerY = originPosition.y + originSize.height
+    //     let hasChange = false
+
+    //     const children = parent.getChildren()
+    //     if (children) {
+    //       children.forEach((child) => {
+    //         const bbox = child.getBBox().inflate(embedPadding)
+    //         const corner = bbox.getCorner()
+
+    //         if (bbox.x < x) {
+    //           x = bbox.x
+    //           hasChange = true
+    //         }
+
+    //         if (bbox.y < y) {
+    //           y = bbox.y
+    //           hasChange = true
+    //         }
+
+    //         if (corner.x > cornerX) {
+    //           cornerX = corner.x
+    //           hasChange = true
+    //         }
+
+    //         if (corner.y > cornerY) {
+    //           cornerY = corner.y
+    //           hasChange = true
+    //         }
+    //       })
+    //     }
+
+    //     if (hasChange) {
+    //       parent.prop(
+    //         {
+    //           position: { x, y },
+    //           size: { width: cornerX - x, height: cornerY - y },
+    //         },
+    //         { skipParentHandler: true },
+    //       )
+    //     }
+    //   }
+
+    //   console.log(node);
+    // })
+
+
+
+  </script>
+
+</body>
+
+</html>
