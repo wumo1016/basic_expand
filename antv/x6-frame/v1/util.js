@@ -10,9 +10,7 @@ const _vertical = 'vertical' // 垂直布局
 const _parentNodePadding = [20, 20] // 上下 左右
 
 class X6FrameUtil {
-  constructor() {
-    this.sourceNodePosition = null
-  }
+  constructor() {}
 
   dealData(data) {
     const innerData = []
@@ -155,42 +153,6 @@ class X6FrameUtil {
       })
     }
     loop([root], null, null, 1)
-  }
-
-  nodeChangePotison(graph) {
-    // graph.on('node:change:position', e => {
-    //   console.log(e)
-    // })
-  }
-
-  nodeMouseEvent(graph) {
-    graph.on('node:mousedown', e => {
-      const {
-        store: {
-          data: { position }
-        }
-      } = e.node
-      this.sourceNodePosition = {
-        x: position.x,
-        y: position.y
-      }
-    })
-
-    graph.on('node:mouseup', e => {
-      const {
-        store: {
-          data: { position: position }
-        }
-      } = e.node
-      if (
-        this.sourceNodePosition.x === position.x &&
-        this.sourceNodePosition.y === position.y
-      )
-        return
-      // console.log(this.sourceNodePosition, position)
-
-      console.log(e)
-    })
   }
 }
 
