@@ -131,7 +131,9 @@
   graph.getNodesUnderNode()
 })
 
+/* ----------------------------------------- 更新边 ------------------------------------- */
 
 ;(function () {
-  graph.getNodesUnderNode()
+  const edgeView = graph.findViewByCell(edge)
+  edgeView.update();
 })

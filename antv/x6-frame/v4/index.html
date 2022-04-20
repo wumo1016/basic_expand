@@ -1,0 +1,100 @@
+<!--
+ * @Description: 采用elk布局算法
+ * @Author: wyb
+ * @LastEditors: wyb
+ * @LastEditTime: 2022-04-20 18:08:22
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #container {
+      width: 98vh;
+      height: 90vh;
+      margin: 20px auto;
+      border: 1px solid gray;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+  <script src="../x6(1.31.3).min.js"></script>
+  <script src="./elk.bundled.js"></script>
+  <script src="./util.js"></script>
+  <script src="./mock.js"></script>
+  <script>
+
+    const elk = new ELK()
+
+    const graph = new X6.Graph({
+      container: document.getElementById('container'),
+      panning: true,
+      grid: 1,
+      mousewheel: {
+        enabled: true,
+        modifiers: ['ctrl', 'meta'],
+      },
+    })
+
+    const frameUtil = new X6FrameUtil('container')
+    const data = frameUtil.dealData(mockData)
+
+
+
+    console.time('aa')
+    elk.layout(data)
+      .then(res => {
+        console.timeEnd('aa')
+        frameUtil.dealLayout(graph, res)
+
+        const edge = graph.createEdge({
+          source: {
+            cell: '1'
+          },
+          target: {
+            cell: '5'
+          },
+          // 线路由规则
+          router: 'manhattan',
+          // 线连接器规则
+          connector: {
+            name: 'rounded',
+            args: { radius: 10 },
+          },
+          attrs: {
+            line: {
+              // 箭头配置 https://x6.antv.vision/zh/examples/edge/marker#native-markers
+              // sourceMarker: {
+              //   name: 'block',
+              //   args: { size: 6 }
+              // },
+              targetMarker: {
+                name: 'block',
+                args: { size: 6 }
+              },
+              strokeWidth: 1, // 线宽
+              stroke: 'blue',
+              strokeDasharray: 5, // 虚线段长
+            }
+          },
+          // https://x6.antv.vision/zh/examples/edge/tool#button
+          tools: {
+            name: 'button-remove',
+            args: { distance: -40 },
+          },
+        })
+        graph.addEdge(edge)
+
+      })
+
+  </script>
+
+</body>
+
+</html>
