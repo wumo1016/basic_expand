@@ -1,3 +1,9 @@
+<!--
+ * @Description: 添加节点锚点 锚点显示与隐藏
+ * @Author: wyb
+ * @LastEditors: wyb
+ * @LastEditTime: 2022-04-20 10:50:40
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,17 +36,19 @@
     const graph = new X6.Graph({
       container: document.getElementById('container'),
       panning: true, // 画布是否可拖动
-      snapline: true, // 拖动对齐线
+      // snapline: true, // 拖动对齐线
       grid: 1, // 
       mousewheel: {
         enabled: true,
         modifiers: ['ctrl', 'meta'],
-      },
+      }
     })
 
-    const frameUtil = new X6FrameUtil()
+    const frameUtil = new X6FrameUtil('container')
     const data = frameUtil.dealData(mockData)
     frameUtil.dealLayout(graph, data.nodes[0])
+    frameUtil.setNodeMouseEnter(graph)
+    frameUtil.setNodeMouseLeave(graph)
   </script>
 
 </body>

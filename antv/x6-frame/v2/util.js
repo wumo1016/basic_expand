@@ -87,8 +87,9 @@ const linkPorts = {
 }
 
 class X6FrameUtil {
-  constructor() {
+  constructor(_container) {
     this.sourceNodePosition = null
+    this._container = _container
   }
 
   dealData(data) {
@@ -234,6 +235,27 @@ class X6FrameUtil {
       })
     }
     loop([root], null, null, 1)
+  }
+
+  // https://x6.antv.vision/zh/examples/showcase/practices#flowchart
+  setPortStyle(show) {
+    const container = document.getElementById(this._container)
+    const ports = container.querySelectorAll('.x6-port-body')
+    for (let i = 0, len = ports.length; i < len; i++) {
+      ports[i].style.visibility = show ? 'visible' : 'hidden'
+    }
+  }
+
+  setNodeMouseEnter(graph) {
+    graph.on('node:mouseenter', e => {
+      this.setPortStyle(true)
+    })
+  }
+
+  setNodeMouseLeave(graph) {
+    graph.on('node:mouseleave', e => {
+      this.setPortStyle(false)
+    })
   }
 }
 
