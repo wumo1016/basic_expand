@@ -26,14 +26,31 @@
 
   <script>
 
-    const data = mockData
-
+    // options配置: https://x6.antv.vision/zh/docs/api/graph/graph
     const graph = new X6.Graph({
       container: document.getElementById('container'),
       panning: true, // 画布是否可拖动
+      snapline: true, // 拖动对齐线
+      grid: 1, // 
+      mousewheel: {
+        enabled: true,
+        modifiers: ['ctrl', 'meta'],
+      },
     })
 
     const frameUtil = new X6FrameUtil()
+
+    const data = frameUtil.dealData(mockData)
+
+    // console.log(data.nodes[0]);
+
+    frameUtil.dealLayout(graph, data.nodes[0])
+
+    frameUtil.nodeChangePotison(graph)
+
+    frameUtil.nodeMouseEvent(graph)
+
+    // console.log(data);
 
     // const parent = graph.addNode({
     //   x: 40,

@@ -40,4 +40,4 @@
 - describe it 匹配器(expect) 断言(相等、不相等)
 - 异步测试: done方法 async+await
 - 定时器测试: 自己mock一个timer
-- 接口测试: mock方法 mock接口
+- 接口测试: mock方法 mock接口(__mocks__)(jest.mock)

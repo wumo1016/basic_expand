@@ -1,7 +1,7 @@
 const mockData = [
   {
     type: 'element',
-    name: '保温杯',
+    name: '容器',
     width: 0,
     height: 0,
     x: 0,
@@ -9,7 +9,7 @@ const mockData = [
     children: [
       {
         type: 'element',
-        name: '盖子',
+        name: '子1',
         width: 0,
         height: 0,
         x: 0,
@@ -17,7 +17,43 @@ const mockData = [
       },
       {
         type: 'element',
-        name: '外壳',
+        name: '子2',
+        width: 0,
+        height: 0,
+        x: 0,
+        y: 0,
+        children: [
+          {
+            type: 'element',
+            name: '子2-1',
+            width: 0,
+            height: 0,
+            x: 0,
+            y: 0,
+            children: [
+              {
+                type: 'element',
+                name: '子2-1-1',
+                width: 0,
+                height: 0,
+                x: 0,
+                y: 0
+              },
+              {
+                type: 'element',
+                name: '子2-1-2',
+                width: 0,
+                height: 0,
+                x: 0,
+                y: 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        type: 'element',
+        name: '子3',
         width: 0,
         height: 0,
         x: 0,
@@ -25,7 +61,7 @@ const mockData = [
       },
       {
         type: 'element',
-        name: '内胆',
+        name: '子4',
         width: 0,
         height: 0,
         x: 0,
@@ -33,7 +69,23 @@ const mockData = [
       },
       {
         type: 'element',
-        name: '底座',
+        name: '子5',
+        width: 0,
+        height: 0,
+        x: 0,
+        y: 0
+      },
+      {
+        type: 'element',
+        name: '子6',
+        width: 0,
+        height: 0,
+        x: 0,
+        y: 0
+      },
+      {
+        type: 'element',
+        name: '子7',
         width: 0,
         height: 0,
         x: 0,
