@@ -1,4 +1,4 @@
-/* 父级宽度自适应 */
+/* ----------------------------------------- 父级宽度自适应 ------------------------------------- */
 
 ;(function () {
   const embedPadding = 20
@@ -81,4 +81,46 @@
       }
     }
   })
+})
+
+/* ----------------------------------------- 节点位置改变事件 ------------------------------------- */
+
+;(function () {
+  nodeChangePotison(graph) {
+    graph.on('node:change:position', e => {
+      console.log(e)
+    })
+  }
+})
+
+/* ----------------------------------------- 节点鼠标事件 ------------------------------------- */
+
+;(function () {
+  nodeMouseEvent(graph) {
+    graph.on('node:mousedown', e => {
+      const {
+        store: {
+          data: { position }
+        }
+      } = e.node
+      this.sourceNodePosition = {
+        x: position.x,
+        y: position.y
+      }
+    })
+  
+    graph.on('node:mouseup', e => {
+      const {
+        store: {
+          data: { position: position }
+        }
+      } = e.node
+      if (
+        this.sourceNodePosition.x === position.x &&
+        this.sourceNodePosition.y === position.y
+      )
+        return
+      console.log(e)
+    })
+  }
 })

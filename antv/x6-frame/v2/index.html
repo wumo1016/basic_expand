@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #container {
+      width: 98vh;
+      height: 90vh;
+      margin: 20px auto;
+      border: 1px solid gray;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="container"></div>
+
+  <script src="../x6(1.31.3).min.js"></script>
+  <script src="./mock.js"></script>
+  <script src="./util.js"></script>
+
+  <script>
+
+    // options配置: https://x6.antv.vision/zh/docs/api/graph/graph
+    const graph = new X6.Graph({
+      container: document.getElementById('container'),
+      panning: true, // 画布是否可拖动
+      snapline: true, // 拖动对齐线
+      grid: 1, // 
+      mousewheel: {
+        enabled: true,
+        modifiers: ['ctrl', 'meta'],
+      },
+    })
+
+    const frameUtil = new X6FrameUtil()
+    const data = frameUtil.dealData(mockData)
+    frameUtil.dealLayout(graph, data.nodes[0])
+  </script>
+
+</body>
+
+</html>
