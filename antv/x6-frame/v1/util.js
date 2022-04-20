@@ -9,77 +9,6 @@ const _horizontal = 'horizontal' // 水平布局
 const _vertical = 'vertical' // 垂直布局
 const _parentNodePadding = [20, 20] // 上下 左右
 
-const linkPorts = {
-  groups: {
-    top: {
-      position: 'top',
-      attrs: {
-        circle: {
-          r: 5,
-          magnet: true,
-          stroke: '#31d0c6',
-          strokeWidth: 1,
-          fill: '#fff'
-        }
-      }
-    },
-    right: {
-      position: 'right',
-      attrs: {
-        circle: {
-          r: 5,
-          magnet: true,
-          stroke: '#31d0c6',
-          strokeWidth: 1,
-          fill: '#fff'
-        }
-      }
-    },
-    bottom: {
-      position: 'bottom',
-      attrs: {
-        circle: {
-          r: 5,
-          magnet: true,
-          stroke: '#31d0c6',
-          strokeWidth: 1,
-          fill: '#fff'
-        }
-      }
-    },
-    left: {
-      position: 'left',
-      attrs: {
-        circle: {
-          r: 5,
-          magnet: true,
-          stroke: '#31d0c6',
-          strokeWidth: 1,
-          fill: '#fff'
-        }
-      }
-    }
-  },
-  items: [
-    {
-      id: 'right',
-      group: 'right'
-    },
-    {
-      id: 'top',
-      group: 'top'
-    },
-    {
-      id: 'bottom',
-      group: 'bottom'
-    },
-    {
-      id: 'left',
-      group: 'left'
-    }
-  ]
-}
-
 class X6FrameUtil {
   constructor() {
     this.sourceNodePosition = null
@@ -194,8 +123,7 @@ class X6FrameUtil {
                 fill: '#fffbe6',
                 stroke: '#ffe7ba'
               }
-            },
-            ports: linkPorts
+            }
           })
           if (parent) {
             parentNode.addChild(node)
@@ -220,8 +148,7 @@ class X6FrameUtil {
                 stroke: 'none',
                 fill: '#3199FF'
               }
-            },
-            ports: linkPorts
+            }
           })
           parentNode.addChild(node)
         }
@@ -275,12 +202,4 @@ class X6FrameUtil {
  */
 function getStringWidth(str, fontSize = 12) {
   return canvas.getContext('2d').measureText(str).width * (fontSize / 10)
-}
-/**
- * @Author: wyb
- * @Descripttion:
- * @param {*}
- */
-function getLayoutStrategy(width, height) {
-  return height * 3 < width * 5 ? _vertical : _horizontal
 }
