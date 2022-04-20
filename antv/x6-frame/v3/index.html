@@ -1,0 +1,101 @@
+<!--
+ * @Description: 添加节点锚点 锚点显示与隐藏
+ * @Author: wyb
+ * @LastEditors: wyb
+ * @LastEditTime: 2022-04-20 15:09:33
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #container {
+      width: 98vh;
+      height: 90vh;
+      margin: 20px auto;
+      border: 1px solid gray;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="container"></div>
+
+  <script src="../x6(1.31.3).min.js"></script>
+  <script src="./mock.js"></script>
+  <script src="./util.js"></script>
+
+  <script>
+
+    // options配置: https://x6.antv.vision/zh/docs/api/graph/graph
+    const graph = new X6.Graph({
+      container: document.getElementById('container'),
+      panning: true, // 画布是否可拖动
+      // snapline: true, // 拖动对齐线
+      grid: 1, // 
+      mousewheel: {
+        enabled: true,
+        modifiers: ['ctrl', 'meta'],
+      },
+      // https://x6.antv.vision/zh/docs/api/graph/interaction#connecting
+      connecting: {
+        // snap: {
+        //   radius: 20 // 触发自动吸附的范围
+        // },
+        // highlight: true,
+        allowBlank: false, // 是否允许连接到空白处
+        allowLoop: false, // 是否起点终点为同一位节点
+        allowNode: false, // 是否允许连接到非链接桩
+        // 是否链接
+        validateConnection({ sourceCell, targetCell }) {
+          // if (sourceCell.data._dep === targetCell.data._dep) {
+          //   return true
+          // }
+          console.log(sourceCell);
+          return true
+        },
+        sourceEdgeAnchor(e) {
+          console.log(e);
+        }
+      },
+
+      highlighting: {
+        magnetAvailable: {
+          name: 'stroke',
+          args: {
+            padding: 4,
+            attrs: {
+              'stroke-width': 2,
+              stroke: 'red',
+            }
+          },
+        },
+      },
+    })
+
+    const frameUtil = new X6FrameUtil('container')
+    const data = frameUtil.dealData(mockData)
+    frameUtil.dealLayout(graph, data.nodes[0])
+    frameUtil.setNodeMouseEnter(graph)
+    frameUtil.setNodeMouseLeave(graph)
+
+    console.log(data);
+
+    graph.addEdge({
+      source: {
+        cell: '0'
+      },
+      target: {
+        cell: '6'
+      },
+    })
+  </script>
+
+</body>
+
+</html>
