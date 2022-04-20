@@ -51,6 +51,14 @@
     - 图层绘制
     - 显示
 
+## 缓存顺序(https://compare-sw-and-http-caching.glitch.me/)
+- Service Worker
+- Memory Cache
+  - 缓存网页用的资源 图片 js css等(浏览器自己控制)
+  - 当关闭页面时 此资源就会被释放掉 所以重新打开页面的时候不会出现from memory cache的情况
+- HTTP Cache(Disk cache)(强缓存和协商缓存)
+- Push Cache
+
 ## 渲染流程
 - 解析html和css 同步进行
   - 浏览器无法直接使用HTML 需要将HTML转化成 `DOM Tree` 可以直接通过 `document` 拿到 => dom树
