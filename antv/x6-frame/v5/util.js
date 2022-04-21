@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-21 15:08:48
+ * @LastEditTime: 2022-04-21 17:14:24
  */
 const canvas = document.createElement('canvas')
 
@@ -255,7 +255,7 @@ class X6FrameUtil {
       // 线路由规则
       router: 'manhattan',
       // 线连接器规则
-      connector: 'jumpover',
+      connector: 'normal',
       // connector: {
       //   name: 'smooth',
       //   args: { radius: 10 }
@@ -292,6 +292,8 @@ class X6FrameUtil {
     this.setEdgeConnected(graph)
     this.setNodeMouseDown(graph)
     this.setNodeMouseUp(graph)
+    this.setNodeChangePosition(graph)
+    this.setNodeChangeSize(graph)
   }
   /**
    * @Author: wyb
@@ -352,6 +354,7 @@ class X6FrameUtil {
               console.log(cell.data) // 线相关信息
               console.log(view.sourceView.cell.data) // 源节点信息
               console.log(view.targetView.cell.data) // 目标节点信息
+              graph.removeCell(cell)
             }
           }
         }
@@ -421,7 +424,91 @@ class X6FrameUtil {
       this._cloneCells = null
     })
   }
-  
+  /**
+   * @Author: wyb
+   * @Descripttion: 设置节点位置改变事件
+   * @param {*} graph
+   */
+  setNodeChangePosition(graph) {
+    // graph.on('node:change:position', ({ node, options }) => {
+    //   console.log(node.data.name, options?.skipParentHandler)
+    //   if (options?.skipParentHandler) {
+    //     return
+    //   }
+    //   console.log(node.data.name)
+    //   this.handleNodePositionChange(node, options)
+    // })
+  }
+
+  handleNodePositionChange(node, options) {
+    const children = node.getChildren()
+    if (children && children.length && !options?.skipSetPosition) {
+      node.prop('originPosition', node.getPosition())
+    }
+    const parent = node.getParent()
+    if (parent && parent.isNode()) {
+      let originSize, originPosition
+      // 设置父级的源size
+      if (!(originSize = parent.prop('originSize'))) {
+        originSize = parent.getSize()
+        parent.prop('originSize', originSize)
+      }
+      // 设置父的源位置
+      if (!(originPosition = parent.prop('originPosition'))) {
+        originPosition = parent.getPosition()
+        parent.prop('originPosition', originPosition)
+      }
+      let x = originPosition.x
+      let y = originPosition.y
+      let cornerX = originPosition.x + originSize.width
+      let cornerY = originPosition.y + originSize.height
+      let hasChange = false
+      const embedPadding = 10
+      const bbox = node.getBBox().inflate(embedPadding)
+      const corner = bbox.getCorner()
+      if (bbox.x < x) {
+        x = bbox.x
+        hasChange = true
+      }
+      if (bbox.y < y) {
+        y = bbox.y
+        hasChange = true
+      }
+      if (corner.x > cornerX) {
+        cornerX = corner.x
+        hasChange = true
+      }
+      if (corner.y > cornerY) {
+        cornerY = corner.y
+        hasChange = true
+      }
+      if (hasChange) {
+        parent.prop(
+          {
+            position: { x, y },
+            size: { width: cornerX - x, height: cornerY - y }
+          },
+          { skipParentHandler: true }
+        )
+      }
+    }
+  }
+  /**
+   * @Author: wyb
+   * @Descripttion: 设置节点大小改变事件
+   * @param {*} graph
+   */
+  setNodeChangeSize(graph) {
+    // graph.on('node:change:size', ({ node, options }) => {
+    //   const children = node.getChildren()
+    //   if (children && children.length) {
+    //     if (!options.skipParentHandler) {
+    //       node.prop('originSize', node.getSize())
+    //     }
+    //     this.handleNodePositionChange(node, { skipSetPosition: true })
+    //   }
+    // })
+  }
 }
 /**
  * @Author: wyb

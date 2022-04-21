@@ -1,8 +1,8 @@
 <!--
- * @Description: 采用elk布局算法
+ * @Description: 添加节点移动限制 
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-21 13:58:58
+ * @LastEditTime: 2022-04-21 17:45:41
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -51,21 +51,31 @@
           // console.log(sourceCell);
           return true
         },
+      },
+      // 限制节点的移动范围
+      translating: {
+        restrict(view) {
+          const cell = view.cell
+          if (cell.isNode()) {
+            const parent = cell.getParent()
+            if (parent) {
+              console.log(parent.getBBox());
+              return parent.getBBox()
+            }
+          }
+          return null
+        },
       }
-
     })
 
     const data = frameUtil.dealData(mockData)
-
     frameUtil.setEvent(graph)
 
     console.time('aa')
     elk.layout(data)
       .then(res => {
         console.timeEnd('aa')
-
         frameUtil.dealLayout(graph, res)
-
       })
 
   </script>
