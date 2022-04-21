@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-21 17:14:24
+ * @LastEditTime: 2022-04-21 17:54:34
  */
 const canvas = document.createElement('canvas')
 
@@ -250,10 +250,21 @@ class X6FrameUtil {
   createEdge(graph, options) {
     const edge = graph.createEdge({
       data: options.data || {},
-      source: options.source,
-      target: options.target,
+      source: {
+        cell: options.source.cell
+      },
+      target: {
+        cell: options.target.cell
+      },
       // 线路由规则
-      router: 'manhattan',
+      // router: 'manhattan',
+      router: 'orth',
+      // router: {
+      //   name: 'er',
+      //   args: {
+      //     offset: 'center'
+      //   }
+      // },
       // 线连接器规则
       connector: 'normal',
       // connector: {
