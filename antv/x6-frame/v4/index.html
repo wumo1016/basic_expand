@@ -2,7 +2,7 @@
  * @Description: 采用elk布局算法
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-20 18:08:22
+ * @LastEditTime: 2022-04-21 10:00:10
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -40,56 +40,27 @@
         enabled: true,
         modifiers: ['ctrl', 'meta'],
       },
+      interacting: {
+        nodeMovable: false,
+        magnetConnectable: true
+      }
     })
 
     const frameUtil = new X6FrameUtil('container')
     const data = frameUtil.dealData(mockData)
 
-
+    frameUtil.setEdgeMouseEnter(graph)
+    frameUtil.setEdgeMouseLeave(graph)
 
     console.time('aa')
     elk.layout(data)
       .then(res => {
         console.timeEnd('aa')
+
         frameUtil.dealLayout(graph, res)
 
-        const edge = graph.createEdge({
-          source: {
-            cell: '1'
-          },
-          target: {
-            cell: '5'
-          },
-          // 线路由规则
-          router: 'manhattan',
-          // 线连接器规则
-          connector: {
-            name: 'rounded',
-            args: { radius: 10 },
-          },
-          attrs: {
-            line: {
-              // 箭头配置 https://x6.antv.vision/zh/examples/edge/marker#native-markers
-              // sourceMarker: {
-              //   name: 'block',
-              //   args: { size: 6 }
-              // },
-              targetMarker: {
-                name: 'block',
-                args: { size: 6 }
-              },
-              strokeWidth: 1, // 线宽
-              stroke: 'blue',
-              strokeDasharray: 5, // 虚线段长
-            }
-          },
-          // https://x6.antv.vision/zh/examples/edge/tool#button
-          tools: {
-            name: 'button-remove',
-            args: { distance: -40 },
-          },
-        })
-        graph.addEdge(edge)
+        // const edge = frameUtil.createEdge(graph)
+        // graph.addEdge(edge)
 
       })
 

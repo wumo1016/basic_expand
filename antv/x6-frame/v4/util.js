@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-20 17:32:42
+ * @LastEditTime: 2022-04-21 09:58:39
  */
 const canvas = document.createElement('canvas')
 
@@ -146,6 +146,126 @@ class X6FrameUtil {
       })
     }
     loop([root], null, null)
+  }
+
+  createEdge(graph) {
+    const edge = graph.createEdge({
+      data: {
+        name: 'wyb'
+      },
+      source: {
+        cell: '1'
+      },
+      target: {
+        cell: '5'
+      },
+      // 线路由规则
+      router: 'manhattan',
+      // 线连接器规则
+      connector: {
+        name: 'rounded',
+        args: { radius: 10 }
+      },
+      attrs: {
+        line: {
+          // sourceMarker: {
+          //   name: 'block',
+          //   args: { size: 6 }
+          // },
+          targetMarker: {
+            name: 'block',
+            args: { size: 6 }
+          },
+          strokeWidth: 1, // 线宽
+          stroke: 'blue',
+          strokeDasharray: 5 // 虚线段长
+        }
+      }
+      // tools: [
+      //   {
+      //     name: 'button',
+      //     args: {
+      //       markup: [
+      //         {
+      //           tagName: 'circle', // 使用何种图形渲染
+      //           selector: 'body',
+      //           attrs: {
+      //             r: 6,
+      //             strokeWidth: 2,
+      //             fill: '#fe854f',
+      //             cursor: 'pointer'
+      //           }
+      //         },
+      //         {
+      //           tagName: 'text',
+      //           textContent: 'x',
+      //           attrs: {
+      //             y: 2,
+      //             fill: '#fff',
+      //             fontSize: 10,
+      //             textAnchor: 'middle',
+      //             pointerEvents: 'none'
+      //           }
+      //         }
+      //       ],
+      //       distance: '50%', // percent/number
+      //       onClick({ cell, view }) {
+      //         console.log(cell.data) // 线相关信息
+      //         console.log(view.sourceView.cell.data) // 源节点信息
+      //         console.log(view.targetView.cell.data) // 目标节点信息
+      //       }
+      //     }
+      //   }
+      // ]
+    })
+    return edge
+  }
+
+  setEdgeMouseEnter(graph) {
+    graph.on('edge:mouseenter', ({ cell }) => {
+      cell.addTools([
+        {
+          name: 'button',
+          args: {
+            markup: [
+              {
+                tagName: 'circle', // 使用何种图形渲染
+                selector: 'body',
+                attrs: {
+                  r: 6,
+                  strokeWidth: 2,
+                  fill: '#fe854f',
+                  cursor: 'pointer'
+                }
+              },
+              {
+                tagName: 'text',
+                textContent: 'x',
+                attrs: {
+                  y: 2,
+                  fill: '#fff',
+                  fontSize: 10,
+                  textAnchor: 'middle',
+                  pointerEvents: 'none'
+                }
+              }
+            ],
+            distance: '50%', // percent/number
+            onClick({ cell, view }) {
+              console.log(cell.data) // 线相关信息
+              console.log(view.sourceView.cell.data) // 源节点信息
+              console.log(view.targetView.cell.data) // 目标节点信息
+            }
+          }
+        }
+      ])
+    })
+  }
+
+  setEdgeMouseLeave(graph) {
+    graph.on('edge:mouseleave', ({ cell }) => {
+      cell.removeTools()
+    })
   }
 }
 

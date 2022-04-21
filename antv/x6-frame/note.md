@@ -1,0 +1,8 @@
+- markup
+  - https://x6.antv.vision/zh/docs/tutorial/basic/cell/#markup
+- edgeTool
+  - https://x6.antv.vision/zh/examples/edge/tool#button
+- lineMarker
+  - https://x6.antv.vision/zh/examples/edge/marker#native-markers
+- 内置节点
+  - https://x6.antv.vision/zh/docs/tutorial/basic/cell/#%E5%86%85%E7%BD%AE%E8%8A%82%E7%82%B9
