@@ -2,7 +2,7 @@
  * @Description: 采用elk布局算法
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-21 10:00:10
+ * @LastEditTime: 2022-04-21 13:58:58
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -25,12 +25,13 @@
 <body>
   <div id="container"></div>
   <script src="../x6(1.31.3).min.js"></script>
-  <script src="./elk.bundled.js"></script>
+  <script src="../elk.bundled.js"></script>
   <script src="./util.js"></script>
   <script src="./mock.js"></script>
   <script>
 
     const elk = new ELK()
+    const frameUtil = new X6FrameUtil('container')
 
     const graph = new X6.Graph({
       container: document.getElementById('container'),
@@ -40,17 +41,23 @@
         enabled: true,
         modifiers: ['ctrl', 'meta'],
       },
-      interacting: {
-        nodeMovable: false,
-        magnetConnectable: true
+      connecting: {
+        snap: false,
+        allowBlank: false, // 是否允许连接到空白处
+        allowLoop: false, // 是否起点终点为同一位节点
+        anchor: 'center',
+        // 是否允许链接
+        validateConnection({ sourceCell, targetCell }) {
+          // console.log(sourceCell);
+          return true
+        },
       }
+
     })
 
-    const frameUtil = new X6FrameUtil('container')
     const data = frameUtil.dealData(mockData)
 
-    frameUtil.setEdgeMouseEnter(graph)
-    frameUtil.setEdgeMouseLeave(graph)
+    frameUtil.setEvent(graph)
 
     console.time('aa')
     elk.layout(data)
@@ -58,9 +65,6 @@
         console.timeEnd('aa')
 
         frameUtil.dealLayout(graph, res)
-
-        // const edge = frameUtil.createEdge(graph)
-        // graph.addEdge(edge)
 
       })
 

@@ -6,3 +6,7 @@
   - https://x6.antv.vision/zh/examples/edge/marker#native-markers
 - 内置节点
   - https://x6.antv.vision/zh/docs/tutorial/basic/cell/#%E5%86%85%E7%BD%AE%E8%8A%82%E7%82%B9
+- 获取相交视图
+  - https://x6.antv.vision/zh/docs/api/graph/view#findviews
+- 连线配置
+  - https://x6.antv.vision/zh/docs/api/graph/interaction
