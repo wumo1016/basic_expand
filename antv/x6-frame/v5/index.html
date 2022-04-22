@@ -2,7 +2,7 @@
  * @Description: 添加节点移动限制 
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-21 17:45:41
+ * @LastEditTime: 2022-04-22 16:39:50
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +19,14 @@
       margin: 20px auto;
       border: 1px solid gray;
     }
+
+    .x6-widget-transform-resize {
+      display: none;
+    }
+
+    .x6-widget-transform-resize[data-position='bottom-right'] {
+      display: block;
+    }
   </style>
 </head>
 
@@ -26,6 +34,7 @@
   <div id="container"></div>
   <script src="../x6(1.31.3).min.js"></script>
   <script src="../elk.bundled.js"></script>
+  <script src="../utils.js"></script>
   <script src="./util.js"></script>
   <script src="./mock.js"></script>
   <script>
@@ -41,11 +50,14 @@
         enabled: true,
         modifiers: ['ctrl', 'meta'],
       },
+      // 通过拖动修改节点尺寸
+      resizing: frameUtil.resizingConfig,
       connecting: {
         snap: false,
         allowBlank: false, // 是否允许连接到空白处
         allowLoop: false, // 是否起点终点为同一位节点
-        anchor: 'center',
+        allowNode: false, // 是否能连接到非锚点
+        // anchor: 'center',
         // 是否允许链接
         validateConnection({ sourceCell, targetCell }) {
           // console.log(sourceCell);
@@ -59,7 +71,7 @@
           if (cell.isNode()) {
             const parent = cell.getParent()
             if (parent) {
-              console.log(parent.getBBox());
+              // console.log(parent.getBBox());
               return parent.getBBox()
             }
           }

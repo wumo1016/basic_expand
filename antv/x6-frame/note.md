@@ -1,12 +1,25 @@
-- markup
-  - https://x6.antv.vision/zh/docs/tutorial/basic/cell/#markup
-- edgeTool
-  - https://x6.antv.vision/zh/examples/edge/tool#button
-- lineMarker
-  - https://x6.antv.vision/zh/examples/edge/marker#native-markers
-- 内置节点
-  - https://x6.antv.vision/zh/docs/tutorial/basic/cell/#%E5%86%85%E7%BD%AE%E8%8A%82%E7%82%B9
-- 获取相交视图
-  - https://x6.antv.vision/zh/docs/api/graph/view#findviews
-- 连线配置
-  - https://x6.antv.vision/zh/docs/api/graph/interaction
+- 节点相关
+  - 内置节点
+    - https://x6.antv.vision/zh/docs/tutorial/basic/cell/#%E5%86%85%E7%BD%AE%E8%8A%82%E7%82%B9
+  - 节点连接锚点配置
+    - https://x6.antv.vision/zh/docs/api/registry/node-anchor
+- 边相关
+  - edgeTool
+    - https://x6.antv.vision/zh/examples/edge/tool#button
+- 连接线相关
+  - 连线配置
+    - https://x6.antv.vision/zh/docs/api/graph/interaction
+  - 连接点配置
+    - https://x6.antv.vision/zh/docs/api/registry/connection-point
+  - 边连接锚点配置
+    - https://x6.antv.vision/zh/docs/api/registry/edge-anchor
+  - lineMarker
+    - https://x6.antv.vision/zh/examples/edge/marker#native-markers
+- 其他
+  - markup
+    - https://x6.antv.vision/zh/docs/tutorial/basic/cell/#markup
+- 事件系统
+  - https://x6.antv.vision/zh/docs/tutorial/intermediate/events
+- 工具方法
+  - 获取相交视图
+    - https://x6.antv.vision/zh/docs/api/graph/view#findviews
