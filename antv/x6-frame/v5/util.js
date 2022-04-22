@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-22 17:37:00
+ * @LastEditTime: 2022-04-22 17:49:59
  */
 const canvas = document.createElement('canvas')
 
@@ -318,8 +318,7 @@ class X6FrameUtil {
     this.setNodeResize(graph)
     this.setNodeMove(graph)
 
-    this.setEdgeMouseEnter(graph)
-    this.setEdgeMouseLeave(graph)
+    this.setEdgeMouseEnterLeave(graph)
     this.setEdgeConnected(graph)
   }
   /**
@@ -355,7 +354,8 @@ class X6FrameUtil {
    * @Descripttion: 设置边进入事件
    * @param {*} graph
    */
-  setEdgeMouseEnter(graph) {
+  setEdgeMouseEnterLeave(graph) {
+    // 鼠标进入
     graph.on('edge:mouseenter', ({ cell }) => {
       cell.addTools([
         {
@@ -395,13 +395,7 @@ class X6FrameUtil {
         }
       ])
     })
-  }
-  /**
-   * @Author: wyb
-   * @Descripttion: 设置边离开事件
-   * @param {*} graph
-   */
-  setEdgeMouseLeave(graph) {
+    // 鼠标离开
     graph.on('edge:mouseleave', ({ cell }) => {
       cell.removeTools()
     })
