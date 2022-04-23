@@ -1,0 +1,55 @@
+<!--
+ * @Description: 基础布局
+ * @Author: wyb
+ * @LastEditors: wyb
+ * @LastEditTime: 2022-04-23 14:41:42
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #container {
+      width: 98vh;
+      height: 90vh;
+      margin: 20px auto;
+      border: 1px solid gray;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="container"></div>
+
+  <script src="../x6(1.31.3).min.js"></script>
+  <script src="./utils.js"></script>
+
+  <script>
+
+    const graph = new X6.Graph({
+      container: document.getElementById('container'),
+      panning: true, // 画布是否可拖动
+      snapline: true, // 拖动对齐线
+      grid: 1, // 
+      mousewheel: {
+        enabled: true,
+        modifiers: ['ctrl', 'meta'],
+      },
+    })
+
+    graph.addNode({
+      x: 20,
+      y: 20,
+      shape: "test1"
+    });
+
+  </script>
+
+</body>
+
+</html>

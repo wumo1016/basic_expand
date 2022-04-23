@@ -2,7 +2,7 @@
  * @Description: 采用elk布局算法 + 边的拖动创建
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-21 14:02:18
+ * @LastEditTime: 2022-04-23 16:45:33
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -46,9 +46,14 @@
         allowBlank: false, // 是否允许连接到空白处
         allowLoop: false, // 是否起点终点为同一位节点
         anchor: 'center',
+        // allowNode: false,
         // 是否允许链接
         validateConnection({ sourceCell, targetCell }) {
-          // console.log(sourceCell);
+          const ports = targetCell.getPorts()
+          ports.map(port => {
+            targetCell.portProp(port.id, 'attrs/circle/style/visibility', 'visible')
+          })
+          // console.log(ports);
           return true
         },
       }
