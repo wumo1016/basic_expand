@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-24 11:00:09
+ * @LastEditTime: 2022-04-24 11:30:24
  */
 const canvas = document.createElement('canvas')
 
@@ -313,30 +313,17 @@ class X6FrameUtil {
   }
   /**
    * @Author: wyb
-   * @Descripttion:
-   * @param {*}
-   */
-  setPortsVisible(cell, value) {
-    if (cell.isNode()) {
-      const ports = cell.getPorts()
-      ports.map(port => {
-        cell.portProp(port.id, 'attrs/circle/style/visibility', value)
-      })
-    }
-  }
-  /**
-   * @Author: wyb
    * @Descripttion: 设置节点鼠标进入事件
    * @param {*} graph
    */
   setNodeMouseEnterLeave(graph) {
     graph.on('cell:mouseenter', e => {
       const { node, cell } = e
-      this.setPortsVisible(cell, 'visible')
+      setPortsVisible(cell, 'visible')
     })
     graph.on('node:mouseleave', e => {
       const { node, cell } = e
-      this.setPortsVisible(cell, 'hidden')
+      setPortsVisible(cell, 'hidden')
     })
   }
   /**
@@ -414,7 +401,7 @@ class X6FrameUtil {
     // 按下
     graph.on('node:mousedown', e => {
       // 隐藏锚点 fix无效移动后不触发 node:mouseleave 事件
-      this.setPortsVisible(e.cell, 'hidden')
+      setPortsVisible(e.cell, 'hidden')
       // 缓存状态
       this._cloneCells = graph.cloneCells(graph.getCells())
       this._movingNode = {
@@ -505,4 +492,18 @@ function isValidIntersect(node1, node2) {
   } = node2
   if (dep1 === dep2) return false
   return true
+}
+
+/**
+ * @Author: wyb
+ * @Descripttion:
+ * @param {*}
+ */
+function setPortsVisible(cell, value) {
+  if (cell.isNode()) {
+    const ports = cell.getPorts()
+    ports.map(port => {
+      cell.portProp(port.id, 'attrs/circle/style/visibility', value)
+    })
+  }
 }
