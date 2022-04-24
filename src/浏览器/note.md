@@ -146,3 +146,24 @@
   npm install lighthouse -g
   lighthouse http://www.taobao.com
   ```
+
+## performance详解
+- timeOrigin: 定义了测量性能数据的初始时间
+- now(): 表示当前距离测量时间的间隔
+- toJSON(): 将performance以json格式输出
+- getEntries()
+  - PerformanceNavigationTiming
+  - PerformanceResourceTiming
+  - PerformancePaintTiming
+  - PerformanceMark
+  - PerformanceMeasure
+  - PerformanceEventTiming
+  - 以上对象都继承于 PerformanceEntry 对象
+    - name: 当前url
+    - entryType
+    - startTime
+    - duration
+- timing(https://developer.mozilla.org/zh-CN/docs/Web/API/PerformanceTiming)
+- navigation(https://developer.mozilla.org/zh-CN/docs/Web/API/PerformanceNavigation)
+- mark(name): 时间标记，返回代码执行到此位置的时间，以Time Origin为基准
+- measure(anme, startMark, endMark): 返回两个时间点的间隔时间
