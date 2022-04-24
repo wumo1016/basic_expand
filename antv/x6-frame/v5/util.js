@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-22 17:49:59
+ * @LastEditTime: 2022-04-24 11:00:09
  */
 const canvas = document.createElement('canvas')
 
@@ -10,8 +10,6 @@ const _nodePadding = [10, 20] // 上下 左右
 const _nodeHeight = 20 // 文本节点高
 const _nodeHSpace = 20 // 节点水平间距
 const _nodeVSpace = 20 // 节点垂直间距
-
-let aaa = 0
 
 const linkPorts = {
   groups: {
@@ -23,7 +21,10 @@ const linkPorts = {
           magnet: true,
           stroke: '#31d0c6',
           strokeWidth: 1,
-          fill: '#fff'
+          fill: '#fff',
+          style: {
+            visibility: 'hidden'
+          }
         }
       }
     },
@@ -35,7 +36,10 @@ const linkPorts = {
           magnet: true,
           stroke: '#31d0c6',
           strokeWidth: 1,
-          fill: '#fff'
+          fill: '#fff',
+          style: {
+            visibility: 'hidden'
+          }
         }
       }
     },
@@ -47,7 +51,10 @@ const linkPorts = {
           magnet: true,
           stroke: '#31d0c6',
           strokeWidth: 1,
-          fill: '#fff'
+          fill: '#fff',
+          style: {
+            visibility: 'hidden'
+          }
         }
       }
     },
@@ -59,11 +66,17 @@ const linkPorts = {
           magnet: true,
           stroke: '#31d0c6',
           strokeWidth: 1,
-          fill: '#fff'
+          fill: '#fff',
+          style: {
+            visibility: 'hidden'
+          }
         }
       }
     }
-  }
+  },
+  items: ['top', 'right', 'bottom', 'left']
+    .map(item => [{ group: item }, { group: item }])
+    .flat()
 }
 
 class X6FrameUtil {
@@ -257,38 +270,14 @@ class X6FrameUtil {
    * @param {*} options
    */
   createEdge(graph, options) {
-    // aaa += 10
-    // console.log(aaa)
     const edge = graph.createEdge({
       data: options.data || {},
-      source: {
-        cell: options.source.cell
-      },
-      target: {
-        cell: options.target.cell
-        // connectionPoint: {
-        //   name: 'anchor'
-        // } // 连接点使用什么规则连接
-        // anchor: { name: 'midSide', args: { padding: aaa } }, // 如果使用锚点连接 锚点规则
-      },
+      source: options.source,
+      target: options.target,
       // 线路由规则
       router: 'manhattan',
-      // router: {
-      //   name: 'orth',
-      // },
-      // router: {
-      //   name: 'er',
-      //   args: {
-      //     offset: 'center'
-      //   }
-      // },
       // 线连接器规则
       connector: 'normal',
-      // connector: {
-      //   name: 'smooth',
-      //   args: { radius: 10 }
-      // },
-      magnet: true,
       attrs: {
         line: {
           // sourceMarker: {
@@ -303,7 +292,8 @@ class X6FrameUtil {
           stroke: 'blue',
           strokeDasharray: 5 // 虚线段长
         }
-      }
+      },
+      data: {}
     })
     return edge
   }
@@ -323,30 +313,30 @@ class X6FrameUtil {
   }
   /**
    * @Author: wyb
+   * @Descripttion:
+   * @param {*}
+   */
+  setPortsVisible(cell, value) {
+    if (cell.isNode()) {
+      const ports = cell.getPorts()
+      ports.map(port => {
+        cell.portProp(port.id, 'attrs/circle/style/visibility', value)
+      })
+    }
+  }
+  /**
+   * @Author: wyb
    * @Descripttion: 设置节点鼠标进入事件
    * @param {*} graph
    */
   setNodeMouseEnterLeave(graph) {
     graph.on('cell:mouseenter', e => {
-      const { node } = e
-      // console.log(node.data.name, 'mouseenter')
-      if (!node.hasPorts()) {
-        node.addPorts([
-          { group: 'top' },
-          { group: 'top' },
-          { group: 'right' },
-          { group: 'right' },
-          { group: 'bottom' },
-          { group: 'bottom' },
-          { group: 'left' },
-          { group: 'left' }
-        ])
-      }
+      const { node, cell } = e
+      this.setPortsVisible(cell, 'visible')
     })
     graph.on('node:mouseleave', e => {
-      const { node } = e
-      // console.log(node.data.name, 'mouseleave')
-      node.removePorts()
+      const { node, cell } = e
+      this.setPortsVisible(cell, 'hidden')
     })
   }
   /**
@@ -423,7 +413,9 @@ class X6FrameUtil {
   setNodeMouseDownUp(graph) {
     // 按下
     graph.on('node:mousedown', e => {
-      e.node.removePorts()
+      // 隐藏锚点 fix无效移动后不触发 node:mouseleave 事件
+      this.setPortsVisible(e.cell, 'hidden')
+      // 缓存状态
       this._cloneCells = graph.cloneCells(graph.getCells())
       this._movingNode = {
         ex: e.x,
@@ -477,7 +469,7 @@ class X6FrameUtil {
    * @param {*} graph
    */
   setNodeMove(graph) {
-    // 移动完毕事件
+    // 移动完毕
     graph.on('node:moved', e => {
       // 移除dom调整框
       const transformDom = document.querySelector('.x6-widget-transform')

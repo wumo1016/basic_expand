@@ -2,7 +2,7 @@
  * @Description: 添加节点移动限制 
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-22 16:39:50
+ * @LastEditTime: 2022-04-24 10:30:48
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -57,10 +57,13 @@
         allowBlank: false, // 是否允许连接到空白处
         allowLoop: false, // 是否起点终点为同一位节点
         allowNode: false, // 是否能连接到非锚点
+        highlight: true,
+        snap: {
+          radius: 50
+        },
         // anchor: 'center',
         // 是否允许链接
         validateConnection({ sourceCell, targetCell }) {
-          // console.log(sourceCell);
           return true
         },
       },
