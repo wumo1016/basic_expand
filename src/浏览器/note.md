@@ -101,7 +101,11 @@
 - 4.域名分片
 - 5.使用CDN服务
 - 6.gzip压缩
-- 7.设置加载资源优先级 (preload prefetch(将数据缓存到HTTP缓存中))
+- 7.prefetch(将数据缓存到HTTP缓存中)
+  - 由于不同的资源类型优先级不同 所以可以在标签上添加 as 属性 用来指定资源类型 常用类型有 script、style、image、html
+- 8.preload(将数据缓存到HTTP缓存中)
+- 9.DNS预解析(`<link rel="dns-prefetch" href="//example.com">`)
+- 10.prerender(预渲染下一个页面)
 
 ## 渲染优化
 - 脱离文档流
