@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-24 11:30:24
+ * @LastEditTime: 2022-04-24 14:31:16
  */
 const canvas = document.createElement('canvas')
 
@@ -98,9 +98,7 @@ class X6FrameUtil {
       allowReverse: false,
       orthogonal: false,
       minWidth(node) {
-        const children = (node.getChildren() || []).filter(cell =>
-          cell.isNode()
-        )
+        const children = node.filterChild(cell => cell.isNode())
         if (children.length < 1) {
           const { name, fontSize } = node.data
           return getTextWidth(name, fontSize) + _nodePadding[1] * 2
@@ -112,9 +110,7 @@ class X6FrameUtil {
         )
       },
       minHeight(node) {
-        const children = (node.getChildren() || []).filter(cell =>
-          cell.isNode()
-        )
+        const children = node.filterChild(cell => cell.isNode())
         if (children.length < 1) return _nodeHeight + _nodePadding[0] * 2
         return (
           Math.max(...children.map(child => child.getBBox().bottom)) -
@@ -275,7 +271,13 @@ class X6FrameUtil {
       source: options.source,
       target: options.target,
       // 线路由规则
-      router: 'manhattan',
+      // router: 'metro',
+      router: {
+        name: 'manhattan',
+        args: {
+          step: 20
+        }
+      },
       // 线连接器规则
       connector: 'normal',
       attrs: {
@@ -291,7 +293,8 @@ class X6FrameUtil {
           strokeWidth: 1, // 线宽
           stroke: 'blue',
           strokeDasharray: 5 // 虚线段长
-        }
+        },
+        zIndex: 1
       },
       data: {}
     })
@@ -384,10 +387,28 @@ class X6FrameUtil {
    */
   setEdgeConnected(graph) {
     graph.on('edge:connected', ({ edge }) => {
+      const { source, target } = edge
+      // 移除自动生成的边
       graph.removeEdge(edge)
+      // 验证重复边
+      const sourceEdges = graph
+        .getConnectedEdges(graph.getCell(source.cell))
+        .filter(
+          v =>
+            [v.source.port, v.target.port].includes(source.port) &&
+            [v.source.cell, v.target.cell].includes(target.cell)
+        )
+      const existTargetPorts = sourceEdges
+        .map(v => [v.source.port, v.target.port])
+        .flat()
+      if (existTargetPorts.includes(target.port)) {
+        // console.log('连线已存在，不可重复添加')
+        alert('连线已存在，不可重复添加')
+        return
+      }
       const edges = this.createEdge(graph, {
-        source: edge.source,
-        target: edge.target
+        source,
+        target
       })
       graph.addEdge(edges)
     })
@@ -418,7 +439,8 @@ class X6FrameUtil {
       const { valid, data } = validateMove(graph, node)
       if (!valid) {
         // todo 提示信息
-        console.log(`${node.data.name}与${data.data.name}非法相交`)
+        // console.log(`${node.data.name}与${data.data.name}非法相交`)
+        alert(`${node.data.name}与${data.data.name}非法相交`)
         graph.resetCells(Object.values(this._cloneCells))
       }
       // 重置
@@ -443,7 +465,8 @@ class X6FrameUtil {
       const { valid, data } = validateMove(graph, node)
       if (!valid) {
         // todo 提示信息
-        console.log(`${node.data.name}与${data.data.name}非法相交`)
+        // console.log(`${node.data.name}与${data.data.name}非法相交`)
+        alert(`${node.data.name}与${data.data.name}非法相交`)
         graph.resetCells(Object.values(this._cloneCells))
       }
       // 重置

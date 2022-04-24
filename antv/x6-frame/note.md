@@ -15,6 +15,10 @@
     - https://x6.antv.vision/zh/docs/api/registry/edge-anchor
   - lineMarker
     - https://x6.antv.vision/zh/examples/edge/marker#native-markers
+  - router配置
+    - https://x6.antv.vision/zh/docs/api/registry/router
+  - connector配置
+    - https://x6.antv.vision/zh/docs/api/registry/connector
 - 其他
   - markup
     - https://x6.antv.vision/zh/docs/tutorial/basic/cell/#markup
@@ -23,3 +27,4 @@
 - 工具方法
   - 获取相交视图
     - https://x6.antv.vision/zh/docs/api/graph/view#findviews
+
