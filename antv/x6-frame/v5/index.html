@@ -2,7 +2,7 @@
  * @Description: 添加节点移动限制 
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-25 16:34:46
+ * @LastEditTime: 2022-04-25 17:37:23
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -56,6 +56,7 @@
 </head>
 
 <body>
+  <button onclick="test()">测试</button>
   <div id="container">
     <div id="container-contextmenu">
     </div>
@@ -114,8 +115,6 @@
     const data = frameUtil.dealData(mockData)
     frameUtil.setEvent(graph)
 
-    console.log(data);
-
     console.time('aa')
     elk.layout({
       id: 'root',
@@ -126,6 +125,13 @@
         console.timeEnd('aa')
         frameUtil.dealLayout(graph, res)
       })
+
+    function test() {
+      const data = frameUtil.getGraphJSON(graph)
+
+      // console.log(data);
+      console.log(JSON.stringify(data));
+    }
 
   </script>
 

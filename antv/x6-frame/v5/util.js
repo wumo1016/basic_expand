@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-25 16:37:58
+ * @LastEditTime: 2022-04-25 17:50:30
  */
 const canvas = document.createElement('canvas')
 
@@ -75,7 +75,10 @@ const linkPorts = {
     }
   },
   items: ['top', 'right', 'bottom', 'left']
-    .map(item => [{ group: item }, { group: item }])
+    .map(item => [
+      { group: item, id: `${item}1` },
+      { group: item, id: `${item}2` }
+    ])
     .flat()
 }
 
@@ -139,6 +142,7 @@ class X6FrameUtil {
   dealNodeSize(data) {
     const loop = (list, dep = 0) => {
       list.forEach(item => {
+        item.rawData = JSON.parse(JSON.stringify(item))
         let textWidth
         if (item.children?.length) {
           item.fontSize = 16
@@ -197,7 +201,6 @@ class X6FrameUtil {
                 stroke: '#ffe7ba',
                 rx: 6,
                 ry: 6
-                // fill: '#fffbe6',
               }
             },
             ports: linkPorts,
@@ -226,7 +229,78 @@ class X6FrameUtil {
                 stroke: '#ffe7ba',
                 rx: 6,
                 ry: 6
-                // fill: '#3199FF'
+              }
+            },
+            ports: linkPorts,
+            data: item
+          })
+          if (parentNode) {
+            parentNode.addChild(node)
+          } else {
+            graph.addNode(node)
+          }
+        }
+      })
+    }
+
+    loop(root.children, { x: 100, y: 100 }, null)
+  }
+
+  doLayoutHasPosition(graph, root) {
+    const loop = (list, parent, parentNode) => {
+      list.forEach(item => {
+        let node
+        if (item.children?.length) {
+          node = graph.createNode({
+            id: item.id,
+            x: item.x,
+            y: item.y,
+            width: item.width,
+            height: item.height,
+            zIndex: item._dep,
+            label: item.name,
+            attrs: {
+              label: {
+                refX: 0,
+                refX2: 5,
+                refY: -_nodeHeight - 5,
+                refY2: 5,
+                textAnchor: 'start',
+                textVerticalAnchor: 'top',
+                fontSize: 16
+              },
+              body: {
+                stroke: '#ffe7ba',
+                rx: 6,
+                ry: 6
+              }
+            },
+            ports: linkPorts,
+            data: item
+          })
+          if (parent && parentNode) {
+            parentNode.addChild(node)
+          } else {
+            graph.addNode(node)
+          }
+          if (item.children?.length) loop(item.children, item, node)
+        } else {
+          node = graph.createNode({
+            id: item.id,
+            x: item.x,
+            y: item.y,
+            width: item.width,
+            height: item.height,
+            label: item.name,
+            zIndex: item._dep,
+            attrs: {
+              label: {
+                fontSize: 12
+              },
+              body: {
+                stroke: '#ffe7ba',
+                rx: 6,
+                ry: 6
               }
             },
             ports: linkPorts,
@@ -565,6 +639,57 @@ class X6FrameUtil {
     console.log(type)
     console.log(data)
     this.hiddenContextmenu()
+  }
+  /**
+   * @Author: wyb
+   * @Descripttion:
+   * @param {*} graph
+   */
+  getGraphJSON(graph) {
+    const cellList = graph.toJSON().cells
+    const cellMap = {}
+    const [nodeList, egdeList] = [[], []]
+    cellList.map(cell => {
+      if (cell.shape === 'edge') {
+        egdeList.push({
+          source: cell.source,
+          target: cell.target,
+          lineType: '1'
+        })
+      } else {
+        cellMap[cell.id] = cell
+        if (!cell.parent) {
+          nodeList.push(cell)
+        }
+      }
+    })
+    const loop = list => {
+      list = list.map(item => {
+        if (item.children?.length) {
+          item.children = item.children.map(id => cellMap[id])
+          item.children = loop(item.children)
+        }
+        item.data.children = undefined
+        return {
+          data: {
+            ...item.data.rawData,
+            _dep: item.data._dep,
+            fontSize: item.data.fontSize
+          },
+          children: item.children || [],
+          x6Data: {
+            ...item.position,
+            ...item.size
+          }
+        }
+      })
+      return list
+    }
+
+    return {
+      nodeList: loop(nodeList),
+      egdeList
+    }
   }
 }
 /**
