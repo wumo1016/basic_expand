@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-24 14:31:16
+ * @LastEditTime: 2022-04-25 14:03:00
  */
 const canvas = document.createElement('canvas')
 
@@ -310,9 +310,13 @@ class X6FrameUtil {
     this.setNodeMouseDownUp(graph)
     this.setNodeResize(graph)
     this.setNodeMove(graph)
+    this.setNodeContextmenu(graph)
 
     this.setEdgeMouseEnterLeave(graph)
     this.setEdgeConnected(graph)
+
+    this.setBlankContextmenu(graph)
+    this.setBlankMouseDown(graph)
   }
   /**
    * @Author: wyb
@@ -421,6 +425,7 @@ class X6FrameUtil {
   setNodeMouseDownUp(graph) {
     // 按下
     graph.on('node:mousedown', e => {
+      this.hiddenContextmenu()
       // 隐藏锚点 fix无效移动后不触发 node:mouseleave 事件
       setPortsVisible(e.cell, 'hidden')
       // 缓存状态
@@ -485,6 +490,97 @@ class X6FrameUtil {
       const transformDom = document.querySelector('.x6-widget-transform')
       transformDom && transformDom.parentNode.removeChild(transformDom)
     })
+  }
+  /**
+   * @Author: wyb
+   * @Descripttion:
+   * @param {*} graph
+   */
+  setNodeContextmenu(graph) {
+    graph.on('node:contextmenu', e => {
+      this.showContextmenu(e, graph, [
+        {
+          type: 'add',
+          text: '添加子级'
+        },
+        {
+          type: 'edit',
+          text: '编辑'
+        },
+        {
+          type: 'delete',
+          text: '删除'
+        }
+      ])
+    })
+  }
+  /**
+   * @Author: wyb
+   * @Descripttion:
+   * @param {*} graph
+   */
+  setBlankContextmenu(graph) {
+    graph.on('blank:contextmenu', e => {
+      this.showContextmenu(e, graph, [
+        {
+          type: 'add',
+          text: '新增接口'
+        }
+      ])
+    })
+  }
+  /**
+   * @Author: wyb
+   * @Descripttion:
+   * @param {*}
+   */
+  showContextmenu(e, graph, menuList = []) {
+    const dom = document.querySelector('#container-contextmenu')
+    dom.innerHTML = ''
+    const frag = document.createDocumentFragment()
+    menuList.map(menu => {
+      const div = document.createElement('div')
+      div.textContent = menu.text
+      div.addEventListener('click', () => {
+        this.handleContextmenu({ type: menu.type, data: e.node?.data || {} })
+      })
+      frag.appendChild(div)
+    })
+    // 转换坐标
+    const pos = graph.localToGraph(e.x, e.y)
+    dom.appendChild(frag)
+    dom.style = `left: ${pos.x}px;top: ${pos.y}px;display:block;`
+  }
+  /**
+   * @Author: wyb
+   * @Descripttion:
+   * @param {*} graph
+   */
+  setBlankMouseDown(graph) {
+    graph.on('blank:mousedown', e => {
+      this.hiddenContextmenu()
+    })
+  }
+  /**
+   * @Author: wyb
+   * @Descripttion:
+   * @param {*}
+   */
+  hiddenContextmenu() {
+    const dom = document.querySelector('#container-contextmenu')
+    dom.style = `display:none;`
+    dom.innerHTML = ''
+  }
+  /**
+   * @Author: wyb
+   * @Descripttion:
+   * @param {*} type
+   * @param {*} data
+   */
+  handleContextmenu({ type, data }) {
+    console.log(type)
+    console.log(data)
+    this.hiddenContextmenu()
   }
 }
 /**

@@ -2,7 +2,7 @@
  * @Description: 添加节点移动限制 
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-24 11:31:36
+ * @LastEditTime: 2022-04-25 14:01:38
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +20,31 @@
       border: 1px solid gray;
     }
 
+    #container-contextmenu {
+      position: absolute;
+      z-index: 1000;
+      border: 1px solid #DCDFE6;
+      border-radius: 5px;
+      font-size: 14px;
+      display: none;
+      background: #fff;
+      color: #303133;
+      box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    }
+
+    #container-contextmenu>div {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    #container-contextmenu>div:not(:last-child) {
+      border-bottom: 1px solid #DCDFE6;
+    }
+
+    #container-contextmenu>div:hover {
+      color: #409EFF;
+    }
+
     .x6-widget-transform-resize {
       display: none;
     }
@@ -31,7 +56,10 @@
 </head>
 
 <body>
-  <div id="container"></div>
+  <div id="container">
+    <div id="container-contextmenu">
+    </div>
+  </div>
   <script src="../x6(1.31.3).min.js"></script>
   <script src="../elk.bundled.js"></script>
   <script src="../utils.js"></script>
