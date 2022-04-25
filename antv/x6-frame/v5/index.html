@@ -2,7 +2,7 @@
  * @Description: 添加节点移动限制 
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-25 14:01:38
+ * @LastEditTime: 2022-04-25 16:34:46
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -114,8 +114,14 @@
     const data = frameUtil.dealData(mockData)
     frameUtil.setEvent(graph)
 
+    console.log(data);
+
     console.time('aa')
-    elk.layout(data)
+    elk.layout({
+      id: 'root',
+      layoutOptions: { 'elk.algorithm': 'layered' },
+      children: data
+    })
       .then(res => {
         console.timeEnd('aa')
         frameUtil.dealLayout(graph, res)

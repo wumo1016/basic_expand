@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-20 17:35:03
+ * @LastEditTime: 2022-04-25 16:42:47
  */
 const mockData = [
   {
@@ -65,5 +65,30 @@ const mockData = [
       //   name: '子7'
       // }
     ]
-  }
+  },
+  {
+    id: 'j1',
+    type: 'inter',
+    name: '接口1'
+  },
+  {
+    id: 'j2',
+    type: 'inter',
+    name: '接口2'
+  },
+  {
+    id: 'j3',
+    type: 'inter',
+    name: '接口3'
+  },
+  {
+    id: 'j4',
+    type: 'inter',
+    name: '接口4'
+  },
+  {
+    id: 'j5',
+    type: 'inter',
+    name: '接口5'
+  },
 ]

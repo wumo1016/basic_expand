@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-25 14:03:00
+ * @LastEditTime: 2022-04-25 16:37:58
  */
 const canvas = document.createElement('canvas')
 
@@ -132,35 +132,12 @@ class X6FrameUtil {
   }
 
   dealData(data) {
-    const innerData = []
-    const outerData = []
-
-    for (const item of data) {
-      if (item.type === 'element') {
-        innerData.push(item)
-      }
-    }
-
-    this.dealInnerData(innerData)
-
-    return innerData[0]
+    this.dealNodeSize(data)
+    return data
   }
 
-  dealInnerData(data) {
-    let root
-    if (data.length === 1) {
-      root = data[0]
-    }
-
-    root.x = 100
-    root.y = 100
-    root.layoutOptions = { 'elk.algorithm': 'layered' }
-
-    this.dealNodeSize(root)
-  }
-
-  dealNodeSize(root) {
-    const loop = (list, dep = 1) => {
+  dealNodeSize(data) {
+    const loop = (list, dep = 0) => {
       list.forEach(item => {
         let textWidth
         if (item.children?.length) {
@@ -186,7 +163,7 @@ class X6FrameUtil {
         item.height = _nodeHeight + _nodePadding[0] * 2
       })
     }
-    loop([root])
+    loop(data)
   }
 
   dealLayout(graph, root) {
@@ -214,18 +191,19 @@ class X6FrameUtil {
                 refY2: 5,
                 textAnchor: 'start',
                 textVerticalAnchor: 'top',
-                fontSize: item.fontSize
+                fontSize: 16
               },
               body: {
                 stroke: '#ffe7ba',
                 rx: 6,
                 ry: 6
+                // fill: '#fffbe6',
               }
             },
             ports: linkPorts,
             data: item
           })
-          if (parent) {
+          if (parent && parentNode) {
             parentNode.addChild(node)
           } else {
             graph.addNode(node)
@@ -242,22 +220,28 @@ class X6FrameUtil {
             zIndex: item._dep,
             attrs: {
               label: {
-                fontSize: item.fontSize
+                fontSize: 12
               },
               body: {
                 stroke: '#ffe7ba',
                 rx: 6,
                 ry: 6
+                // fill: '#3199FF'
               }
             },
             ports: linkPorts,
             data: item
           })
-          parentNode.addChild(node)
+          if (parentNode) {
+            parentNode.addChild(node)
+          } else {
+            graph.addNode(node)
+          }
         }
       })
     }
-    loop([root], null, null)
+
+    loop(root.children, { x: 100, y: 100 }, null)
   }
   /**
    * @Author: wyb
