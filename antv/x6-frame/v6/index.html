@@ -1,0 +1,148 @@
+<!--
+ * @Description: 统一初始化与再渲染数据
+ * @Author: wyb
+ * @LastEditors: wyb
+ * @LastEditTime: 2022-04-26 11:43:10
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #container {
+      width: 98vh;
+      height: 90vh;
+      margin: 20px auto;
+      border: 1px solid gray;
+    }
+
+    #container-contextmenu {
+      position: absolute;
+      z-index: 1000;
+      border: 1px solid #DCDFE6;
+      border-radius: 5px;
+      font-size: 14px;
+      display: none;
+      background: #fff;
+      color: #303133;
+      box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    }
+
+    #container-contextmenu>div {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    #container-contextmenu>div:not(:last-child) {
+      border-bottom: 1px solid #DCDFE6;
+    }
+
+    #container-contextmenu>div:hover {
+      color: #409EFF;
+    }
+
+    .x6-widget-transform-resize {
+      display: none;
+    }
+
+    .x6-widget-transform-resize[data-position='bottom-right'] {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <button onclick="test()">测试</button>
+  <div id="container">
+    <div id="container-contextmenu">
+    </div>
+  </div>
+  <script src="../x6(1.31.3).min.js"></script>
+  <script src="../elk.bundled.js"></script>
+  <script src="../utils.js"></script>
+  <script src="./util.js"></script>
+  <script src="./mock.js"></script>
+  <script>
+
+    const elk = new ELK()
+    const frameUtil = new X6FrameUtil('container')
+
+    const graph = new X6.Graph({
+      container: document.getElementById('container'),
+      // panning: true, // 画布拖动平移
+      grid: 1,
+      mousewheel: {
+        enabled: true,
+        modifiers: ['ctrl'], // 滚轮缩放
+      },
+      // selecting: {
+      //   enabled: true,
+      //   rubberband: true,
+      //   showNodeSelectionBox: true,
+      //   showEdgeSelectionBox: true,
+      //   modifiers: ['ctrl'],
+      // },
+      // 通过拖动修改节点尺寸
+      resizing: frameUtil.resizingConfig,
+      connecting: {
+        snap: false,
+        allowBlank: false, // 是否允许连接到空白处
+        allowLoop: false, // 是否起点终点为同一位节点
+        allowNode: false, // 是否能连接到非锚点
+        // highlight: true,
+        snap: {
+          radius: 50
+        },
+        // anchor: 'center',
+        // 是否允许链接
+        validateConnection({ sourceCell, targetCell }) {
+          return true
+        },
+      },
+      // 限制节点的移动范围
+      translating: {
+        restrict(view) {
+          const cell = view?.cell
+          if (cell?.isNode()) {
+            const parent = cell.getParent()
+            if (parent) {
+              // console.log(parent.getBBox());
+              return parent.getBBox()
+            }
+          }
+          return null
+        },
+      }
+    })
+    frameUtil.setEvent(graph)
+
+    frameUtil.initLayout(graph, mockData1)
+
+    // const data = frameUtil.dealData(mockData)
+    // console.time('aa')
+    // elk.layout({
+    //   id: 'root',
+    //   layoutOptions: { 'elk.algorithm': 'layered' },
+    //   children: data
+    // })
+    //   .then(res => {
+    //     console.timeEnd('aa')
+    //     frameUtil.dealLayout(graph, res)
+    //   })
+
+    function test() {
+      const data = frameUtil.getGraphJSON(graph)
+
+      console.log(data);
+      console.log(JSON.stringify(data));
+    }
+
+  </script>
+
+</body>
+
+</html>
