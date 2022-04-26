@@ -2,7 +2,7 @@
  * @Description: 统一初始化与再渲染数据
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-26 14:01:20
+ * @LastEditTime: 2022-04-26 14:16:21
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +73,7 @@
 
     const graph = new X6.Graph({
       container: document.getElementById('container'),
-      // panning: true, // 画布拖动平移
+      panning: true, // 画布拖动平移
       grid: 1,
       mousewheel: {
         enabled: true,
@@ -132,7 +132,9 @@
     //   .then(res => {
     //     console.log(res);
     //     console.timeEnd('aa')
-    //     frameUtil.dealLayout(graph, res)
+    //     frameUtil.initLayout(graph, {
+    //       nodeList: res.children
+    //     }, true)
     //   })
 
     function test() {
