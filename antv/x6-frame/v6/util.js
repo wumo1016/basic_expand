@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-26 11:47:09
+ * @LastEditTime: 2022-04-26 14:03:56
  */
 const canvas = document.createElement('canvas')
 
@@ -230,12 +230,10 @@ class X6FrameUtil {
   initNodeLayout(graph, nodeList) {
     const loop = (list, parentNode) => {
       list.forEach(item => {
-        item = {
-          ...item,
-          ...item.x6Data,
-          name: item.data.name,
-          id: item.data.id
-        }
+        const x6Data = item.x6Data
+        Reflect.deleteProperty(item, 'x6Data')
+        item.rawData = JSON.parse(JSON.stringify(item))
+        item = { ...item, ...x6Data }
         let node = graph.createNode({
           id: item.id,
           label: item.name,
@@ -299,13 +297,13 @@ class X6FrameUtil {
       source: options.source,
       target: options.target,
       // 线路由规则
-      // router: 'metro',
-      router: {
-        name: 'manhattan',
-        args: {
-          step: 20
-        }
-      },
+      router: 'metro',
+      // router: {
+      //   name: 'manhattan',
+        // args: {
+        //   step: 20
+        // }
+      // },
       // 线连接器规则
       connector: 'normal',
       attrs: {
@@ -640,17 +638,14 @@ class X6FrameUtil {
           item.children = item.children.map(id => cellMap[id])
           item.children = loop(item.children)
         }
-        item.data.children = undefined
         return {
-          data: {
-            ...item.data.rawData,
-            fontSize: item.data.fontSize
-          },
+          ...item.data.rawData,
           children: item.children || [],
           x6Data: {
             ...item.position,
             ...item.size,
-            _dep: item.data._dep
+            _dep: item.data._dep,
+            fontSize: item.data.fontSize
           }
         }
       })
