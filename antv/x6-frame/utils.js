@@ -98,7 +98,7 @@ const getLetterWidth = (letter, fontSize) => {
   return fontSize * (letterAspectRatio[letter] || 1)
 }
 
-const getTextSize = (text, fontSize) => {
+const getTextSize = (text, fontSize = 12) => {
   let width = 0
   const pattern = new RegExp('[\u{4E00}-\u{9FA5}]+')
   text.split('').forEach(letter => {
