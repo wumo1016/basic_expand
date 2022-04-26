@@ -2,7 +2,7 @@
  * @Description: 添加节点移动限制 
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-25 17:37:23
+ * @LastEditTime: 2022-04-26 11:30:57
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -73,12 +73,19 @@
 
     const graph = new X6.Graph({
       container: document.getElementById('container'),
-      panning: true,
+      // panning: true, // 画布拖动平移
       grid: 1,
       mousewheel: {
         enabled: true,
-        modifiers: ['ctrl', 'meta'],
+        modifiers: ['ctrl'], // 滚轮缩放
       },
+      // selecting: {
+      //   enabled: true,
+      //   rubberband: true,
+      //   showNodeSelectionBox: true,
+      //   showEdgeSelectionBox: true,
+      //   modifiers: ['ctrl'],
+      // },
       // 通过拖动修改节点尺寸
       resizing: frameUtil.resizingConfig,
       connecting: {
@@ -99,8 +106,8 @@
       // 限制节点的移动范围
       translating: {
         restrict(view) {
-          const cell = view.cell
-          if (cell.isNode()) {
+          const cell = view?.cell
+          if (cell?.isNode()) {
             const parent = cell.getParent()
             if (parent) {
               // console.log(parent.getBBox());
@@ -111,25 +118,26 @@
         },
       }
     })
-
-    const data = frameUtil.dealData(mockData)
     frameUtil.setEvent(graph)
 
-    console.time('aa')
-    elk.layout({
-      id: 'root',
-      layoutOptions: { 'elk.algorithm': 'layered' },
-      children: data
-    })
-      .then(res => {
-        console.timeEnd('aa')
-        frameUtil.dealLayout(graph, res)
-      })
+    frameUtil.initLayout(graph, mockData1)
+
+    // const data = frameUtil.dealData(mockData)
+    // console.time('aa')
+    // elk.layout({
+    //   id: 'root',
+    //   layoutOptions: { 'elk.algorithm': 'layered' },
+    //   children: data
+    // })
+    //   .then(res => {
+    //     console.timeEnd('aa')
+    //     frameUtil.dealLayout(graph, res)
+    //   })
 
     function test() {
       const data = frameUtil.getGraphJSON(graph)
 
-      // console.log(data);
+      console.log(data);
       console.log(JSON.stringify(data));
     }
 

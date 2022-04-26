@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-25 17:50:30
+ * @LastEditTime: 2022-04-26 11:12:06
  */
 const canvas = document.createElement('canvas')
 
@@ -177,68 +177,44 @@ class X6FrameUtil {
           item.x = parent.x + item.x
           item.y = parent.y + item.y
         }
-        let node
-        if (item.children?.length) {
-          node = graph.createNode({
-            id: item.id,
-            x: item.x,
-            y: item.y,
-            width: item.width,
-            height: item.height,
-            zIndex: item._dep,
-            label: item.name,
-            attrs: {
-              label: {
-                refX: 0,
-                refX2: 5,
-                refY: -_nodeHeight - 5,
-                refY2: 5,
-                textAnchor: 'start',
-                textVerticalAnchor: 'top',
-                fontSize: 16
-              },
-              body: {
-                stroke: '#ffe7ba',
-                rx: 6,
-                ry: 6
-              }
-            },
-            ports: linkPorts,
-            data: item
-          })
-          if (parent && parentNode) {
-            parentNode.addChild(node)
-          } else {
-            graph.addNode(node)
-          }
-          if (item.children?.length) loop(item.children, item, node)
+        let node = graph.createNode({
+          id: item.id,
+          label: item.name,
+          x: item.x,
+          y: item.y,
+          width: item.width,
+          height: item.height,
+          zIndex: item._dep,
+          attrs: {
+            label: item.children?.length
+              ? {
+                  refX: 0,
+                  refX2: 5,
+                  refY: -_nodeHeight - 5,
+                  refY2: 5,
+                  textAnchor: 'start',
+                  textVerticalAnchor: 'top',
+                  fontSize: 16
+                }
+              : {
+                  fontSize: 12
+                },
+            body: {
+              stroke: '#ffe7ba',
+              rx: 6,
+              ry: 6
+            }
+          },
+          ports: linkPorts,
+          data: item
+        })
+        if (parentNode) {
+          parentNode.addChild(node)
         } else {
-          node = graph.createNode({
-            id: item.id,
-            x: item.x,
-            y: item.y,
-            width: item.width,
-            height: item.height,
-            label: item.name,
-            zIndex: item._dep,
-            attrs: {
-              label: {
-                fontSize: 12
-              },
-              body: {
-                stroke: '#ffe7ba',
-                rx: 6,
-                ry: 6
-              }
-            },
-            ports: linkPorts,
-            data: item
-          })
-          if (parentNode) {
-            parentNode.addChild(node)
-          } else {
-            graph.addNode(node)
-          }
+          graph.addNode(node)
+        }
+        if (item.children?.length) {
+          loop(item.children, item, node)
         }
       })
     }
@@ -246,76 +222,70 @@ class X6FrameUtil {
     loop(root.children, { x: 100, y: 100 }, null)
   }
 
-  doLayoutHasPosition(graph, root) {
-    const loop = (list, parent, parentNode) => {
+  initLayout(graph, data) {
+    this.initNodeLayout(graph, data.nodeList || [])
+    this.initEdgeLayout(graph, data.egdeList || [])
+  }
+
+  initNodeLayout(graph, nodeList) {
+    const loop = (list, parentNode) => {
       list.forEach(item => {
-        let node
-        if (item.children?.length) {
-          node = graph.createNode({
-            id: item.id,
-            x: item.x,
-            y: item.y,
-            width: item.width,
-            height: item.height,
-            zIndex: item._dep,
-            label: item.name,
-            attrs: {
-              label: {
-                refX: 0,
-                refX2: 5,
-                refY: -_nodeHeight - 5,
-                refY2: 5,
-                textAnchor: 'start',
-                textVerticalAnchor: 'top',
-                fontSize: 16
-              },
-              body: {
-                stroke: '#ffe7ba',
-                rx: 6,
-                ry: 6
-              }
-            },
-            ports: linkPorts,
-            data: item
-          })
-          if (parent && parentNode) {
-            parentNode.addChild(node)
-          } else {
-            graph.addNode(node)
-          }
-          if (item.children?.length) loop(item.children, item, node)
+        item = {
+          ...item,
+          ...item.x6Data,
+          name: item.data.name,
+          id: item.data.id
+        }
+        let node = graph.createNode({
+          id: item.id,
+          label: item.name,
+          x: item.x,
+          y: item.y,
+          width: item.width,
+          height: item.height,
+          zIndex: item._dep,
+          attrs: {
+            label: item.children?.length
+              ? {
+                  refX: 0,
+                  refX2: 5,
+                  refY: -_nodeHeight - 5,
+                  refY2: 5,
+                  textAnchor: 'start',
+                  textVerticalAnchor: 'top',
+                  fontSize: 16
+                }
+              : {
+                  fontSize: 12
+                },
+            body: {
+              stroke: '#ffe7ba',
+              rx: 6,
+              ry: 6
+            }
+          },
+          ports: linkPorts,
+          data: item
+        })
+        if (parentNode) {
+          parentNode.addChild(node)
         } else {
-          node = graph.createNode({
-            id: item.id,
-            x: item.x,
-            y: item.y,
-            width: item.width,
-            height: item.height,
-            label: item.name,
-            zIndex: item._dep,
-            attrs: {
-              label: {
-                fontSize: 12
-              },
-              body: {
-                stroke: '#ffe7ba',
-                rx: 6,
-                ry: 6
-              }
-            },
-            ports: linkPorts,
-            data: item
-          })
-          if (parentNode) {
-            parentNode.addChild(node)
-          } else {
-            graph.addNode(node)
-          }
+          graph.addNode(node)
+        }
+        if (item.children?.length) {
+          loop(item.children, node)
         }
       })
     }
 
-    loop(root.children, { x: 100, y: 100 }, null)
+    loop(nodeList, null)
+  }
+
+  initEdgeLayout(graph, egdeList) {
+    for (const item of egdeList) {
+      const edge = this.createEdge(graph, item)
+      graph.addEdge(edge)
+    }
   }
   /**
    * @Author: wyb
@@ -673,13 +643,13 @@ class X6FrameUtil {
         return {
           data: {
             ...item.data.rawData,
-            _dep: item.data._dep,
             fontSize: item.data.fontSize
           },
           children: item.children || [],
           x6Data: {
             ...item.position,
-            ...item.size
+            ...item.size,
+            _dep: item.data._dep
           }
         }
       })
