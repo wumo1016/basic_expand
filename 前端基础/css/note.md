@@ -50,3 +50,6 @@ body {
 
 ## position
 - fixed: 当祖先元素的transform、filter、perspective等属于不为none时 容器由视口改为该祖先
+
+## 在calc中使用scss变量
+- 使用 `#{}` 包裹 例如: `height: calc(100% - #{$height})`
