@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-26 11:12:06
+ * @LastEditTime: 2022-04-26 14:16:03
  */
 const canvas = document.createElement('canvas')
 
@@ -170,72 +170,22 @@ class X6FrameUtil {
     loop(data)
   }
 
-  dealLayout(graph, root) {
-    const loop = (list, parent, parentNode) => {
-      list.forEach(item => {
-        if (parent) {
-          item.x = parent.x + item.x
-          item.y = parent.y + item.y
-        }
-        let node = graph.createNode({
-          id: item.id,
-          label: item.name,
-          x: item.x,
-          y: item.y,
-          width: item.width,
-          height: item.height,
-          zIndex: item._dep,
-          attrs: {
-            label: item.children?.length
-              ? {
-                  refX: 0,
-                  refX2: 5,
-                  refY: -_nodeHeight - 5,
-                  refY2: 5,
-                  textAnchor: 'start',
-                  textVerticalAnchor: 'top',
-                  fontSize: 16
-                }
-              : {
-                  fontSize: 12
-                },
-            body: {
-              stroke: '#ffe7ba',
-              rx: 6,
-              ry: 6
-            }
-          },
-          ports: linkPorts,
-          data: item
-        })
-        if (parentNode) {
-          parentNode.addChild(node)
-        } else {
-          graph.addNode(node)
-        }
-        if (item.children?.length) {
-          loop(item.children, item, node)
-        }
-      })
-    }
-
-    loop(root.children, { x: 100, y: 100 }, null)
-  }
-
-  initLayout(graph, data) {
-    this.initNodeLayout(graph, data.nodeList || [])
+  initLayout(graph, data, init = false) {
+    this.initNodeLayout(graph, data.nodeList || [], init)
     this.initEdgeLayout(graph, data.egdeList || [])
   }
 
-  initNodeLayout(graph, nodeList) {
-    const loop = (list, parentNode) => {
+  initNodeLayout(graph, nodeList, init) {
+    const loop = (list, parentNode, parent) => {
       list.forEach(item => {
-        item = {
-          ...item,
-          ...item.x6Data,
-          name: item.data.name,
-          id: item.data.id
+        if (init && parent) {
+          item.x = parent.x + item.x
+          item.y = parent.y + item.y
         }
+        const x6Data = item.x6Data
+        Reflect.deleteProperty(item, 'x6Data')
+        item.rawData = JSON.parse(JSON.stringify(item))
+        item = { ...item, ...x6Data }
         let node = graph.createNode({
           id: item.id,
           label: item.name,
@@ -273,12 +223,12 @@ class X6FrameUtil {
           graph.addNode(node)
         }
         if (item.children?.length) {
-          loop(item.children, node)
+          loop(item.children, node, item)
         }
       })
     }
 
-    loop(nodeList, null)
+    loop(nodeList, null, { x: 100, y: 100 })
   }
 
   initEdgeLayout(graph, egdeList) {
@@ -299,13 +249,13 @@ class X6FrameUtil {
       source: options.source,
       target: options.target,
       // 线路由规则
-      // router: 'metro',
-      router: {
-        name: 'manhattan',
-        args: {
-          step: 20
-        }
-      },
+      router: 'metro',
+      // router: {
+      //   name: 'manhattan',
+      // args: {
+      //   step: 20
+      // }
+      // },
       // 线连接器规则
       connector: 'normal',
       attrs: {
@@ -526,6 +476,7 @@ class X6FrameUtil {
    */
   setNodeContextmenu(graph) {
     graph.on('node:contextmenu', e => {
+      // todo 如果点击的时接口 则阻止默认事件
       this.showContextmenu(e, graph, [
         {
           type: 'add',
@@ -639,17 +590,14 @@ class X6FrameUtil {
           item.children = item.children.map(id => cellMap[id])
           item.children = loop(item.children)
         }
-        item.data.children = undefined
         return {
-          data: {
-            ...item.data.rawData,
-            fontSize: item.data.fontSize
-          },
+          ...item.data.rawData,
           children: item.children || [],
           x6Data: {
             ...item.position,
             ...item.size,
-            _dep: item.data._dep
+            _dep: item.data._dep,
+            fontSize: item.data.fontSize
           }
         }
       })
