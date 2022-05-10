@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* is 单个使用 */
+    /* :is(.box1, .box2) p {
+      color: red
+    } */
+
+    /* is 层叠连用 */
+    /* :is(.box1, .box2, .box3) :is(.p1, .p3) {
+      color: blue
+    } */
+
+    /* where */
+    /* :where(.box1, .box2) p {
+      color: red
+    } */
+
+    /* :not */
+    /* div p:not(.p3, .p4) {
+      color: blue;
+    } */
+
+    /* has */
+    div:has(.p2) {
+      color: blue
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box1">
+    <p class="p1">123</p>
+  </div>
+  <div class="box2">
+    <p class="p2">123</p>
+  </div>
+  <div class="box3">
+    <p class="p3">123</p>
+  </div>
+  <div class="box4">
+    <p class="p4">123</p>
+  </div>
+
+</body>
+
+</html>
