@@ -28,6 +28,7 @@ class SendTracker {
     xhr.setRequestHeader('x-log-bodyrawsize', body.length)
     xhr.onload = function () {
       if ((this.status >= 200 && this.status <= 300) || this.status == 304) {
+        console.log(xhr)
         callback && callback()
       }
     }
