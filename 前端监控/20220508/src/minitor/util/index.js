@@ -49,7 +49,7 @@ export function getSelector(pathsOrTarget) {
   let paths = pathsOrTarget
   if (!Array.isArray(pathsOrTarget)) {
     paths = []
-    const element = pathsOrTarget
+    let element = pathsOrTarget
     while (element) {
       paths.push(element)
       element = element.parentNode

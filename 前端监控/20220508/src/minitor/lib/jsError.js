@@ -4,22 +4,36 @@ import { getLines, getLastEvent, getSelector } from '../util'
 import tracker from '../util/tracker'
 
 export function injectJsError() {
-  // 监听全局错误
+  // 监听全局错误 (js执行错误 + )
   window.addEventListener(
     'error',
     function (event) {
       const lastEvent = getLastEvent() // 最后一个交互事件
-      const log = {
-        kind: 'stability', // 监控指标的大类 => 稳定性
-        type: 'error', // 监控指标的小类 => 错误
-        errorType: 'jsError', // js执行错误
-        message: event.message, // 报错信息
-        filename: event.filename, // 报错链接
-        position: (event.lineno || 0) + ':' + (event.colno || 0), // 报错行列号
-        stack: getLines(event.error.stack), // 错误堆栈
-        selector: lastEvent
-          ? getSelector(lastEvent.path || lastEvent.target)
-          : '' // CSS选择器
+      let log
+      // 脚本错误
+      if (event.target && (event.target.src || event.target.href)) {
+        log = {
+          kind: 'stability', // 监控指标的大类 => 稳定性
+          type: 'error', // 监控指标的小类 => 错误
+          errorType: 'resourceError', // js或css资源记载错误
+          message: '资源加载错误', // 报错信息
+          filename: event.target.src || event.target.href, // 报错链接
+          tagName: event.target.tagName, // script
+          selector: getSelector(event.target) // CSS选择器
+        }
+      } else {
+        log = {
+          kind: 'stability', // 监控指标的大类 => 稳定性
+          type: 'error', // 监控指标的小类 => 错误
+          errorType: 'jsError', // js执行错误
+          message: event.message, // 报错信息
+          filename: event.filename, // 报错链接
+          position: (event.lineno || 0) + ':' + (event.colno || 0), // 报错行列号
+          stack: getLines(event.error.stack), // 错误堆栈
+          selector: lastEvent
+            ? getSelector(lastEvent.path || lastEvent.target)
+            : '' // CSS选择器
+        }
       }
       tracker.send(log)
     },
