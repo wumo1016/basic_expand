@@ -55,7 +55,7 @@ export function getSelector(pathsOrTarget) {
       element = element.parentNode
     }
   }
-  paths
+  return paths
     .reverse()
     .filter(function (element) {
       return element !== window && element !== document
@@ -65,14 +65,7 @@ export function getSelector(pathsOrTarget) {
       if (element.id) {
         selector = `#${element.id}`
       } else if (element.className && typeof element.className === 'string') {
-        selector =
-          '.' +
-          element.className
-            .split(' ')
-            .filter(function (item) {
-              return !!item
-            })
-            .join('.')
+        selector = '.' + element.className.split(' ').filter(Boolean).join('.')
       } else {
         selector = element.nodeName
       }

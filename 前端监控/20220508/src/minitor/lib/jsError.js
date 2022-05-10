@@ -1,8 +1,7 @@
-// import tracker from '../util/tracker'
-// import getSelector from '../util/getSelector'
 // import formatTime from '../util/formatTime'
 
-import { getLines, getLastEvent } from '../util'
+import { getLines, getLastEvent, getSelector } from '../util'
+import tracker from '../util/tracker'
 
 export function injectJsError() {
   // 监听全局错误
@@ -10,19 +9,19 @@ export function injectJsError() {
     'error',
     function (event) {
       const lastEvent = getLastEvent() // 最后一个交互事件
-      console.log(lastEvent)
       const log = {
         kind: 'stability', // 监控指标的大类 => 稳定性
         type: 'error', // 监控指标的小类 => 错误
         errorType: 'jsError', // js执行错误
         message: event.message, // 报错信息
         filename: event.filename, // 报错链接
-        position: (event.lineNo || 0) + ':' + (event.columnNo || 0), // 报错行列号
+        position: (event.lineno || 0) + ':' + (event.colno || 0), // 报错行列号
         stack: getLines(event.error.stack), // 错误堆栈
         selector: lastEvent
           ? getSelector(lastEvent.path || lastEvent.target)
           : '' // CSS选择器
       }
+      tracker.send(log)
       // tracker.send({
       //   kind: 'stability', //稳定性指标
       //   type: 'error', //error
