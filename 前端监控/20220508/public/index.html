@@ -2,34 +2,42 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>monitor</title>
 </head>
 
 <body>
-
-  <div id="container">
-    <div class="content">
-      <input type="button" value="点击抛出js错误" onclick="btnClick()">
-      <input type="button" value="点击抛出promise错误" onclick="btnPromiseClick()">
+    <div id="container">
+        <div class="content">
+          <input type="button" value="发起ajax成功请求" onclick="sendAjaxSuccess()" />
+          <input type="button" value="发起ajax失败请求" onclick="sendAjaxError()" />
+        </div>
     </div>
-  </div>
 
-  <script>
-    function btnClick() {
-      window.someVariable.error = 'someVariable';
-    }
-
-    function btnPromiseClick() {
-      new Promise(function (resolve, reject) {
-        window.someVariable.error = 'someVariable';
-      })
-    }
-  </script>
-  <script defer src="/someError.js"></script>
-
+    <script>
+      function sendAjaxSuccess() {
+          let xhr = new XMLHttpRequest;
+          xhr.open('GET', '/success', true);
+          xhr.responseType = 'json';
+          xhr.onload = function () {
+              console.log(xhr.response);
+          }
+          xhr.send();
+      }
+      function sendAjaxError() {
+          let xhr = new XMLHttpRequest;
+          xhr.open('POST', '/error', true);
+          xhr.responseType = 'json';
+          xhr.onload = function () {
+              console.log(xhr.response);
+          }
+          xhr.onerror = function (error) {
+              console.log(error);
+          }
+          xhr.send("name=zhufeng");
+        }
+    </script>
 </body>
 
 </html>

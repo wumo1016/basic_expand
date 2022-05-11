@@ -11,7 +11,15 @@ module.exports = {
   },
   devServer: {
     port: 3000,
-    static: path.resolve(__dirname, 'dist') // 静态文件根目录
+    static: path.resolve(__dirname, 'dist'), // 静态文件根目录
+    onBeforeSetupMiddleware({ app }) {
+      app.get('/success', function (req, res) {
+        res.json({ i: 1 })
+      })
+      app.post('/error', function (req, res) {
+        res.setStatus(500)
+      })
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({

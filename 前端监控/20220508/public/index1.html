@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="container">
+    <div class="content">
+      <input type="button" value="点击抛出js错误" onclick="btnClick()">
+      <input type="button" value="点击抛出promise错误" onclick="btnPromiseClick()">
+    </div>
+  </div>
+
+  <script>
+    function btnClick() {
+      window.someVariable.error = 'someVariable';
+    }
+
+    function btnPromiseClick() {
+      new Promise(function (resolve, reject) {
+        window.someVariable.error = 'someVariable';
+      })
+    }
+  </script>
+  <script defer src="/someError.js"></script>
+
+</body>
+
+</html>
