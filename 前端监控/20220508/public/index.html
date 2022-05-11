@@ -9,34 +9,13 @@
 
 <body>
     <div id="container">
-        <div class="content">
-          <input type="button" value="发起ajax成功请求" onclick="sendAjaxSuccess()" />
-          <input type="button" value="发起ajax失败请求" onclick="sendAjaxError()" />
+        <div class="content" style="width:600px;word-wrap:break-word;">
         </div>
     </div>
 
     <script>
-      function sendAjaxSuccess() {
-          let xhr = new XMLHttpRequest;
-          xhr.open('GET', '/success', true);
-          xhr.responseType = 'json';
-          xhr.onload = function () {
-              console.log(xhr.response);
-          }
-          xhr.send();
-      }
-      function sendAjaxError() {
-          let xhr = new XMLHttpRequest;
-          xhr.open('POST', '/error', true);
-          xhr.responseType = 'json';
-          xhr.onload = function () {
-              console.log(xhr.response);
-          }
-          xhr.onerror = function (error) {
-              console.log(error);
-          }
-          xhr.send("name=zhufeng");
-        }
+        let content = document.getElementsByClassName('content')[0];
+        content.innerHTML = '@'.repeat(10000);
     </script>
 </body>
 

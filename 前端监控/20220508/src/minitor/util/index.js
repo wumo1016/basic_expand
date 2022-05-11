@@ -73,3 +73,15 @@ export function getSelector(pathsOrTarget) {
     })
     .join(' ')
 }
+/**
+ * @Author: wyb
+ * @Descripttion: 
+ * @param {*} callback
+ */
+export function onload(callback) {
+  if (document.readyState === 'complete') {
+    callback()
+  } else {
+    window.addEventListener('load', callback)
+  }
+}
