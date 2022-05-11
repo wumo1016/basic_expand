@@ -10,15 +10,12 @@
 <body>
     <div id="container">
         <div class="content" style="width:600px;word-wrap:break-word;">
-
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            let start = Date.now();
-            while ((Date.now() - start) < 1000) { }
-        });
+        let content = document.getElementsByClassName('content')[0];
+        content.innerHTML = '@'.repeat(10000);
     </script>
 </body>
 
