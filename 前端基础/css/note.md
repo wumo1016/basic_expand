@@ -1,12 +1,26 @@
 ## css 隔离方案
 
 - BEM
+  - 一种命名规范
+  - 块（Block）、元素（Element）、修饰符（Modifier）
   - 命名时加上模块前缀 实现隔离
-- css-module
-  - css-loader 的解决方案
-  - 它通过编译的方式生成全局唯一的选择器来实现样式的隔离
+- css-loader
+  - 它会将选择器都编译成一段哈希字符串来实现样式的隔离
 - css-in-js
-  - 利用 js 的作用域实现 css 隔离
+
+  - 使用 js 语法书写 css
+  - 比如 `Styled-components` 库 使用标签模板字符串语法 最终会生成一个带有 hash classname 的标签 直接使用这个标签包裹内容即可 (它的样式是放在 style 标签中 插入到 head 中)
+
+  ```js
+  const div = styled.div`
+    color: blue;
+    background: #fff;
+  `
+  ```
+
+- Shadow Dom
+  - 严格意义上的隔离 天然支持
+  - 内部可以支持 style link 等标签
 - scoped
   - vue-loader 的解决方案
   - 通过编译的方式在标签添加 data-xxx 的属性 然后给 css 选择器上[data-xxx]的属性选择器实现 css 的隔离
@@ -63,8 +77,9 @@ body {
 - `[attr=value]`: 选择带有属性 attr 值为 value 的元素
 
 ## position
-- fixed: 当祖先元素的transform、filter、perspective等属于不为none时 容器由视口改为该祖先
 
-## 在calc中使用scss变量
+- fixed: 当祖先元素的 transform、filter、perspective 等属于不为 none 时 容器由视口改为该祖先
+
+## 在 calc 中使用 scss 变量
+
 - 使用 `#{}` 包裹 例如: `height: calc(100% - #{$height})`
-

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .scroll-panel {
+      height: 500px;
+      position: relative;
+    }
+
+    .scroll-ctn {
+      display: block;
+      width: 100%;
+      height: 300px;
+      overflow-y: scroll;
+      border: 1px solid gray;
+      /* scroll-behavior: smooth; */
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <button onclick="scrollA()">A</button>
+    <button onclick="scrollB()">B</button>
+    <button onclick="scrollC()">C</button>
+  </div>
+  <div class="scroll-ctn">
+    <div id="A" class="scroll-panel">
+      A
+    </div>
+    <div id="B" class="scroll-panel">
+      B
+    </div>
+    <div id="C" class="scroll-panel">
+      C
+    </div>
+  </div>
+
+  <script>
+    /* 
+    方法1: element.scrollTo(x, y)
+    方法2: element.scrollTo({ top, left, behavior })
+    方法3: element.scrollTop = xxx element.scrollLeft = xxx
+    */
+    const element = document.querySelector('.scroll-ctn')
+    function scrollA() {
+      // scroll1(0)
+      // scroll2(0)
+      scroll3(0)
+    }
+    function scrollB() {
+      // scroll1(500)
+      // scroll2(500)
+      scroll3(500)
+    }
+    function scrollC() {
+      // scroll1(1000)
+      // scroll2(1000)
+      // scroll3(1000)
+    }
+
+    function scroll1(y) {
+      element.scrollTo(0, y);
+    }
+
+    function scroll2(y) {
+      element.scrollTo({
+        top: y,
+        left: 0,
+        behavior: 'smooth' // auto立即滚动 smooth平滑滚动
+      });
+    }
+
+    function scroll3(y) {
+      element.scrollTop = y
+    }
+  </script>
+</body>
+
+</html>
