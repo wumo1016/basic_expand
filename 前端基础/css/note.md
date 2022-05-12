@@ -4,18 +4,49 @@
   - 一种命名规范
   - 块（Block）、元素（Element）、修饰符（Modifier）
   - 命名时加上模块前缀 实现隔离
-- css-loader
+- css-modules
+
+  - 依赖 css-loader
   - 它会将选择器都编译成一段哈希字符串来实现样式的隔离
+
+  ```html
+  <style module>
+    .guang {
+      color: red;
+    }
+  </style>
+  <template>
+    <p :class="$style.guang">hi</p>
+  </template>
+  <!-- 会被编译成 -->
+  <style module>
+    ._1yZGjg0pYkMbaHPr4wT6P__1 {
+      color: red;
+    }
+  </style>
+  <template>
+    <p class="_1yZGjg0pYkMbaHPr4wT6P__1">hi</p>
+  </template>
+  ```
+
 - css-in-js
 
   - 使用 js 语法书写 css
   - 比如 `Styled-components` 库 使用标签模板字符串语法 最终会生成一个带有 hash classname 的标签 直接使用这个标签包裹内容即可 (它的样式是放在 style 标签中 插入到 head 中)
 
-  ```js
-  const div = styled.div`
-    color: blue;
-    background: #fff;
-  `
+  ```javascript
+  import styled from 'styled-components';
+  const Wrapper = styled.div`
+      font-size: 50px;
+      color: red;
+  `;
+  function Guang {
+      return (
+          <div>
+              <Wrapper>内部文件写法</Wrapper>
+          </div>
+      );
+  }
   ```
 
 - Shadow Dom
@@ -24,6 +55,25 @@
 - scoped
   - vue-loader 的解决方案
   - 通过编译的方式在标签添加 data-xxx 的属性 然后给 css 选择器上[data-xxx]的属性选择器实现 css 的隔离
+  ```html
+  <style scoped>
+    .guang {
+      color: red;
+    }
+  </style>
+  <template>
+    <div class="guang">hi</div>
+  </template>
+  <!-- 会被编译成 -->
+  <style>
+    .guang[data-v-f3f3eg9] {
+      color: red;
+    }
+  </style>
+  <template>
+    <div class="guang" data-v-f3f3eg9>hi</div>
+  </template>
+  ```
 
 ## 修改 placeholder 样式
 
