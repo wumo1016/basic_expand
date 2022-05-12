@@ -10,15 +10,23 @@
 <body>
     <div id="container">
         <div class="content" style="width:600px;word-wrap:break-word;">
-
+            <p>啊可恶的家伙情况为底栖</p>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            let start = Date.now();
-            while ((Date.now() - start) < 1000) { }
-        });
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     let start = Date.now();
+        //     while ((Date.now() - start) < 1000) { }
+        // });
+        setTimeout(() => {
+            let content = document.querySelector('.content');
+            let h2 = document.createElement('h2');
+            h2.innerHTML = '我是最有重要的内容';
+            h2.setAttribute('elementtiming', 'meaningful');
+            content.appendChild(h2);
+        }, 2000);
+
     </script>
 </body>
 
