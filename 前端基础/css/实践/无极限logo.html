@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>声生不息</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    :root {
+      --black: #010101;
+      --red: #F66034;
+      --blue: #0A68DF;
+    }
+
+    html,
+    body {
+      background: var(--black);
+      height: 100%;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .logo {
+      display: flex;
+      position: relative;
+      margin-top: -250px;
+    }
+
+    .cycle {
+      height: 500px;
+      width: 500px;
+      border-radius: 50%;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .cycle_1 {
+      z-index: 2;
+      background: var(--red);
+      background: repeating-linear-gradient(180deg, var(--red), var(--red) 12px, var(--black) 0, var(--black) 22px);
+      border: 12px solid var(--black);
+    }
+
+    .cycle_2 {
+      margin-left: -160px;
+      background: linear-gradient(to right, var(--red), var(--blue));
+      border: 12px solid var(--black);
+    }
+
+    .cycle_2::before {
+      position: absolute;
+      box-sizing: border-box;
+      top: -12px;
+      left: -12px;
+      content: '';
+      display: inline-block;
+      height: 500px;
+      width: 500px;
+      background: linear-gradient(to right, var(--red), var(--blue));
+      border-radius: 50%;
+      -webkit-clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+      clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+      z-index: 3;
+      border: 12px solid var(--black);
+    }
+
+    .cycle_1::after,
+    .cycle_2::after {
+      content: '';
+      display: inline-block;
+      height: 200px;
+      width: 200px;
+      background: var(--black);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -100px;
+      margin-left: -100px;
+      border-radius: 50%;
+      z-index: 3;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- https://juejin.cn/post/7097064275847905288 -->
+  <div class="logo">
+    <div class="cycle cycle_1"></div>
+    <div class="cycle cycle_2"></div>
+  </div>
+</body>
+
+</html>
