@@ -75,7 +75,7 @@ export function getSelector(pathsOrTarget) {
 }
 /**
  * @Author: wyb
- * @Descripttion: 
+ * @Descripttion:
  * @param {*} callback
  */
 export function onload(callback) {
@@ -84,4 +84,12 @@ export function onload(callback) {
   } else {
     window.addEventListener('load', callback)
   }
+}
+/**
+ * @Author: wyb
+ * @Descripttion:
+ * @param {*} time
+ */
+export const formatTime = time => {
+  return `${time}`.split('.')[0]
 }
