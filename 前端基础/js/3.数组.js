@@ -1,3 +1,18 @@
+/* 方法
+  - push pop shift unshift splice
+  - map forEach
+  - filter find findIndex
+  - reduce reduceRight
+  - some every
+  - flat
+  - includes indexOf lastIndexOf
+  - concat
+  - join
+  - reverse
+  - sort
+  - isArray
+*/
+
 /* ----------------------------------------- Array.from  ----------------------------------------- */
 ;(function () {
   const map = new Map()
@@ -36,7 +51,6 @@
   // console.log(list1.flatMap(v => v))
 })
 
-
 /* ----------------------------------------- reduce ----------------------------------------- */
 /* 
 - 前提是数组不能为空
@@ -53,7 +67,6 @@
     }
     return prev
   }
-
   ;(function () {
     const list = [1, 2, 3, 4]
     const total = list.myreduce((prev, next, index, array) => {
