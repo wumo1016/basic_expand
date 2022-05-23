@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-26 14:16:03
+ * @LastEditTime: 2022-05-17 14:50:28
  */
 const canvas = document.createElement('canvas')
 
@@ -152,7 +152,7 @@ class X6FrameUtil {
               text: item.name,
               width: textWidth,
               layoutOptions: {
-                'nodeLabels.placement': `[H_LEFT, V_TOP, OUTSIDE]`
+                'nodeLabels.placement': `INSIDE V_TOP H_CENTER`
               },
               height: _nodeHeight
             }
@@ -197,11 +197,11 @@ class X6FrameUtil {
           attrs: {
             label: item.children?.length
               ? {
-                  refX: 0,
-                  refX2: 5,
-                  refY: -_nodeHeight - 5,
+                  refX: '50%',
+                  refX2: 0,
+                  refY: 0,
                   refY2: 5,
-                  textAnchor: 'start',
+                  textAnchor: 'middle',
                   textVerticalAnchor: 'top',
                   fontSize: 16
                 }
@@ -209,7 +209,8 @@ class X6FrameUtil {
                   fontSize: 12
                 },
             body: {
-              stroke: '#ffe7ba',
+              stroke: '#6baff5',
+              strokeWidth: 2,
               rx: 6,
               ry: 6
             }
