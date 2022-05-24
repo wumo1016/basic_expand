@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    /* https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestIdleCallback */
+
+    window.requestIdleCallback(() => {
+      console.log(123456);
+    }, {
+      timeout: 5000
+    })
+
+    let num = 0
+    for (let i = 0; i < 1000000000; i++) {
+      num++
+    }
+    console.log(num);
+
+  </script>
+</body>
+
+</html>
