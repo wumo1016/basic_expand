@@ -30,15 +30,27 @@
         // }
         // const timer = setInterval(move, 10);  // 16.6  setInterval => settimeout
 
-        /* 使用 requestAnimationFrame */
+        /* 使用 requestAnimationFrame 需要不断进行回调*/
+        // const element = document.getElementById('box');
+        // function move() {
+        //     element.style.left = element.offsetLeft + 1 + 'px';
+        //     if (element.offsetLeft < 600) {
+        //         window.requestAnimationFrame(move)
+        //     }
+        // }
+        // window.requestAnimationFrame(move)
+
+        /* 可以使用 cancelAnimationFrame 主动取消回调  */
         const element = document.getElementById('box');
+        var rafId
         function move() {
             element.style.left = element.offsetLeft + 1 + 'px';
-            if (element.offsetLeft < 600) {
-                window.requestAnimationFrame(move)
+            rafId = window.requestAnimationFrame(move)
+            if (element.offsetLeft > 600) {
+                window.cancelAnimationFrame(rafId)
             }
         }
-        window.requestAnimationFrame(move)
+        rafId = window.requestAnimationFrame(move)
     </script>
 </body>
 
