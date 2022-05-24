@@ -20,7 +20,7 @@
     </style>
     <div id="box"></div>
     <script>
-        /* example 1 */
+        /* 自己使用定时器 如果小于显示器的刷新频率 回调会调用多次 */
         // const element = document.getElementById('box');
         // function move() {
         //     element.style.left = element.offsetLeft + 1 + 'px';
@@ -30,7 +30,7 @@
         // }
         // const timer = setInterval(move, 10);  // 16.6  setInterval => settimeout
 
-        /* example 2 */
+        /* 使用 requestAnimationFrame */
         const element = document.getElementById('box');
         function move() {
             element.style.left = element.offsetLeft + 1 + 'px';
