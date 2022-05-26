@@ -25,19 +25,26 @@
 - 暂时性死区
   - 本质是：只要已进入当前作用域 所使用的变量就已经存在了 但是不可获取
   - 只要块级作用域内存在let声明的变量 这个变量就绑定这个区域 不受外界影响
-- 不允许重复声明(包括 函数参数)
+- let不允许在相同作用域内，重复声明同一个变量(包括 函数参数)
 */
 ;(function () {
-  // for循环有个特别之处 设置循环变量的那部分是一个父作用域 循环体内部是一个单独的子作用域(因此可以重复声明变量)
-  for (let i = 0; i < 5; i++) {
-    let i = 10
-    console.log(i) // 10
-  }
-
-  function test(name) {
-    // let name = 'wyb'
-  }
-  test('wyb') // SyntaxError: Identifier 'name' has already been declared
+  /* for循环有个特别之处 设置循环变量的那部分是一个父作用域 循环体内部是一个单独的子作用域(因此可以重复声明变量) */
+  // for (let i = 0; i < 5; i++) {
+  //   let i = 10
+  //   console.log(i) // 10
+  // }
+  /* 变量绑定区域 */
+  // var tmp = 123
+  // if (true) {
+  //   tmp = 'abc' // ReferenceError: Cannot access 'tmp' before initialization
+  //   let tmp
+  //   console.log(123)
+  // }
+  /* 不能重复声明 */
+  // function test(name) {
+  //   let name = 'wyb'
+  // }
+  // test('wyb') // SyntaxError: Identifier 'name' has already been declared
 })
 
 /* ----------------------------------------- const ----------------------------------------- */
@@ -49,16 +56,17 @@
 ;(function () {})()
 
 /* ----------------------------------------- 块级作用域 ----------------------------------------- */
-/* 特点：
-- 块级作用域中函数声明的行为类似于let 在外部不可引用 (故在快集作用域内 要尽量使用函数表达式)
+/* 介绍
+- ES5只有全局作用域和函数作用域
+- 块级作用域中函数声明的行为类似于let 在外部不可引用 (故在块级作用域内 要尽量使用函数表达式)
 - ES6中 块级作用域必须有大括号 (`if(true) let a = 123` 这种就不存在快作用域 会直接报错)
 */
 ;(function () {})
 
 /* ----------------------------------------- 顶层对象 ----------------------------------------- */
 /* 特点：
-- 浏览器 => window  Node => global 浏览器&Web Worker => self
-- var和function声明的变量 会作为顶层对象的属性
+- 顶层对象: 浏览器 => window  Node => global 浏览器&Web Worker => self
+- var 和 function声明的变量 会作为顶层对象的属性
 - this
   - 全局环境: 顶层对象
   - Nodejs: 当前模块
