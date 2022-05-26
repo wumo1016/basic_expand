@@ -1,3 +1,32 @@
+/* https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String
+- 属性
+  - length
+- 方法
+  - concat(str1, ...strN): 拼接字符串，并返回新的字符串
+  - startsWidth endsWith: 判断当前字符串是否以一个给定的字符串开头或结尾的
+  - at(index): 可接受负数 从-1开始
+  - charAt(index): 功能与at一致 但它不支持负数
+  - charCodeAt(index) fromCharCode(str): index默认0；返回指定字符的Unicode编码， 开头128个Unicode编码与ASCII编码一致；index如果超出范围，则返回NaN
+  - codePointAt(index) fromCodePoint(str): 功能与上面的一致
+  - includes
+  - indexOf lastIndexOf
+  - localeCompare: str1.localeCompare(str2) 比较str1是否是在str2后面，是就返回1，否则返回-1
+  - match matchAll: 支持正则
+  - replace replaceAll: 支持正则
+  - search: 匹配到就返回索引，否则返回-1；支持正则
+  - split: 支持正则
+  - padStart padEnd
+  - repeat
+  - slice(startIndex, endIndex): 支持负数
+  - substring(startIndex, endIndex): 功能与slice一致 但不支持负数
+  - toLowerCase toUpperCase
+  - trim trimStart trimEnd
+- 遍历
+  - for of
+- 其他
+  - 支持索引取值
+*/
+
 /* ----------------------------------------- 标签模板 ----------------------------------------- */
 /* 
 - 第一个参数是没有被替换的部分组成的一个数组(通过变量进行分割的部分)
