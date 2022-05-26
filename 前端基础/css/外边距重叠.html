@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 相邻元素重叠 */
+    body {
+      padding: 10px;
+      background: rgb(226, 224, 224);
+    }
+
+    .box1 {
+      border: 1px solid gray;
+      margin-bottom: 30px;
+    }
+
+    .box2 {
+      border: 1px solid blue;
+      margin-top: 20px;
+    }
+
+    /* 父子重叠 父没有边框或内边距 */
+    .box3 {
+      background: gray;
+    }
+
+    .box4 {
+      margin-top: 20px;
+    }
+
+    /* 空元素重叠 此元素没有边框或内边距 */
+    .box5 {
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 相邻元素重叠 -->
+  <div class="box1">
+    box1
+  </div>
+  <div class="box2">
+    box2
+  </div>
+
+  <!-- 父子重叠 -->
+  <div class="box3">
+    <div class="box4">
+      box4
+    </div>
+  </div>
+  <!-- 空元素重叠 -->
+  <div class="box5"></div>
+  <div class="box6">box6</div>
+</body>
+
+</html>
