@@ -112,3 +112,20 @@
 - 重写 window.addEventListener window.removeEventListener
 
 ## qiankun 原理
+
+- 预加载
+  - 可以通过 prefetch 配置加载模式
+    - true 在第一次子应用挂载后加载
+    - all 在 start 立即加载所有自已子应用
+    - array 只加载在 array 中的子应用 在第一次子应用挂载后加载
+    - function 返回两个数组 一个是在子应用挂载后加载的子应用 和 立即加载的子应用
+  - 原理
+    - 通过 import-html-entry 拿到所有 script 和 style
+    - 然后通过 fetch 请求 并把请求结果缓存起来
+- js 隔离
+  - 通过快照沙箱和代理沙箱 然后通过函数自执行的方式将 proxy 传进去 实现对 window 的隔离
+- 样式隔离
+  - 实验性的样式隔离 在所有选择器前面加上的一个前缀 div[data-qiankun="appName"] 因为最终的子应用外面或包裹带有这样一个属性的 div
+  - shadow DOM
+- 全局状态管理
+  - 自己定义一个全局状态 进行事件订阅派发
