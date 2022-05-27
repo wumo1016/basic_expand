@@ -1,17 +1,3 @@
-## new 的实现原理
-
-- 创建一个新对象 并将目标对象的**proto**设置为构造函数的 prototype
-- 执行构造函数 并将 this 指向这个新对象
-- 返回这个新对象
-
-```javascript
-function _new(classzz, ...args) {
-  const obj = Object.create(classzz.prototype)
-  classzz.call(obj, ...args)
-  return obj
-}
-```
-
 ## Object.create 的实现原理
 
 - 创建一个新函数
@@ -28,6 +14,10 @@ function _create(obj) {
 
 ## new 的实现原理
 
+- 创建一个新对象 并将目标对象的 `__proto__` 设置为构造函数的 prototype
+- 执行构造函数 并将 this 指向这个新对象
+- 返回这个新对象
+
 ```javascript
 function _new(claszz, ...args) {
   const obj = Object.create(claszz.prototype) // 相当于 obj = {} obj.__proto__ = claszz.prototype
@@ -39,8 +29,8 @@ function _new(claszz, ...args) {
 ## 原型链
 
 - 函数都有一个 prototype 属性 指向原型对象
-- 对象都有一个**proto**属性 指向构造函数原型对象
-- 最顶端就是 Object.prototype.**proto** 就是 null
+- 对象都有一个`__proto__`属性 指向构造函数原型对象
+- 最顶端就是 Object.prototype.`__proto__` 就是 null
 
 ## 对象的属性描述符
 
