@@ -128,7 +128,7 @@ function _new(claszz, ...args) {
 
 ## JSON.parse(JSON.stringfy(obj))的弊端
 
-- 会忽略 undefined、symbol、函数
+- 会忽略值为 undefined、symbol、函数的属性
   ```javascript
   let obj = {
     age: undefined,
@@ -147,6 +147,7 @@ function _new(claszz, ...args) {
   obj.b.c = obj.b
   console.log(JSON.parse(JSON.stringify(obj)))
   ```
+- 正则的值会呗直接转成空对象
 
 ## 遍历对象的方法
 
