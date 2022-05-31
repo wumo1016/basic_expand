@@ -11,8 +11,31 @@
   console.log(new RegExp(/abc/gi, 'i').flags) // i
 })
 
-/* ----------------------------------------- RegExp 属性  ----------------------------------------- */
+/* ----------------------------------------- 实例 属性  ----------------------------------------- */
 /* 
 - lastIndex: 从什么位置开始匹配 获取/设置
+- source: 返回表达式的正文
+- flags: 返回表达式的修饰符
+*/
+;(function () {
+  /* lastIndex */
+  // const reg = /a/g
+  // const str = 'aaa'
+  // console.log(reg.lastIndex) // 0
+  // console.log(reg.exec(str))
+  // console.log(reg.lastIndex) // 1
+
+  /* source */
+  // const reg = /abc/g
+  // console.log(reg.source) // abc
+
+  /* flags */
+  const reg = /abc/g
+  console.log(reg.flags) // g
+})()
+
+/* ----------------------------------------- RegExp 静态属性  ----------------------------------------- */
+/* 
+- 
 */
 ;(function () {})
