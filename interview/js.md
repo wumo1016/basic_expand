@@ -26,20 +26,55 @@ function _new(claszz, ...args) {
 }
 ```
 
+## 对象的属性描述符
+
+- 数据属性
+  - configurable: 是否可修改属性描述符的配置、是否可删除
+  - enumberable: 是否可枚举
+  - writable: 是否可修改内存地址
+  - value
+- 访问器属性
+  - configurable
+  - enumberable
+  - get
+  - set
+
+## JSON.parse(JSON.stringfy(obj))的弊端
+
+- 会忽略值为 undefined、symbol、函数的属性
+  ```javascript
+  let obj = {
+    age: undefined,
+    sex: Symbol('male'),
+    jobs: function () {}
+  }
+  console.log(JSON.parse(JSON.stringify(obj))) // {}
+  ```
+- 不能解决循环引用问题 会直接报错
+  ```javascript
+  let obj = {
+    b: {
+      c: 2
+    }
+  }
+  obj.b.c = obj.b
+  console.log(JSON.parse(JSON.stringify(obj)))
+  ```
+- 正则、Map、Set 的值会被直接转成空对象
+
+## 遍历对象的方法
+
+- for in (包括自身和继承的所有可枚举属性)(不含 Symbol 属性)
+- Object.keys (包括自身的所有可枚举属性)(不含 Symbol 属性)
+- Object.getOwnPropertyNames(包括自身的所有属性)(不含 Symbol 属性)
+- Object.getOwnPropertySymbols(包括自身的所有 Symbol 属性)
+- Reflect.ownKeys (包括自身的所有属性)(包含 Symbol 属性)
+
 ## 原型链
 
 - 函数都有一个 prototype 属性 指向原型对象
 - 对象都有一个`__proto__`属性 指向构造函数原型对象
 - 最顶端就是 Object.prototype.`__proto__` 就是 null
-
-## 对象的属性描述符
-
-- configurable：是否可修改
-- enumerable：是否可枚举
-- value：属性对应的值
-- writable：是否可以通过赋值运算符改变
-- get
-- set
 
 ## 防抖和节流
 
@@ -125,37 +160,6 @@ function _new(claszz, ...args) {
   ```
 - callee
   - arguments 对象的一个属性 返回当前正在被执行的函数
-
-## JSON.parse(JSON.stringfy(obj))的弊端
-
-- 会忽略值为 undefined、symbol、函数的属性
-  ```javascript
-  let obj = {
-    age: undefined,
-    sex: Symbol('male'),
-    jobs: function () {}
-  }
-  console.log(JSON.parse(JSON.stringify(obj))) // {}
-  ```
-- 不能解决循环引用问题 会直接报错
-  ```javascript
-  let obj = {
-    b: {
-      c: 2
-    }
-  }
-  obj.b.c = obj.b
-  console.log(JSON.parse(JSON.stringify(obj)))
-  ```
-- 正则的值会呗直接转成空对象
-
-## 遍历对象的方法
-
-- for in (包括自身和继承的所有可枚举属性)(不含 Symbol 属性)
-- Object.keys (包括自身的所有可枚举属性)(不含 Symbol 属性)
-- Object.getOwnPropertyNames(包括自身的所有属性)(不含 Symbol 属性)
-- Object.getOwnPropertySymbols(包括自身的所有 Symbol 属性)
-- Reflect.ownKeys (包括自身的所有属性)(包含 Symbol 属性)
 
 ## 继承的几种方式(详情见前端基础-继承)
 
