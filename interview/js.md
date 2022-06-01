@@ -26,19 +26,6 @@ function _new(claszz, ...args) {
 }
 ```
 
-## 对象的属性描述符
-
-- 数据属性
-  - configurable: 是否可修改属性描述符的配置、是否可删除
-  - enumberable: 是否可枚举
-  - writable: 是否可修改内存地址
-  - value
-- 访问器属性
-  - configurable
-  - enumberable
-  - get
-  - set
-
 ## JSON.parse(JSON.stringfy(obj))的弊端
 
 - 会忽略值为 undefined、symbol、函数的属性
@@ -69,6 +56,40 @@ function _new(claszz, ...args) {
 - Object.getOwnPropertyNames(包括自身的所有属性)(不含 Symbol 属性)
 - Object.getOwnPropertySymbols(包括自身的所有 Symbol 属性)
 - Reflect.ownKeys (包括自身的所有属性)(包含 Symbol 属性)
+
+## 对象的属性描述符
+
+- 数据属性
+  - configurable: 是否可修改属性描述符的配置、是否可删除
+  - enumberable: 是否可枚举
+  - writable: 是否可修改内存地址
+  - value
+- 访问器属性
+  - configurable
+  - enumberable
+  - get
+  - set
+
+## 箭头函数
+
+- 没有自己的 this 对象
+  - 普通函数内部 this 执行运行时所在的对象
+  - 箭头函数内部的 this 直接指向定义时上层作用域的 this
+  - 箭头函数的 this 在定义时就已经确定 后期即使通过 call 等也无法更改
+  - 其实在编译的时候 箭头函数的 this 都被被变成一个变量(\_this) \_this = 上层作用域的 this
+- 没有 arguments 参数 使用 rest 参数代替
+- 不能作为构造函数 不能被 new
+- 不能使用 yield 命令 就是不能当作 generator 函数
+
+## 事件模型
+
+- 事件发生的三个阶段 事件捕获阶段 + 事件处理阶段 + 事件冒泡阶段
+- 阻止冒泡：
+  - 标准：`e.stopPropagation()`
+  - IE：`window.event.cancelBubble = false`
+- 阻止捕获：
+  - 标准：`e.preventDefault()`
+  - IE：`window.event.returnValue`
 
 ## 原型链
 
@@ -102,16 +123,6 @@ function _new(claszz, ...args) {
 - 如果是 new 出来的 this 就指向那个 new 出来的对象
 - 事件中 this 执行触发这个事件的对象
 
-## 事件模型
-
-- 事件发生的三个阶段 事件捕获阶段 + 事件处理阶段 + 事件冒泡阶段
-- 阻止冒泡：
-  - 标准：`e.stopPropagation()`
-  - IE：`window.event.cancelBubble = false`
-- 阻止捕获：
-  - 标准：e.preventDefault()
-  - IE：`window.event.returnValue`
-
 ## 内存泄露
 
 - 介绍：不再需要使用的变量存在于内存中
@@ -126,17 +137,6 @@ function _new(claszz, ...args) {
   - radix 值必须介于 2-35 之间 默认 10 写 0 也表示 10
     - radix 如果不满足就返回 NaN
     - string 如果不满足对应进制的值 也返回 NaN
-
-## 箭头函数
-
-- 没有自己的 this 对象(
-  - 普通函数内部 this 执行运行时所在的对象
-  - 头内部的 this 直接指向定义时上层作用域的 this
-  - 说箭头函数的 this 在定义时就已经确定 后期即使通过 call 等也无法更改
-  - 其实在编译的时候 箭头函数的 this 都被被变成一个变量(\_this) \_this = 上层作用域的 this
-- 没有 arguments 参数 使用 rest 参数代替
-- 不能作为构造函数 不能被 new
-- 不能使用 yield 命令 就是不能当作 generator 函数
 
 ## caller 与 callee 的区别
 
