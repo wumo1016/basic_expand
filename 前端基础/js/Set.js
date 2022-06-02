@@ -1,16 +1,42 @@
-/* Set => add delete clear has size forEach keys valules entries */
-
-// forEach => 三个参数 value key(等于value) 当前Set集合
-// keys是valules方法的别名，与valules返回的结果一样
-
+/* ----------------------------------------- Set  ----------------------------------------- */
+/* 
+- Set函数: 接收一个数组 (或具有iterable接口的其他数据结构)
+- 属性
+  - size
+- 方法 
+  - 操作方法
+    - add
+    - delete
+    - has
+    - clear 
+  - 遍历方法
+    - keys 
+    - values 与keys方法的行为一致
+    - entries => [ 1, 1 ], [ 2, 2 ], [ 3, 3 ]
+    - forEach(value, key, 当前Set集合)
+    - for of
+*/
 ;(function () {
   const set = new Set([1, 2, 3, 1, 2, 3]) // 自动去重
-  for (const key of set.keys()) {
+  for (const key of set) {
     console.log(key) // 1 2 3
   }
 })
 
-/* 求数组的 交集 并集 差集 */
+/* ----------------------------------------- WeakSet ----------------------------------------- */
+/* 
+- 它的成员只能是对象
+- 它对对象的引用是弱引用 不影响垃圾回收
+- 方法
+  - add
+  - delete
+  - has
+- 注意
+  - 没有size和forEach属性或方法
+  - 不能被遍历 因为都是弱引用 随时都会消失
+*/
+
+/* ----------------------------------------- 交集 并集 差集 ----------------------------------------- */
 ;(function () {
   const arr1 = [1, 2, 3, 4]
   const arr2 = [3, 4, 5, 6]
