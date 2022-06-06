@@ -84,12 +84,12 @@ function _new(claszz, ...args) {
 ## 事件模型
 
 - 事件发生的三个阶段 事件捕获阶段 + 事件处理阶段 + 事件冒泡阶段
-- 阻止冒泡：
-  - 标准：`e.stopPropagation()`
-  - IE：`window.event.cancelBubble = false`
-- 阻止捕获：
-  - 标准：`e.preventDefault()`
-  - IE：`window.event.returnValue`
+- 阻止冒泡与捕获
+  - `e.stopPropagation()`
+  - `e.cancelBubble = true`
+- 阻止默认事件
+  - `e.preventDefault()`
+  - `return false`
 
 ## 原型链
 
