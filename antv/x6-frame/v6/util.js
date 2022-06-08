@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-05-17 14:50:28
+ * @LastEditTime: 2022-06-08 16:15:00
  */
 const canvas = document.createElement('canvas')
 
@@ -142,17 +142,19 @@ class X6FrameUtil {
   dealNodeSize(data) {
     const loop = (list, dep = 0) => {
       list.forEach(item => {
-        item.rawData = JSON.parse(JSON.stringify(item))
+        // item.rawData = JSON.parse(JSON.stringify(item))
         let textWidth
         if (item.children?.length) {
-          item.fontSize = 16
+          item.fontSize = 12
           textWidth = getTextWidth(item.name, item.fontSize)
           item.labels = [
             {
               text: item.name,
-              width: textWidth,
+              width: textWidth + _nodePadding[1] * 2,
               layoutOptions: {
-                'nodeLabels.placement': `INSIDE V_TOP H_CENTER`
+                'nodeLabels.placement': 'INSIDE H_CENTER V_TOP',
+                // 'nodeSize.minimum': (textWidth + _nodePadding[1] * 2, 20)
+                // 'nodeSize.constraints': 'PORT_LABELS'
               },
               height: _nodeHeight
             }
@@ -203,7 +205,7 @@ class X6FrameUtil {
                   refY2: 5,
                   textAnchor: 'middle',
                   textVerticalAnchor: 'top',
-                  fontSize: 16
+                  fontSize: 12
                 }
               : {
                   fontSize: 12

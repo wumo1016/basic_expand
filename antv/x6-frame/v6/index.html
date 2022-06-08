@@ -2,7 +2,7 @@
  * @Description: 统一初始化与再渲染数据
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-05-17 15:10:07
+ * @LastEditTime: 2022-06-08 16:12:27
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -122,19 +122,35 @@
 
     // frameUtil.initLayout(graph, mockData1)
 
-    const data = frameUtil.dealData(mockData)
+    const data = frameUtil.dealData(mockData2)
+
+    console.log(JSON.parse(JSON.stringify(data)));
     console.time('aa')
+    // elk.layout({
+    //   id: 'root',
+    //   children: data,
+    // },
+    //   {
+    //     layoutOptions: {
+    //       algorithm: 'layered',
+    //       // 'nodeLabels.placement': 'INSIDE H_CENTER V_TOP',
+    //       // 'nodeSize.constraints': 'MINIMUM_SIZE',
+    //       // 'nodeSize.options': 'MINIMUM_SIZE',
+    //     },
+    //     // layoutOptions: { algorithm: 'fixed' },
+    //     // layoutOptions: { algorithm: 'stress', 'elk.spacing.nodeNode': 10, 'elk.padding.nodeNode': 6 },
+    //   })
     elk.layout({
       id: 'root',
       children: data,
-    },
-      {
-        layoutOptions: { algorithm: 'layered' },
-        // layoutOptions: { algorithm: 'fixed' },
-        // layoutOptions: { algorithm: 'stress', 'elk.spacing.nodeNode': 20 },
-      })
+    }, {
+      layoutOptions: {
+        // 'nodeSize.constraints': 'NODE_LABELS'
+        // 'nodeSize.options': 'MINIMUM_SIZE',
+      }
+    })
       .then(res => {
-        console.log(res);
+        console.log(res.children);
         console.timeEnd('aa')
         frameUtil.initLayout(graph, {
           nodeList: res.children
