@@ -28,7 +28,28 @@
     色的烦烦烦烦烦烦烦烦烦烦烦烦烦烦烦方法
   </div>
   <script>
+    const obj = {
+      age: 18,
+      get name() {
+        this.age
+        console.log(this === obj)
+      },
+      getname() {
+        console.log(this === obj);
+      }
+    }
 
+    // obj.getname()
+
+    const proxy = new Proxy(obj, {
+      get(target, key, receiver) {
+        console.log(target, key);
+        // return Reflect.get(target, key, receiver)
+        return target[key]
+      }
+    })
+
+    proxy.getname()
   </script>
 </body>
 
