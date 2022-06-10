@@ -2,7 +2,7 @@
  * @Description: 统一初始化与再渲染数据
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-06-08 16:12:27
+ * @LastEditTime: 2022-06-09 13:48:48
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -124,8 +124,8 @@
 
     const data = frameUtil.dealData(mockData2)
 
-    console.log(JSON.parse(JSON.stringify(data)));
-    console.time('aa')
+    // console.log(JSON.parse(JSON.stringify(data)));
+    // console.time('aa')
     // elk.layout({
     //   id: 'root',
     //   children: data,
@@ -150,8 +150,8 @@
       }
     })
       .then(res => {
-        console.log(res.children);
-        console.timeEnd('aa')
+        // console.log(res.children);
+        // console.timeEnd('aa')
         frameUtil.initLayout(graph, {
           nodeList: res.children
         }, true)
@@ -159,9 +159,8 @@
 
     function test() {
       const data = frameUtil.getGraphJSON(graph)
-
-      console.log(data);
-      console.log(JSON.stringify(data));
+      // console.log(data);
+      // console.log(JSON.stringify(data));
     }
 
   </script>
