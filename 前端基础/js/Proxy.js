@@ -35,3 +35,31 @@
   console.log(proxy.call(null, 5, 6)) // 22
   console.log(proxy.apply(null, [7, 8])) // 30
 })
+
+/* ----------------------------------------- this问题 ----------------------------------------- */
+/* 
+- 对象内部函数的this指向 原对象 (所以需要使用Reflect.get去获取属性 这样this都会指向 proxy)
+- 属性访问器函数默认指向 proxy
+*/
+;(function () {
+  const obj = {
+    age: 18,
+    get name() {
+      console.log(this === proxy)
+    },
+    getname() {
+      console.log(this === proxy)
+    }
+  }
+
+  const proxy = new Proxy(obj, {
+    get(target, key, receiver) {
+      console.log(target, key)
+      // return Reflect.get(target, key, receiver)
+      return target[key]
+    }
+  })
+
+  proxy.name
+  proxy.getname()
+})()
