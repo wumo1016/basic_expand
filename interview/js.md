@@ -84,12 +84,12 @@ function _new(claszz, ...args) {
 ## 事件模型
 
 - 事件发生的三个阶段 事件捕获阶段 + 事件处理阶段 + 事件冒泡阶段
-- 阻止冒泡：
-  - 标准：`e.stopPropagation()`
-  - IE：`window.event.cancelBubble = false`
-- 阻止捕获：
-  - 标准：`e.preventDefault()`
-  - IE：`window.event.returnValue`
+- 阻止冒泡与捕获
+  - `e.stopPropagation()`
+  - `e.cancelBubble = true`
+- 阻止默认事件
+  - `e.preventDefault()`
+  - `return false`
 
 ## 原型链
 
@@ -102,7 +102,7 @@ function _new(claszz, ...args) {
 - 防抖：在指定时间内连续触发，只会执行一次，分为立即执行和非立即执行
   - 应用：搜素框输入 input 触发搜索、窗口变化后重新渲染图表等
 - 节流：在指定时间内连续触发，只在每个指定时间段内执行一次
-  - 应用：滚动加载更多、高频点击、表单重复提交
+  - 应用：滚动加载更多、高频点击
 
 ## 自执行函数
 

@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-26 14:02:33
+ * @LastEditTime: 2022-06-08 15:28:39
  */
 const mockData = [
   {
@@ -305,3 +305,30 @@ const mockData1 = {
     }
   ]
 }
+
+const mockData2 = [
+  {
+    id: '0',
+    type: 'element',
+    name: '圆珠笔',
+    children: [
+      {
+        id: '1',
+        type: 'element',
+        name: '测试新物料'
+      },
+      {
+        id: '2',
+        type: 'element',
+        name: '测试1111111111111111',
+        children: [
+          {
+            id: '2-1',
+            type: 'element',
+            name: '测试',
+          }
+        ]
+      },
+    ]
+  }
+]

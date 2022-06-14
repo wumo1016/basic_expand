@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1 {
+      width: 500px;
+      height: 500px;
+      border: 1px solid red;
+    }
+
+    .box2 {
+      width: 200px;
+      height: 200px;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- addEventListener的第三个参数
+    - useCapture
+      - true 事件在捕获阶段执行
+      - false(默认) 事件在冒泡阶段执行
+   -->
+
+  <div class="box1">
+    <div class="box2"></div>
+  </div>
+
+  <a class="baidu" href="https:www.baidu.com">百度</a>
+
+  <script>
+
+    /* 冒泡 */
+    // document.body.addEventListener('click', (e) => {
+    //   console.log('body click');
+    // })
+
+    // document.querySelector('.box1').addEventListener('click', () => {
+    //   console.log('box1 click');
+    // })
+
+    // document.querySelector('.box2').addEventListener('click', (e) => {
+    //   console.log('box2 click');
+    //   // e.stopPropagation()
+    //   e.cancelBubble = true
+    // })
+
+    /* 捕获 */
+    // document.body.addEventListener('click', (e) => {
+    //   console.log('body click');
+    //   e.stopPropagation()
+    //   // e.cancelBubble = true
+    // }, true)
+
+    // document.querySelector('.box1').addEventListener('click', () => {
+    //   console.log('box1 click');
+    // }, true)
+
+    // document.querySelector('.box2').addEventListener('click', (e) => {
+    //   console.log('box2 click');
+    // })
+
+
+    /* 阻止默认事件 */
+    document.querySelector('.baidu').addEventListener('click', (e) => {
+      console.log('a', e.cancelable);
+      e.preventDefault()
+    })
+
+  </script>
+
+</body>
+
+</html>

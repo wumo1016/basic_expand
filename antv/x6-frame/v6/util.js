@@ -2,7 +2,7 @@
  * @Description:
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-05-17 14:50:28
+ * @LastEditTime: 2022-06-09 14:01:34
  */
 const canvas = document.createElement('canvas')
 
@@ -142,17 +142,19 @@ class X6FrameUtil {
   dealNodeSize(data) {
     const loop = (list, dep = 0) => {
       list.forEach(item => {
-        item.rawData = JSON.parse(JSON.stringify(item))
+        // item.rawData = JSON.parse(JSON.stringify(item))
         let textWidth
         if (item.children?.length) {
-          item.fontSize = 16
+          item.fontSize = 12
           textWidth = getTextWidth(item.name, item.fontSize)
           item.labels = [
             {
               text: item.name,
-              width: textWidth,
+              width: textWidth + _nodePadding[1] * 2,
               layoutOptions: {
-                'nodeLabels.placement': `INSIDE V_TOP H_CENTER`
+                'nodeLabels.placement': 'INSIDE H_CENTER V_TOP'
+                // 'nodeSize.minimum': (textWidth + _nodePadding[1] * 2, 20)
+                // 'nodeSize.constraints': 'PORT_LABELS'
               },
               height: _nodeHeight
             }
@@ -203,7 +205,7 @@ class X6FrameUtil {
                   refY2: 5,
                   textAnchor: 'middle',
                   textVerticalAnchor: 'top',
-                  fontSize: 16
+                  fontSize: 12
                 }
               : {
                   fontSize: 12
@@ -568,47 +570,49 @@ class X6FrameUtil {
    * @param {*} graph
    */
   getGraphJSON(graph) {
-    const cellList = graph.toJSON().cells
-    const cellMap = {}
-    const [nodeList, egdeList] = [[], []]
-    cellList.map(cell => {
-      if (cell.shape === 'edge') {
-        egdeList.push({
-          source: cell.source,
-          target: cell.target,
-          lineType: '1'
-        })
-      } else {
-        cellMap[cell.id] = cell
-        if (!cell.parent) {
-          nodeList.push(cell)
-        }
-      }
-    })
-    const loop = list => {
-      list = list.map(item => {
-        if (item.children?.length) {
-          item.children = item.children.map(id => cellMap[id])
-          item.children = loop(item.children)
-        }
-        return {
-          ...item.data.rawData,
-          children: item.children || [],
-          x6Data: {
-            ...item.position,
-            ...item.size,
-            _dep: item.data._dep,
-            fontSize: item.data.fontSize
+    const cellMap = new Map(),
+      nodeList = []
+    const formatNumber = value =>
+      value.toFixed(2) -
+      0(graph.toJSON().cells || []).map(cell => {
+        if (cell.shape === 'rect') {
+          const {
+            id,
+            parent: parentId,
+            position: { x, y },
+            size: { width, height },
+            children = []
+          } = cell
+          const obj = {
+            id,
+            parentId,
+            x: formatNumber(x),
+            y: formatNumber(y),
+            width: formatNumber(width),
+            height: formatNumber(height),
+            children
+          }
+          if (cell.parent) {
+            cellMap.set(
+              cell.parent,
+              (cellMap.get(cell.parent) || []).concat(obj)
+            )
+          } else {
+            nodeList.push(obj)
           }
         }
       })
-      return list
+    const loop = list => {
+      list.forEach(item => {
+        if (item.children?.length) {
+          item.children = cellMap.get(item.id) || []
+          loop(item.children)
+        }
+      })
     }
-
-    return {
-      nodeList: loop(nodeList),
-      egdeList
-    }
+    loop(nodeList)
+    cellMap.clear()
+    return nodeList
   }
 }
 /**

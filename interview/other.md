@@ -105,11 +105,12 @@
   - loadApp => bootstrap mount unmount
   - activeWhen
   - customProps
-- reroute 卸载应用 - 加载应用 - 挂载应用
-- start => reroute
+- start => reroute 卸载应用 - 加载应用 - 挂载应用
 - hashchange popstate => reroute
 - 重写 pushstate replacestate => reroute
 - 重写 window.addEventListener window.removeEventListener
+  - 收集了子应用内监听的原生事件
+  - 在子应用 load => bootstrap 之后执行
 
 ## qiankun 原理
 
