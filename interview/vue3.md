@@ -10,11 +10,10 @@
 
 ## effect 的实现原理
 
-- new ReactiveEffect()
-  - activeEffect
-  - run
-  - stop
-- 执行 run
+- 做了什么
+  - new ReactiveEffect(fn)
+- 返回值
+  - effect.run
 
 ## 响应式原理
 
