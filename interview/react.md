@@ -1,4 +1,4 @@
-## react 组件如何通讯
+## 组件如何通讯
 
 ## jsx 本质是什么
 
@@ -8,8 +8,24 @@
 
 ## 描述 redux 单相数据流
 
-## setState 
+## setState
 
 - 不可变值
-- 可能是异步更新
-- 可能会被合并
+- 同步或异步
+- 覆盖或合并
+
+## 生命周期
+
+- 挂载时
+  - constructor
+  - render
+  - 更新 dom 和 refs
+  - componentDidMount
+- 更新时
+  - New Props、setState、forceUpdate
+  - shouldComponentUpdate
+  - render
+  - 更新 dom 和 refs
+  - componentDidUpdate
+- 卸载时
+  - componentWillUnMount
