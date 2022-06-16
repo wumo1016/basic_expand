@@ -1,3 +1,16 @@
+## vue3 与 vue2 的区别
+
+- 源码结构
+- 全局采用 TS 编写
+- 数据劫持原理
+- composition API
+- 新的内置组件
+  - teleport: 穿梭组件
+    - 将组件挂载到指定的选择器上
+  - suspense: 异步组件
+    - setup 函数返回一个 Promise1
+- 自定义渲染器
+
 ## reactive 的实现原理
 
 - 响应式的原理
