@@ -11,18 +11,32 @@
   - 结构清晰 降低耦合
   - 复用性高 可维护性高
 
+## commomjs 与 esm 的区别
+
+- 值的加载(针对于常量)
+  - commomjs: 输出的是一个值的拷贝
+  - esm: 输出的是值的引用
+- 加载时机
+  - commomjs: 是运行时加载
+  - esm: 是编译时输出接口
+- 循环加载
+  - commomjs: 遇到循环加载时 输出的是当前已经执行的那部分值
+  - esm: 输出最终的值
+- this
+  - commomjs: 执行当前模块
+  - esm: undefined
+
 ## 前端常见优化
 
-- 开发阶段
-  - webpack 配置多进程打包
-  - 打包时缩小文件搜索范围
-- 资源加载阶段
-  - dns-prefetch
+- 资源加载
+
   - 减少 http 请求
   - 合理设置缓存
   - 资源合并与压缩
   - 使用 cdn 加速
-- 页面渲染阶段
+  - dns-prefetch
+
+- 开发阶段
   - css 在上 js 在下
   - 加载 css 时使用 link 而不是@import
   - 不影响显示的 js 文件使用 defer 或 async 异步加载
@@ -130,3 +144,18 @@
   - shadow DOM
 - 全局状态管理
   - 自己定义一个全局状态 进行事件订阅派发
+
+## webpack 常见 loader
+
+- 样式：style-loader、css-loader、less-loader、sass-loader 等
+- 文件：raw-loader、file-loader 、url-loader 等
+- 编译：babel-loader 、ts-loader 等
+
+## 如果你接到一个项目如何从头开始的
+
+- 需求确认
+  - 确认需求，要知道做什么，做成什么样
+  - 确实资源，人力资源和时间资源
+- 功能分析: 有多复杂 已决定后面的技术选型
+- 技术选型: 选定技术框架
+- 设计实现: 搭建基础框架、按功能去实现
