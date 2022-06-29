@@ -187,3 +187,8 @@ function _new(claszz, ...args) {
 - 寄生式组合继承
   - 原理: 使用冒充继承和原型式继承
   - 优点: 只调用一次父类构造函数
+
+## mouseover 和 mouseenter 的区别
+
+- mouseenter 和 mouseleave 不存在事件冒泡
+- mouseover 和 mouseout 存在事件冒泡
