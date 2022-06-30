@@ -21,16 +21,6 @@
 
 ## effect 的实现原理
 
-- 做了什么
-  - new ReactiveEffect(fn)
-- 返回值
-  - effect.run
-
-## 响应式原理
-
-- track => trackEffects
-- trigger => triggerEffects
-
 ## ref 的实现原理
 
 ## computed 的实现原理
