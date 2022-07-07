@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <button onclick="test1()">防抖立即执行版</button>
+    <button onclick="test2()">防抖非立即执行版</button>
+  </div>
+  <div>
+    <button onclick="test3()">节流定时器立即执行版</button>
+    <button onclick="test4()">节流定时器非立即执行版</button>
+  </div>
+  <div>
+    <button onclick="test5()">节流定时器时间戳版</button>
+  </div>
+
+  <script>
+    /* ----------------------------------------- 防抖 ----------------------------------------- */
+    /*
+    - 在指定时间连续调用某个函数，只执行一次
+    - 分为立即指定版和非立即执行版
+    - 应用: 搜素框输入 input 触发搜索、窗口变化后重新渲染图表等
+    */
+    function debounce(fn, wait = 1000, immediate = false) {
+      let T
+      return function (...args) {
+        if (T) {
+          clearTimeout(T)
+        } else if (immediate) {
+          fn.apply(this, args)
+        }
+        T = setTimeout(() => {
+          T = null
+          if (!immediate) fn.apply(this, args)
+        }, wait)
+      }
+    }
+    var test1 = debounce(() => console.log(123), 1000, true)
+    var test2 = debounce(() => console.log(123))
+
+    /* ----------------------------------------- 节流 ----------------------------------------- */
+    /*
+    - 连续调用某个函数，只在每个指定时间段内执行一次
+    - 分为时间戳版、定时器版、时间戳与定时器结合版
+    */
+
+    // 定时器版
+    function throttle1(fn, wait = 1000, immediate = false) {
+      let T
+      return function (...args) {
+        if (!T) {
+          if (immediate) {
+            fn.apply(this, args)
+          }
+          T = setTimeout(() => {
+            T = null
+            if (!immediate) fn.apply(this, args)
+          }, wait)
+        }
+      }
+    }
+
+    var test3 = throttle1(() => console.log(123), 1000, true)
+    var test4 = throttle1(() => console.log(123), 1000, false)
+
+    // 时间戳版
+    function throttle2(fn, wait = 1000) {
+      let time = Date.now()
+      return function (...args) {
+        const val = Date.now() - time
+        if (val >= wait) {
+          time = Date.now()
+          fn.apply(this, args)
+        }
+      }
+    }
+
+    var test5 = throttle2(() => console.log(123))
+
+
+  </script>
+</body>
+
+</html>
