@@ -32,7 +32,7 @@
     - 设备: 光纤、同轴电缆、网线(超过 100m 基本开始损耗)、中继器(连接两根网线)、集线器(相当于多口中继器)
       - 通过中继器传输数据是通过广播将数据发给每个设备，需要的自行接收
 
-## TCP/IP (四层)模型(https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4@main/%E7%BD%91%E7%BB%9C/tcpip%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B.drawio.png)
+## [TCP/IP (四层)模型](https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4@main/%E7%BD%91%E7%BB%9C/tcpip%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B.drawio.png)
 
 - 应用层
   - 专注为用户提供功能，比如 HTTP、FTP、Telnet、DNS、SMTP
@@ -53,7 +53,7 @@
       - 主机号: 用于表示同一子网的不同主机
         - 由 IP 地址与子网掩码取反进行与运算获取
     - 网络号和主机号需要通过子网掩码算出
-    - IP 地址计算器 `https://ipv4calc.bmcx.com/`
+    - [IP 地址计算器](https://ipv4calc.bmcx.com/)
 - 网络接口层
   - 在 IP 头部前面再加上 MAC 头部 并封装成数据帧发送到网络上
   - 在以太网中 往往需要通过 MAC 来标识设备
@@ -82,21 +82,3 @@
   - IP 协议
   - ARP 协议
     - 地址转化协议: 主要是将 ip 地址转化成 mac 地址
-
-## TCP 协议
-
-- 为什么需要三次握手
-  - 因为需要确认是否可以双向通信
-  - 过程
-    - A => 我可以给你打电话嘛 => B
-    - B => 可以 => A
-    - B => 我可以给你打电话嘛 => A
-    - A => 可以 => B
-  - 中间两次可以合并
-- 为什么需要四次挥手
-  - 过程
-    - A => 我们分开吧 => B
-    - B => 收到 => A
-    - B => 我们分开吧 => A
-    - A => 可以 => B
-  - 由于 B 中间还需要处理一些事情 所以不能合并
