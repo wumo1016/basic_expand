@@ -55,7 +55,7 @@ class FishMapUtil {
       x: root.x - this.getRootWidth(),
       y: root.y,
       id: tailId,
-      name: '',
+      name: root.name,
       _rootTail: true
     }
     this.nodes.push(root, rootTailNode)
@@ -330,31 +330,44 @@ class FishMapUtil {
       draw(ctx, group) {
         const { _rootHead, _rootTail } = ctx
         if (_rootHead) {
-          const width = 170
-          const height = 150
-          const halfHeight = height / 2
+          // const width = 170
+          // const height = 150
+          // const halfHeight = height / 2
           // 指引线  rx ry x-axis-rotation large-arc-flag sweep-flag x y
           // x半径 y半径 旋转角度 大弧/小狐 顺时针/逆时针 终点x 终点y
-          group.addShape('path', {
+          // group.addShape('path', {
+          //   attrs: {
+          //     path: [
+          //       ['M', 0, 0],
+          //       ['L', 0, -halfHeight],
+          //       ['M', 0, -halfHeight],
+          //       ['A', width, halfHeight, 0, 0, 1, 0, halfHeight],
+          //       ['M', 0, halfHeight],
+          //       ['L', 0, 0]
+          //     ],
+          //     stroke: '#424f58',
+          //     fill: '#424f58',
+          //     lineWidth: 2
+          //   },
+          //   draggable: true
+          // })
+          const width = getStringWidth(ctx.name) + 80
+          const height = width
+          group.addShape('image', {
             attrs: {
-              path: [
-                ['M', 0, 0],
-                ['L', 0, -halfHeight],
-                ['M', 0, -halfHeight],
-                ['A', width, halfHeight, 0, 0, 1, 0, halfHeight],
-                ['M', 0, halfHeight],
-                ['L', 0, 0]
-              ],
-              stroke: '#424f58',
-              fill: '#424f58',
-              lineWidth: 2
+              x: 0,
+              y: -height / 2,
+              img: './fish1.svg',
+              width,
+              height
             },
-            draggable: true
+            // must be assigned in G6 3.3 and later versions. it can be any value you want
+            name: 'image-shape'
           })
           group.addShape('text', {
             attrs: {
               x: 10,
-              y: 0,
+              y: height / 5,
               text: ctx.name,
               textAlign: 'left',
               textBaseline: 'middle',
@@ -364,22 +377,33 @@ class FishMapUtil {
             draggable: true
           })
         } else if (_rootTail) {
-          const width = 30
-          const height = 8
-          const path = group.addShape('path', {
+          const height = ((getStringWidth(ctx.name) + 80) / 5) * 4
+          const width = (height / 11) * 7
+          // const path = group.addShape('path', {
+          //   attrs: {
+          //     path: [
+          //       ['M', 0, 0],
+          //       ['A', width, height, 45, 1, 0, -width * 2, 0],
+          //       ['M', 0, 0],
+          //       ['A', width, height, -45, 0, 1, -width * 2, 0]
+          //     ],
+          //     stroke: '#424f58',
+          //     fill: '#424f58',
+          //     lineWidth: 2
+          //   }
+          // })
+          // return path
+          group.addShape('image', {
             attrs: {
-              path: [
-                ['M', 0, 0],
-                ['A', width, height, 45, 1, 0, -width * 2, 0],
-                ['M', 0, 0],
-                ['A', width, height, -45, 0, 1, -width * 2, 0]
-              ],
-              stroke: '#424f58',
-              fill: '#424f58',
-              lineWidth: 2
-            }
+              x: 0,
+              y: -height / 2,
+              img: './fish2.svg',
+              width,
+              height
+            },
+            // must be assigned in G6 3.3 and later versions. it can be any value you want
+            name: 'image-shape'
           })
-          return path
         } else {
           const subGroup = group.addGroup({
             id: 'fish-node-group'

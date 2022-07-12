@@ -2,7 +2,7 @@
  * @Description: 代码重构
  * @Author: wyb
  * @LastEditors: wyb
- * @LastEditTime: 2022-04-17 19:12:35
+ * @LastEditTime: 2022-07-12 17:06:04
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="../g6.min.js"></script>
+  <script src="../g6(4.2.7).min.js"></script>
   <style>
     html,
     body {
@@ -40,7 +40,7 @@
   <div id="container" @click="canvasClick"></div>
 
   <script src="./mock.js"></script>
-  <script src="./utils.js"></script> -->
+  <script src="./utils.js"></script>
 
   <script>
     const fishUtil = new FishMapUtil()
@@ -58,7 +58,8 @@
           {
             type: 'drag-canvas',
             allowDragOnItem: true
-          }
+          },
+          'zoom-canvas'
         ]
       },
       defaultEdge: {
