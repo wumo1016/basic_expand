@@ -12,7 +12,7 @@ const ROOT_F_HSpace = 50
 const ROOT_F_VSpace = ROOT_F_HSpace * Math.sqrt(3)
 const TILT_NO_CHILD_WIDTH = 35 // 倾斜线没有子节点时的宽度
 const MAIN_Space = 40 // 主线间隔
-const lineColor = '#424f58'
+const lineColor = 'rgb(143, 143, 143)'
 const isStraight = dep => !(dep % 2) // 是否是直节点
 const canvas = document.createElement('canvas')
 
