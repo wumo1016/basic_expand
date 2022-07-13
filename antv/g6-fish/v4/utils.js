@@ -16,6 +16,19 @@ const lineColor = 'rgb(143, 143, 143)'
 const isStraight = dep => !(dep % 2) // 是否是直节点
 const canvas = document.createElement('canvas')
 
+const ColorList = [
+  '#83da2b',
+  '#699cff',
+  '#a188ff',
+  '#35b58f',
+  '#ff6991',
+  '#e99d63',
+  '#dabe2b',
+  '#4cd9ef',
+  '#d86bd8',
+  '#e37171'
+]
+
 class FishMapUtil {
   /**
    * @Author: wyb
@@ -79,6 +92,7 @@ class FishMapUtil {
   splitData(root) {
     ;(root.children || []).forEach((item, index) => {
       item._rootChild = true
+      item._bgColor = ColorList[index % 10]
       if (index % 2) {
         this.bottomData.push(item)
       } else {
@@ -107,21 +121,26 @@ class FishMapUtil {
    * @param {*} isTop
    */
   dealNodeSize(data, root, nodes, isTop = true) {
-    const loop = (list, dep = 1) => {
+    const loop = (list, dep = 1, parent) => {
       list.forEach(item => {
+        item._isTop = isTop
+        /* 设置节点样式 */
+        if (parent) {
+          item._bgColor = parent._bgColor
+        }
         /* 节点深度 */
         item._dep = dep
         /* 设置旋转角度、文本偏移 */
         if (isTop) {
           if (isStraight(dep)) {
             item._rotate = 0
-            item._textOffsetX = 20
+            item._textOffsetX = 30
           } else {
             item._rotate = 60
-            item._textOffsetX = 10
+            item._textOffsetX = 20
           }
           if (item._rootChild) {
-            item._textOffsetX = 20
+            item._textOffsetX = 30
           }
         } else {
           if (isStraight(dep)) {
@@ -138,7 +157,7 @@ class FishMapUtil {
         }
         /* 递归 */
         if (item.children?.length) {
-          loop(item.children, dep + 1)
+          loop(item.children, dep + 1, item)
         }
         /* 设置宽高 */
         if (item.children?.length) {
@@ -259,9 +278,9 @@ class FishMapUtil {
         let _lineLong
         if (isStraight(item._dep)) {
           if (isTop) {
-            item._lineOffset = -10
+            item._lineOffset = -6
           } else {
-            item._lineOffset = 3
+            item._lineOffset = 6
           }
           if (last) {
             _lineLong = item.x - last.x + 20
@@ -271,15 +290,15 @@ class FishMapUtil {
         } else {
           if (isTop) {
             if (item._rootChild) {
-              item._lineOffset = -10
+              item._lineOffset = -8
             } else {
-              item._lineOffset = 2
+              item._lineOffset = 6
             }
           } else {
             if (item._rootChild) {
-              item._lineOffset = 3
+              item._lineOffset = 5
             } else {
-              item._lineOffset = -10
+              item._lineOffset = -6
             }
           }
           const childWidth = item.x - last?.x || 0
@@ -328,7 +347,7 @@ class FishMapUtil {
   registerNode(name) {
     G6.registerNode(name, {
       draw(ctx, group) {
-        const { _rootHead, _rootTail } = ctx
+        const { _rootHead, _rootTail, _bgColor, _rootChild } = ctx
         if (_rootHead) {
           // const width = 170
           // const height = 150
@@ -351,7 +370,7 @@ class FishMapUtil {
           //   },
           //   draggable: true
           // })
-          const width = getStringWidth(ctx.name) + 80
+          const width = getStringWidth(ctx.name) + 120
           const height = width
           group.addShape('image', {
             attrs: {
@@ -377,7 +396,7 @@ class FishMapUtil {
             draggable: true
           })
         } else if (_rootTail) {
-          const height = ((getStringWidth(ctx.name) + 80) / 5) * 4
+          const height = ((getStringWidth(ctx.name) + 120) / 5) * 4
           const width = (height / 11) * 7
           // const path = group.addShape('path', {
           //   attrs: {
@@ -408,28 +427,49 @@ class FishMapUtil {
           const subGroup = group.addGroup({
             id: 'fish-node-group'
           })
+          // 矩形边框
+          const rect = subGroup.addShape('rect', {
+            attrs: {
+              name: 'key-rect',
+              fill: _bgColor,
+              radius: 0,
+              cursor: 'pointer',
+              fillOpacity: _rootChild ? 1 : 0.1
+            },
+            name: 'key-rect',
+            draggable: true
+          })
           // 文本
-          subGroup.addShape('text', {
+          const text = subGroup.addShape('text', {
             attrs: {
               x: -ctx._textOffsetX,
               y: -ctx._textOffsetY || 0,
               text: ctx.name,
               textAlign: 'right',
               textBaseline: 'middle',
-              fill: '#000',
+              fill: _rootChild ? '#fff' : '#000',
               fontSize: 12
             },
             draggable: true
           })
+          const textBox = text.getBBox()
+          const textPadding = [4, 6]
+          rect.attr({
+            x: -(ctx._textOffsetX + textBox.width + textPadding[1]),
+            y: -(ctx._textOffsetY || 0) - (textBox.height / 2 + textPadding[0]),
+            width: textBox.width + textPadding[1] * 2,
+            height: textBox.height + textPadding[0] * 2
+          })
           // 指引线
+          const _lineY = 10
           subGroup.addShape('path', {
             attrs: {
-              startArrow: {
-                path: 'M 0,0 L 4,2 L 4,-2 Z'
-              },
+              // startArrow: {
+              //   path: 'M 0,0 L 4,2 L 4,-2 Z'
+              // },
               path: [
-                ['M', ctx._lineOffset, 10],
-                ['L', -ctx._lineLong, 10]
+                ['M', ctx._lineOffset, _lineY],
+                ['L', -ctx._lineLong, _lineY]
               ],
               stroke: lineColor,
               lineWidth: getLineWidth(ctx._dep)
@@ -462,7 +502,7 @@ function getStringWidth(str, fontSize = 12) {
  * @param {*} defaultWidth
  */
 function getNodeWidth(node, fontSize = 12, defaultWidth = NODE_WIDTH) {
-  return Math.max(getStringWidth(node.name, fontSize) + 20, defaultWidth)
+  return Math.max(getStringWidth(node.name, fontSize) + 20, defaultWidth) + 30
 }
 /**
  * @Author: wyb
