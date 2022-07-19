@@ -91,18 +91,18 @@ function _new(claszz, ...args) {
   - `e.preventDefault()`
   - `return false`
 
-## 原型链
-
-- 函数都有一个 prototype 属性 指向原型对象
-- 对象都有一个`__proto__`属性 指向构造函数原型对象
-- 最顶端就是 Object.prototype.`__proto__` 就是 null
-
 ## 防抖和节流
 
 - 防抖：在指定时间内连续触发，只会执行一次，分为立即执行和非立即执行
   - 应用：搜素框输入 input 触发搜索、窗口变化后重新渲染图表等
 - 节流：在指定时间内连续触发，只在每个指定时间段内执行一次
   - 应用：滚动加载更多、高频点击
+
+## 原型链
+
+- 函数都有一个 prototype 属性 指向原型对象
+- 对象都有一个`__proto__`属性 指向构造函数原型对象
+- 最顶端就是 Object.prototype.`__proto__` 就是 null
 
 ## 自执行函数
 
