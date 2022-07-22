@@ -1,3 +1,52 @@
+## pnpm 的优点
+
+- 解决体积过大的问题
+
+## single-spa 原理
+
+- registerApplication
+  - name
+  - loadApp => bootstrap mount unmount
+  - activeWhen
+  - customProps
+- start => reroute 卸载应用 - 加载应用 - 挂载应用
+- hashchange popstate => reroute
+- 重写 pushstate replacestate => reroute
+- 重写 window.addEventListener window.removeEventListener
+  - 收集了子应用内监听的原生事件
+  - 在子应用 load => bootstrap 之后执行
+
+## qiankun 原理
+
+- 预加载
+  - 可以通过 prefetch 配置加载模式
+    - true 在第一次子应用挂载后加载
+    - all 在 start 立即加载所有自已子应用
+    - array 只加载在 array 中的子应用 在第一次子应用挂载后加载
+    - function 返回两个数组 一个是在子应用挂载后加载的子应用 和 立即加载的子应用
+  - 原理
+    - 通过 import-html-entry 拿到所有 script 和 style
+    - 然后通过 fetch 请求 并把请求结果缓存起来
+- js 隔离
+  - 通过快照沙箱和代理沙箱 然后通过函数自执行的方式将 proxy 传进去 实现对 window 的隔离
+- 样式隔离
+  - 实验性的样式隔离 在所有选择器前面加上的一个前缀 div[data-qiankun="appName"] 因为最终的子应用外面或包裹带有这样一个属性的 div
+  - shadow DOM
+- 全局状态管理
+  - 自己定义一个全局状态 进行事件订阅派发
+
+## 前端常见优化
+
+- 减少 http 请求 资源合并
+- 资源压缩
+- 合理设置缓存
+- 使用 cdn 加速
+- dns-prefetch
+- css 在上 js 在下
+- 加载 css 时使用 link 而不是@import
+- 不影响显示的 js 文件使用 defer 或 async 异步加载
+- 图片懒加载
+
 ## 模块化的区别以及好处
 
 - 分类
@@ -25,18 +74,6 @@
 - this
   - commomjs: 执行当前模块
   - esm: undefined
-
-## 前端常见优化
-
-- 减少 http 请求 资源合并
-- 资源压缩
-- 合理设置缓存
-- 使用 cdn 加速
-- dns-prefetch
-- css 在上 js 在下
-- 加载 css 时使用 link 而不是@import
-- 不影响显示的 js 文件使用 defer 或 async 异步加载
-- 图片懒加载
 
 ## git 常用操作
 
@@ -103,43 +140,6 @@
   - `docker start name/ID` 启动容器
   - `docker stop name/ID` 停止容器
   - `docker rm name/ID` 删除容器
-
-## pnpm 的优点
-
-- 解决体积过大的问题
-
-## single-spa 原理
-
-- registerApplication
-  - name
-  - loadApp => bootstrap mount unmount
-  - activeWhen
-  - customProps
-- start => reroute 卸载应用 - 加载应用 - 挂载应用
-- hashchange popstate => reroute
-- 重写 pushstate replacestate => reroute
-- 重写 window.addEventListener window.removeEventListener
-  - 收集了子应用内监听的原生事件
-  - 在子应用 load => bootstrap 之后执行
-
-## qiankun 原理
-
-- 预加载
-  - 可以通过 prefetch 配置加载模式
-    - true 在第一次子应用挂载后加载
-    - all 在 start 立即加载所有自已子应用
-    - array 只加载在 array 中的子应用 在第一次子应用挂载后加载
-    - function 返回两个数组 一个是在子应用挂载后加载的子应用 和 立即加载的子应用
-  - 原理
-    - 通过 import-html-entry 拿到所有 script 和 style
-    - 然后通过 fetch 请求 并把请求结果缓存起来
-- js 隔离
-  - 通过快照沙箱和代理沙箱 然后通过函数自执行的方式将 proxy 传进去 实现对 window 的隔离
-- 样式隔离
-  - 实验性的样式隔离 在所有选择器前面加上的一个前缀 div[data-qiankun="appName"] 因为最终的子应用外面或包裹带有这样一个属性的 div
-  - shadow DOM
-- 全局状态管理
-  - 自己定义一个全局状态 进行事件订阅派发
 
 ## webpack 常见 loader
 
