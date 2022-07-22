@@ -72,7 +72,7 @@
   - commomjs: 遇到循环加载时 输出的是当前已经执行的那部分值
   - esm: 输出最终的值
 - this
-  - commomjs: 执行当前模块
+  - commomjs: 当前模块
   - esm: undefined
 
 ## git 常用操作

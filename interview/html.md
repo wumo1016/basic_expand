@@ -47,3 +47,10 @@
   - `<meta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript" />`
 - 图片都添加 alt
 - 少用 iframe
+
+## js 延迟加载的几种方式
+
+- 将 js 脚本放在文档底部
+- 添加 defer 属性
+- 添加 async 属性
+- 动态创建 script 的方式

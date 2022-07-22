@@ -107,9 +107,43 @@
 
 ## 手写 ajax
 
-- readyState
-  - 0：请求未初始化
-  - 1：服务器链接已建立
-  - 2：请求已接收
-  - 3：请求处理中
-  - 4：请求已完成 且响应已经就绪
+- 1.创建 Ajax 对象
+
+  ```js
+  const xhr = new XMLHttpRequest()
+  ```
+
+- 2.配置请求地址方法等
+
+  ```js
+  xhr.open('get', 'index.xml', true)
+  ```
+
+- 3.发送请求
+
+  ```js
+  xhr.send(null)
+  ```
+
+- 4.监听请求，接受响应
+  - readyState
+    - 0：请求未初始化
+    - 1：服务器链接已建立
+    - 2：请求已接收
+    - 3：请求处理中
+    - 4：请求已完成 且响应已经就绪
+  ```js
+  xhr.onreadysatechange = function () {
+    if ((xhr.readyState == 4 && xhr.status == 200) || xhr.status == 304)
+      console.log(xhr.responseXML)
+  }
+  ```
+
+## 内存泄露
+
+- 介绍：不再需要使用的变量存在于内存中
+- 哪些操作会导致内存泄漏
+  - 意外的全局变量：`a = 123`
+  - 闭包使用不当
+  - 被遗忘的计时器
+  - DOM的引用: 如果我们获取了DOM的引用，而后面这个元素被删除，但这个引用如果一直在，那它也无法被回收
