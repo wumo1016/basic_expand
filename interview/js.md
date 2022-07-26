@@ -185,3 +185,28 @@ function _new(claszz, ...args) {
 
 - mouseenter 和 mouseleave 不存在事件冒泡
 - mouseover 和 mouseout 存在事件冒泡
+
+## instanceof 的原理
+
+- 判断对象的类型 其内部机制就是通过判断对象的原型链中能否找到类型的 prototype
+- 实现 instanceof
+  - 首先获取类型的原型
+  - 然后获取对象的原型
+  - 然后循环判读 对象的原型是否等于类型的原型 直到对象原型为 null
+  ```js
+  function myinstanceof(left, right) {
+    const proto = right.prototype
+    const l = left.__proto__
+    while (l) {
+      if (l === proto) return true
+      l = l.__proto__
+    }
+    return false
+  }
+  ```
+
+## {}和[]的 valueOf 和 toString 的结果
+
+- {} 的 valueOf 结果为 {} toString 的结果为 '[object Object]'
+- [] 的 valueOf 结果为 [] toString 的结果为 ''
+- 数值运算中优先调用 valueOf 字符串优先调用的是 toString
