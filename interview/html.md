@@ -51,6 +51,5 @@
 ## js 延迟加载的几种方式
 
 - 将 js 脚本放在文档底部
-- 添加 defer 属性
-- 添加 async 属性
+- 添加 defer、async 属性
 - 动态创建 script 的方式
