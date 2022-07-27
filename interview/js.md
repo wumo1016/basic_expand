@@ -210,3 +210,28 @@ function _new(claszz, ...args) {
 - {} 的 valueOf 结果为 {} toString 的结果为 '[object Object]'
 - [] 的 valueOf 结果为 [] toString 的结果为 ''
 - 数值运算中优先调用 valueOf 字符串优先调用的是 toString
+
+## 判断数据类型
+
+- Object.prototype.toString.call(target)
+  - [object Object/Array/Function]
+- typeof
+  - 判断基本数据类型
+  - 引用类型都返回 object (包括 null)
+- instanceof
+  - 用于引用类型的检测
+- constructor
+  - ("xx")/([])/(function(){}).constructor === String/Array/Function
+  - null、undefined 等无法检测
+  - 而且 constructor 可能会被篡改
+
+## 简单请求与非简单请求
+
+- 简单请求
+  - 需同时满足请求方法和请求头两个条件
+    - 请求方法: HEAD、GET、POST
+    - 请求头
+      - 只能是: Accept/Accept-Language/Conent-Language/Content-Type
+      - Content-Type 只能是: text/plain、multipart/form-data 或 application/x-www-form-urlencoded
+- 非简单请求
+  - 会先发送一个预检请求 OPTIONS
