@@ -235,3 +235,37 @@ function _new(claszz, ...args) {
       - Content-Type 只能是: text/plain、multipart/form-data、 application/x-www-form-urlencoded
 - 非简单请求
   - 会先发送一个预检请求 OPTIONS
+
+## fetch
+
+- 优点
+  - 原生支持
+  - 基于 Promise 使用方便
+- 缺点
+
+  - 只对网络请求出错报错，其他的 400、500 等都当作成功的请求，需要自己封装请求
+  - 默认不会携带 cookie 需要配置
+  - 无法直接取消，需要借助 AbortController 实现
+
+  ```javascript
+  var controller = new AbortController()
+  var signal = controller.signal
+  // 将signal传入fetch的第二个参数
+  fetch(url, { signal })
+    .then(function (response) {
+      // ...
+    })
+    .catch(function (err) {
+      if (err.name === 'AbortError') {
+        console.log('Fetch was aborted')
+      } else {
+        console.error('Oops!', err)
+      }
+    })
+
+  setTimeout(() => {
+    controller.abort() // 取消fetch请求
+  }, 1000)
+  ```
+
+  - 不支持监控请求进度
