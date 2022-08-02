@@ -225,13 +225,13 @@ function _new(claszz, ...args) {
   - null、undefined 等无法检测
   - 而且 constructor 可能会被篡改
 
-## 简单请求与非简单请求
+## 简单请求与非简单请求(跨域请求)
 
 - 简单请求
   - 需同时满足请求方法和请求头两个条件
     - 请求方法: HEAD、GET、POST
     - 请求头
       - 只能是: Accept/Accept-Language/Conent-Language/Content-Type
-      - Content-Type 只能是: text/plain、multipart/form-data 或 application/x-www-form-urlencoded
+      - Content-Type 只能是: text/plain、multipart/form-data、 application/x-www-form-urlencoded
 - 非简单请求
   - 会先发送一个预检请求 OPTIONS
