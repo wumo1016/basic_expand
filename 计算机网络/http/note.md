@@ -84,10 +84,10 @@
 
 ## HTTP 与 HTTPS 的区别
 
-- HTTPS 解决了 HTTP 不安全的缺陷 在 TCP 和 HTTP 网络层之间加入了 SSL/TSL 安全协议 使得报文能够加密传输
-- HTTP 传输建立相对简单 在 TCP 三次握手之后即可传输数据 但 HTTPS 还需要进行 SSL/TSL 的握手过程
+- HTTPS 解决了 HTTP 不安全的缺陷 在 TCP 和 HTTP 网络层之间加入了 SSL/TLS 安全协议 使得报文能够加密传输
+- HTTP 传输建立相对简单 在 TCP 三次握手之后即可传输数据 但 HTTPS 还需要进行 SSL/TLS 的握手过程
 - HTTP 的端口是 80 HTTP 的端口是 443
-- HTTPS 需要想 CA(证书权威机构)申请数字证书，来保证服务器的身份是可信的
+- HTTPS 需要向 CA(证书权威机构)申请数字证书，来保证服务器的身份是可信的
 
 ## HTTPS
 
