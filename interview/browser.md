@@ -181,6 +181,22 @@
 - 无状态: 每一个连接都需要验证身份
 - 不安全: 信息窃取，身份伪装
 
+## 浏览器缓存
+
+- 查看浏览器是否存在强缓存
+- Cache-Control：max-age=过期时间(时长)/no-cache(需要缓存，但是需要协商缓存来验证)/no-store(不缓存)；Expirs：过期时间(绝对)。Cache-Control 优先级更高
+  - 不缓存 => 直接请求
+  - 缓存
+    - 未过期 => 直接使用缓存
+    - 已过期
+      - 是否存在 Etag
+        - 存在 => 发请求 携带 If-none-Match(Etag 的值) 如果一样返回 304 不一样返回 200
+        - 不存在
+          - 是否存在 Last-Modifield
+            - 存在 携带 In-Modified-since(Last-Modifield 的值) 与服务器的 Last-Modifield 比较
+              - Last-Modifield <= In-Modified-since 返回304
+            - 返回 200 和结果
+
 ## HTTP 与 HTTPS 的区别
 
 - 安全性: HTTP 是超文本传输协议，是明文传输的；HTTPS 在 TCP 和 HTTP 之间加入 SSL/TLS 协议，使得报文能够加密传输

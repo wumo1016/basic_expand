@@ -29,7 +29,7 @@
           - 设置Cache-Control：max-age=xxx(Expires)
           - 从控制台请求可以看到这类请求直接返回200 size是 `memory cache`(资源从内存中取出) 或 `disk cache`(资源从磁盘中取出)
         - 协商缓存
-          - 设置响应头 Last-Modified-Since
+          - 设置响应头 Last-Modified
           - 下一次请求头带上 If-Modified-Since 然后与最后修改时间对比 相同就返回304
           - 缺点：有可能修改时间变了 但是内容没变
         - 文件指纹：根据文件内容生成一段密钥(摘要)
