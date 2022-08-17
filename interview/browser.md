@@ -60,7 +60,7 @@
 
 - 三次握手
   - 客户端 => SYN => 服务器
-  - 服务器 => ACK + SYN  => 客户端
+  - 服务器 => ACK + SYN => 客户端
   - 客户端 => ACK => 服务端
 - 四次挥手
   - 客服端 => FIN => 服务器
@@ -194,7 +194,7 @@
         - 不存在
           - 是否存在 Last-Modifield
             - 存在 携带 In-Modified-since(Last-Modifield 的值) 与服务器的 Last-Modifield 比较
-              - Last-Modifield <= In-Modified-since 返回304
+              - Last-Modifield <= In-Modified-since 返回 304
             - 返回 200 和结果
 
 ## HTTP 与 HTTPS 的区别
@@ -203,3 +203,10 @@
 - 传输数据: HTTP 在三次 TCP 连接后即可传输数据，但 HTTPS 还需要 SSL/TLS 的握手过程
 - 端口: HTTP => 80 HTTPS => 443
 - 证书: HTTP 需要向 CA 证书机构申请证书
+
+## get 与 post 的区别
+
+- 本质不同
+- 发送的数据大小不同
+- get一般会被缓存
+- *都可以使用url、body携带参数
