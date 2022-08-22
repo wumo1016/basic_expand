@@ -78,3 +78,11 @@
   - useRouteMatch
   - useLocation
   - useHistory
+
+## useLayoutEffect 和 useEffect 的区别
+
+- useEffect 在 render 结束后执行，性能更好；
+- useLayoutEffect 会在 DOM 更新完成后立即执行，会阻塞浏览器的绘制。
+- 多数情况下，使用 useEffect，但有些跟视图有关的副作用想要第一时间呈现给用户，那么我们就可以使用 useLayoutEffect
+
+## useMemo 和useCallBack的区别
