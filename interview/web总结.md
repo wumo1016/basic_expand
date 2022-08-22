@@ -1,1573 +1,3 @@
-
-
-# 标准盒模型与怪异盒模型区别
-
-```
-标准盒模型一个块的总宽度= width + margin(左右) + padding(左右) + border(左右) 
-怪异盒模型一个块的总宽度= width + margin(左右)（即width已经包含了padding和 border值）
-```
-
-# CSS3弹性盒
-
-```
-弹性盒 display:flex（父元素添加） 
-弹性盒：控制子元素按主轴方向排列 
-弹性盒可以设置单独内容水平垂直居中
-父元素：display:flex 子元素：margin:auto 
-灵活元素：灵活元素即使是内联元素也能设置宽高
-
-加父元素身上
-1.flex-direction 属性指定了弹性子元素在父容器中的位置。 
-	row：横向从左到右排列（左对齐），默认的排列方式。
-	row-reverse：反转横向排列（右对齐，从后往前排，最后一项排在最前面。
-	column：纵向排列。
-	olumn-reverse：反转纵向排列，从后往前排，最后一项排在最上面。
-2.justify-content:flex-start/flex-end/space-between/space-around
-3.align-items: 设置或检索弹性盒子元素在侧轴（纵轴）方向上的对齐方式。  
-		center/flex-start/flex-end/baseline/stretch
-4.flex-wrap:属性用于指定弹性盒子的子元素换行方式。nowrap/wrap/wrap-reverse
-5.align-content:设置各个行的对齐:  
-	stretch - 默认。各行将会伸展以占用剩余的空间。
-	flex-start - 各行向弹性盒容器的起始位置堆叠。
-	flex-end - 各行向弹性盒容器的结束位置堆叠。
-	center -各行向弹性盒容器的中间位置堆叠。
-	space-between -各行在弹性盒容器中平均分布。
-	space-around 
-	
-加子元素身
-1、align-self：属性用于设置弹性元素自身在侧轴（纵轴）方向上的对齐方式。
-	align-self: auto | flex-start | flex-end | center | baseline | stretch
-	flex 属性用于指定弹性子元素如何分配空间。
-     	1: 计算值为 1 1 auto
-    	initial: 计算值为 0 1 auto
-     	none：计算值为 0 0 auto
-inherit：从父元素继承
-2、第一个参数表示: flex-grow 定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大
-3、第二个参数表示: flex-shrink 定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小
-4、第三个参数表示: flex-basis给上面两个属性分配多余空间之前, 计算项目是否有多余空间, 默认值为 auto, 即项目本身的大小
-```
-
-# CSS元素居中
-
-```
-1.使用margin进行固定长度的偏移	
-
-2.使用绝对定位并进行偏移(已知宽高)
-#father{ position:relative; } 
-#son{ position: absolute; left:50%; top:50%; 
-	  margin-left: -子元素的宽/2; margin-top: -子元素的高/2; } 
-
-3.使用绝对定位并margin自适应进行居中 
-#father{ position:relative;} 
-#son{position: absolute; left: 0; top: 0; right: 0; bottom: 0; margin:auto; }
-			  (啊不斯陆特)
-4.使用弹性盒子来实现居中 
-#father{ display: flex; justify-content: center; align-items: center; }
-						(加斯特佛)				  (额来) (哎特木)
-5.使用定位 + transform
-#father{ position:relative;} 
-#son{ position: absolute; left: 50%; top: 50%; transform:translate(-50% -50%) }
-
-6.table-cell布局
-因为table-cell相当与表格的td，td为行内元素，无法设置宽和高，所以嵌套一层，嵌套一层必须设置display: inline-block;
-```
-
-# CSS几种定位的区别 relative, absolute, fixed
-
-```
-1、相对定位position:relative;参考物是自己,不脱离文档流(初始位置仍然占据空 间),top:100px; 给正值是向该容器的中心点移动;
-
-2、绝对定位position:absolute; 参考物是外层具有position属性的元素, 如果向外 都么有找到最后会参考body/html做定位
-
-3、固定定位position:fixed; 参考物是可视窗口 
-
-4、粘性定位(了解)position:sticky; 是绝对定位+固定定位
-```
-
-# div外边距重叠的原因及解决办法
-
-```
-情况一:
-	两个div垂直边界相邻，margin会等于二者中margin较大的值 
-解决方案:
-1.position：absolute 
-2.float:left 
-
-情况二:
-	子元素在父元素内，子元素的margin-top会与父元素的margin-top重叠，值等于二者中较大的，如果只有子元素设置了margin-top，则显示为父元素的margin-top 
-解决方案:
-1.给父元素设置border（给子元素设置边框没有用） 
-2.给父元素设置padding值 
-3.给父元素或子元素添加float：left 
-4.给父元素或子元素添加position：absolute 
-5.给父元素添加overflow：hidden 
-6.给子元素添加display：inline-block 
-
-情况三:
-	一个空白元素自身的margin-top和margin-bottom会重叠，值为二者中较大的 
-解决方案:
-1.设置透明border 
-```
-
-# px，em，rem，pt的区别 
-
-```
-1、px实际上就是像素，用px设置字体大小时，比较稳定和精确 
-2、em就是根据基准来缩放字体的大小 
-3、rem是相对于根元素字体大小来显示的 
-4、pt的大小等于1英寸的1/72 浏览器的兼容性除了IE6-IE8，其他的浏览器都支持em和rem，px所有浏览器都支持
-```
-
-# ★ CSS的BFC
-
-```
-1、什么是BFC  BFC: block formatting context(块状格式化上下文)
-    bfc是一个独立的空间，只有块状元素参与，
-    它规定了里面的块状元素如何布局，它和外部的坏境毫不相干
-
-  触发条件
-1. 根元素（html）本身就是一个BFC
-        2. float不能none的时候
-        3. position为absolute或者fixed的时候
-        4. display为inline-block, table-cell, flex, inline-flex等
-        5. overflow不为visible的时候
-2、BFC渲染规则
-    a.内部的box会在垂直方向，一个接一个的放置 
-    b.box垂直方向的距离由margin决定。属于同一个BFC的两个相邻box的margin会发生重 叠
-    c.每个元素的margin box的左边，与包含块border box的左边相接触（对于从左往右的格 式化，否则相反）。
-    即使存在浮动也是如此 
-    d.BFC的区域不会与float box重叠 
-    e.BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之 也如此 
-    f.计算BFC的高度时，浮动元素也参与计算 	
-
-3、如何产生BFC 
-	一个块级元素就是一个BFC
-
-a.根元素
-    b.float属性不为none 
-    c.position为absolute或fixed 
-    d.display为inline-block， table-cell，table-caption，flex，inline-flex 
-    e.overflow不为visible 
-
-4、BFC的作用 
-    a.自适应两栏布局
-    b.清除内部浮动 
-    c.防止垂直margin重叠（放在两个BFC里） 		
-```
-
-# 兼容问题
-
-```
-1）css浏览器兼容问题（比如设置元素透明度，ie浏览器使用滤镜实现，filter 
-：progid：DXlmage Transform.Microsoft.Alpha(style=0,opacity=50);非IE浏览器 
-opacity：0.5） 
-解决方法：现在前端开发已经出现了非常多的框架和类库用于浏览器的兼容问题，比如jq类 库，解决获取元素中包含的所有文本内容兼容性问题，$(“element”).text(“element text”) 
-
-2）css3浏览器前缀问题 
-	-ms-：ie浏览器 
-	-o-：opera欧朋浏览器 
-	-webkit-：谷歌浏览器 
-	-moz-：火狐浏览器
-
-工作中遇到的困难 
-	1）IE6中高度不对问题 
-		在div中给定了高度为1px,其它浏览器显示正常，可是ie6中显示的高度就不对了，这时我 
-		给样式表中加 了个font-size:0px;line-height:0px;就好了 
-	2)把border设为“0”像素虽然在页面上看不见，但按border默认值理解，
-		浏览器依然对 border- width/border-color进行了渲染，
-		即已经占用了内存值把border设为“none”即没有，浏览器解析“none”时将不作出渲染动作，即不会消耗内存
-```
-
-# 移动端适配 
-
-```
-1.Media Queries 通过查询设备的宽度来执行不同的 css 代码，最终达到界面 的配置 
-2.Flex弹性布局 
-3.rem + viewport 缩放 实现原理 根据rem将页面放大dpr倍, 然后viewport设置为1/dpr. 
-4、rem实现 移动端适配方案： 
-	1）viewport（scale=1/dpr）    dpr:备像素比   
-	2）rem 3）flex 4）vm/vh
-	以iphone8为例，iphone8的CSS像素为375px*677px，DPR是2，
-	所以其设备像素为750px*1354px
-	750(px) / 375(px)  = 2
-```
-
-# 什么是CSS预处理器？优点是什么
-
-```
-css预处理器用一种专门的编程语言，进行web页面样式设计，然后在编译成正常的css文件，
-以供项目使用 在css中使用变量、简单的逻辑程序、函数。可以让你的css更加简洁、适应性更强、可读性更佳、更易于代码的维护
-```
-
-# 0.5px线怎么实现（单边框0.5px）
-
-```
-方式一：border + border - img + 线性渐变linear-gradient
-方式二：定位 + 伪元素 + background + 线性渐变linear-gradient
-方式三：定位 + 伪元素 + transform缩放（scale）
-```
-
-# CSS布局 - 左侧宽度固定，右侧自适应
-
-```
-方法一: 
-	设置绝对定位
-	宽度固定区域设置 position：absolute+ left/right+ top + width
-	自适应区域设置 margin-left/margin-right: 固定宽度区域的宽度。
-
-注意:
-	（1）若左侧固定的高度大于右侧自适应区域高度
-		页面布局就变成这样了：（测试布局区域紧挨着自适应区域的下方，盖住了部分固定区域）
-		简单粗暴的就是测试布局区域定位的top值直接设置为两个区域最高的高度值
-	（2）若左侧固定的高度大于右侧自适应区域高度，且测试区域不进行定位
-方法二:
-	浮动布局
-	左侧固定区域浮动+宽度，右侧自适应区域 设置margin-left :左侧宽度值。
-方法三:
-	BFC规则
-	左侧固定区域浮动+宽度，右侧自适应区域（非浮动元素）设置overflow：hidden。
-```
-
-# CSS布局 - 左右侧宽度固定，中间自适应
-
-```
-1、绝对定位布局：position + margin
-缺点: 如果中间栏含有最小宽度限制，或是含有宽度的内部元素，当浏览器宽度小到一定程度，会发生层重叠的情况。
-2、浮动布局： float + margin
-3、flex布局
-	高度由内容决定。
-4、table布局
-	高度由内容决定。
-5、Grid网格布局
-6、圣杯布局
-7、双飞翼布局
-8、对比圣杯布局和双飞翼布局
-（1）都是左右栏定宽，中间栏自适应的三栏布局，中间栏都放到文档流前面，保证先行渲染。
-（2）解决方案基本相似：都是三栏全部设置左浮动float：left,然后分别结局中间栏内容被覆盖的问题。
-（3）解决中间栏内容被覆盖问题时，圣杯布局设置父元素的padding,双飞翼布局在中间栏嵌套一个div,
-	内容放到新的	div中，并设置margin，实际上，双飞翼布局就是圣杯布局的改进方案。
-```
-
-# webpack 打包优化  怎么减少打包时间
-
-```
-多进程打包 - 速度分析
-多进程压缩 - 体积分析
-资源CDN
-动态polyfill - 根据不同浏览器，动态载入需要的polyfill,大幅度减少构建体积
-
-split-thunk
-前端构建项目中，为了提高打包效率，往往将第三库与业务逻辑代码分开打包，因为第三方库往往不需要经常打包更新。webpack建议使用CommonsChunk 来单独打包第三方库
-
-webpack loader(转换器)和plugin(插件)有什么区别:
-	loader它是一个转换器，将A文件进行编译形成B文件，这里操作的是文件，比如将A.scss转换为A.css，单纯的文件转换过程
-	plugin是一个扩展器，它丰富了webpack本身，针对是loader结束后，webpack打包的整个过程，它并不直接操作文件，而是基于事件机制工作，会监听webpack打包过程中的某些节点，执行广泛的任务
-
-loader:
-	优雅降级，
-	图片打包
-plugin:
-	html产出：把public下面的html文件打包到build里面的index.html并自动引入app.js
-	css抽离
-	静态资源拷贝
-```
-
-# 继承的6种方式 ☆
-
-```
-1.原型链继承
-	重点：让新实例的原型等于父类的实例。
-	特点：1、实例可继承的属性有：实例的构造函数的属性，父类构造函数属性，父类原型的属性。
-　　　		（新实例不会继承父类实例的属性！）
-	缺点：1、新实例无法向父类构造函数传参。
-		 2、继承单一。
-		 3、所有新实例都会共享父类实例的属性。
-　　　　　　（原型上的属性是共享的，一个实例修改了原型属性，另一个实例的原型属性也会被修改！）
-
-    Person.prototype是一个对象，
-    Student.prototype = new Person();
-    Student.prototype.constructor = Student;
-　　　　
-  function Animal(name,age){
-        this.name=name;
-        thia.age=age;
-     }
-     //在原型中添加方法
-     Animal.prototype.eat=function(){
-        console.log("动物吃草")
-        this.play()
-     }
-     Animal.prototype.play=function(){
-        console.log("玩啥呢")
-
-2.借用构造函数继承
-	重点：用.call()和.apply()将父类构造函数引入子类函数（在子类函数中做了父类函数的自执行（复制））
-	特点：1、只继承了父类构造函数的属性，没有继承父类原型的属性。
-		 2、解决了原型链继承缺点1、2、3。
-		 3、可以继承多个构造函数属性（call多个）。
-		 4、在子实例中可向父实例传参。
-	缺点：1、只能继承父类构造函数的属性。
-		 2、无法实现构造函数的复用。（每次用每次都要重新调用）
-		 3、每个新实例都有父类构造函数的副本，臃肿。
-代码	========================================================= 
-        /定义一个超类/父类： 人
-function Person (name, age) {
-    //人都有姓名，年龄，会吃饭，会睡觉
-    //传入出生年份 year，自动计算年龄
-    this.name = name;
-    this.age = age;
-    this.eat = function () {
-        alert('吃饭');
-    }
-    this.sleep = function () {
-        alert('睡觉');
-    }
-}
-//定义一个子类： 学生
-//学生Student也是人，自然要继承超类 Person 的所有属性和方法
-//学生都应当有姓名、年龄、会吃饭、会睡觉
-//当然学生也有自己的一些属性：学号，学校名称等，和方法，比如都要去做一件事：写作业
-function Student (stuID, schoolName, name, age) {
-    this.stuID = stuID;
-    this.schoolName = schoolName;
-    //用call调用 Person,以实现继承
-    Person.call(this, name, age);
-}
-
-Student.prototype.doHomework = function () {
-    alert('做作业');
-}
-
-//实例化一个学生
-var stu1 = new Student(1001, '第一小学', '王宝宝',20);
-console.log(stu1.stuID);       //1001
-console.log(stu1.schoolName);  //'第一小学'
-console.log(stu1.name);        //'王宝宝'
-console.log(stu1.age);         //20
-stu1.eat();                    //'吃饭'
-stu1.sleep();                  //'睡觉'
-stu1.doHomework();             //'做作业'
-解释：上面代码定义了一个父类函数 Person 和一个子类函数 Student, 在子类构造函数中，我们通过 call 的方式调用了父类构造函数 Person实现了继承。别忘了，函数只不过是一段可以在特定作用域执行代码的特殊对象，我们可以通过 call 方法指定我函数的作用域。
-　　在 stu1 = new Student() 构造函数时，Student 内部 this 的值指向的是 stu1, 所以 this.stuID =stu1.stuID, 所以 Person.call(this, name, age) 就相当于Person.call(stu1, '王宝宝', 20)，就相当于 stu1.Person('王宝宝',20)。最后，stu1 去调用 Person 方法时，Person 内部的 this 指向就指向了 stu1。那么Person 内部this 上的所有属性和方法，都被拷贝到了stu1上。
-　　总之，在子类函数中，通过call() 方法调用父类函数后，子类实例 stu1, 可以访问到 Student 构造函数和 Person 构造函数里的所有属性和方法。这样就实现了子类向父类的继承。
-========================================================================
-3.组合继承（组合原型链继承和借用构造函数继承）		 
-	重点：结合了两种模式的优点，传参和复用
-	特点：1、可以继承父类原型上的属性，可以传参，可复用。
-		 2、每个新实例引入的构造函数属性是私有的。
-	缺点：调用了两次父类构造函数（耗内存），子类的构造函数会代替原型上的那个父类构造函数。
-4.原型式继承
-	重点：用一个函数包装一个对象，然后返回这个函数的调用，这个函数就变成了个可以随意增添属性的实例或对象。			 object.create()就是这个原理。
-	特点：类似于复制一个对象，用函数来包装。
-	缺点：1、所有实例都会继承原型上的属性。
-		 2、无法实现复用。（新实例属性都是后面添加的）
-5.寄生式继承
-	重点：就是给原型式继承外面套了个壳子。
-	优点：没有创建自定义类型，因为只是套了个壳子返回对象（这个），这个函数顺理成章就成了创建的新对象。
-	缺点：没用到原型，无法复用。
-6.寄生组合式继承（常用）
-	重点：修复了组合继承的问题
-	寄生：在函数内返回对象然后调用
-	组合：1、函数的原型等于另一个实例。
-		 2、在函数中用apply或者call引入另一个构造函数，可传参　
-```
-
-# 阻止冒泡和取消默认事件(默认行为)
-
-```
-防止事件捕获和冒泡:
-w3c的方法是e.stopPropagation()
-IE则是使用e.cancelBubble = true
-
-取消默认事件
-w3c的方法是e.preventDefault()
-IE则是使用e.returnValue = false
-
-jQuery用法
-阻止默认事件 return false (不停止冒泡)
-```
-
-# 
-
-
-
-# 遍历数组的方式
-
-```
-1.for循环
-使用临时变量，将长度缓存起来，避免重复获取数组长度，当数组较大时优化效果才会比较明显。
-
-2.foreach循环
-遍历数组中的每一项，没有返回值，对原数组没有影响，不支持IE。
-有一些局限，不能continue跳过或者break终止循环
-
-3.map循环
-有返回值，可以return出来
-map的回调函数中支持return返回值
-并不影响原来的数组，return的是新数组
-
-4.for of遍历
-可以正确响应break、continue和return语句
-
-5.filter遍历
-不会改变原始数组,返回新数组
-
-6.every遍历
-every()是对数组中的每一项运行给定函数，如果该函数对每一项返回true,则返回true。
-
-7.some遍历
-some()是对数组中每一项运行指定函数，如果该函数对任一项返回true，则返回true。
-
-8.reduce
-reduce()方法接收一个函数作为累加器（accumulator），数组中的每个值（从左到右）开始缩减，最终为一个值。
-
-9.reduceRight
-reduceRight()方法的功能和reduce()功能是一样的，
-不同的是reduceRight()从数组的末尾向前将数组中的数组项做累加。
-
-10.find
-find()方法返回数组中符合测试函数条件的第一个元素。否则返回undefined 
-
-11.findIndex
-对于数组中的每个元素，findIndex方法都会调用一次回调函数（采用升序索引顺序），直到有元素返回 true。
-只要有一个元素返回 true，findIndex立即返回该返回 true 的元素的索引值。
-如果数组中没有任何元素返回 true，则 findIndex 返回 -1。
-findIndex 不会改变数组对象。
-
-12.keys，values，entries
-ES6 提供三个新的方法 —— entries()，keys()和values() —— 用于遍历数组。
-它们都返回一个遍历器对象，可以用for...of循环进行遍历，
-唯一的区别是keys()是对键名的遍历、values()是对键值的遍历，entries()是对键值对的遍历
-```
-
-# 数据分页
-
-```
-前端的话，定义一个新的数组for循环判断，有个公式，计算起始页和终止页的。
-符合条件push仅数组中，后端就是用limt判断
-```
-
-# 数组排序
-
-```
-1. 普通数组排序　　
-　　js中用方法sort()为数组排序。sort()方法有一个可选参数，是用来确定元素顺序的函数。如果这个参数被省略，那么数组中的元素将按照ASCII字符顺序进行排序。
-2. 冒泡排序
-（1）比较相邻的元素。如果第一个比第二个大，就交换他们两个位置。
-（2）对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。
-（3）针对所有的元素重复以上的步骤，除了最后一个。
-（4）持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。
-3. 快速排序：递归思想，两边快速的排序，冒泡排序的改进
-（1）选择数组中间数作为基数，并从数组中取出此基数；
-（2）准备两个数组容器，遍历数组，逐个与基数比对，较小的放左边容器，较大的放右边容器；
-（3）进行相同的操作，直到数组中只有一个元素时，返回该数组。
-4. 插入排序
-（1）从第一个元素开始，该元素可以认为已经被排序
-（2）取出下一个元素，在已经排序的元素序列中扫描
-（3）如果该元素（已排序）大于新元素，将该元素移到下一位置
-（4）重复步骤3，直到找到已排序的元素小于或者等于新元素的位置
-（5）将新元素插入到下一位置中
-（6）重复步骤2
-5. 选择排序
-（1）在未排序序列中找到最小（大）元素
-（2）并存放到排序序列的起始位置
-（3）然后，再从剩余未排序元素中继续寻找最小（大）元素
-（4）然后放到已排序序列的末尾。
-（5）以此类推
-```
-
-# 数组合并
-
-```
-1、concat
-	js的Array对象提供了一个叫concat()方法，连接两个或更多的数组，并返回结果。
-		var c = a.concat(b); //c=[1,2,3,4,5,6];
-
-	这里有一个问题，concat方法连接a、b两个数组后，a、b两个数组的数据不变，同时会返回一个新的数组。这样当我们需要进行多次的数组合并时，会造成很大的内存浪费，如果是数据量比较小的时候，还可以勉强用，如果数据量大的时候，这个就不妥了，所以这个方法肯定不是最好的。
-
-2、for循环
-大概的思路是：遍历其中一个数组，把该数组中的所有元素依次添加到另外一个数组中。直接上代码：
-	for(var i in b) { a.push ( b[i] );}
-	
-3、apply
-	函数的apply方法有一个特性，那就是func.apply(obj,argv)，argv是一个数组。
-		a.push.apply(a,b);
-	调用a.push这个函数实例的apply方法，同时把，b当作参数传入，
-	这样a.push这个方法就会遍历b数组的所有元素，达到合并的效果。
-	这里可能有点绕，我们可以把b看成[4,5,6]，变成这样：
-		a.push.apply(a,[4,5,6]);
-	然后上面的操作就等同于：
-		a.push(4,5,6);
-	这样就很清楚了！
-```
-
-# 数组方法
-
-```
-push，在数组末尾添加一位或多位元素
-pop，删除数组最后一位元素
-unshift，在数组的开头添加一位或多位元素
-shift，删除数组的第一位元素
-join，将数组转换为字符串
-reserve，反转数组元素的顺序
-sort，对数组进行排序
-concat，连接两个或多个数组
-splice，添加或删除数组中的元素
-slice，从已有的数组中返回选定的元素
-indexOf、lastIndexOf，查找数组中的元素
-forEach，对数组进行遍历循环，对数组中每一项运行指定的函数
-map，迭代数组
-filter，对数组中的元素进行指定的检查返回符合条件的元素放入一个新数组中
-every，测试所有元素是否都符合指定条件
-some，测试某些元素是否符合指定条件
-reduce，接收一个函数作为累加器，数组中的每个值开始缩减，最终计算为一个值
-toString，将数组转换为字符串
-```
-
-# ★ 数组去重
-
-```
-使用ES6 Set
-	var arr = [1, 1, 4, 2, 2, 3, 3, 3, 6, 6, 6];
-	arr = Array.from(new Set(arr));  [...new Set(arr)]
-	console.log(arr);//[1, 4, 2, 3, 6]
-
-使用indexOf
-	var arr = [1, 1, 4, 2, 2, 3, 3, 3, 6, 6, 6];
-	var newArr = [];
-	arr.forEach((item) => {
-  		newArr.indexOf(item) === -1 ? newArr.push(item) : "";
-	});
-	console.log(newArr);//[1, 4, 2, 3, 6]
-
-使用lastIndexOf
-	var arr = [1, 1, 4, 2, 2, 3, 3, 3, 6, 6, 6];
-	var newArr = [];
-	arr.forEach((item) => {
-  		newArr.lastIndexOf(item) === -1 ? newArr.push(item) : "";
-	});
-    console.log(newArr);//[1, 4, 2, 3, 6]
-
-使用双重for循环加splice方法
-	var arr = [1, 1, 4, 2, 2, 3, 3, 3, 6, 6, 6];
-	for (var i = 0; i < arr.length; i++) {
- 		for (var j = i + 1; j < arr.length; j++) {
-    		if (arr[i] == arr[j]) {
-      			arr.splice(j,1);
-      			j--;
-    		}
- 		}
-	}
-	console.log(arr);//[1, 4, 2, 3, 6]
-
-使用forEach和includes方法
-	var arr = [1, 1, 4, 2, 2, 3, 3, 3, 6, 6, 6];
-	var newArr = [];
-	arr.forEach((item) => {
-  		newArr.includes(item) ? "" : newArr.push(item);
-	});
-	console.log(newArr);//[1, 4, 2, 3, 6]
-
-使用fliter和includes方法
-	var arr = [1, 1, 4, 2, 2, 3, 3, 3, 6, 6, 6];
-	var newArr = [];
-	arr.filter((item) => {
-  		newArr.includes(item) ? "" : newArr.push(item);
-	});
-	console.log(newArr);//[1, 4, 2, 3, 6]
-```
-
-# for...of 原理
-
-```
-for...of 是ES6引入用来遍历所有数据结构的统一方法。
-
-这里的所有数据结构只指具有iterator接口的数据。
-一个数据只要部署了 Symbol.iterator，就具有了 iterator接口，就可以使用 for...of 循环遍历它的成员。
-也就是说，for...of循环内部调用的数据结构为Symbol.iterator方法。
-部署在 Symbol.iterator 属性，或者说，一个数据结构只要具有 Symbol.iterator 属性，就认为是"可遍历的"。
-
-Iterator(伊特瑞特):
-	遍历器（Iterator）就是这样一种机制。它是一种接口，为各种不同的数据结构提供统一的访问机制。
-	任何数据结构只要部署 Iterator 接口，就可以完成遍历操作（即依次处理该数据结构的所有成员）。
-	通俗点理解就是为了解决不同数据结构遍历的问题，引入了Iterator.
-
-Iterator的特点:
-	各种数据结构，提供一个统一的、简便的访问接口
-	使得数据结构的成员能够按某种次序排列
-	ES6 创造了一种新的遍历命令for...of循环，Iterator 接口主要供for...of消费
-	
-原生具备 Iterator 接口的数据结构如下。
-	Array
-	Map
-	Set
-	String：字符串是一个类似数组的对象，也原生具有 Iterator 接口。
-	TypedArray：
-		通俗理解：ArrayBuffer是一片内存空间，不能直接引用里面的数据，可以通过TypedArray类型引用，
-				用户只能通过TypedArray使用这片内存，不能直接通过ArrayBuffer使用这片内存
-	函数的 arguments 对象
-	NodeList 对象
-	
-除了原生具备Iterator 接口的数据之外，其他数据结构（主要是对象）的 Iterator 接口，
-都需要自己在Symbol.iterator属性上面部署，这样才会被for...of循环遍历。
-
-对象（Object）之所以没有默认部署 Iterator 接口，是因为对象的哪个属性先遍历，哪个属性后遍历是不确定的，需要开发者手动指定。本质上，遍历器是一种线性处理，对于任何非线性的数据结构，部署遍历器接口，就等于部署一种线性转换。不过，严格地说，对象部署遍历器接口并不是很必要，因为这时对象实际上被当作 Map 结构使用，ES5 没有 Map 结构，而 ES6 原生提供了。
-
-一个对象如果要具备可被for...of循环调用的 Iterator 接口，就必须在Symbol.iterator的属性上部署遍历器生成方法（原型链上的对象具有该方法也可）。
-```
-
-# 遍历对象的方式
-
-```
-第一种： 
-for...in
-
-第二种：
-1）Object.keys（obj）
-2）Object.values（obj）
-参数：
-	obj：要返回其枚举自身属性的对象
-返回值：
-	一个表示给定对象的所有可枚举属性的字符串数组。
-
-第三种：
-使用Object.getOwnPropertyNames(obj)
-返回一个数组，包含对象自身的所有属性（包含不可枚举属性）
-遍历可以获取key和value
-```
-
-# map与filter、map和forEach的区别
-
-```
-map 与 filter 区别:
-	相同点：filter 和 map 都是对数组的操作，均返回一个新的数组
-	不同点：filter是满足条件的留下，是对原数组的过滤；map则是对原数组的加工，映射成一对一的新数组
-
-map 与 forEach 区别:
-	map()会分配内存空间存储新数组并返回，forEach()不会返回数据(undefined)。
-	forEach()允许callback更改原始数组的元素。
-```
-
-# 面向对象编程
-
-```
-面向对象编程:
-将所需要做的功能抽象成一个“对象”，然后一遍遍地调用这个对象来完成想要的功能。
-
-面向对象的三大特征:
-1.封装
-我们平时所用的方法和类都是一种封装，当我们在项目开发中，遇到一段功能的代码在好多地方重复使用的时候，我们可以把他单独封装成一个功能的方法，这样在我们需要使用的地方直接调用即可。
-
-2.继承
-继承在我们的项目开发中主要使用为子类继承父类，继承会继承父类的实例属性和实例方法，并不会继承静态属性和静态方法，并且静态方法只能通过类名去调用。
-
-3.多态
-多态的具体表现为方法重载和方法重写：
-方法重载：
-重载是指不同的函数使用相同的函数名，但是函数的参数个数或类型不同。调用的时候根据函数的参数来区别不同的函数
-方法重写：
-重写（也叫覆盖）是指在派生类中重新对基类中的虚函数（注意是虚函数）重新实现。即函数名和参数都一样，只是函数的实现体不一样
-
-三大特征的优点：
-封装：
-封装的优势在于只可以在类内部进行对属性的操作，外部无法对这些属性进行操作，要想修改，也只能通过定义的封装方法；
-
-继承：
-继承减少了代码的冗余，省略了很多重复代码，开发者可以从父类底层定义所有子类必须有的属性和方法，以达到耦合的目的；
-
-多态：
-多态实现了方法的个性化，不同的子类根据具体状况可以实现不同的方法；
-```
-
-# window.onload与document.ready的区别
-
-```
-1.执行时间
-	window.onload必须等到页面内包括图片的所有元素加载完毕后才能执行。 
-	$(document).ready()是DOM结构绘制完毕后就执行，不用等到加载完毕。
-
-2.编写个数不同
-	window.onload不能同时编写多个，如果有多个window.onload方法，只会执行一个 
-	$(document).ready()可以同时编写多个，并且都可以得到执行
-
-3.简化写法
-	window.onload没有简化写法 
-	$(document).ready(function(){})可以简写成$(function(){});
-```
-
-# this
-
-```
-this代表函数运行时，自动生成的一个内部对象，只能在函数内部使用，
-随着函数使用场合的不同，this的值会发生变化。
-
-指向:
-1.在方法中，this 表示该方法所属的对象。
-2.如果单独使用，this 表示全局对象window。
-3.函数中，this 表示全局对象window。
-4.严格模式下，this 是未定义的(undefined)，不指向window。
-5.在事件中，this 表示事件绑定对象。
-6.类似 call() 和 apply() 方法可以将 this 引用到任何对象。
-7.箭头函数本身是没有this和arguments的，this指向父级环境对象(固定指向 无法改变)
-8.自执行函数 this 表示全局对象window
-9.计时器函数 this 表示全局对象window
-10.构造函数中 this指向新实例对象
-```
-
-# <!DOCTYPE>
-
-```
-<!DOCTYPE> 声明位于文档中的最前面的位置，处于 <html> 标签之前。
-
-<!DOCTYPE> 声明不是一个 HTML 标签；它是用来告知 Web 浏览器页面使用了哪个版本的HTML，确保浏览器能够预先知道文档类型。
-
-在 HTML 4.01 中，<!DOCTYPE> 声明需引用 DTD （文档类型声明），
-因为 HTML 4.01 是基于 SGML （Standard Generalized Markup Language 标准通用标记语言）。
-DTD 指定了标记语言的规则，确保了浏览器能够正确的渲染内容。
-
-HTML5 不是基于 SGML，因此不要求引用 DTD。
-
-```
-
-# CSS position属性
-
-```
-absolute:生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位。
-fixed	:生成固定定位的元素，相对于浏览器窗口进行定位。
-relative:生成相对定位的元素，相对于其正常位置进行定位。
-static	:默认值。没有定位。
-sticky	:粘性定位，该定位基于用户滚动的位置。
-inherit	:规定应该从父元素继承 position 属性的值。
-```
-
-# js的解构
-
-```
-解构定义：允许按照一定模式，从数组和对象中提取值，对变量进行赋值。
-解构必须满足的条件：（模式匹配），只要等号两边的模式相同，左边的变量就会被赋予对应的值。
-主要介绍2种解构常用的类型：数组解构和对象解构。
-
-数组解构：
-	1.数组中的变量个数比赋值的数组中个数少的解构：
-	2.数组中的变量个数比赋值的数组中个数多的解构：
-	3.数组中的变量中有空字符的解构：
-	上面的3种数组解构，赋值的数组的数值按位赋值给另外一方数组中的变量
-	
-	4.数组中的变量中有不定参数(有些时候也叫扩展运算符)的解构：需要注意的是不定参数必须放最后。
-	5.数组中的变量中有默认值的解构：如果赋值的数组个数没有另外一方数组变量个数多，并且变量数组有默认，
-								没有进行赋值用默认，进行赋值用赋值的
-
-对象的解构：两方也需要相同类型的括号，对象结构使用大括号{}
-普通对象解构：
-	对象跟数值解构不同的一点，对象解构不是按位去赋值，是根据键名(属性名) 来进行赋值
-有默认值的对象解构
-	跟数组的默认值差不多，有赋值就用赋值的，没有就用默认值
-有不定参数的对象解构
-	跟数组的不定参数差不多，不定参数放在最后，不定参数创建一个对象接受的剩下的键名键值(属性名属性值)
-有嵌套的对象解构
-	主要注意嵌套层次是不是赋值一方对象的嵌套层次相同。
-```
-
-# js实现轮播图思路
-
-```
-1.图片移动实现原理：
-利用浮动将所有所有照片依次排成一行，给这一长串图片添加一个父级的遮罩，每次只显示一张图，其余的都隐藏起来。对图片添加绝对定位，通过控制left属性，实现照片的移动。
-
-2.图片移动动画原理：
-从a位置移动到b位置，需要先计算两点之间的差值，通过差值和时间间隔，计算出每次移动的步长，通过添加定时器，每次移动相同的步长，实现动画效果。
-
-3.图片定位停止原理：
-每一张照片都有相同的宽度，每张照片都有一个绝对的定位数值，通过检测定每次移动后，照片当前位置和需要到达位置之间的距离是否小于步长，如果小于，说明已经移动到位，可以将定时器清除，来停止动画。
-
-4图片切换原理：
-在全局设置一个变量，记录当前图片的位置，每次切换或跳转时，只需要将数值修改，并调用图片页数转像素位置函数，再调用像素运动函数即可。
-
-5.自动轮播原理：
-设置定时器，一定时间间隔后，将照片标记加1，然后开始切换。
-
-6.左右点击切换原理：
-修改当前位置标记，开始切换。这里需要注意与自动轮播之间的冲突。当点击事件触发之后，停止自动轮播计时器，开始切换。当动画结束后再次添加自动轮播计时器。
-
-7.无缝衔接原理：
-需要无缝衔接，难度在于最后一页向后翻到第一页，和第一页向前翻到最后一页。由于图片的基本移动原理。要想实现无缝衔接，两张图片就必须紧贴在一起。所以在第一张的前面需要添加最后一张，最后一张的后面需要添加第一张。
-
-首先判断图片的位置，是否移动到位。当满足当前位置，与预定位置之间的距离小于一步时，认定为移动到位，并把图片直接定位到预定位置。然后判断，图片的位置是否需要跳转。
-ps：这里一定要在图片运动函数结束后，在进行跳转。
-
-8.预防鬼畜原理：
-始终保证轮播图的运动动画只有一个，从底层杜绝鬼畜。需要在每次动画开始之前，尝试停止动画定时器，然后开始为新的动画添加定时器。
-
-轮播图鬼畜的本质原因就是，同一时间多个定时器添加在图片上，这些定时器直接相互冲突，造成图片的抖动。
-解决方法：每次执行运动函数之前，先尝试清除一下，上一个轮播图的定时器。确保同时触发运动函数时，只有一个定时器在工作。
-
-9.预防暴力点击原理：
-如果用户快速点击触发事件，会在短时间内多次调用切换函数，虽然动画函数可以保证，不会发生鬼畜，但在照片从最后一张到第一张的切换过程，不会按照正常的轮播，而是实现了跳转。所以需要通过添加口令的方式来，限制用户的点击。当用户点击完成后，口令销毁，动画结束后恢复口令。
-
-10.小圆点的位置显示原理：
-每次触发动画时，通过全局变量标记，获取当前页数，操作清除所有小圆点，然后指定一页添加样式。
-
-11.点击触发跳转的原理：
-类似于左右点击触发，只是这是将全局页面标记，直接修改，后执行动画。需要避免与自动轮播定时器的冲突。
-```
-
-# js数组和对象的扩展
-
-```
-1.Array.from()方法用于将对象转为真正的数组(类数组转数组)
-2.Array.of()方法用于将一组值，转换为数组。
-  console.log(Array.of(1,2,3,4,4,50));//[1, 2, 3, 4, 4, 50]
-3.Object.assign(目标对象,对象1,对象2)用于对象的合并,将源对象的所有可枚举属性，复制到目标对象。(浅拷贝)
-```
-
-# js提升
-
-```
-一、提升（Hosting）
-简单说就是在js代码执行前引擎会先进行预编译，预编译期间会将变量声明与函数声明提升至其对应作用域的最顶端。
-
-二、变量提升
-在ES6之前，JavaScript没有块级作用域(一对花括号{}即为一个块级作用域)，只有全局作用域和函数作用域。
-变量提升即将变量声明提升到它所在作用域的最开始的部分。
-变量声明的提升是以变量所处的第一层词法作用域为“单位”的，即全局作用域中声明的变量会提升至全局最顶层，函数内声明的变量会提升至函数最顶层
-
-三、函数提升
-即函数提升只会提升函数声明，而不会提升函数表达式。
-
-四、为什么会有提升？
-函数提升就是为了解决相互递归的问题，大体上可以解决像ML语言这样自下而上的顺序问题。
-大概是说，变量提升是人为实现的问题，而函数提升在当初设计时是有目的的。
-```
-
-# 比较redux和vuex、redux和redux和vuex的区别的区别
-
-```
-redux和vuex的区别
-	1）vuex是redux的基础上进行改变，对仓库的管理更加明确
-	2）使用mutation来替换redux中的reducer
-	3)vuex有自动渲染的功能，所以不需要更新
-	
-redux和flux的区别
-　　1）redux是flux中的一个实现
-　　2））在redux中我们只能定义一个store，在flux中我们可以定义多个
-　　3）在redux中，store和dispatch都放到了store，结构更加清晰
-　　4）在redux中本身就内置State对象，对仓库的管理更加明确
-```
-# vuex
-
-```
-vuex适用于中大型应用开发； vue应用核心是store(仓库),store是一个容器，它包含着你写的应用中大部分状态(state)。
-vue和单纯对象的不同点(-官网-)
-	1) vuex的状态储存是响应式的。当Vue组件从store众读取状态的时候，若store中的状态发生变化，那么相应的组件也会相应的得到高效更新。
-	2）不能够直接改变store中的状态。改变store中的状态 的唯一途径就是 显示地**提交(commit)**mutation。(改变它的状态需要遵循它的规则，否则不能改变)
-	
-
-```
-![vuex](C:\Users\29543\Desktop\vuex.png)
-
-## 组件传参
-
-1. 父传子
-
-- 在父组件使用自定义属性传递，在子组件使用 props 接受
-- 使用插槽的方式的进行传参
-- 在任意组件可以调用 this.$root 获取到根组件的实例
-- 在子组件可以调用 this.$parent 获取到父组件的实例
-- 依赖注册 provide/inject
-
-2. 子传父
-
-- 通过自定义事件的方式，在子组件调用 this.$emit()
-- 通过作用域插槽的方式
-- 通过 ref 配合 this.$refs 去获取
-
-3. 非父子
-
-- vuex
-- event-bus
-
-## 单向数据流
-
-所有的 prop 都使得其父子 prop 之间形成了一个单向下行绑定：父级 prop 的更新会向下流动到子组件中，但是反过来则不行。这样会防止从子组件意外变更父级组件的状态，从而导致你的应用的数据流向难以理解。
-
-## 插槽
-
-作用： 内容分发
-父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。
-一般默认情况下，插槽的作用域是父组件的作用域
-```
-
-```
-## v-if 和 v-for 不要一起使用
-
-因为 v-for 的优先级是大于 v-if 的
-
-1. 如果 v-if 的条件和 item 相关，先使用计算属性过滤出需要的数组
-2. 如果 v-if 的条件和 item 无关，将 v-if 提到上一级
-```
-
-```
-## CSS display 属性
-
-| none               | 此元素不会被显示。                                |
-| ------------------ | ---------------------------------------- |
-| block              | 此元素将显示为块级元素，此元素前后会带有换行符。                 |
-| inline             | 默认。此元素会被显示为内联元素，元素前后没有换行符。               |
-| inline-block       | 行内块元素。（CSS2.1 新增的值）                      |
-| list-item          | 此元素会作为列表显示。                              |
-| run-in             | 此元素会根据上下文作为块级元素或内联元素显示。                  |
-| compact            | CSS 中有值 compact，不过由于缺乏广泛支持，已经从 CSS2.1 中删除。 |
-| marker             | CSS 中有值 marker，不过由于缺乏广泛支持，已经从 CSS2.1 中删除。 |
-| table              | 此元素会作为块级表格来显示（类似 <table>），表格前后带有换行符。     |
-| inline-table       | 此元素会作为内联表格来显示（类似 <table>），表格前后没有换行符。     |
-| table-row-group    | 此元素会作为一个或多个行的分组来显示（类似 <tbody>）。          |
-| table-header-group | 此元素会作为一个或多个行的分组来显示（类似 <thead>）。          |
-| table-footer-group | 此元素会作为一个或多个行的分组来显示（类似 <tfoot>）。          |
-| table-row          | 此元素会作为一个表格行显示（类似 <tr>）。                  |
-| table-column-group | 此元素会作为一个或多个列的分组来显示（类似 <colgroup>）。       |
-| table-column       | 此元素会作为一个单元格列显示（类似 <col>）                 |
-| table-cell         | 此元素会作为一个表格单元格显示（类似 <td> 和 <th>）          |
-| table-caption      | 此元素会作为一个表格标题显示（类似 <caption>）             |
-| inherit            | 规定应该从父元素继承 display 属性的值。                 |
-```
-# CSS选择符
-
-CSS选择符
-	id选择器（#myid）
-	类选择器（.myclassname）
-	标签选择器（div）
-	相邻选择器（h1+p）
-	子选择器（ul>li）
-	后代选择器（li a）
-	群组选择器（div，p{}）
-	通配符选择器（*）
-	属性选择器（a[title=""]）
-	伪类选择器（a:hover{}或者li:nth-child{}）
-```
-
-# CSS中link和@import的区别
-
-```
-link属于HTML标签，@import是CSS提供的
-
-页面被加载时，link引用的css文件会同时被加载，而@import引用的css文件要等到页面被加载完毕再加载
-
-import只在IE5以上才能识别，link是HTML标签，无兼容问题
-
-link 引入样式的权重大于@import 的引用
-```
-
-# CSS中display:none、visibility:hidden和opacity:0;的区别
-
-```
-display:none;隐藏对应的元素，在文档布局中不再给它分配空间，它各边的元素会合拢。
-
-visibility:hidden;隐藏对应的元素，但在文档布局中仍保留原来的空间。
-
-opacity:0;内容不可见，占据空间。
-```
-
-# CSS中rgba()和opacity的透明效果区别
-
-```
-rgba()和 opacity 都能实现透明效果，但最大的不同是 opacity 作用于元素，以及元素内的所有内容的透明度；
-
-rgba()只作用于元素的颜色或其背景色（设置 rgba 透明的元素的子元素不会继承透明效果）。
-```
-
-# CSS的外边距重叠
-
-```
-在 CSS 当中，相邻的两个盒子（可能是兄弟关系也可能是祖先关系）的外边距可以结合成一个单独的外边距。这种合并外边距的方式被称为折叠，并且因而所结合成的外边距称为折叠外边距。
-
-折叠结果遵循下列计算规则如下
-
-两个相邻的外边距都是正数时，折叠结果是它们两者之间较大的值。
-
-两个相邻的外边距都是负数时，折叠结果是两者绝对值的较大值。
-
-两个外边距一正一负时，折叠结果是两者之和。
-```
-
-# CSS清除浮动
-
-- 给高度塌陷的元素添加overflow: hidden
-
-- 里面的最下面加一个空的div，并添加clear: both
-
-- 万能清除法
-
-  ```
-    .clearfix::after {
-      content: ' ';
-      display: block;
-      height: 0;
-      overflow: hidden;
-      visibility: hidden;
-      clear: both;
-    }
-  ```
-
-- display:flow-root
-
-  - 新出来的，没有副作用，但是还存在兼容性问题
-
-# 过渡和动画的区别
-
-```
-animation属性类似于transition，他们都是随着时间改变元素的属性值，
- 
-其主要区别在于：
-- 过渡需要用户触发，动画不需要用户触发
-- 过渡不能控制中间过程，动画可以
-- 过渡只能一次， 动画可以任意次数
-```
-
-# 前后端开发中数据是怎么交互的
-
-```
-web后端和前端是怎么连接的？
-
-网站数据处理主要分为三层。
-第一层，表示层，这部分可以用HTML代码，CSS/Javascript代码来实现等。
-	通过前端代码可以实现网页的布局和设计。这层又可以称为显示层。也就是你用浏览器打开能看到的网页。
-第二层，是业务层，这层是负责处理数据的。常用的代码语言有PHP,JSP，Java等。
-	通过这些后台处理语言的算法来处理前台传回的数据。必要的时候进行操作数据库，然后把结果返回给前端网页，业务层可以实现对数据库的增删改查操作
-第三层，是数据层，这个就是数据库，用来存储数据的。
-	
-	
-在网页上填一个表格然后提交会有以下几种数据传输经过：
-①你接触到的是这个网页是属于表示层，这个网页一般由HTML标签结合CSS/JAVASCRIPT来实现的。这时候你要先填入数据。
-②然后你按提交触发后台处理机制，这时候数据会传到后台的代码进行处理。这部分代码根据不同网站可以使用PHP,JSP，JAVA等。代码根据程序员预设的算法将收到的数据进行处理之后会相应的对数据库进行操作，存储数据等。
-③成功操作完数据库之后，业务层的代码会再向表示层也就是显示器端传回一个指令通知你表格填写成功
-
-从前端向后台传递参数方法
-
-一、通过表单传递参数
-1.前端部分，在前端jsp页面设置form表单，确定需要传递的参数name让用户输入，
-  通过点击按钮后submit()提交到后台
-2.后台对前端请求的反应，接收数据，处理数据以及返回数据。
-
-二．通过ajax传递参数（有post和get写法）
-1.ajax是如何将前端数据传到后台的
-	$.ajax({
-      type: "POST",//type是ajax的方法
-      url : "<%=path%>/resource/usermenus",//参数url,要把参数传到什么地方
-      data : {parentid:parentid,parentpath:parentpath},//传递什么数据
-      success : function(data){//sucess表示，当数据返回成功后要怎么做，返回的数据存储在data
-	})
-2.后台对前端请求的反应，接收数据,处理数据以及返回数据
-3.前端接收到后端返回的数据进行处理
-```
-
-# cookie的理解
-
-```
-cookie又叫会话跟踪技术，是由web服务器保存在用户浏览器上的小文本文件，它可以记录用户ID、密码、浏览过的网页、停留的时间等信息。当用户再次来到该网站时，网站通过读取cookie，得知用户相关信息，就可以做出相应的动作，如在页面显示欢迎用户标语，或者让用户不用输入ID、密码就直接登录等等。如果用户清理了cookie，那么用户曾登录过的网站信息就没有了。
-
-优点
-	极高的扩展性和可用性
-	通过良好的编程，可以控制保存在cookie中的session对象的大小
-	通过加密技术和安全传输技术，减少cookie被破解的可能
-	只在cookie中存放不敏感数据，即使被盗也不会有重大的损失
-	控制cookie的生命周期，使之不会永久有效。偷盗者可能拿到一个过期的cookie
-
-缺点
-	cookie有数量和长度的限制。每个domain最多有20条cookie，长度不能超过4KB，否则会被裁掉。
-	安全性问题。如果cookie被人拦截了，那个人就可以取得所有的session信息。即使加密也于事无补，因为拦截者不需要知道cookie的意义，他只需要原样转发就能达到目的。
-	有些状态不可能保存在客户端。
-```
-
-# HTTP请求的过程--输入网址到呈现网页发生的过程
-
-```
-1. 对www.baidu.com这个网址进行DNS域名解析，得到对应的IP地址
-  　　2. 根据这个IP，找到对应的服务器，发起TCP的三次握手
-  　　3. 建立TCP连接后发起HTTP请求
-  　　4. 服务器响应HTTP请求，浏览器得到html代码
-  　　5. 浏览器解析html代码，并请求html代码中的资源（如js、css图片等）（先得到html代码，才能去找这些资源）
-  　　6. 浏览器对页面进行渲染呈现给用户
-　　	7.断开TCP连接,4次挥手
-        第一次挥手：客户端想分手，发送消息（FIN）给服务器
-        第二次挥手：服务器通知客户端已经接受的挥手请求，返回确认消息（ACK），但还没做好分手准备
-        第三次挥手：服务器已经做好分手准备，通知客户端（FIN）
-        第四次挥手：客户端发送消息给服务器（ACK），确认分手，服务器关闭连接。
-```
-
-# 浏览器渲染原理及流程
-
-- 浏览器将获取的HTML文档解析成DOM Tree（DOM树）
-- 将Css样式表，解析成CSSOM Tree（CSS树）
-- 将DOM和CSSOM合并为渲染树（rendering tree），这个过程称之为attachment（附着合成）
-- 渲染树的每个元素经过精确的计算后，给出坐标，这个过程称之为layout（布局）
-- 将渲染树的各个节点绘制到屏幕上，这个过程称之为painting（绘制）
-
-# 浏览器本地存储cookie，localStorage，sessionStorage
-
-| 特性     | cookie(会话跟踪技术)                    | localStorage                 | sessionStorage          | IndexDB(浏览器提供的本地数据库)   |
-| ------ | --------------------------------- | ---------------------------- | ----------------------- | ---------------------- |
-| 数据生命周期 | 一般由服务器生成，可以设置过期时间                 | 持久化本地存储，除非被主动删除，否则一直存在       | 页面关闭就清理                 | 持久化本地存储，除非被主动删除，否则一直存在 |
-| 数据存储大小 | 4K                                | 5M                           | 5M                      | 无限                     |
-| 与服务端通信 | 可与服务端通信，每次都会携带在 header 中，对于请求性能影响 | 不参与                          | 不参与                     | 不参与                    |
-| 有效期    | 设置的有效期之前有效，当超过有效期便会失效             | 永久有效，需手动删除                   | 当前会话下有效，关闭页面或者浏览器时会被清空  |                        |
-| 应用场景   | 判断用户是否登录                          | 长期登录(判断用户是否已登录),适合长期保存在本地的数据 | 统计当前页面元素的点击次数；敏感账号一次性登录 |                        |
-
-# hash值获取方式
-
-```
-可以通过window.location.hash获取hash值
-```
-
-# document.write和innerHTML的区别
-
-```
-document.write会重绘整个页面
-
-innerHTML重绘页面的一部分
-```
-
-# 进程和线程的区别
-
-```
-一个程序至少有一个进程，一个进程至少有一个线程
-
-线程的划分尺度小于进程，使得多线程程序的并发性高
-
-进程在执行过程中拥有独立的内存单元，而多个线程共享内存，从而极大提高了程序的运行效率
-
-每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制 
-
-从逻辑角度来看，多线程的意义在于一个应用程序中，有多个执行部分可以同时执行。但操作系统并没有将多个线程看做多个独立的应用，来实现进程的调度和管理以及资源分配。这就是进程和线程的重要区别
-```
-
-# babel原理
-
-```
-Babel 是一个通用的多功能 JavaScript 编译器，但与一般编译器不同的是它只是把同种语言的高版本规则转换为低版本规则，而不是输出另一种低级机器可识别的代码，并且在依赖不同的拓展插件下可用于不同形式的静态分析。（静态分析：指在不需要执行代码的前提下对代码进行分析以及相应处理的一个过程，主要应用于语法检查、编译、代码高亮、代码转换、优化、压缩等等）
-
-babel 做了什么
-和编译器类似，babel 的转译过程也分为三个阶段，这三步具体是：
-
-1.解析 Parse
-将代码解析生成抽象语法树( 即AST )，也就是计算机理解我们代码的方式(扩展：一般来说每个 js 引擎都有自己的 AST，比如熟知的 v8，chrome 浏览器会把 js 源码转换为抽象语法树，再进一步转换为字节码或机器代码)，而 babel 则是通过 babylon 实现的 。简单来说就是一个对于 JS 代码的一个编译过程，进行了词法分析与语法分析的过程。
-2.转换 Transform
-对于 AST 进行变换一系列的操作，babel 接受得到 AST 并通过 babel-traverse 对其进行遍历，在此过程中进行添加、更新及移除等操作。
-3.生成 Generate
-将变换后的 AST 再转换为 JS 代码, 使用到的模块是 babel-generator。
-
-而 babel-core 模块则是将三者结合使得对外提供的API做了一个简化。
-
-此外需要注意的是，babel 只是转译新标准引入的语法，比如ES6箭头函数：而新标准引入的新的原生对象，部分原生对象新增的原型方法，新增的 API 等（Proxy、Set 等）, 这些事不会转译的，需要引入对应的 polyfill 来解决。
-
-```
-
-#  dva
-
-```
-dva 首先是一个基于 redux 和 redux-saga 的数据流方案，然后为了简化开发体验，dva 还额外内置了 react-router 和 fetch，所以也可以理解为一个轻量级的应用框架。
-
-#特性
-易学易用，仅有 6 个 api，对 redux 用户尤其友好，配合 umi 使用后更是降低为 0 API
-elm 概念，通过 reducers, effects 和 subscriptions 组织 model
-插件机制，比如 dva-loading 可以自动处理 loading 状态，不用一遍遍地写 showLoading 和 hideLoading
-支持 HMR，基于 babel-plugin-dva-hmr 实现 components、routes 和 models 的 HMR
-
-
-代替redux和redux-saga的，里面还内置了react-router和fetch
-
-dva = React-Router + Redux + Redux-saga
-
-缺点：耦合度太高，把路由也耦合了，把路由状态提升到store中去了
-
-react-router 耦合了状态管理
-useSelector获取全局的状态
-
-
-
-dva使用
-1、安装
-yarn add dva 或
-npm i dva --save
-2、model 注册
-model 分两类，一是全局 model，二是页面 model。全局 model 存于 /src/models/ 目录，所有页面都可引用；页面 model 不能被其他页面所引用。
-src/models//*.js 为 global model
-src/pages//models/**/*.js 为 page model
-在src下创建models文件夹，为全局的model，
-3、创建model数据
-4、umi配置dva热更新
-
-
-
-
-dva 首先是一个基于 redux 和 redux-saga 的数据流方案，然后为了简化开发体验，dva 还额外内置了 react-router 和 fetch。
-
-当有行为动作改变数据的时候，可以通过 dispatch 发起一个 action，如果是同步行为会直接通过 Reducers 改变 State ，如果是异步行为（副作用）会先触发 Effects 然后流向 Reducers 最终改变 State，所以在 dva 中，数据流向非常清晰简明
-dva主要是以Model的形式来管理数据的状态，每个Model都有自己用的一个命名空间namespace。
-其中定义需要维护的数据state, 以及同步处理的reducer，和用于异步处理的effect。
-整个应该的state由多个小的 Model 合成，在Model外触发action，可以使用namespace指定使用哪个命名空间中的reducer进行数据处理。
-数据和组件的绑定也是通过connect根据命名空间namespace进行的绑定。
-（1）Model 对象的属性
-
-namespace: 当前 Model 的名称。整个应用的 State，由多个小的 Model 的 State 以 namespace 为 key 合成
-state: 该 Model 当前的状态。数据保存在这里，直接决定了视图层的输出
-reducers: Action 处理器，处理同步动作，用来算出最新的 State。可以看做是 state 的计算器。它的作用是根据 Action，从上一个 State 算出当前 State。
-effects：Action 处理器，处理异步动作。基于 Redux-saga 实现。Effect 指的是副作用。用于处理异步操作和业务逻辑，不直接修改 state。会先触发 Effects 然后流向 Reducers 最终改变 State。
-（2）call 和 put：dva 提供的effect 函数内部的处理函数。
-
-call：执行异步函数
-put：发出一个 Action，类似于 dispatch
-seclect: 在effects中对于param数据和当前的state数据进行再出处理，用于获取当前state。
-```
-
-
-
-# flex：1 计算方式
-
-![flex](D:\Program Files\feiq\Recv Files\图片\flex.jpg)
-
-# 补充
-
-```
-服务器：具备唯一的公网IP地址
-电脑主机：通过局部网连接公网
-
-域名如何解析IP地址
-DNS域名解析：浏览器先从本地记录->操作系统本地缓存->局部网的路由器->运营商的服务器找缓存->公网根
-
-css为什么要写在html的head： 避免回流，提高性能
-
-js 弱类型 单线程 脚本语言(特定的运行环境)
-面向对象 js核心思想 基于原型链--复用
-
-vue2实现数据双向数据绑定 Object.defineProperty() --非法入侵原型链
-vue3实现数据双向数据绑定 proxy代理
-
-闭包是函数的一种特性，函数可以沿作用域链访问外部的变量
-
-Set中数组的索引就是项本身，索引是唯一的，项也是唯一的
-
-ES模块与commonJs的区别 1.打包环境不一样，2.ES模块import是静态导入，代码执行前导入，commonJs是运行时导入
-
-babel如何优雅降级
-AST抽象语法树
-Babel是一个广泛使用的转码器，可以将ES6/ES7代码转为ES5代码
-过程：将ES6、ES7先转成AST抽象语法树，再将AST抽象语法树转成目标语法
-
-filbe把VDOM节点改造成filbe节点，以一个filbe节点为单位，进行diff。diff算法是比对DOM树，当DOM庞大时，比对时间长，会阻塞，容易引起卡顿，16.3之后改成filbe
-filbe核心：病发模式以前，以整棵vdom树为节点；病发模式以后，diff可中断，执行其他任务，等空闲时可以再来执行filbe
-filbe架构特点：时间分片 任务分段 异步渲染
-
-*diff算法：从上到下，从左到右，按照key值依次遍历，时间复杂程度为n。遇到新增就新增，遇到改变，先删除再生成，props=改变则更新，遇到删除，连同子节点一起删掉
-
-高阶组件，传入一个组件，返回一个组件，组合与继承
-
-v8垃圾回首机制
-https://segmentfault.com/a/1190000014383214
-这是一面吗，还有2面
-JavaScript执行环境/执行上下文
-https://blog.csdn.net/weixin_34138056/article/details/91423750
-
-高阶组件
-https://www.cnblogs.com/sanchang/p/10614074.html
-
-页面加载缓慢
-1.广告  2.按需加载：按业务进行代码分割  react.lazy() + Suspense  3.缓存
-
-项目性能优化
-1.资源请求时间 
-    CDN 内容分发网络
-    缓存：强缓存(所有文件都缓存，以后只要再次访问这个网站，不请求网络，而请求本地缓存，缺点--网站不会更新，解决--html不强缓存)；协商缓存(客户端第一次发起请求，在request上会添加一个时间，当第二次发起请求，服务器会将上次的时间戳与资源在服务器上的最后修改时间判断资源是否有变化，如果有变化，则返回新版本status200，如果没有变化，则会重定向到本地缓存，status304)
-    DNS预解析
-    预加载 preload prefetch  <link rel="preload" href="/path/to/style.css" as="style">
-2.优化资源大小
-   代码分割
-   分包
-   懒加载
-   文件压缩（代码压缩--分包，配置多出口，图片压缩-雪碧图、base64、图片设置宽高）
-3.优化代码执行
-   react减少render
-   防抖、节流
-   css避免过多嵌套，能加类名就加类名
-   js避免业务逻辑之外的回流重绘，卸载不必要的事件监听、事件代理
-在react中优化
-   react.lazy 
-   userMemo userCallback
-   shouldComponentUpdata  
-   react.pureComponent 在render前先进行一次浅比较（新旧state，新旧props）
-   渲染无关的数据，不存入state
-   尽量减少表单元素受控
-   把大量的计算扔到webworker线程里
-   
-react数据流
-react是单项数据流，子组件通过props获取父组件的状态和方法，数据流是不可逆
-
-for……of 只能遍历有遍历器（Iterator）的，对象不能遍历
-
-组件通信
-父传子 props
-子传父 父给子一个方法，子调用并传参；
-兄弟 子传父 父传子；ref；状态提升
-远程 context；redux；事件发布订阅模式；第三方媒介-URL、本地缓存
-
-BFC是W3C规范，一个块元素就是一个独立的BFC
-
-弹性盒和浮动不能同时使用，弹性盒生效，浮动不生效
-
-把组件状态提升到最外层 flux架构  react-redux是flux的具体实现
-
-路由实现原理：1.哈希模式 hashChange 2.history模式 popstate
-
-编辑跳转：编辑路由router跳转时，将id穿到URL
-
-模板字符串、结构赋值，类是构造函数的语法糖，箭头函数、扩展运算符，async/await是promise的语法糖
-
-code-review 
-技术层面，代码的规范和兜底
-逻辑层面，查看代码是否有业务逻辑错误 
-```
-
-# ★react补充
-
-## **1.我看你的简历里主要技术栈是react，你会用hooks吗？**
-
-​	1）为什么用
-​      		为了让函数组件拥有类组件的功能和其他的React特性；
-​      		自定义hook  实现组件的复用
-​      		代码量比类组件更少，更清爽
-​	2）原生hooks（都要写在最顶层） 
-​      		useState、useReducer  状态定义
-​      		useEffect、useLayoutEffect 生命周期功能
-​      		useRef useImperativeHandle 替代了类组件的 Ref
-​      		useMemo、useCallback  优化函数组件
-​      		useDebugValue  为自定义hook添加名称
-​      
-​     	***useState:***
-
-​           1、概念：在类组件中，我们使用 `this.state` 来保存组件状态，并对其修改触发组件重新渲染，而在函数组件中，由于没有 state等一些自己的状态 ，于是React 通过 useState 来帮我们保存组件的状态。
-​		作用：定义状态 修改状态
-​		返回一个数组，其中第一项是状态值，第二项是一个更新状态的函数。
-​		状态一旦改变，React 就会重新渲染组件，变量获取新的状态值。
-​		
-​      **useEffect:**( 副作用函数()=>消除副作用,监听数组)   副作用：模拟生命周期钩子
-
-​            1、函数组件能保存状态，但是对于异步请求，副作用的操作还是无能为力，所以 React 提供了 useEffect 来帮助开发者处理函数组件的副作用         	
-
-​             2、他接受两个参数，第一个参数是副作用函数，它可以返回一个消除副作用函数。
-​        	 第二个参数是一个数组，副作用函数和消除副作用函数受这个数组的监听内容影响，以此决定是否在当次render前后触发。数组不传的情况下，副作用函数会在每次render后执行一次，消除副作用函数默认会在初始化后每次render前和卸载前执行。
-​         	常用useEffect来模拟生命周期钩子(比如 componentdidmount、componentdidupdata、componentwillunmount)，以及做一些render后的事件监听(副作用)，以及卸载监听(消除副作用)；
-  // 只有一个参数且是函数的时候, 就是不传递第二个参数，代表不监听任何参数变化。每次渲染DOM之后，都会执行useEffect中的函数相当于componentDidMount和componentDidUpdate
-
- // 第二个参数是一个数组，数组里面可以添加依赖
-
- // 若第二个参数是空数组，相当于componentDidMount
-
- // 第二个参数里面有依赖，相当于shouldComponentUpdate, watch     
-
- //如果第一个参数（函数）里面返回了一个函数，则就是卸载，此时注意的是依赖是空数组
-
-
-
- **useLayoutEffect和useEffect的区别：**
-
-```
-useEffect在render结束后执行，性能更好；
-
-useLayoutEffect会在DOM更新完成后立即执行，会阻塞浏览器的绘制。
-
-多数情况下，使用useEffect，但有些跟视图有关的副作用想要第一时间呈现给用户，那么我们就可以使用useLayoutEffect
-```
-
-​	**useReducer** ：useReducer 这个 Hooks 在使用上几乎跟 Redux/React-Redux 一样，唯一缺少的就是无法使用 redux 提供的中间件。有两个参数，参数1：reducer，参数2：默认的state，返回的是一个数组。
-​	**useContext:***useContext 是 React 帮你封装好的，用来处理多层级传递数据的方式，在以前组件树中，跨层级祖先组件想要给孙子组件传递数据的时候，除了一层层 props 往下透传之外，我们还可以使用 React Context API 来帮我们做这件事，通过 React createContext 的语法，在 APP 组件中可以跨过 子组件组件给儿子组件 传递数据。而在 React Hooks 中，我们可以使用 useContext 进行改造，传递给 useContext 的是 context 而不是 consumer，返回值即是想要透传的数据了。用法很简单，使用 useContext 可以解决 Consumer 多状态嵌套的问题。而使用 useContext 则变得十分简洁，可读性更强且不会增加组件树深度。
-​		（跨组件通信 createContext创建一个组件 <numContext.Provider value={num}>使用 useContext 可以解决 Consumer 多状态嵌套的问题。）
-​	**useDebugValue:**
-​		自定义 hook 的标签 方便调试台查看
-​	**useMemo:**
-​		记忆组件 动态缓存 返回一个记忆值，优化作用,类似于shouldComponentUpdate
-​        会在组件第一次渲染的时候执行，之后他依赖的变量发生改变时再次执行
-​	**useCallBack:**（当自定义事件传递给子组件的时候，子组件会二次渲染，此时就可以用useCallBack来阻止它二次渲染，来达到性能优化的作用）
-
-## 	**useMemo 和useCallBack的区别****
-
-```
-	useCallback都会在组件第一次渲染的时候执行，之后会在其依赖的变量发生改变时再次执行
-​	并且这两个hooks都返回缓存的值，useMemo返回缓存的变量，useCallback返回缓存的函数。
-`useMemo` 和 `useCallback` 接收的参数都是一样,第一个参数为回调 第二个参数为要依赖的数据
-共同作用：
-1.仅仅 `依赖数据` 发生变化, 才会重新计算结果，也就是起到缓存的作用。
-两者区别：
-1.`useMemo` 计算结果是 `return` 回来的值, 主要用于缓存计算结果的值 ，应用场景如： 需要计算的状态
-2.`useCallback` 计算结果是 `函数`, 主要用于 缓存函数，应用场景如: 需要缓存的函数，因为函数式组件每次任何一个 state 的变化 整个组件 都会被重新刷新，一些函数是没有必要被重新刷新的，此时就应该缓存起来，提高性能，和减少资源浪费。
-
-注意： 不要滥用会造成性能浪费，react中减少render就能提高性能，所以这个仅仅只针对缓存能减少重复渲染时使用和缓存计算结果。		
-```
-
-​	**useRef:**
-​		创建ref实例， 可以用来存值，也可以用来标记dom和组件获取他们的实例。
-​		返回一个可变的ref对象
-​	useImperativeHandle:
-​		将组件中的方法放到外面使用
-​		搭配React.forwardRef
-
-  	3)使用规则
-​        	自定义hook名称以 “use” 开头，函数内部可以调⽤其他的 Hook
-​        	只能用在函数组件当中使用
-​        	只能在函数最外层调用原生Hook。不能在循环、条件判断或者子函数中调用
-​	4）自定义hook
-   		类似于高阶组件 
-   		高阶组件返回的一个类组件，而自定义Hook可以返回任何东西
-   		高阶组件必须传递一个组件作为参数，而自定义Hook不需要
-
-```
-   function useFriendStatus(friendID) {
-     const [isOnline, setIsOnline] = useState(null);
-     useDebugValue(isOnline ? 'Online' : 'Offline');
-     return isOnline;
-   }
-```
-
-## **2.你的项目中用到了redux吗？ 讲下redux 数据流？**
-
-redux是一种管理状态
-
-## 	**redux 数据流**
-
-​		是flux架构思想的具体实现：将状态提升到全局store，然后分发给组件，更新store的方式是dispatch一个action触发对应的reducer函数。
-​	
-​	**redux流程**
-
-- ​	打造store -- 存储定义 state、管理state
-
-- ​	打造reducers，reducer拷贝state,并返回一个新的state给store(扩展元素安抚) -- 定义修改后的数据
-
-- ​	通过connect高阶组件将store的数据取出来给了组件
-
-- ​	组件中触发动作激活 action 
-
-- ​	actionCreators 创建action，action激活reducer
-
-- ​	reducers中修改数据
-
-  **redux组成**
-  ​        store :用来存储数据和数据管理的、更新视图
-  ​        reducer:是一个纯函数，接收旧 state 和 action，根据不同的 Action 做出不同的操作并返回新的 state
-  ​        actions:发送动作给reducer,reducer接收动作，判断动作类型修改数据，修改事件后，组件重新做redux事件的订阅
-  ​       		View：界面，在React中，其实就是组件
-
-  **redux三大原则**
-  ​        1）**单一数据源**:
-    		整个应用的 state 被存储在一个 Object tree 中，且只存在于唯一的Store中
-  ​        2）**state 是只读的**:
-   		唯一改变 state 的方法就是触发 action，action 是一个用于描述发生事件的普通对象，视图部分只需要表达想要修改的意图，所有修改都会被集中化处理。
-  ​        3）**状态的改变通过纯函数reducer来完成**:
-    		Redux使用纯函数方式来执行状态的修改，Action表明了修改状态值的意图，而真正执行状态修改的则是Reducer。且Reducer必须是一个纯函数，当Reducer接收到Action时，Action并不能直接修改State的值，而是通过创建一个新的状态对象来返回修改的状态。
-
-## **3.Provider 和 connact分别做了什么事？**
-
-​    	react-redux是给react项目提供的状态提升和分发的简化操作api=>Provider+connect。
-   	通过最外层Provider组件开启context，将全局store内容打进去；通过connect高阶组件获取store内容，并将其打入到参数组件的props中； 上述两者完成了状态提升到全局和状态分发。
-
-## **4.redux(或者react-redux)如何更新store里面的数据？**
-
-​	dispatch一个action触发对应的reducer函数。
-
-## **5.reducer是个纯函数，那我想在更新store前执行一些副作用怎么办？**
-
-​	dva中引用了 redux-saga中间件， 它提供了effect函数来处理副作用。完整链路是： dispatch一个action，触发effect函数执行副作用，然后再触发reducer去更新store。
-
-## **6.redux-saga的实现原理？**
-
-```
-	基于generator函数实现的。
-​	**redux-saga是redux的中间键，提供了effect函数功能。**
-
-​	**为什么要用它？**
-​	因为有时候我们期望 dispatch一个action后，先处理一些业务逻辑(也称之为副作用)，比如发送请求获取数据然后将数据更新到store，但reducer是纯函数，无法在reducer内使用副作用代码(比如不能在reducer里面去请求)。
-​	那么我们可以用redux-saga中间键去扩展 redux的功能，提供一个effect函数。
-​	这样就可以，dispath一个action => 触发effect执行副作用业务逻辑 => 然后触发reducer传入数据 => 更新store
-
-
-用法：先安装->
-```
-
-
-
-## **7.Hook的实现原理是？**
-
-​	闭包，然后react底层用一个单链表结构记录它们。
-
-## **8.为什么不能在条件语句中使用hook？**
-
-​	因为单链表中的链表节点缺失，会造成链路中断。所以react不允许在条件语句中使用hook
-
-## **9.setState(callback/object,callback?)**
-
-在react中如果写了很多个this.setState，他就会等待合并，为了性能优化
-
-以前在合成事件中都是异步
-
-第一个参数如果是对象，合成事件都是异步，但在计时器中是同步（这是react的一个bug，但在react 16.8之后，这个bug被修复了，所以16.8之后在计时器中setState也成了异步）
-
-第二个参数为回调函数： 这个callbackstate更新之后的回调，此时state已经完成更新，可以取到更新后的state 
-
-# swiper原理，原生js怎么实现，主要是拉动的弹性效果
-
-```
-swiper是一款轻量级的轮播图插件，不仅支持pc端更是为移动端而生，用它可以快速地做出一个轮播图，或者扩展使其做出复杂的轮播效果。
-
-主要使用touchstart,touchmove，touchend事件
-
-touchstart时记录用户触摸点的x,y坐标，存入数组[x,y]，将slide Container的transition设置为0s（默认有transition: all 0s ease 0s）
-
-touchmove事件也会进行触摸位置移动，
-
-触摸的距离len为用触摸点的x坐标e.touches[0].clientX减去touchstart时记录的数组里的x坐标.(得出的len为负值)
-
-移动的位置为：
-
-负的slide container的宽度clientWidth*currentIndex + len
-
-touchend事件
-
-当不是第一或者最后一张的时候，currentIndex加1,设置transition时间，
-
-设置移动距离distance为itemWidth * currentIndex,设置transform的translate为(-distance px,0),其中itemWidth为slidecontainer的宽度
-
-导航小圆点
-
-初始化的时候创建一个数组，数组长度为slider的长度
-
-根据currentIndex进行样式变换，currentIndex跟当前的小圆点index一致的时候，添加特殊的class,比如背景色，更大的width等。
-```
-
-# diff算法、diff算法中key的比较是怎样的?
-
-diff算法：从上到下，从左到右，按照key值依次遍历，时间复杂程度为n。遇到新增就新增，遇到改变，先删除再生成，props=改变则更新，遇到删除，连同子节点一起删掉
-
-
-
-理解：diff算法用来计算出虚拟Dom中改变的部分，然后针对该部分进行DOM操作，而不用重新渲染整个页面，渲染整个DOM结构的过程中开销是很大的，需要浏览器对DOM结构进行重绘与回流，而diff算法能够使得操作过程中只更新修改的那部分DOM结构而不更新整个DOM，这样能够最小化操作DOM结构，能够最大程度上减少浏览器重绘与回流的规模。
-
-diff算法：即差异查找算法，对于DOM结构即为tree的差异查找算法，只有在React更新阶段才会有Diff算法的运用；react的diff运算为了降低时间复杂度，是按层比较新旧两个虚拟dom树的。diff运算的主要流程见下：
-
-        1、tree diff : 新旧两棵dom树，逐层对比的过程就是 tree diff, 当整棵DOM树逐层对比完毕，则所有需要被按需更新的元素，必然能够被找到。
-        2、component diff ： 在进行tree diff的时候，每一层中，都有自己的组件，组件级别的对比，叫做 component diff。如果对比前后，组件的类型相同，则暂时认为此组件不需要更新；如果对比前后，组件的类型不同，则需要移除旧组件，创建新组件，并渲染到页面上。
-        React只会匹配类型相同的组件，也就是说如果<A>被<B>替换，那么React将直接删除A组件然后创建一个B组件；如果某组件A转移到同层B组件上，那么这个A组件会先被销毁，然后在B组件下重新生成，以A为根节点的树整个都被重新创建，这会比较耗费性能，但实际上我们很少跨层移动dom节点，一般都是同层横向移动；
-        3、element diff ：在进行组件对比的时候，如果两个组件类型相同，则需要进行元素级别的对比，这叫做element diff。
-        对于列表渲染，react会在创建时要求为每一项输入一个独一无二的key，这样就能进行高效的diff运算了。比如我们要在b和c节点中间插入一个节点f，jquery会将f这个节点后面的每一个节点都进行更新，比如c更新成f，d更新成c，e更新成d，这样操作的话就会特别多，而加了key的react咋不会频繁操作dom，而是优先采用移动的方式，找到正确的位置去插入新节点；所以我们不能省略key值，因为在对比两个新旧的子元素是，是通过key值来精确地判断两个节点是否为同一个，如果没有key的话则是见到谁就更新谁，非常耗费性能。
-            当我们通过this.setState()改变数据的时候，React会将其标记为脏节点，在事件循环的最后才会重新渲染所有的脏节点以及脏节点的子树；另外我们可以使用shouldComponentUpdate这个生命周期来选择性的渲染子树，可以基于组件之前的状态或者下一个状态来决定它是否需要重新渲染，这样的话可以组织重新渲染大的子树。
-    只进行统一层级的比较，如果跨层级的移动则视为创建和删除操作。
-    如果是不同类型的元素，则认为是创建了新的元素，而不会递归比较他们的孩子。
-    如果是列表元素等比较相似的内容，可以通过key来唯一确定是移动还是创建或删除操作。
-
-# diff算法中用key比较和index有什么区别，为什么不用index
-
-```
-总结：当以数组的下标index作为key值时，其中一个元素发生了变化 就有可能导致所有元素的key值发生改变 。diff算法是比较同级之间的不同并以key值来进行关联。当对数组进行下标的变换时，比如删除第一条数据，那么以后所有的Index都会发生改变，那么key值自然也跟着全部发生改变，所以，index作为key值和没加index是一样的，并不能提升性能。 
-
-在平时的开发过程中, 因为我们的数据绝大部分都是从后台获取来的. 数据库中每一条数据都会一个 id 作为唯一标识，而这个 id 也是我们最常使用作为 key 值的来源。
-```
-
 # 函数组件和类组件的区别
 
 ```
@@ -1585,8 +15,7 @@ props不能改变
 ```
 
 [
-  ](https://lurongtao.gitee.io/felixbooks-interview2/react/)
-
+](https://lurongtao.gitee.io/felixbooks-interview2/react/)
 
 - [前端面试题及答案汇总](#%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%B1%87%E6%80%BB)
   - [第 1 题：写 React / Vue 项目时为什么要在列表组件中写 key，其作用是什么？](#%E7%AC%AC-1-%E9%A2%98%E5%86%99-react--vue-%E9%A1%B9%E7%9B%AE%E6%97%B6%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%9C%A8%E5%88%97%E8%A1%A8%E7%BB%84%E4%BB%B6%E4%B8%AD%E5%86%99-key%E5%85%B6%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88)
@@ -1603,8 +32,8 @@ props不能改变
   - [第 12 题：JS 异步解决方案的发展历程以及优缺点。](#%E7%AC%AC-12-%E9%A2%98js-%E5%BC%82%E6%AD%A5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%E4%BB%A5%E5%8F%8A%E4%BC%98%E7%BC%BA%E7%82%B9)
   - [第 13 题：Promise 构造函数是同步执行还是异步执行，那么 then 方法呢？](#%E7%AC%AC-13-%E9%A2%98promise-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E6%98%AF%E5%90%8C%E6%AD%A5%E6%89%A7%E8%A1%8C%E8%BF%98%E6%98%AF%E5%BC%82%E6%AD%A5%E6%89%A7%E8%A1%8C%E9%82%A3%E4%B9%88-then-%E6%96%B9%E6%B3%95%E5%91%A2)
   - [第 14 题：情人节福利题，如何实现一个 new](#%E7%AC%AC-14-%E9%A2%98%E6%83%85%E4%BA%BA%E8%8A%82%E7%A6%8F%E5%88%A9%E9%A2%98%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA-new)
-  - [第 15 题：简单讲解一下http2的多路复用](#%E7%AC%AC-15-%E9%A2%98%E7%AE%80%E5%8D%95%E8%AE%B2%E8%A7%A3%E4%B8%80%E4%B8%8Bhttp2%E7%9A%84%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8)
-  - [第 16 题：谈谈你对TCP三次握手和四次挥手的理解](#%E7%AC%AC-16-%E9%A2%98%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9tcp%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%E7%9A%84%E7%90%86%E8%A7%A3)
+  - [第 15 题：简单讲解一下 http2 的多路复用](#%E7%AC%AC-15-%E9%A2%98%E7%AE%80%E5%8D%95%E8%AE%B2%E8%A7%A3%E4%B8%80%E4%B8%8Bhttp2%E7%9A%84%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8)
+  - [第 16 题：谈谈你对 TCP 三次握手和四次挥手的理解](#%E7%AC%AC-16-%E9%A2%98%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9tcp%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%E7%9A%84%E7%90%86%E8%A7%A3)
   - [第 17 题：A、B 机器正常连接后，B 机器突然重启，问 A 此时处于 TCP 什么状态](#%E7%AC%AC-17-%E9%A2%98ab-%E6%9C%BA%E5%99%A8%E6%AD%A3%E5%B8%B8%E8%BF%9E%E6%8E%A5%E5%90%8Eb-%E6%9C%BA%E5%99%A8%E7%AA%81%E7%84%B6%E9%87%8D%E5%90%AF%E9%97%AE-a-%E6%AD%A4%E6%97%B6%E5%A4%84%E4%BA%8E-tcp-%E4%BB%80%E4%B9%88%E7%8A%B6%E6%80%81)
   - [第 18 题：React 中 setState 什么时候是同步的，什么时候是异步的？](#%E7%AC%AC-18-%E9%A2%98react-%E4%B8%AD-setstate-%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E6%98%AF%E5%90%8C%E6%AD%A5%E7%9A%84%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E6%98%AF%E5%BC%82%E6%AD%A5%E7%9A%84)
   - [第 19 题：React setState 笔试题，下面的代码输出什么？](#%E7%AC%AC-19-%E9%A2%98react-setstate-%E7%AC%94%E8%AF%95%E9%A2%98%E4%B8%8B%E9%9D%A2%E7%9A%84%E4%BB%A3%E7%A0%81%E8%BE%93%E5%87%BA%E4%BB%80%E4%B9%88)
@@ -1619,7 +48,7 @@ props不能改变
   - [第 28 题：cookie 和 token 都存放在 header 中，为什么不会劫持 token？](#%E7%AC%AC-28-%E9%A2%98cookie-%E5%92%8C-token-%E9%83%BD%E5%AD%98%E6%94%BE%E5%9C%A8-header-%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E4%BC%9A%E5%8A%AB%E6%8C%81-token)
   - [第 29 题：聊聊 Vue 的双向数据绑定，Model 如何改变 View，View 又是如何改变 Model 的](#%E7%AC%AC-29-%E9%A2%98%E8%81%8A%E8%81%8A-vue-%E7%9A%84%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9Amodel-%E5%A6%82%E4%BD%95%E6%94%B9%E5%8F%98-viewview-%E5%8F%88%E6%98%AF%E5%A6%82%E4%BD%95%E6%94%B9%E5%8F%98-model-%E7%9A%84)
   - [第 30 题：两个数组合并成一个数组](#%E7%AC%AC-30-%E9%A2%98%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E5%90%88%E5%B9%B6%E6%88%90%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84)
-  - [第 31 题：改造下面的代码，使之输出0 - 9，写出你能想到的所有解法。](#%E7%AC%AC-31-%E9%A2%98%E6%94%B9%E9%80%A0%E4%B8%8B%E9%9D%A2%E7%9A%84%E4%BB%A3%E7%A0%81%E4%BD%BF%E4%B9%8B%E8%BE%93%E5%87%BA0---9%E5%86%99%E5%87%BA%E4%BD%A0%E8%83%BD%E6%83%B3%E5%88%B0%E7%9A%84%E6%89%80%E6%9C%89%E8%A7%A3%E6%B3%95)
+  - [第 31 题：改造下面的代码，使之输出 0 - 9，写出你能想到的所有解法。](#%E7%AC%AC-31-%E9%A2%98%E6%94%B9%E9%80%A0%E4%B8%8B%E9%9D%A2%E7%9A%84%E4%BB%A3%E7%A0%81%E4%BD%BF%E4%B9%8B%E8%BE%93%E5%87%BA0---9%E5%86%99%E5%87%BA%E4%BD%A0%E8%83%BD%E6%83%B3%E5%88%B0%E7%9A%84%E6%89%80%E6%9C%89%E8%A7%A3%E6%B3%95)
   - [第 32 题：Virtual DOM 真的比操作原生 DOM 快吗？谈谈你的想法。](#%E7%AC%AC-32-%E9%A2%98virtual-dom-%E7%9C%9F%E7%9A%84%E6%AF%94%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%94%9F-dom-%E5%BF%AB%E5%90%97%E8%B0%88%E8%B0%88%E4%BD%A0%E7%9A%84%E6%83%B3%E6%B3%95)
   - [第 33 题：下面的代码打印什么内容，为什么？](#%E7%AC%AC-33-%E9%A2%98%E4%B8%8B%E9%9D%A2%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%93%E5%8D%B0%E4%BB%80%E4%B9%88%E5%86%85%E5%AE%B9%E4%B8%BA%E4%BB%80%E4%B9%88)
   - [第 34 题：简单改造下面的代码，使之分别打印 10 和 20。](#%E7%AC%AC-34-%E9%A2%98%E7%AE%80%E5%8D%95%E6%94%B9%E9%80%A0%E4%B8%8B%E9%9D%A2%E7%9A%84%E4%BB%A3%E7%A0%81%E4%BD%BF%E4%B9%8B%E5%88%86%E5%88%AB%E6%89%93%E5%8D%B0-10-%E5%92%8C-20)
@@ -1663,7 +92,7 @@ props不能改变
   - [第 72 题： 为什么普通 `for` 循环的性能远远高于 `forEach` 的性能，请解释其中的原因。](#%E7%AC%AC-72-%E9%A2%98-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%99%AE%E9%80%9A-for-%E5%BE%AA%E7%8E%AF%E7%9A%84%E6%80%A7%E8%83%BD%E8%BF%9C%E8%BF%9C%E9%AB%98%E4%BA%8E-foreach-%E7%9A%84%E6%80%A7%E8%83%BD%E8%AF%B7%E8%A7%A3%E9%87%8A%E5%85%B6%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9B%A0)
   - [第 73 题： 介绍下 BFC、IFC、GFC 和 FFC](#%E7%AC%AC-73-%E9%A2%98-%E4%BB%8B%E7%BB%8D%E4%B8%8B-bfcifcgfc-%E5%92%8C-ffc)
   - [第 74 题： 使用 JavaScript Proxy 实现简单的数据绑定](#%E7%AC%AC-74-%E9%A2%98-%E4%BD%BF%E7%94%A8-javascript-proxy-%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A)
-  - [第 75 题：数组里面有10万个数据，取第一个元素和第10万个元素的时间相差多少](#%E7%AC%AC-75-%E9%A2%98%E6%95%B0%E7%BB%84%E9%87%8C%E9%9D%A2%E6%9C%8910%E4%B8%87%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%8F%96%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E5%92%8C%E7%AC%AC10%E4%B8%87%E4%B8%AA%E5%85%83%E7%B4%A0%E7%9A%84%E6%97%B6%E9%97%B4%E7%9B%B8%E5%B7%AE%E5%A4%9A%E5%B0%91)
+  - [第 75 题：数组里面有 10 万个数据，取第一个元素和第 10 万个元素的时间相差多少](#%E7%AC%AC-75-%E9%A2%98%E6%95%B0%E7%BB%84%E9%87%8C%E9%9D%A2%E6%9C%8910%E4%B8%87%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%8F%96%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E5%92%8C%E7%AC%AC10%E4%B8%87%E4%B8%AA%E5%85%83%E7%B4%A0%E7%9A%84%E6%97%B6%E9%97%B4%E7%9B%B8%E5%B7%AE%E5%A4%9A%E5%B0%91)
   - [第 76 题：输出以下代码运行结果](#%E7%AC%AC-76-%E9%A2%98%E8%BE%93%E5%87%BA%E4%BB%A5%E4%B8%8B%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C)
   - [第 77 题：算法题「旋转数组」](#%E7%AC%AC-77-%E9%A2%98%E7%AE%97%E6%B3%95%E9%A2%98%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84)
   - [第 78 题：Vue 的父组件和子组件生命周期钩子执行顺序是什么](#%E7%AC%AC-78-%E9%A2%98vue-%E7%9A%84%E7%88%B6%E7%BB%84%E4%BB%B6%E5%92%8C%E5%AD%90%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%E6%98%AF%E4%BB%80%E4%B9%88)
@@ -1690,7 +119,7 @@ props不能改变
   - [第 99 题：编程算法题](#%E7%AC%AC-99-%E9%A2%98%E7%BC%96%E7%A8%8B%E7%AE%97%E6%B3%95%E9%A2%98)
   - [第 100 题：请写出如下代码的打印结果](#%E7%AC%AC-100-%E9%A2%98%E8%AF%B7%E5%86%99%E5%87%BA%E5%A6%82%E4%B8%8B%E4%BB%A3%E7%A0%81%E7%9A%84%E6%89%93%E5%8D%B0%E7%BB%93%E6%9E%9C)
   - [第 101 题：修改以下 print 函数，使之输出 0 到 99，或者 99 到 0](#%E7%AC%AC-101-%E9%A2%98%E4%BF%AE%E6%94%B9%E4%BB%A5%E4%B8%8B-print-%E5%87%BD%E6%95%B0%E4%BD%BF%E4%B9%8B%E8%BE%93%E5%87%BA-0-%E5%88%B0-99%E6%88%96%E8%80%85-99-%E5%88%B0-0)
-  - [第 102 题：不用加减乘除运算符，求整数的7倍](#%E7%AC%AC-102-%E9%A2%98%E4%B8%8D%E7%94%A8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B1%82%E6%95%B4%E6%95%B0%E7%9A%847%E5%80%8D)
+  - [第 102 题：不用加减乘除运算符，求整数的 7 倍](#%E7%AC%AC-102-%E9%A2%98%E4%B8%8D%E7%94%A8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B1%82%E6%95%B4%E6%95%B0%E7%9A%847%E5%80%8D)
   - [第 103 题：模拟实现一个 localStorage](#%E7%AC%AC-103-%E9%A2%98%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA-localstorage)
   - [第 104 题：模拟 localStorage 时如何实现过期时间功能](#%E7%AC%AC-104-%E9%A2%98%E6%A8%A1%E6%8B%9F-localstorage-%E6%97%B6%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4%E5%8A%9F%E8%83%BD)
   - [第 105 题：编程题](#%E7%AC%AC-105-%E9%A2%98%E7%BC%96%E7%A8%8B%E9%A2%98)
@@ -1720,332 +149,460 @@ props不能改变
   - [第 129 题：输出以下代码执行结果](#%E7%AC%AC-129-%E9%A2%98%E8%BE%93%E5%87%BA%E4%BB%A5%E4%B8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C)
   - [第 130 题：输出以下代码执行结果，大致时间就好（不同于上题）](#%E7%AC%AC-130-%E9%A2%98%E8%BE%93%E5%87%BA%E4%BB%A5%E4%B8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C%E5%A4%A7%E8%87%B4%E6%97%B6%E9%97%B4%E5%B0%B1%E5%A5%BD%E4%B8%8D%E5%90%8C%E4%BA%8E%E4%B8%8A%E9%A2%98)
   - [第 131 题：接口如何防刷](#%E7%AC%AC-131-%E9%A2%98%E6%8E%A5%E5%8F%A3%E5%A6%82%E4%BD%95%E9%98%B2%E5%88%B7)
-  - [第 132 题：实现一个 Dialog 类，Dialog可以创建 dialog 对话框，对话框支持可拖拽（腾讯）](#%E7%AC%AC-132-%E9%A2%98%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA-dialog-%E7%B1%BBdialog%E5%8F%AF%E4%BB%A5%E5%88%9B%E5%BB%BA-dialog-%E5%AF%B9%E8%AF%9D%E6%A1%86%E5%AF%B9%E8%AF%9D%E6%A1%86%E6%94%AF%E6%8C%81%E5%8F%AF%E6%8B%96%E6%8B%BD%E8%85%BE%E8%AE%AF)
+  - [第 132 题：实现一个 Dialog 类，Dialog 可以创建 dialog 对话框，对话框支持可拖拽（腾讯）](#%E7%AC%AC-132-%E9%A2%98%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA-dialog-%E7%B1%BBdialog%E5%8F%AF%E4%BB%A5%E5%88%9B%E5%BB%BA-dialog-%E5%AF%B9%E8%AF%9D%E6%A1%86%E5%AF%B9%E8%AF%9D%E6%A1%86%E6%94%AF%E6%8C%81%E5%8F%AF%E6%8B%96%E6%8B%BD%E8%85%BE%E8%AE%AF)
   - [第 133 题：用 setTimeout 实现 setInterval，阐述实现的效果与 setInterval 的差异](#%E7%AC%AC-133-%E9%A2%98%E7%94%A8-settimeout-%E5%AE%9E%E7%8E%B0-setinterval%E9%98%90%E8%BF%B0%E5%AE%9E%E7%8E%B0%E7%9A%84%E6%95%88%E6%9E%9C%E4%B8%8E-setinterval-%E7%9A%84%E5%B7%AE%E5%BC%82)
   - [第 134 题：求两个日期中间的有效日期](#%E7%AC%AC-134-%E9%A2%98%E6%B1%82%E4%B8%A4%E4%B8%AA%E6%97%A5%E6%9C%9F%E4%B8%AD%E9%97%B4%E7%9A%84%E6%9C%89%E6%95%88%E6%97%A5%E6%9C%9F)
   - [第 135 题：算法题（盛大）](#%E7%AC%AC-135-%E9%A2%98%E7%AE%97%E6%B3%95%E9%A2%98%E7%9B%9B%E5%A4%A7)
   - [第 136 题：如何实现骨架屏，说说你的思路](#%E7%AC%AC-136-%E9%A2%98%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%AA%A8%E6%9E%B6%E5%B1%8F%E8%AF%B4%E8%AF%B4%E4%BD%A0%E7%9A%84%E6%80%9D%E8%B7%AF)
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+  <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 前端面试题及答案汇总
+
 ### 第 1 题：写 React / Vue 项目时为什么要在列表组件中写 key，其作用是什么？
+
 公司：滴滴、饿了么
 解析：[第 1 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/1)
 <br/>
+
 ### 第 2 题：`['1', '2', '3'].map(parseInt)` what & why ?
+
 解析：[第 2 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/4)
 <br/>
+
 ### 第 3 题：什么是防抖和节流？有什么区别？如何实现？
+
 公司：挖财
 解析：[第 3 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/5)
 <br/>
+
 ### 第 4 题：介绍下 Set、Map、WeakSet 和 WeakMap 的区别？
+
 解析：[第 4 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/6)
 <br/>
+
 ### 第 5 题：介绍下深度优先遍历和广度优先遍历，如何实现？
+
 解析：[第 5 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/9)
 <br/>
+
 ### 第 6 题：请分别用深度优先思想和广度优先思想实现一个拷贝函数？
+
 解析：[第 6 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/10)
 <br/>
+
 ### 第 7 题：ES5/ES6 的继承除了写法以外还有什么区别？
+
 解析：[第 7 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/20)
 <br/>
+
 ### 第 8 题：setTimeout、Promise、Async/Await 的区别
+
 解析：[第 8 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/33)
 <br/>
+
 ### 第 9 题：Async/Await 如何通过同步的方式实现异步
+
 公司：头条、微医
 解析：[第 9 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/156)
 <br/>
+
 ### 第 10 题：异步笔试题
+
 > 请写出下面代码的运行结果
+
 ```js
 async function async1() {
-    console.log('async1 start');
-    await async2();
-    console.log('async1 end');
+  console.log('async1 start')
+  await async2()
+  console.log('async1 end')
 }
 async function async2() {
-    console.log('async2');
+  console.log('async2')
 }
-console.log('script start');
-setTimeout(function() {
-    console.log('setTimeout');
+console.log('script start')
+setTimeout(function () {
+  console.log('setTimeout')
 }, 0)
-async1();
-new Promise(function(resolve) {
-    console.log('promise1');
-    resolve();
-}).then(function() {
-    console.log('promise2');
-});
-console.log('script end');
+async1()
+new Promise(function (resolve) {
+  console.log('promise1')
+  resolve()
+}).then(function () {
+  console.log('promise2')
+})
+console.log('script end')
 ```
+
 解析：[第 10 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/7)
 公司：头条
 <br/>
+
 ### 第 11 题：算法手写题
+
 > 已知如下数组：
 >
 > var arr = [ [1, 2, 2], [3, 4, 5, 5], [6, 7, 8, 9, [11, 12, [12, 13, [14] ] ] ], 10];
 >
 > 编写一个程序将数组扁平化去并除其中重复部分数据，最终得到一个升序且不重复的数组
-公司：携程
-解析：[第 11 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/8)
-<br/>
+> 公司：携程
+> 解析：[第 11 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/8)
+> <br/>
+
 ### 第 12 题：JS 异步解决方案的发展历程以及优缺点。
+
 公司：滴滴、挖财、微医、海康
 解析：[第 12 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/11)
 <br/>
+
 ### 第 13 题：Promise 构造函数是同步执行还是异步执行，那么 then 方法呢？
+
 公司：微医
 解析：[第 13 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/19)
 <br/>
+
 ### 第 14 题：情人节福利题，如何实现一个 new
+
 公司：兑吧
 解析：[第 14 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/12)
 <br/>
-### 第 15 题：简单讲解一下http2的多路复用
+
+### 第 15 题：简单讲解一下 http2 的多路复用
+
 公司：网易
 解析：[第 15 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/14)
 <br/>
-### 第 16 题：谈谈你对TCP三次握手和四次挥手的理解
+
+### 第 16 题：谈谈你对 TCP 三次握手和四次挥手的理解
+
 解析：[第 16 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/15)
 <br/>
+
 ### 第 17 题：A、B 机器正常连接后，B 机器突然重启，问 A 此时处于 TCP 什么状态
-> 如果A 与 B 建立了正常连接后，从未相互发过数据，这个时候 B 突然机器重启，问 A 此时处于 TCP 什么状态？如何消除服务器程序中的这个状态？（超纲题，了解即可）
-解析：[第 17 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/21)
-<br/>
+
+> 如果 A 与 B 建立了正常连接后，从未相互发过数据，这个时候 B 突然机器重启，问 A 此时处于 TCP 什么状态？如何消除服务器程序中的这个状态？（超纲题，了解即可）
+> 解析：[第 17 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/21)
+> <br/>
+
 ### 第 18 题：React 中 setState 什么时候是同步的，什么时候是异步的？
+
 公司：微医
 解析：[第 18 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/17)
 <br/>
+
 ### 第 19 题：React setState 笔试题，下面的代码输出什么？
+
 ```js
 class Example extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       val: 0
-    };
+    }
   }
-  
-  componentDidMount() {
-    this.setState({val: this.state.val + 1});
-    console.log(this.state.val);    // 第 1 次 log
 
-    this.setState({val: this.state.val + 1});
-    console.log(this.state.val);    // 第 2 次 log
+  componentDidMount() {
+    this.setState({ val: this.state.val + 1 })
+    console.log(this.state.val) // 第 1 次 log
+
+    this.setState({ val: this.state.val + 1 })
+    console.log(this.state.val) // 第 2 次 log
 
     setTimeout(() => {
-      this.setState({val: this.state.val + 1});
-      console.log(this.state.val);  // 第 3 次 log
+      this.setState({ val: this.state.val + 1 })
+      console.log(this.state.val) // 第 3 次 log
 
-      this.setState({val: this.state.val + 1});
-      console.log(this.state.val);  // 第 4 次 log
-    }, 0);
+      this.setState({ val: this.state.val + 1 })
+      console.log(this.state.val) // 第 4 次 log
+    }, 0)
   }
 
   render() {
-    return null;
+    return null
   }
-};
+}
 ```
+
 解析：[第 19 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/18)
 <br/>
+
 ### 第 20 题：介绍下 npm 模块安装机制，为什么输入 npm install 就可以自动安装对应的模块？
+
 解析：[第 20 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/22)
 <br/>
+
 ### 第 21 题：有以下 3 个判断数组的方法，请分别介绍它们之间的区别和优劣
-> Object.prototype.toString.call() 、 instanceof 以及 Array.isArray() 
-解析：[第 21 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/23)
-<br/>
+
+> Object.prototype.toString.call() 、 instanceof 以及 Array.isArray()
+> 解析：[第 21 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/23)
+> <br/>
+
 ### 第 22 题：介绍下重绘和回流（Repaint & Reflow），以及如何进行优化
+
 解析：[第 22 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/24)
 <br/>
+
 ### 第 23 题：介绍下观察者模式和订阅-发布模式的区别，各自适用于什么场景
+
 解析：[第 23 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/25)
 <br/>
+
 ### 第 24 题：聊聊 Redux 和 Vuex 的设计思想
+
 解析：[第 24 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/45)
 <br/>
+
 ### 第 25 题：说说浏览器和 Node 事件循环的区别
+
 解析：[第 25 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/26)
-<br/> 
+<br/>
+
 ### 第 26 题：介绍模块化发展历程
-可从IIFE、AMD、CMD、CommonJS、UMD、webpack(require.ensure)、ES Module、`<script type="module">` 这几个角度考虑。
+
+可从 IIFE、AMD、CMD、CommonJS、UMD、webpack(require.ensure)、ES Module、`<script type="module">` 这几个角度考虑。
 解析：[第 26 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/28)
 <br/>
+
 ### 第 27 题：全局作用域中，用 const 和 let 声明的变量不在 window 上，那到底在哪里？如何去获取？。
+
 解析：[第 27 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/30)
 <br/>
+
 ### 第 28 题：cookie 和 token 都存放在 header 中，为什么不会劫持 token？
+
 解析：[第 28 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/31)
 <br/>
+
 ### 第 29 题：聊聊 Vue 的双向数据绑定，Model 如何改变 View，View 又是如何改变 Model 的
+
 解析：[第 29 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/34)
 <br/>
+
 ### 第 30 题：两个数组合并成一个数组
+
 请把两个数组 ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'] 和 ['A', 'B', 'C', 'D']，合并为 ['A1', 'A2', 'A', 'B1', 'B2', 'B', 'C1', 'C2', 'C', 'D1', 'D2', 'D']。
 解析： [第 30 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/39)
 <br/>
-### 第 31 题：改造下面的代码，使之输出0 - 9，写出你能想到的所有解法。
+
+### 第 31 题：改造下面的代码，使之输出 0 - 9，写出你能想到的所有解法。
+
 ```js
-for (var i = 0; i< 10; i++){
-	setTimeout(() => {
-		console.log(i);
-    }, 1000)
+for (var i = 0; i < 10; i++) {
+  setTimeout(() => {
+    console.log(i)
+  }, 1000)
 }
 ```
+
 解析：[第 31 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/43)
 <br/>
+
 ### 第 32 题：Virtual DOM 真的比操作原生 DOM 快吗？谈谈你的想法。
+
 解析：[第 32 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/47)
 <br/>
+
 ### 第 33 题：下面的代码打印什么内容，为什么？
+
 ```js
-var b = 10;
-(function b(){
-    b = 20;
-    console.log(b); 
-})();
+var b = 10
+;(function b() {
+  b = 20
+  console.log(b)
+})()
 ```
+
 解析：[第 33 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/48)
 <br/>
+
 ### 第 34 题：简单改造下面的代码，使之分别打印 10 和 20。
+
 ```js
-var b = 10;
-(function b(){
-    b = 20;
-    console.log(b); 
-})();
+var b = 10
+;(function b() {
+  b = 20
+  console.log(b)
+})()
 ```
+
 解析：[第 34 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/51)
 <br/>
+
 ### 第 35 题：浏览器缓存读取规则
-可以分成 Service Worker、Memory Cache、Disk Cache 和 Push Cache，那请求的时候 from memory cache 和 from disk cache 的依据是什么，哪些数据什么时候存放在 Memory Cache 和 Disk Cache中？
+
+可以分成 Service Worker、Memory Cache、Disk Cache 和 Push Cache，那请求的时候 from memory cache 和 from disk cache 的依据是什么，哪些数据什么时候存放在 Memory Cache 和 Disk Cache 中？
 解析：[第 35 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/53)
 <br/>
+
 ### 第 36 题：使用迭代的方式实现 flatten 函数。
+
 解析：[第 36 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/54)
 <br/>
+
 ### 第 37 题：为什么 Vuex 的 mutation 和 Redux 的 reducer 中不能做异步操作？
+
 解析：[第 37 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/65)
 <br/>
+
 ### 第 38 题：下面代码中 a 在什么情况下会打印 1？
+
 ```js
 var a = ?;
 if(a == 1 && a == 2 && a == 3){
  	console.log(1);
 }
 ```
+
 解析：[第 38 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/57)
 公司：京东
 <br/>
+
 ### 第 39 题：介绍下 BFC 及其应用。
+
 解析：[第 39 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/59)
 <br/>
+
 ### 第 40 题：在 Vue 中，子组件为何不可以修改父组件传递的 Prop
+
 如果修改了，Vue 是如何监控到属性的修改并给出警告的。
 解析：[第 40 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/60)
 <br/>
+
 ### 第 41 题：下面代码输出什么
+
 ```js
-var a = 10;
-(function () {
-    console.log(a)
-    a = 5
-    console.log(window.a)
-    var a = 20;
-    console.log(a)
+var a = 10
+;(function () {
+  console.log(a)
+  a = 5
+  console.log(window.a)
+  var a = 20
+  console.log(a)
 })()
 ```
-解析：[第 41题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/61)
+
+解析：[第 41 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/61)
 <br/>
+
 ### 第 42 题：实现一个 sleep 函数
-比如 sleep(1000) 意味着等待1000毫秒，可从 Promise、Generator、Async/Await 等角度实现
+
+比如 sleep(1000) 意味着等待 1000 毫秒，可从 Promise、Generator、Async/Await 等角度实现
 解析：[第 42 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/63)
 <br/>
+
 ### 第 43 题：使用 sort() 对数组 [3, 15, 8, 29, 102, 22] 进行排序，输出结果
+
 解析：[第 43 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/66)
 <br/>
+
 ### 第 44 题：介绍 HTTPS 握手过程
+
 解析：[第 44 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/70)
 <br/>
+
 ### 第 45 题：HTTPS 握手过程中，客户端如何验证证书的合法性
+
 解析：[第 45 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/74)
 <br/>
+
 ### 第 46 题：输出以下代码执行的结果并解释为什么
+
 ```js
 var obj = {
-    '2': 3,
-    '3': 4,
-    'length': 2,
-    'splice': Array.prototype.splice,
-    'push': Array.prototype.push
+  2: 3,
+  3: 4,
+  length: 2,
+  splice: Array.prototype.splice,
+  push: Array.prototype.push
 }
 obj.push(1)
 obj.push(2)
 console.log(obj)
 ```
+
 解析：[第 46 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/76)
 <br/>
+
 ### 第 47 题：双向绑定和 vuex 是否冲突
+
 解析：[第 47 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/81)
 <br/>
+
 ### 第 48 题：call 和 apply 的区别是什么，哪个性能更好一些
+
 解析：[第 48 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/84)
 <br/>
+
 ### 第 49 题：为什么通常在发送数据埋点请求的时候使用的是 1x1 像素的透明 gif 图片？
+
 解析：[第 49 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/87)
 <br/>
+
 ### 第 50 题：实现 (5).add(3).minus(2) 功能。
+
 > 例： 5 + 3 - 2，结果为 6
-解析：[第 50 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/88)
-公司：百度
-<br/>
+> 解析：[第 50 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/88)
+> 公司：百度
+> <br/>
+
 ### 第 51 题：Vue 的响应式原理中 Object.defineProperty 有什么缺陷？
+
 为什么在 Vue3.0 采用了 Proxy，抛弃了 Object.defineProperty？
 解析：[第 51 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/90)
 <br/>
+
 ### 第 52 题：怎么让一个 div 水平垂直居中
+
 解析：[第 52 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/92)
 <br/>
-### 第 53 题：输出以下代码的执行结果并解释为什么
-```js
-var a = {n: 1};
-var b = a;
-a.x = a = {n: 2};
 
-console.log(a.x) 	
+### 第 53 题：输出以下代码的执行结果并解释为什么
+
+```js
+var a = { n: 1 }
+var b = a
+a.x = a = { n: 2 }
+
+console.log(a.x)
 console.log(b.x)
 ```
+
 解析：[第 53 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/93)
 <br/>
+
 ### 第 54 题：冒泡排序如何实现，时间复杂度是多少， 还可以如何改进？
+
 解析：[第 54 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/94)
 <br/>
+
 ### 第 55 题：某公司 1 到 12 月份的销售额存在一个对象里面
+
 如下：{1:222, 2:123, 5:888}，请把数据处理为如下结构：[222, 123, null, null, 888, null, null, null, null, null, null, null]。
 解析：[第 55 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/96)
 <br/>
-### 第 56 题：要求设计 LazyMan 类，实现以下功能。 
+
+### 第 56 题：要求设计 LazyMan 类，实现以下功能。
+
 ```js
-LazyMan('Tony');
+LazyMan('Tony')
 // Hi I am Tony
 
-LazyMan('Tony').sleep(10).eat('lunch');
+LazyMan('Tony').sleep(10).eat('lunch')
 // Hi I am Tony
 // 等待了10秒...
 // I am eating lunch
 
-LazyMan('Tony').eat('lunch').sleep(10).eat('dinner');
+LazyMan('Tony').eat('lunch').sleep(10).eat('dinner')
 // Hi I am Tony
 // I am eating lunch
 // 等待了10秒...
 // I am eating diner
 
-LazyMan('Tony').eat('lunch').eat('dinner').sleepFirst(5).sleep(10).eat('junk food');
+LazyMan('Tony')
+  .eat('lunch')
+  .eat('dinner')
+  .sleepFirst(5)
+  .sleep(10)
+  .eat('junk food')
 // Hi I am Tony
 // 等待了5秒...
 // I am eating lunch
@@ -2053,94 +610,139 @@ LazyMan('Tony').eat('lunch').eat('dinner').sleepFirst(5).sleep(10).eat('junk foo
 // 等待了10秒...
 // I am eating junk food
 ```
+
 解析：[第 56 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/98)
 <br/>
-### 第 57 题：分析比较 opacity: 0、visibility: hidden、display: none 优劣和适用场景。 
+
+### 第 57 题：分析比较 opacity: 0、visibility: hidden、display: none 优劣和适用场景。
+
 解析：[第 57 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/100)
 <br/>
+
 ### 第 58 题：箭头函数与普通函数（function）的区别是什么？构造函数（function）可以使用 new 生成实例，那么箭头函数可以吗？为什么？
+
 解析：[第 58 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/101)
 <br/>
+
 ### 第 59 题：给定两个数组，写一个方法来计算它们的交集。
+
 > 例如：给定 nums1 = [1, 2, 2, 1]，nums2 = [2, 2]，返回 [2, 2]。
-解析：[第 59 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/102)
-<br/>
+> 解析：[第 59 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/102)
+> <br/>
+
 ### 第 60 题：已知如下代码，如何修改才能让图片宽度为 300px ？注意下面代码不可修改。
+
 > `<img src="1.jpg" style="width:480px!important;”>`
-解析：[第 60 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/105)
-<br/>
+> 解析：[第 60 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/105)
+> <br/>
+
 ### 第 61 题：介绍下如何实现 token 加密
+
 解析：[第 61 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/106)
 <br/>
+
 ### 第 62 题：redux 为什么要把 reducer 设计成纯函数
+
 解析：[第 62 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/107)
 <br/>
+
 ### 第 63 题：如何设计实现无缝轮播
+
 解析：[第 63 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/108)
 <br/>
+
 ### 第 64 题：模拟实现一个 Promise.finally
+
 解析：[第 64 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/109)
 <br/>
+
 ### 第 65 题： `a.b.c.d` 和 `a['b']['c']['d']`，哪个性能更高？
+
 解析：[第 65 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/111)
 <br/>
+
 ### 第 66 题：ES6 代码转成 ES5 代码的实现思路是什么
+
 解析：[第 66 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/112)
 <br/>
+
 ### 第 67 题：数组编程题
+
 随机生成一个长度为 10 的整数类型的数组，例如 `[2, 10, 3, 4, 5, 11, 10, 11, 20]`，将其排列成一个新数组，要求新数组形式如下，例如 `[[2, 3, 4, 5], [10, 11], [20]]`。
 解析：[第 67 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/113)
 <br/>
+
 ### 第 68 题： 如何解决移动端 Retina 屏 1px 像素问题
+
 解析：[第 68 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/115)
 <br/>
+
 ### 第 69 题： 如何把一个字符串的大小写取反（大写变小写小写变大写），例如 ’AbC' 变成 'aBc' 。
+
 解析：[第 69 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/116)
 <br/>
+
 ### 第 70 题： 介绍下 webpack 热更新原理，是如何做到在不刷新浏览器的前提下更新页面的
+
 解析：[第 70 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/118)
 <br/>
+
 ### 第 71 题： 实现一个字符串匹配算法，从长度为 n 的字符串 S 中，查找是否存在字符串 T，T 的长度是 m，若存在返回所在位置。
+
 解析：[第 71 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/119)
 <br/>
+
 ### 第 72 题： 为什么普通 `for` 循环的性能远远高于 `forEach` 的性能，请解释其中的原因。
+
 ![image-20190512225510941](https://ws2.sinaimg.cn/large/006tNc79gy1g2yxbg4ta8j31gh0u048h.jpg)
 解析：[第 72 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/121)
 <br/>
+
 ### 第 73 题： 介绍下 BFC、IFC、GFC 和 FFC
+
 解析：[第 73 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/122)
 <br/>
+
 ### 第 74 题： 使用 JavaScript Proxy 实现简单的数据绑定
+
 解析：[第 74 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/123)
 <br/>
-### 第 75 题：数组里面有10万个数据，取第一个元素和第10万个元素的时间相差多少
+
+### 第 75 题：数组里面有 10 万个数据，取第一个元素和第 10 万个元素的时间相差多少
+
 解析：[第 75 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/124)
 <br/>
+
 ### 第 76 题：输出以下代码运行结果
+
 ```js
 // example 1
-var a={}, b='123', c=123;  
+var a={}, b='123', c=123;
 a[b]='b';
-a[c]='c';  
+a[c]='c';
 console.log(a[b]);
 ---------------------
 // example 2
-var a={}, b=Symbol('123'), c=Symbol('123');  
+var a={}, b=Symbol('123'), c=Symbol('123');
 a[b]='b';
-a[c]='c';  
+a[c]='c';
 console.log(a[b]);
 ---------------------
 // example 3
-var a={}, b={key:'123'}, c={key:'456'};  
+var a={}, b={key:'123'}, c={key:'456'};
 a[b]='b';
-a[c]='c';  
+a[c]='c';
 console.log(a[b]);
 ```
+
 解析：[第 76 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/125)
 <br/>
+
 ### 第 77 题：算法题「旋转数组」
+
 > 给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
-示例 1：
+> 示例 1：
+
 ```js
 输入: [1, 2, 3, 4, 5, 6, 7] 和 k = 3
 输出: [5, 6, 7, 1, 2, 3, 4]
@@ -2149,30 +751,43 @@ console.log(a[b]);
 向右旋转 2 步: [6, 7, 1, 2, 3, 4, 5]
 向右旋转 3 步: [5, 6, 7, 1, 2, 3, 4]
 ```
+
 示例 2：
+
 ```js
 输入: [-1, -100, 3, 99] 和 k = 2
 输出: [3, 99, -1, -100]
-解释: 
+解释:
 向右旋转 1 步: [99, -1, -100, 3]
 向右旋转 2 步: [3, 99, -1, -100]
 ```
+
 解析：[第 77 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/126)
 <br/>
+
 ### 第 78 题：Vue 的父组件和子组件生命周期钩子执行顺序是什么
+
 解析：[第 78 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/128)
 <br/>
+
 ### 第 79 题：input 搜索如何防抖，如何处理中文输入
+
 解析：[第 79 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/129)
 <br/>
+
 ### 第 80 题：介绍下 Promise.all 使用、原理实现及错误处理
+
 解析：[第 80 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/130)
 <br/>
+
 ### 第 81 题：打印出 1 - 10000 之间的所有对称数
+
 > 例如：121、1331 等
-解析：[第 81 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/131)
-<br/>
+> 解析：[第 81 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/131)
+> <br/>
+
 ### 第 82 题：周一算法题之「移动零」
+
 > 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
 >
 > 示例:
@@ -2187,12 +802,16 @@ console.log(a[b]);
 > 1. 必须在原数组上操作，不能拷贝额外的数组。
 >
 > 1. 尽量减少操作次数。
-解析：[第 82 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/132)
-<br/>
+>    解析：[第 82 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/132)
+>    <br/>
+
 ### 第 83 题：var、let 和 const 区别的实现原理是什么
+
 解析：[第 83 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/133)
 <br/>
+
 ### 第 84 题：请实现一个 add 函数，满足以下功能。
+
 > ```js
 > add(1); 			// 1
 > add(1)(2);  	// 3
@@ -2201,29 +820,41 @@ console.log(a[b]);
 > add(1, 2)(3); // 6
 > add(1, 2, 3); // 6
 > ```
-解析：[第 84 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/134)
-<br/>
+>
+> 解析：[第 84 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/134)
+> <br/>
+
 ### 第 85 题：react-router 里的 `<Link>` 标签和 `<a>` 标签有什么区别
+
 > 如何禁掉 `<a>` 标签默认事件，禁掉之后如何实现跳转。
-解析：[第 85 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/135)
-<br/>
+> 解析：[第 85 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/135)
+> <br/>
+
 ### 第 86 题：周一算法题之「两数之和」
+
 给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。
 你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。
 示例：
+
 ```js
 给定 nums = [2, 7, 11, 15], target = 9
 因为 nums[0] + nums[1] = 2 + 7 = 9
 所以返回 [0, 1]
 ```
+
 解析：[第 86 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/136)
 公司：京东、快手
 <br/>
+
 ### 第 87 题：在输入框中如何判断输入的是一个正确的网址。
+
 解析：[第 87 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/138)
 <br/>
+
 ### 第 88 题：实现 convert 方法，把原始 list 转换成树形结构，要求尽可能降低时间复杂度
+
 以下数据结构中，id 代表部门编号，name 是部门名称，parentId 是父部门编号，为 0 代表一级部门，现在要求实现一个 convert 方法，把原始 list 转换成树形结构，parentId 为多少就挂载在该 id 的属性 children 数组下，结构如下：
+
 ```js
 // 原始 list 如下
 let list =[
@@ -2277,27 +908,28 @@ let result = [
   ···
 ];
 ```
+
 解析：[第 88 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/139)
 <br/>
+
 ### 第 89 题：设计并实现 Promise.race()
+
 解析：[第 89 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/140)
 <br/>
+
 ### 第 90 题：实现模糊搜索结果的关键词高亮显示
+
 <img src="https://ws3.sinaimg.cn/large/006tNc79ly1g43dykaccuj30u01hc49s.jpg" height="800"/>
 
 解析：[第 90 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/141)
 
 <br/>
 
-
-
 ### 第 91 题：介绍下 HTTPS 中间人攻击
 
 解析：[第 91 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/142)
 
 <br/>
-
-
 
 ### 第 92 题：已知数据格式，实现一个函数 fn 找出链条中所有的父级 id
 
@@ -2309,17 +941,11 @@ let result = [
 > fn(value) // 输出 [1， 11， 112]
 > ```
 
-
-
 <img src="https://ws1.sinaimg.cn/large/006tNc79gy1g45a04ntttj30k20wen01.jpg" height="800"/>
-
-
 
 解析：[第 92 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/143)
 
 <br/>
-
-
 
 ### 第 93 题：给定两个大小为 m 和 n 的有序数组 nums1 和 nums2。请找出这两个有序数组的中位数。要求算法的时间复杂度为 O(log(m+n))。
 
@@ -2345,15 +971,11 @@ nums2 = [3, 4]
 
 <br/>
 
-
-
 ### 第 94 题：vue 在 v-for 时给每项元素绑定事件需要用事件代理吗？为什么？
 
 解析：[第 94 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/145)
 
 <br/>
-
-
 
 ### 第 95 题：模拟实现一个深拷贝，并考虑对象相互引用以及 Symbol 拷贝的情况
 
@@ -2361,15 +983,11 @@ nums2 = [3, 4]
 
 <br/>
 
-
-
 ### 第 96 题：介绍下前端加密的常见场景和方法
 
 解析：[第 96 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/150)
 
 <br/>
-
-
 
 ### 第 97 题：React 和 Vue 的 diff 时间复杂度从 O(n^3) 优化到 O(n) ，那么 O(n^3) 和 O(n) 是如何计算出来的？
 
@@ -2377,19 +995,17 @@ nums2 = [3, 4]
 
 <br/>
 
-
-
 ### 第 98 题：写出如下代码的打印结果
 
 ```js
 function changeObjProperty(o) {
-  o.siteUrl = "http://www.baidu.com"
+  o.siteUrl = 'http://www.baidu.com'
   o = new Object()
-  o.siteUrl = "http://www.google.com"
-} 
-let webSite = new Object();
-changeObjProperty(webSite);
-console.log(webSite.siteUrl);
+  o.siteUrl = 'http://www.google.com'
+}
+let webSite = new Object()
+changeObjProperty(webSite)
+console.log(webSite.siteUrl)
 ```
 
 公司：京东
@@ -2397,8 +1013,6 @@ console.log(webSite.siteUrl);
 解析：[第 98 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/152)
 
 <br/>
-
-
 
 ### 第 99 题：编程算法题
 
@@ -2410,40 +1024,34 @@ console.log(webSite.siteUrl);
 
 <br/>
 
-
-
 ### 第 100 题：请写出如下代码的打印结果
 
 > ```js
 > function Foo() {
-> Foo.a = function() {
->   console.log(1)
+>   Foo.a = function () {
+>     console.log(1)
+>   }
+>   this.a = function () {
+>     console.log(2)
+>   }
 > }
-> this.a = function() {
->   console.log(2)
+> Foo.prototype.a = function () {
+>   console.log(3)
 > }
+> Foo.a = function () {
+>   console.log(4)
 > }
-> Foo.prototype.a = function() {
-> console.log(3)
-> }
-> Foo.a = function() {
-> console.log(4)
-> }
-> Foo.a();
-> let obj = new Foo();
-> obj.a();
-> Foo.a();
+> Foo.a()
+> let obj = new Foo()
+> obj.a()
+> Foo.a()
 > ```
-
-
 
 公司：京东
 
 解析：[第 100 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/155)
 
 <br/>
-
-
 
 ### 第 101 题：修改以下 print 函数，使之输出 0 到 99，或者 99 到 0
 
@@ -2456,17 +1064,15 @@ console.log(webSite.siteUrl);
 > 3、不能使用全局变量
 >
 > ```js
-> function print(n){
-> setTimeout(() => {
->  console.log(n);
-> }, Math.floor(Math.random() * 1000));
+> function print(n) {
+>   setTimeout(() => {
+>     console.log(n)
+>   }, Math.floor(Math.random() * 1000))
 > }
-> for(var i = 0; i < 100; i++){
-> print(i);
+> for (var i = 0; i < 100; i++) {
+>   print(i)
 > }
 > ```
-
-
 
 公司：头条
 
@@ -2474,15 +1080,11 @@ console.log(webSite.siteUrl);
 
 <br/>
 
-
-
-### 第 102 题：不用加减乘除运算符，求整数的7倍
+### 第 102 题：不用加减乘除运算符，求整数的 7 倍
 
 解析：[第 102 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/161)
 
 <br/>
-
-
 
 ### 第 103 题：模拟实现一个 localStorage
 
@@ -2492,8 +1094,6 @@ console.log(webSite.siteUrl);
 
 <br/>
 
-
-
 ### 第 104 题：模拟 localStorage 时如何实现过期时间功能
 
 公司：阿里
@@ -2502,11 +1102,9 @@ console.log(webSite.siteUrl);
 
 <br/>
 
-
-
 ### 第 105 题：编程题
 
-> url有三种情况
+> url 有三种情况
 >
 > ```js
 > https://www.xx.cn/api?keyword=&level1=&local_batch_id=&elective=&local_province_id=33
@@ -2514,28 +1112,22 @@ console.log(webSite.siteUrl);
 > https://www.xx.cn/api?keyword=&level1=&local_batch_id=&elective=800,700&local_province_id=33
 > ```
 >
-> 匹配elective后的数字输出（写出你认为的最优解法）:
+> 匹配 elective 后的数字输出（写出你认为的最优解法）:
 >
 > ```js
-> [] || ['800'] || ['800','700']
+> ;[] || ['800'] || ['800', '700']
 > ```
-
-
 
 解析：[第 105 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/177)
 
 <br/>
 
-
-
 ### 第 106 题：分别写出如下代码的返回值
 
 > ```js
-> String('11') == new String('11');
-> String('11') === new String('11');
+> String('11') == new String('11')
+> String('11') === new String('11')
 > ```
-
-
 
 公司：京东
 
@@ -2543,35 +1135,27 @@ console.log(webSite.siteUrl);
 
 <br/>
 
-
-
 ### 第 107 题：考虑到性能问题，如何快速从一个巨大的数组中随机获取部分元素。
 
-> 比如有个数组有100K个元素，从中不重复随机选取10K个元素。
-
-
+> 比如有个数组有 100K 个元素，从中不重复随机选取 10K 个元素。
 
 解析：[第 107 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/187)
 
 <br/>
 
-
-
 ### 第 108 题：请写出如下代码的打印结果
 
 > ```js
-> var name = 'Tom';
-> (function() {
->  if (typeof name == 'undefined') {
->      var name = 'Jack';
->      console.log('Goodbye ' + name);
->  } else {
->      console.log('Hello ' + name);
->  }
-> })();
+> var name = 'Tom'
+> ;(function () {
+>   if (typeof name == 'undefined') {
+>     var name = 'Jack'
+>     console.log('Goodbye ' + name)
+>   } else {
+>     console.log('Hello ' + name)
+>   }
+> })()
 > ```
-
-
 
 公司：京东
 
@@ -2579,23 +1163,19 @@ console.log(webSite.siteUrl);
 
 <br/>
 
-
-
 ### 第 109 题：扩展题，请写出如下代码的打印结果
 
 > ```js
-> var name = 'Tom';
-> (function() {
->  if (typeof name == 'undefined') {
->      name = 'Jack';
->      console.log('Goodbye ' + name);
->  } else {
->      console.log('Hello ' + name);
->  }
-> })();
+> var name = 'Tom'
+> ;(function () {
+>   if (typeof name == 'undefined') {
+>     name = 'Jack'
+>     console.log('Goodbye ' + name)
+>   } else {
+>     console.log('Hello ' + name)
+>   }
+> })()
 > ```
-
-
 
 公司：京东
 
@@ -2603,88 +1183,74 @@ console.log(webSite.siteUrl);
 
 <br/>
 
-
-
 ### 第 110 题：编程题，请写一个函数，完成以下功能
 
 > 输入
-> ``'1, 2, 3, 5, 7, 8, 10'``
+> `'1, 2, 3, 5, 7, 8, 10'`
 > 输出
-> ``'1~3, 5, 7~8, 10'``
-
-
+> `'1~3, 5, 7~8, 10'`
 
 解析：[第 110 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/201)
 
 <br/>
 
-
-
 ### 第 111 题：编程题，写个程序把 entry 转换成如下对象
 
 > ```js
 > var entry = {
-> a: {
-> b: {
->   c: {
->     dd: 'abcdd'
+>   a: {
+>     b: {
+>       c: {
+>         dd: 'abcdd'
+>       }
+>     },
+>     d: {
+>       xx: 'adxx'
+>     },
+>     e: 'ae'
 >   }
-> },
-> d: {
->   xx: 'adxx'
-> },
-> e: 'ae'
 > }
-> }
-> 
+>
 > // 要求转换成如下对象
 > var output = {
-> 'a.b.c.dd': 'abcdd',
-> 'a.d.xx': 'adxx',
-> 'a.e': 'ae'
+>   'a.b.c.dd': 'abcdd',
+>   'a.d.xx': 'adxx',
+>   'a.e': 'ae'
 > }
 > ```
-
-
 
 解析：[第 111 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/206)
 
 <br/>
 
-
-
 ### 第 112 题：编程题，写个程序把 entry 转换成如下对象（跟昨日题目相反）
 
 > ```js
 > var entry = {
-> 'a.b.c.dd': 'abcdd',
-> 'a.d.xx': 'adxx',
-> 'a.e': 'ae'
+>   'a.b.c.dd': 'abcdd',
+>   'a.d.xx': 'adxx',
+>   'a.e': 'ae'
 > }
-> 
+>
 > // 要求转换成如下对象
 > var output = {
-> a: {
-> b: {
->   c: {
->     dd: 'abcdd'
+>   a: {
+>     b: {
+>       c: {
+>         dd: 'abcdd'
+>       }
+>     },
+>     d: {
+>       xx: 'adxx'
+>     },
+>     e: 'ae'
 >   }
-> },
-> d: {
->   xx: 'adxx'
-> },
-> e: 'ae'
-> }
 > }
 > ```
-
-
 
 解析：[第 112 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/212)
 
 <br/>
-
-
 
 ### 第 113 题：编程题，根据以下要求，写一个数组去重函数（蘑菇街）
 
@@ -2692,13 +1258,9 @@ console.log(webSite.siteUrl);
 > 2. 如传入的数组元素为`[123, [1, 2, 3], [1, "2", 3], [1, 2, 3], "meili"]`，则输出：`[123, [1, 2, 3], [1, "2", 3], "meili"]`
 > 3. 如传入的数组元素为`[123, {a: 1}, {a: {b: 1}}, {a: "1"}, {a: {b: 1}}, "meili"]`，则输出：`[123, {a: 1}, {a: {b: 1}}, {a: "1"}, "meili"]`
 
-
-
 解析：[第 113 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/215)
 
 <br/>
-
-
 
 ### 第 114 题：编程题，找出字符串中连续出现最多的字符和个数（蘑菇街）
 
@@ -2707,73 +1269,47 @@ console.log(webSite.siteUrl);
 > 'abbkejsbcccwqaa' => {'c':3}
 > ```
 
-
-
 解析：[第 114 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/220)
 
 <br/>
 
-
-
 ### 第 115 题：写一个单向链数据结构的 js 实现并标注复杂度（水滴筹）
-
-
 
 解析：[第 115 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/226)
 
 <br/>
 
-
-
 ### 第 116 题：输出以下代码运行结果
 
 > ```js
-> 1 + "1"
-> 
-> 2 * "2"
-> 
-> [1, 2] + [2, 1]
-> 
-> "a" + + "b"
+> 1 + '1'
+>
+> 2 * '2'[(1, 2)] + [2, 1]
+>
+> 'a' + +'b'
 > ```
-
-
 
 解析：[第 116 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/229)
 
 <br/>
 
-
-
 ### 第 117 题：介绍下 http1.0、1.1、2.0 协议的区别？
-
-
 
 解析：[第 117 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/232)
 
 <br/>
 
-
-
 ### 第 118 题：vue 渲染大量数据时应该怎么优化？
-
-
 
 解析：[第 118 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/233)
 
 <br/>
 
-
-
 ### 第 119 题：vue 如何优化首页的加载速度？vue 首页白屏是什么问题引起的？如何解决呢？
-
-
 
 解析：[第 119 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/234)
 
 <br/>
-
-
 
 ### 第 120 题：为什么 for 循环嵌套顺序会影响性能？
 
@@ -2781,41 +1317,31 @@ console.log(webSite.siteUrl);
 var t1 = new Date().getTime()
 for (let i = 0; i < 100; i++) {
   for (let j = 0; j < 1000; j++) {
-    for (let k = 0; k < 10000; k++) {
-    }
+    for (let k = 0; k < 10000; k++) {}
   }
 }
 var t2 = new Date().getTime()
 console.log('first time', t2 - t1)
 for (let i = 0; i < 10000; i++) {
   for (let j = 0; j < 1000; j++) {
-    for (let k = 0; k < 100; k++) {
-    }
+    for (let k = 0; k < 100; k++) {}
   }
 }
 var t3 = new Date().getTime()
 console.log('two time', t3 - t2)
 ```
 
-
-
 解析：[第 120 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/235)
 
 <br/>
-
-
 
 ### 第 121 题：统计 1 ~ n 整数中出现 1 的次数。
 
 例如统计 1 ~ 400W 出现 1 的次数。
 
-
-
 解析：[第 121 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/237)
 
 <br/>
-
-
 
 ### 第 122 题：webpack 打包 vue 速度太慢怎么办？
 
@@ -2823,39 +1349,25 @@ console.log('two time', t3 - t2)
 
 <br/>
 
-
-
 ### 第 123 题：vue 是如何对数组方法进行变异的？例如 push、pop、splice 等方法
-
-
 
 解析：[第 123 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/239)
 
 <br/>
 
-
-
 ### 第 124 题：永久性重定向（301）和临时性重定向（302）对 SEO 有什么影响
-
-
 
 解析：[第 124 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/241)
 
 <br/>
 
-
-
 ### 第 125 题：算法题
 
 如何将`[{id: 1}, {id: 2, pId: 1}, ...]` 的重复数组（有重复数据）转成树形结构的数组 `[{id: 1, child: [{id: 2, pId: 1}]}, ...]` （需要去重）
 
-
-
 解析：[第 125 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/243)
 
 <br/>
-
-
 
 ### 第 126 题：扑克牌问题
 
@@ -2865,163 +1377,42 @@ console.log('two time', t3 - t2)
 >
 > 问：原来那堆牌的顺序，用函数实现。
 
-
-
 解析：[第 126 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/245)
 
 <br/>
 
-
-
 ### 第 127 题：如何用 css 或 js 实现多行文本溢出省略效果，考虑兼容性
-
-
 
 解析：[第 127 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/246)
 
 <br/>
 
-
-
 ### 第 128 题：Http 状态码 301 和 302 的应用场景分别是什么
-
-
 
 解析：[第 128 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/249)
 
 <br/>
 
-
-
 ### 第 129 题：输出以下代码执行结果
 
 > ```js
 > function wait() {
-> return new Promise(resolve =>
->  setTimeout(resolve, 10 * 1000)
-> )
+>   return new Promise(resolve => setTimeout(resolve, 10 * 1000))
 > }
-> 
+>
 > async function main() {
-> console.time();
-> const x = wait();
-> const y = wait();
-> const z = wait();
-> await x;
-> await y;
-> await z;
-> console.timeEnd();
+>   console.time()
+>   const x = wait()
+>   const y = wait()
+>   const z = wait()
+>   await x
+>   await y
+>   await z
+>   console.timeEnd()
 > }
-> main();
+> main()
 > ```
-
-
 
 解析：[第 129 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/251)
 
 <br/>
-
-
-
-### 第 130 题：输出以下代码执行结果，大致时间就好（不同于上题）
-
-> ```js
-> function wait() {
-> return new Promise(resolve =>
->  setTimeout(resolve, 10 * 1000)
-> )
-> }
-> 
-> async function main() {
-> console.time();
-> await wait();
-> await wait();
-> await wait();
-> console.timeEnd();
-> }
-> main();
-> ```
-
-
-
-解析：[第 130 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/253)
-
-<br/>
-
-
-
-### 第 131 题：接口如何防刷
-
-
-
-解析：[第 131 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/254)
-
-<br/>
-
-
-
-### 第 132 题：实现一个 Dialog 类，Dialog可以创建 dialog 对话框，对话框支持可拖拽（腾讯）
-
-
-
-解析：[第 132 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/257)
-
-<br/>
-
-
-
-### 第 133 题：用 setTimeout 实现 setInterval，阐述实现的效果与 setInterval 的差异
-
-
-
-解析：[第 133 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/259)
-
-<br/>
-
-
-
-### 第 134 题：求两个日期中间的有效日期
-
-> 如 2015-2-8 到 2015-3-3，返回【2015-2-8 2015-2-9...】
-
-
-
-解析：[第 134 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/264)
-
-<br/>
-
-
-
-### 第 135 题：算法题（盛大）
-
-> 在一个字符串数组中有红、黄、蓝三种颜色的球，且个数不相等、顺序不一致，请为该数组排序。使得排序后数组中球的顺序为:黄、红、蓝。
->
-> 例如：红蓝蓝黄红黄蓝红红黄红，排序后为：黄黄黄红红红红红蓝蓝蓝。
-
-
-
-解析：[第 135 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/266)
-
-<br/>
-
-
-
-### 第 136 题：如何实现骨架屏，说说你的思路
-
-
-
-解析：[第 136 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/270)
-
-<br/>
-© 2022 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
