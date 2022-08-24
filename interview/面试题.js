@@ -154,7 +154,7 @@ function test5() {
 }
 // test5()
 
-/* -------------------- 6.异步 ----------------- */
+/* -------------------- 异步 ----------------- */
 ;(function () {
   function wait() {
     return new Promise(resolve => setTimeout(resolve, 5 * 1000))
@@ -173,3 +173,85 @@ function test5() {
 
   main()
 })
+
+/* -------------------- 编程题 ----------------- */
+;(function () {
+  const entry = {
+    'a.b.c.dd': 'abcdd',
+    'a.d.xx': 'adxx',
+    'a.e': 'ae'
+  }
+  // 输出为
+  const output = {
+    a: {
+      b: {
+        c: {
+          dd: 'abcdd'
+        }
+      },
+      d: {
+        xx: 'adxx'
+      },
+      e: 'ae'
+    }
+  }
+  
+  function test(obj) {
+    const res = {}
+    for (const keys in obj) {
+      const keyList = keys.split('.')
+      const len = keyList.length
+      const loop = (target, i) => {
+        const key = keyList[i]
+        if (i < len - 1) {
+          loop(target[key] || (target[key] = {}), i + 1)
+        } else {
+          target[key] = obj[keys]
+        }
+      }
+      loop(res, 0)
+    }
+    return res
+  }
+  console.log(JSON.stringify(test(entry)))
+})
+
+/* -------------------- 编程题 ----------------- */
+;(function () {
+  const entry = {
+    a: {
+      b: {
+        c: {
+          dd: 'abcdd'
+        }
+      },
+      d: {
+        xx: 'adxx'
+      },
+      e: 'ae'
+    }
+  }
+  // 输出为
+  const output = {
+    'a.b.c.dd': 'abcdd',
+    'a.d.xx': 'adxx',
+    'a.e': 'ae'
+  }
+
+  function test(obj) {
+    const res = {}
+    const loop = (target, prefix) => {
+      for (const key in target) {
+        const [value, k] = [target[key], `${prefix}.${key}`]
+        if (typeof value === 'object') {
+          loop(value, k)
+        } else {
+          res[k.slice(1)] = value
+        }
+      }
+    }
+    loop(obj, '')
+    return res
+  }
+  console.log(JSON.stringify(test(entry)))
+})()
