@@ -245,8 +245,7 @@ console.log('script end')
 >
 > 编写一个程序将数组扁平化去并除其中重复部分数据，最终得到一个升序且不重复的数组
 > 公司：携程
-> 解析：[第 11 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/8)
-> <br/>
+> 解析：[第 11 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/8) > <br/>
 
 ### 第 12 题：JS 异步解决方案的发展历程以及优缺点。
 
@@ -280,8 +279,7 @@ console.log('script end')
 ### 第 17 题：A、B 机器正常连接后，B 机器突然重启，问 A 此时处于 TCP 什么状态
 
 > 如果 A 与 B 建立了正常连接后，从未相互发过数据，这个时候 B 突然机器重启，问 A 此时处于 TCP 什么状态？如何消除服务器程序中的这个状态？（超纲题，了解即可）
-> 解析：[第 17 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/21)
-> <br/>
+> 解析：[第 17 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/21) > <br/>
 
 ### 第 18 题：React 中 setState 什么时候是同步的，什么时候是异步的？
 
@@ -333,8 +331,7 @@ class Example extends React.Component {
 ### 第 21 题：有以下 3 个判断数组的方法，请分别介绍它们之间的区别和优劣
 
 > Object.prototype.toString.call() 、 instanceof 以及 Array.isArray()
-> 解析：[第 21 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/23)
-> <br/>
+> 解析：[第 21 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/23) > <br/>
 
 ### 第 22 题：介绍下重绘和回流（Repaint & Reflow），以及如何进行优化
 
@@ -627,14 +624,12 @@ LazyMan('Tony')
 ### 第 59 题：给定两个数组，写一个方法来计算它们的交集。
 
 > 例如：给定 nums1 = [1, 2, 2, 1]，nums2 = [2, 2]，返回 [2, 2]。
-> 解析：[第 59 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/102)
-> <br/>
+> 解析：[第 59 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/102) > <br/>
 
 ### 第 60 题：已知如下代码，如何修改才能让图片宽度为 300px ？注意下面代码不可修改。
 
 > `<img src="1.jpg" style="width:480px!important;”>`
-> 解析：[第 60 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/105)
-> <br/>
+> 解析：[第 60 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/105) > <br/>
 
 ### 第 61 题：介绍下如何实现 token 加密
 
@@ -783,8 +778,7 @@ console.log(a[b]);
 ### 第 81 题：打印出 1 - 10000 之间的所有对称数
 
 > 例如：121、1331 等
-> 解析：[第 81 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/131)
-> <br/>
+> 解析：[第 81 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/131) > <br/>
 
 ### 第 82 题：周一算法题之「移动零」
 
@@ -802,8 +796,7 @@ console.log(a[b]);
 > 1. 必须在原数组上操作，不能拷贝额外的数组。
 >
 > 1. 尽量减少操作次数。
->    解析：[第 82 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/132)
->    <br/>
+>    解析：[第 82 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/132) > <br/>
 
 ### 第 83 题：var、let 和 const 区别的实现原理是什么
 
@@ -821,14 +814,12 @@ console.log(a[b]);
 > add(1, 2, 3); // 6
 > ```
 >
-> 解析：[第 84 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/134)
-> <br/>
+> 解析：[第 84 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/134) > <br/>
 
 ### 第 85 题：react-router 里的 `<Link>` 标签和 `<a>` 标签有什么区别
 
 > 如何禁掉 `<a>` 标签默认事件，禁掉之后如何实现跳转。
-> 解析：[第 85 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/135)
-> <br/>
+> 解析：[第 85 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/135) > <br/>
 
 ### 第 86 题：周一算法题之「两数之和」
 
@@ -1101,94 +1092,4 @@ console.log(webSite.siteUrl)
 解析：[第 104 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/171)
 
 <br/>
-
-### 第 105 题：编程题
-
-> url 有三种情况
->
-> ```js
-> https://www.xx.cn/api?keyword=&level1=&local_batch_id=&elective=&local_province_id=33
-> https://www.xx.cn/api?keyword=&level1=&local_batch_id=&elective=800&local_province_id=33
-> https://www.xx.cn/api?keyword=&level1=&local_batch_id=&elective=800,700&local_province_id=33
-> ```
->
-> 匹配 elective 后的数字输出（写出你认为的最优解法）:
->
-> ```js
-> ;[] || ['800'] || ['800', '700']
-> ```
-
-解析：[第 105 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/177)
-
-<br/>
-
-### 第 106 题：分别写出如下代码的返回值
-
-> ```js
-> String('11') == new String('11')
-> String('11') === new String('11')
-> ```
-
-公司：京东
-
-解析：[第 106 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/180)
-
-<br/>
-
-### 第 107 题：考虑到性能问题，如何快速从一个巨大的数组中随机获取部分元素。
-
-> 比如有个数组有 100K 个元素，从中不重复随机选取 10K 个元素。
-
-解析：[第 107 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/187)
-
-<br/>
-
-### 第 108 题：请写出如下代码的打印结果
-
-> ```js
-> var name = 'Tom'
-> ;(function () {
->   if (typeof name == 'undefined') {
->     var name = 'Jack'
->     console.log('Goodbye ' + name)
->   } else {
->     console.log('Hello ' + name)
->   }
-> })()
-> ```
-
-公司：京东
-
-解析：[第 108 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/190)
-
-<br/>
-
-### 第 109 题：扩展题，请写出如下代码的打印结果
-
-> ```js
-> var name = 'Tom'
-> ;(function () {
->   if (typeof name == 'undefined') {
->     name = 'Jack'
->     console.log('Goodbye ' + name)
->   } else {
->     console.log('Hello ' + name)
->   }
-> })()
-> ```
-
-公司：京东
-
-解析：[第 109 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/198)
-
-<br/>
-
-### 第 110 题：编程题，请写一个函数，完成以下功能
-
-> 输入
-> `'1, 2, 3, 5, 7, 8, 10'`
-> 输出
-> `'1~3, 5, 7~8, 10'`
-
-解析：[第 110 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/201)
 

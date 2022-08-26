@@ -195,7 +195,7 @@ function test5() {
       e: 'ae'
     }
   }
-  
+
   function test(obj) {
     const res = {}
     for (const keys in obj) {
@@ -254,4 +254,34 @@ function test5() {
     return res
   }
   console.log(JSON.stringify(test(entry)))
+})
+
+/* -------------------- 变量提升 ----------------- */
+;(function () {
+  // 1
+  // var name = 'Tom'
+  // ;(function () {
+  //   if (typeof name == 'undefined') {
+  //     var name = 'Jack'
+  //     console.log('Goodbye ' + name)
+  //   } else {
+  //     console.log('Hello ' + name)
+  //   }
+  // })()
+
+  // 2
+  var name = 'Tom'
+  ;(function () {
+    if (typeof name == 'undefined') {
+      name = 'Jack'
+      console.log('Goodbye ' + name)
+    } else {
+      console.log('Hello ' + name)
+    }
+  })()
 })()
+
+/* -------------------- 编程题 ----------------- */
+// ;(function(){
+
+// })()
