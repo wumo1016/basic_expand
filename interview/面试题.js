@@ -279,6 +279,16 @@ function test5() {
       console.log('Hello ' + name)
     }
   })()
+})
+
+/* -------------------- 不用加减乘除运算符求整数7倍 ----------------- */
+;(function () {
+  /* eval */
+  const test1 = num => eval(new Array(7).fill(num).join('+'))
+  /* Function */
+  const test2 = num =>
+    new Function(`return ${new Array(7).fill(num).join('+')}`)()
+  console.log(test2(7))
 })()
 
 /* -------------------- 编程题 ----------------- */

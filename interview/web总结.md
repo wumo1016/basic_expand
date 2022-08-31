@@ -1068,28 +1068,3 @@ console.log(webSite.siteUrl)
 公司：头条
 
 解析：[第 101 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/158)
-
-<br/>
-
-### 第 102 题：不用加减乘除运算符，求整数的 7 倍
-
-解析：[第 102 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/161)
-
-<br/>
-
-### 第 103 题：模拟实现一个 localStorage
-
-公司：阿里
-
-解析：[第 103 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/166)
-
-<br/>
-
-### 第 104 题：模拟 localStorage 时如何实现过期时间功能
-
-公司：阿里
-
-解析：[第 104 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/171)
-
-<br/>
-
