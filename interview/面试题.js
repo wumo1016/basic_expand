@@ -289,6 +289,53 @@ function test5() {
   const test2 = num =>
     new Function(`return ${new Array(7).fill(num).join('+')}`)()
   console.log(test2(7))
+})
+
+/* -------------------- 打印0-99 ----------------- */
+;(function () {
+  /* 
+  - 只能修改 `setTimeout` 到 `Math.floor(Math.random() * 1000` 的代码
+  - 不能修改 `Math.floor(Math.random() * 1000`
+  - 不能使用全局变量
+  */
+  /* 
+  function print(n) {
+    setTimeout(() => {
+      console.log(n)
+    }, Math.floor(Math.random() * 1000))
+  }
+  for (var i = 0; i < 100; i++) {
+    print(i)
+  } 
+  */
+
+  /* 解法1 */
+  // function print(n) {
+  //   setTimeout(
+  //     () => {
+  //       console.log(n)
+  //     },
+  //     0,
+  //     Math.floor(Math.random() * 1000)
+  //   )
+  // }
+  // for (var i = 0; i < 100; i++) {
+  //   print(i)
+  // }
+
+  /* 解法2 */
+  function print(n) {
+    setTimeout(
+      (() => {
+        console.log(n)
+        return () => {}
+      })(),
+      Math.floor(Math.random() * 1000)
+    )
+  }
+  for (var i = 0; i < 100; i++) {
+    print(i)
+  }
 })()
 
 /* -------------------- 编程题 ----------------- */
