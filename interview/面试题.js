@@ -336,6 +336,23 @@ function test5() {
   for (var i = 0; i < 100; i++) {
     print(i)
   }
+})
+
+/* -------------------- 同步异步 ----------------- */
+;(function () {
+  async function async1() {
+    console.log(1)
+    await new Promise(() => {
+      console.log(2)
+    })
+    console.log(3)
+    return 4
+  }
+
+  console.log(5)
+  async1().then(res => console.log(res))
+  console.log(6)
+
 })()
 
 /* -------------------- 编程题 ----------------- */
