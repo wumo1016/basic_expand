@@ -207,3 +207,14 @@
 ## Vuex 怎么知道 state 是通过 mutation 修改还是外部直接修改的
 
 - 在 Store 实例中有一个变量 committing，使用$watch 监控 state 的变化，判断如果 committing 为 false，则就是外部直接修改的 因为在使用 commit 提交修改的时候 内部使用了一个函数对 mutation 函数进行了包装 执行 mutation 函数之前将 committing 设置为 true mutation 函数执行完毕时候 再将 committing 设置为 false
+
+## v-model 如何处理中文输入的
+
+- 监听 compositionstart 和 compositionend 事件
+- input 事件
+  - `if(e.target._tag) return`
+- compositionstart
+  - `e.target._tag = true`
+- compositionstart
+  - `e.target._tag = false`
+  - `e.target.dispatchEvent(new Event('input'))`

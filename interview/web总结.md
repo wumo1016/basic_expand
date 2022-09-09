@@ -764,18 +764,3 @@ console.log(a[b]);
 
 解析：[第 78 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/128)
 <br/>
-
-### 第 79 题：input 搜索如何防抖，如何处理中文输入
-
-解析：[第 79 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/129)
-<br/>
-
-### 第 80 题：介绍下 Promise.all 使用、原理实现及错误处理
-
-解析：[第 80 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/130)
-<br/>
-
-### 第 81 题：打印出 1 - 10000 之间的所有对称数
-
-> 例如：121、1331 等
-> 解析：[第 81 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/131) > <br/>
