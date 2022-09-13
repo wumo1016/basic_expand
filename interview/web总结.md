@@ -706,28 +706,3 @@ LazyMan('Tony')
 ### 第 75 题：数组里面有 10 万个数据，取第一个元素和第 10 万个元素的时间相差多少
 
 解析：[第 75 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/124)
-<br/>
-
-### 第 76 题：输出以下代码运行结果
-
-```js
-// example 1
-var a={}, b='123', c=123;
-a[b]='b';
-a[c]='c';
-console.log(a[b]);
----------------------
-// example 2
-var a={}, b=Symbol('123'), c=Symbol('123');
-a[b]='b';
-a[c]='c';
-console.log(a[b]);
----------------------
-// example 3
-var a={}, b={key:'123'}, c={key:'456'};
-a[b]='b';
-a[c]='c';
-console.log(a[b]);
-```
-
-解析：[第 76 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/125)
