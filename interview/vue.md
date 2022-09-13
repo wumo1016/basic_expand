@@ -218,3 +218,12 @@
 - compositionstart
   - `e.target._tag = false`
   - `e.target.dispatchEvent(new Event('input'))`
+
+## 父子组件的生命周期执行顺序
+
+- 加载渲染过程
+  - 父 beforeCreate->父 created->父 beforeMount->子 beforeCreate->子 created->子 beforeMount->子 mounted->父 mounted
+- 子组件更新过程
+  - 父 beforeUpdate->子 beforeUpdate->子 updated->父 updated
+- 销毁过程
+  - 父 beforeDestroy->子 beforeDestroy->子 destroyed->父 destroyed
