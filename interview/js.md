@@ -269,3 +269,7 @@ function _new(claszz, ...args) {
   ```
 
   - 不支持监控请求进度
+
+## switch
+
+- switch 的 case 比较值用的是 == 而不是 ===
