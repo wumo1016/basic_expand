@@ -680,29 +680,3 @@ LazyMan('Tony')
 ### 第 70 题： 介绍下 webpack 热更新原理，是如何做到在不刷新浏览器的前提下更新页面的
 
 解析：[第 70 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/118)
-<br/>
-
-### 第 71 题： 实现一个字符串匹配算法，从长度为 n 的字符串 S 中，查找是否存在字符串 T，T 的长度是 m，若存在返回所在位置。
-
-解析：[第 71 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/119)
-<br/>
-
-### 第 72 题： 为什么普通 `for` 循环的性能远远高于 `forEach` 的性能，请解释其中的原因。
-
-![image-20190512225510941](https://ws2.sinaimg.cn/large/006tNc79gy1g2yxbg4ta8j31gh0u048h.jpg)
-解析：[第 72 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/121)
-<br/>
-
-### 第 73 题： 介绍下 BFC、IFC、GFC 和 FFC
-
-解析：[第 73 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/122)
-<br/>
-
-### 第 74 题： 使用 JavaScript Proxy 实现简单的数据绑定
-
-解析：[第 74 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/123)
-<br/>
-
-### 第 75 题：数组里面有 10 万个数据，取第一个元素和第 10 万个元素的时间相差多少
-
-解析：[第 75 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/124)
