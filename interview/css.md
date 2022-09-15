@@ -186,3 +186,7 @@
 - display：none; => 元素不在于与文档中
 - visibility: hidden; => 元素存在，不可见，不可响应事件
 - opacity: 0; => 元素存在，不可见，可响应事件
+
+## position:fixed 降级问题
+
+- 如何使用 fixed 定位元素的父级有啥用 transform 的 fixed 的效果会被将为 absolute

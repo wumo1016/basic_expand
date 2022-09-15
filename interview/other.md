@@ -169,3 +169,6 @@
 ## CSRF
 
 - 跨站请求伪造
+
+## webpack 热更新原理
+http://www.javascriptpeixun.cn/my/course/3588

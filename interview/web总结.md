@@ -670,13 +670,3 @@ LazyMan('Tony')
 ### 第 68 题： 如何解决移动端 Retina 屏 1px 像素问题
 
 解析：[第 68 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/115)
-<br/>
-
-### 第 69 题： 如何把一个字符串的大小写取反（大写变小写小写变大写），例如 ’AbC' 变成 'aBc' 。
-
-解析：[第 69 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/116)
-<br/>
-
-### 第 70 题： 介绍下 webpack 热更新原理，是如何做到在不刷新浏览器的前提下更新页面的
-
-解析：[第 70 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/118)
