@@ -273,3 +273,9 @@ function _new(claszz, ...args) {
 ## switch
 
 - switch 的 case 比较值用的是 == 而不是 ===
+
+## ES6 代码转成 ES5 代码的实现思路是什么
+
+- 先将 ES6 转化成 AST 抽象语法树
+- 修改语法树为 ES5 版本的
+- 根据语法树生成 ES5 代码字符串
