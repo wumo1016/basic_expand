@@ -190,3 +190,8 @@
 ## position:fixed 降级问题
 
 - 如何使用 fixed 定位元素的父级有啥用 transform 的 fixed 的效果会被将为 absolute
+
+## 已知如下代码，如何修改才能让图片宽度为 300px 注意下面代码不可修改`<img src="1.jpg" style="width:480px!important;”>`。
+
+- `<img src="1.jpg" style="width:480px!important; max-width = 300px">`
+- `<img src="1.jpg" style="width:480px!important; transform: scale(300/480)">`

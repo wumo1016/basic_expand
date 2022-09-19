@@ -630,27 +630,3 @@ LazyMan('Tony')
 
 > `<img src="1.jpg" style="width:480px!important;”>`
 > 解析：[第 60 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/105) > <br/>
-
-### 第 61 题：介绍下如何实现 token 加密
-
-解析：[第 61 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/106)
-<br/>
-
-### 第 62 题：redux 为什么要把 reducer 设计成纯函数
-
-解析：[第 62 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/107)
-<br/>
-
-### 第 63 题：如何设计实现无缝轮播
-
-解析：[第 63 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/108)
-<br/>
-
-### 第 64 题：模拟实现一个 Promise.finally
-
-解析：[第 64 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/109)
-<br/>
-
-### 第 65 题： `a.b.c.d` 和 `a['b']['c']['d']`，哪个性能更高？
-
-解析：[第 65 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/111)
