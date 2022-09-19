@@ -609,24 +609,3 @@ LazyMan('Tony')
 ```
 
 解析：[第 56 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/98)
-<br/>
-
-### 第 57 题：分析比较 opacity: 0、visibility: hidden、display: none 优劣和适用场景。
-
-解析：[第 57 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/100)
-<br/>
-
-### 第 58 题：箭头函数与普通函数（function）的区别是什么？构造函数（function）可以使用 new 生成实例，那么箭头函数可以吗？为什么？
-
-解析：[第 58 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/101)
-<br/>
-
-### 第 59 题：给定两个数组，写一个方法来计算它们的交集。
-
-> 例如：给定 nums1 = [1, 2, 2, 1]，nums2 = [2, 2]，返回 [2, 2]。
-> 解析：[第 59 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/102) > <br/>
-
-### 第 60 题：已知如下代码，如何修改才能让图片宽度为 300px ？注意下面代码不可修改。
-
-> `<img src="1.jpg" style="width:480px!important;”>`
-> 解析：[第 60 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/105) > <br/>
