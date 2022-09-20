@@ -550,28 +550,3 @@ console.log(obj)
 ### 第 52 题：怎么让一个 div 水平垂直居中
 
 解析：[第 52 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/92)
-<br/>
-
-### 第 53 题：输出以下代码的执行结果并解释为什么
-
-```js
-var a = { n: 1 }
-var b = a
-a.x = a = { n: 2 }
-
-console.log(a.x)
-console.log(b.x)
-```
-
-解析：[第 53 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/93)
-<br/>
-
-### 第 54 题：冒泡排序如何实现，时间复杂度是多少， 还可以如何改进？
-
-解析：[第 54 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/94)
-<br/>
-
-### 第 55 题：某公司 1 到 12 月份的销售额存在一个对象里面
-
-如下：{1:222, 2:123, 5:888}，请把数据处理为如下结构：[222, 123, null, null, 888, null, null, null, null, null, null, null]。
-解析：[第 55 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/96)

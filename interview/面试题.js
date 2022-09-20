@@ -427,6 +427,16 @@ function test5() {
   // I am eating dinner
   // 等待了10秒...
   // I am eating junk food
+})
+
+/* -------------------- 输出以下代码的执行结果并解释为什么 ----------------- */
+;(function () {
+  var a = { n: 1 }
+  var b = a
+  a.x = a = { n: 2 }
+
+  console.log(a.x) // undefined
+  console.log(b.x) // { n: 2 }
 })()
 
 /* -------------------- 编程题 ----------------- */
