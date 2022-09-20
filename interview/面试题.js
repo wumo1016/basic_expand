@@ -352,7 +352,81 @@ function test5() {
   console.log(5)
   async1().then(res => console.log(res))
   console.log(6)
+})
 
+/* -------------------- 要求设计 LazyMan 类，实现以下功能 ----------------- */
+;(function () {
+  class LazyManClass {
+    constructor(name) {
+      console.log(`Hi I am ${name}`)
+      this.queue = []
+      setTimeout(() => {
+        this.next()
+      })
+      return this
+    }
+    sleep(time) {
+      this.queue.push(() => {
+        setTimeout(() => {
+          console.log(`等待了${time}秒...`)
+          this.next()
+        }, time * 1000)
+      })
+      return this
+    }
+    eat(name) {
+      this.queue.push(() => {
+        console.log(`I am eating ${name}`)
+        this.next()
+      })
+      return this
+    }
+    sleepFirst(time) {
+      this.queue.unshift(() => {
+        setTimeout(() => {
+          console.log(`等待了${time}秒...`)
+          this.next()
+        }, time * 1000)
+      })
+      return this
+    }
+    next() {
+      const fn = this.queue.shift()
+      fn && fn()
+    }
+  }
+  const LazyMan = name => new LazyManClass(name)
+
+  /* 1 */
+  // LazyMan('Tony')
+  // Hi I am Tony
+
+  /* 2 */
+  // LazyMan('Tony').sleep(2).eat('lunch')
+  // Hi I am Tony
+  // 等待了10秒...
+  // I am eating lunch
+
+  /* 3 */
+  // LazyMan('Tony').eat('lunch').sleep(2).eat('dinner')
+  // Hi I am Tony
+  // I am eating lunch
+  // 等待了10秒...
+  // I am eating diner
+
+  /* 4 */
+  LazyMan('Tony')
+    .eat('lunch')
+    .eat('dinner')
+    .sleepFirst(5)
+    .sleep(3)
+    .eat('junk food')
+  // Hi I am Tony
+  // 等待了5秒...
+  // I am eating lunch
+  // I am eating dinner
+  // 等待了10秒...
+  // I am eating junk food
 })()
 
 /* -------------------- 编程题 ----------------- */
