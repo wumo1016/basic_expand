@@ -7,49 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    body {
-      filter: grayscale(1);
-    }
 
     .box {
-      width: 500px;
-      border: 1px solid red;
-    }
-
-    .box::selection {
-      color: red;
-      background: blue;
+      width: 0;
+      height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 12px solid red;
     }
   </style>
 </head>
 
 <body>
   <div class="box">
-    色的烦烦烦烦烦烦烦烦烦烦烦烦烦烦烦方法
   </div>
   <script>
-    const obj = {
-      age: 18,
-      get name() {
-        this.age
-        console.log(this === obj)
-      },
-      getname() {
-        console.log(this === obj);
-      }
-    }
 
-    // obj.getname()
-
-    const proxy = new Proxy(obj, {
-      get(target, key, receiver) {
-        console.log(target, key);
-        // return Reflect.get(target, key, receiver)
-        return target[key]
-      }
-    })
-
-    proxy.getname()
   </script>
 </body>
 
