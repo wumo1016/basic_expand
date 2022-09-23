@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .box {
+      border: 1px solid red;
+      padding: 20px;
+      margin: 20px;
+    }
+
+    .box1 {
+      width: 0;
+      height: 0;
+      border: 50px solid transparent;
+      /* 哪个有颜色 哪个就是底边 */
+      border-bottom-color: red;
+      /* 底边宽度控制三角形高度 两侧边宽度控制三角形宽度 */
+    }
+
+    .box2 {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(45deg, red, red 50%, transparent 50%, transparent 100%);
+    }
+
+    .box3 {
+      width: 200px;
+      height: 100px;
+      background: conic-gradient(from 90deg at 50% 0, deeppink 0, deeppink 45deg, transparent 45.1deg);
+    }
+
+    .box4 {
+      width: 50px;
+      height: 50px;
+      background: deeppink;
+      clip-path: polygon(0 0, 100% 0, 0 100%, 0 0);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div>边框 border</div>
+    <div class="box1"></div>
+  </div>
+
+  <div class="box">
+    <div>径向渐变 linear-gradient</div>
+    <div class="box2"></div>
+  </div>
+
+  <div class="box">
+    <div>角向渐变 conic-gradient</div>
+    <div class="box3"></div>
+  </div>
+
+  <div class="box">
+    <div>裁剪 clip-path</div>
+    <div class="box4"></div>
+  </div>
+
+  <div class="box">
+    <div>字符</div>
+    <!-- 
+      ◄ : &#9668; 
+      ► : &#9658; 
+      ▼ : &#9660; 
+      ▲ : &#9650;
+      ⊿ : &#8895;
+      △ : &#9651;
+     -->
+    <div class="box5">
+      <div style="color: red">&#9650;</div>
+      <div style="color: red">&#9660;</div>
+    </div>
+  </div>
+</body>
+
+</html>
