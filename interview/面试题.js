@@ -437,6 +437,20 @@ function test5() {
 
   console.log(a.x) // undefined
   console.log(b.x) // { n: 2 }
+})
+
+/* -------------------- 编程题 ----------------- */
+;(function () {
+  var obj = {
+    2: 3,
+    3: 4,
+    length: 2,
+    splice: Array.prototype.splice,
+    push: Array.prototype.push
+  }
+  obj.push(1)
+  obj.push(2)
+  console.log(obj) // [,, 1, 2, splice: ƒ, push: ƒ]
 })()
 
 /* -------------------- 编程题 ----------------- */
