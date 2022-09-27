@@ -527,26 +527,3 @@ console.log(obj)
 ### 第 48 题：call 和 apply 的区别是什么，哪个性能更好一些
 
 解析：[第 48 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/84)
-<br/>
-
-### 第 49 题：为什么通常在发送数据埋点请求的时候使用的是 1x1 像素的透明 gif 图片？
-
-解析：[第 49 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/87)
-<br/>
-
-### 第 50 题：实现 (5).add(3).minus(2) 功能。
-
-> 例： 5 + 3 - 2，结果为 6
-> 解析：[第 50 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/88)
-> 公司：百度
-> <br/>
-
-### 第 51 题：Vue 的响应式原理中 Object.defineProperty 有什么缺陷？
-
-为什么在 Vue3.0 采用了 Proxy，抛弃了 Object.defineProperty？
-解析：[第 51 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/90)
-<br/>
-
-### 第 52 题：怎么让一个 div 水平垂直居中
-
-解析：[第 52 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/92)

@@ -171,4 +171,12 @@
 - 跨站请求伪造
 
 ## webpack 热更新原理
+
 http://www.javascriptpeixun.cn/my/course/3588
+
+## 为什么通常在发送数据埋点请求的时候使用的是 1x1 像素的透明 gif 图片
+
+- 跨域友好
+- 能够完成整个 HTTP 请求
+- GIF 的合法体积最小
+- 不会阻塞页面加载
