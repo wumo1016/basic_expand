@@ -443,30 +443,3 @@ if(a == 1 && a == 2 && a == 3){
 
 如果修改了，Vue 是如何监控到属性的修改并给出警告的。
 解析：[第 40 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/60)
-<br/>
-
-### 第 41 题：下面代码输出什么
-
-```js
-var a = 10
-;(function () {
-  console.log(a)
-  a = 5
-  console.log(window.a)
-  var a = 20
-  console.log(a)
-})()
-```
-
-解析：[第 41 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/61)
-<br/>
-
-### 第 42 题：实现一个 sleep 函数
-
-比如 sleep(1000) 意味着等待 1000 毫秒，可从 Promise、Generator、Async/Await 等角度实现
-解析：[第 42 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/63)
-<br/>
-
-### 第 43 题：使用 sort() 对数组 [3, 15, 8, 29, 102, 22] 进行排序，输出结果
-
-解析：[第 43 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/66)
