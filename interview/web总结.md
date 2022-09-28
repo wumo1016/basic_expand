@@ -470,13 +470,3 @@ var a = 10
 ### 第 43 题：使用 sort() 对数组 [3, 15, 8, 29, 102, 22] 进行排序，输出结果
 
 解析：[第 43 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/66)
-<br/>
-
-### 第 44 题：介绍 HTTPS 握手过程
-
-解析：[第 44 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/70)
-<br/>
-
-### 第 45 题：HTTPS 握手过程中，客户端如何验证证书的合法性
-
-解析：[第 45 题](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/74)

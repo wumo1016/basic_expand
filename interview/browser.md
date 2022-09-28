@@ -202,7 +202,7 @@
     - 存在 => 发请求 携带 If-none-Match(Etag 的值) 如果一样返回 304 不一样返回 200
     - 不存在
       - 是否存在 Last-Modifield
-        - 存在 携带 In-Modified-since(Last-Modifield 的值) 与服务器的 Last-Modifield 比较  一样返回 304 不一样返回 200
+        - 存在 携带 In-Modified-since(Last-Modifield 的值) 与服务器的 Last-Modifield 比较 一样返回 304 不一样返回 200
         - 不存在，返回 200
 
 ## HTTP 与 HTTPS 的区别
@@ -218,3 +218,7 @@
 - 发送的数据大小不同
 - get 一般会被缓存
 - 都可以使用 url、body 携带参数
+
+## HTTPS 握手过程(https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/70)
+
+## HTTPS 握手过程中，客户端如何验证证书的合法性(https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/74)
