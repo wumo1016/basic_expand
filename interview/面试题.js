@@ -451,7 +451,20 @@ function test5() {
   obj.push(1)
   obj.push(2)
   console.log(obj) // [,, 1, 2, splice: ƒ, push: ƒ]
-})()
+})
+
+/* -------------------- 下面代码中 a 在什么情况下会打印 1 ----------------- */
+;(function () {
+  var a = {
+    i: 1,
+    toString() {
+      return this.i++
+    }
+  }
+  if (a == 1 && a == 2 && a == 3) {
+    console.log(1)
+  }
+})
 
 /* -------------------- 编程题 ----------------- */
 // ;(function(){

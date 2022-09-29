@@ -227,3 +227,8 @@
   - 父 beforeUpdate->子 beforeUpdate->子 updated->父 updated
 - 销毁过程
   - 父 beforeDestroy->子 beforeDestroy->子 destroyed->父 destroyed
+
+## 子组件为何不能修改父组件传入的 props 如果改了 vue 是如何监控到的(https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/60)
+
+- 为了保证单向数据流，便于对数据的追踪
+- 在初始化 props 的时候 对 props 进行了监控 props 修改的时候会调用一个回调函数(判断如果是当前是子组件且不是在更新子组件的时候触发的 props 修改 就报警告)
