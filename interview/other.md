@@ -1,6 +1,7 @@
 ## pnpm 的优点
-
-- 解决体积过大的问题
+- 快: 是同类型工具速度的两倍
+- 支持单体仓库: monorepo
+- 权限严格: pnpm创建的node_modules默认并非扁平结构
 
 ## single-spa 原理
 
