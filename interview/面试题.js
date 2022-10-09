@@ -467,6 +467,35 @@ function test5() {
 })
 
 /* -------------------- 编程题 ----------------- */
+;(function () {
+  // 编写一个程序将数组扁平化去并除其中重复部分数据，最终得到一个升序且不重复的数组
+  const arr = [
+    [1, 2, 2],
+    [3, 4, 5, [5, 6]],
+    [6, 7, 8, 9, [11, 12, [12, 13, [14]]]],
+    10
+  ]
+
+  /* 解法1 */
+  function test1(list) {
+    return [...new Set(list.flat(Infinity).sort((a, b) => a - b))]
+  }
+  console.log(test1(arr))
+  /* 解法2 */
+  function test2(list) {
+    return [
+      ...new Set(
+        arr
+          .toString()
+          .split(',')
+          .sort((a, b) => a - b)
+      )
+    ].map(Number)
+  }
+  console.log(test2(arr))
+})()
+
+/* -------------------- 编程题 ----------------- */
 // ;(function(){
 
 // })()
