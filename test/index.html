@@ -7,12 +7,20 @@
     <title>Document</title>
     <style>
       .box {
+        width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
       }
     </style>
   </head>
 
   <body>
-    <div class="box"></div>
+    <div class="box">
+      水水水水水水水水水水水水水水水水水水水顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶反反复复烦烦烦烦烦烦烦烦烦烦烦烦烦烦烦
+    </div>
 
     <script>
       //1.把虚拟DOM构建成fiber树
