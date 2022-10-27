@@ -38,6 +38,7 @@
       //C1的弟弟是C2
       C1.sibling = C2
 
+      let index = 2
       let curNode
       let remainTiming = () => true
 
@@ -49,8 +50,14 @@
 
       function performUnitOfWork(node) {}
 
+      function beginWork(node) {
+        console.log('-'.repeat(index) + 'begin ' + node.props.id)
+        index += 2
+      }
+
       function finashWork(node) {
-        console.log('finaish ' + node.props.id)
+        index -= 2
+        console.log('-'.repeat(index) + 'finaish ' + node.props.id)
       }
 
       curNode = A1
