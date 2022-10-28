@@ -17,46 +17,6 @@
       水水水水水水水水水水水水水水水水水水水顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶反反复复烦烦烦烦烦烦烦烦烦烦烦烦烦烦烦
     </div>
 
-    <script>
-      //1.把虚拟DOM构建成fiber树
-      let A1 = { type: 'div', props: { id: 'A1' } }
-      let B1 = { type: 'div', props: { id: 'B1' }, return: A1 }
-      let B2 = { type: 'div', props: { id: 'B2' }, return: A1 }
-      let C1 = { type: 'div', props: { id: 'C1' }, return: B1 }
-      let C2 = { type: 'div', props: { id: 'C2' }, return: B1 }
-      //A1的第一个子节点B1
-      A1.child = B1
-      //B1的弟弟是B2
-      B1.sibling = B2
-      //B1的第一个子节点C1
-      B1.child = C1
-      //C1的弟弟是C2
-      C1.sibling = C2
-
-      let index = 2
-      let curNode
-      let remainTiming = () => true
-
-      function workLoop() {
-        while (curNode && remainTiming()) {
-          curNode = performUnitOfWork(curNode)
-        }
-      }
-
-      function performUnitOfWork(node) {}
-
-      function beginWork(node) {
-        console.log('-'.repeat(index) + 'begin ' + node.props.id)
-        index += 2
-      }
-
-      function finashWork(node) {
-        index -= 2
-        console.log('-'.repeat(index) + 'finaish ' + node.props.id)
-      }
-
-      curNode = A1
-      workLoop()
-    </script>
+    <script></script>
   </body>
 </html>
