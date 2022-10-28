@@ -279,3 +279,37 @@ function _new(claszz, ...args) {
 - 先将 ES6 转化成 AST 抽象语法树
 - 修改语法树为 ES5 版本的
 - 根据语法树生成 ES5 代码字符串
+
+## 手写 ajax
+
+- 1.创建 Ajax 对象
+
+  ```js
+  const xhr = new XMLHttpRequest()
+  ```
+
+- 2.配置请求地址方法等
+
+  ```js
+  xhr.open('get', 'index.xml', true)
+  ```
+
+- 3.发送请求
+
+  ```js
+  xhr.send(null)
+  ```
+
+- 4.监听请求，接受响应
+  - readyState
+    - 0：请求未初始化
+    - 1：服务器链接已建立
+    - 2：请求已接收
+    - 3：请求处理中
+    - 4：请求已完成 且响应已经就绪
+  ```js
+  xhr.onreadysatechange = function () {
+    if ((xhr.readyState == 4 && xhr.status == 200) || xhr.status == 304)
+      console.log(xhr.responseXML)
+  }
+  ```
