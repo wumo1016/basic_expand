@@ -67,3 +67,13 @@ const obj = {
 }
 // fn3.bind()(2, 3)
 // fn3.mybind()(2, 3)
+
+/* bind */
+;(function () {
+  function fn(a, b, c) {
+    console.log(a, b, c)
+  }
+
+  const test1 = fn.bind(null, 1, 2)
+  test1(3)
+})()
