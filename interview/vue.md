@@ -63,7 +63,8 @@
 
 - 首先数据变化 视图就对应的更新
 - 当在视图中使用表单等操作改变视图 就更新对应的数据
-- 利用 Object.defineProperty 重写数据的 getter 和 setter get 的时候收集 watcher set 的时候触发对应的 watcher
+- vue2 中利用 Object.defineProperty 重写数据的 getter 和 setter get 的时候收集 watcher set 的时候触发对应的 watcher
+- vue3 则使用的是 Proxy API
 
 ## 如何检测数组的变化
 
