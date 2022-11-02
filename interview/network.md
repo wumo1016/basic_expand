@@ -73,11 +73,10 @@
   - `text/html、multipart/form-data`
 - Content-Language: 用于指定页面的目标受众
 
-## get 与 post 的区别
+## get 与 post
 
-- 本质不同
-- 发送的数据大小不同
-- get 一般会被缓存
+- 根据 RFC 规范，它们的用途不同
+- get 一般会被缓存且是幂等的
 - 都可以使用 url、body 携带参数
 
 ## HTTP 历史
