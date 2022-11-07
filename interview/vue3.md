@@ -9,23 +9,9 @@
 - 编译优化 实现静态模板分析
 - 自定义渲染器 可以创建自定义渲染器 改写 vue 底层逻辑
 
-## reactive 的实现原理
+## reactive 与 ref 的区别
 
-- 响应式的原理
-- 为什么使用 Reflect
-- 如何处理重复代理问题
-  - 重复代理原对象
-  - 代理代理过的 proxy
-- 如何实现的懒代理
-- 对数组的处理 2 点
-
-## effect 的实现原理
-
-## ref 的实现原理
-
-## computed 的实现原理
-
-## watch 的实现原理
+## watch 与 watchEffect 的区别
 
 ## pinia 的优点
 
