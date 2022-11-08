@@ -155,9 +155,9 @@
 
 ## 模板编译的大致过程
 
-- parse 阶段 将 template 编译成 ast 语法树 (parseHTML)
-- optimize 阶段 对静态语法做静态标记 diff 的时候 如果是静态节点直接跳过
-- generate 阶段 生成字符串代码
+- parse 阶段: 将 template 编译成 ast 语法树 (parseHTML)
+- optimize 阶段: 对静态语法做静态标记 diff 的时候 如果是静态节点直接跳过
+- generate 阶段: 生成字符串代码
 
 ## Vue.mixin 作用与原理
 
