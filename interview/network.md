@@ -94,7 +94,11 @@
   - 二进制帧: 使用二进制帧传输数据
   - 并发传输: 多路复用机制并发传输，通过 Stream 实现并发，一般一个域名只需要一个 TCP 连接
   - 服务端推送: 请求 html，直接推送 css，无需再次请求
-- HTTP/3.0：解决 TCP 队头阻塞问题，采用 QUIC 协议，QUIC 协议基于 UDP 协议
+- HTTP/3.0
+  - UDP
+  - QUIC
+  - HTTP
+  - 缺点
 - HTTPS：
   - 安全性: HTTP 是超文本传输协议，是明文传输的；HTTPS 在 TCP 和 HTTP 之间加入 SSL/TLS 协议，使得报文能够加密传输
   - 传输数据: HTTP 在三次 TCP 连接后即可传输数据，但 HTTPS 还需要 SSL/TLS 的握手过程
