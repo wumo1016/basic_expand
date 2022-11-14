@@ -96,8 +96,8 @@
   - 服务端推送: 请求 html，直接推送 css，无需再次请求
 - HTTP/3.0
   - UDP
-  - QUIC
-  - HTTP
+  - QUIC(3)
+  - HTTP(2)
   - 缺点
 - HTTPS：
   - 安全性: HTTP 是超文本传输协议，是明文传输的；HTTPS 在 TCP 和 HTTP 之间加入 SSL/TLS 协议，使得报文能够加密传输
