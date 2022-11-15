@@ -101,7 +101,7 @@
   - 缺点
 - HTTPS：
   - 安全性: HTTP 是超文本传输协议，是明文传输的；HTTPS 在 TCP 和 HTTP 之间加入 SSL/TLS 协议，使得报文能够加密传输
-  - 传输数据: HTTP 在三次 TCP 连接后即可传输数据，但 HTTPS 还需要 SSL/TLS 的握手过程
+  - 连接建立: HTTP 在三次 TCP 连接后即可传输数据，但 HTTPS 还需要 SSL/TLS 的握手过程
   - 端口: HTTP => 80 HTTPS => 443
   - 证书: HTTP 需要向 CA 证书机构申请证书
 
