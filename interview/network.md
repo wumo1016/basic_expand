@@ -105,6 +105,12 @@
   - 端口: HTTP => 80 HTTPS => 443
   - 证书: HTTP 需要向 CA 证书机构申请证书
 
+## 数字证书签发和验证流程
+
+## RAS 算法
+
+## ECDHE 算法
+
 ## HTTPS 握手过程(https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/70)
 
 ## HTTPS 握手过程中，客户端如何验证证书的合法性(https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/74)
