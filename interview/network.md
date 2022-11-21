@@ -109,6 +109,19 @@
 
 ## RAS 算法
 
+- 第一次
+  - 生成客户端随机数 C，传给服务端
+- 第二次
+  - 服务端生成随机数 S，传给客户端
+  - 数字证书，传给客户端
+- 第三次
+  - 验证数字证书合法性
+  - 生成 pre-master key 使用服务端公钥加密，传给服务端
+  - C + S + pre-master key => 加密生成会话密钥
+- 第四次
+  - 解密 pre-master key
+  - C + S + pre-master key => 加密生成会话密钥
+
 ## ECDHE 算法
 
 ## HTTPS 握手过程(https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/70)
