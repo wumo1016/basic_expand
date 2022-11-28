@@ -141,6 +141,26 @@
   - [服务端椭圆曲线私钥] + [客户端椭圆曲线公钥] + 基点 => [共享密钥]
   - C + S + [共享密钥] => 会话密钥
 
+## TCP 重传机制
+
+- 超时重传
+- 快速重传
+- SACK
+- D-SACK
+
+## 滑动窗口
+
+- 介绍
+- 字段
+- 分类
+
+## 流量控制
+
+- 介绍
+- 糊涂窗口综合征
+  - 触发原因
+  - 解决办法
+
 ## HTTPS 握手过程(https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/70)
 
 ## HTTPS 握手过程中，客户端如何验证证书的合法性(https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/74)
