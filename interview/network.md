@@ -161,6 +161,11 @@
   - 触发原因
   - 解决办法
 
+## 拥塞处理
+
+- 拥塞窗口
+- 拥塞算法
+
 ## HTTPS 握手过程(https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/70)
 
 ## HTTPS 握手过程中，客户端如何验证证书的合法性(https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/74)
