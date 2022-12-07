@@ -295,3 +295,7 @@
 - MTU: 一个网络包的最大长度, 一般为 1500 字节
 - MSS: 一个网络包所能容纳的 TCP 数据的最大长度, 就是 MTU 的长度减去 IP 和 TCP 头部的长度
 - MSL: 报文最大生存时间
+
+## HTTPS 握手过程(https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/70)
+
+## HTTPS 握手过程中，客户端如何验证证书的合法性(https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/74)

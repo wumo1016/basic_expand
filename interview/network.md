@@ -173,6 +173,4 @@
   - 拥塞发生
   - 快速恢复
 
-## HTTPS 握手过程(https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/70)
-
-## HTTPS 握手过程中，客户端如何验证证书的合法性(https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/74)
+## 粘包
