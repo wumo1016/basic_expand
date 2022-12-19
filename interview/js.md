@@ -320,3 +320,7 @@ function _new(claszz, ...args) {
       console.log(xhr.responseXML)
   }
   ```
+
+## async await 的原理
+
+- generator + co 的结合
