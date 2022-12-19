@@ -26,7 +26,7 @@ function test1() {
 
   function parse(obj, str) {
     str = str.replace(/\[(\d)\]/g, '.$1')
-    str.split('.').forEach(item => {
+    str.split('.').forEach((item) => {
       obj = obj[item]
     })
     return obj
@@ -44,18 +44,18 @@ function test2() {
     arr
       .toString()
       .split(',')
-      .map(v => Number(v))
+      .map((v) => Number(v))
   )
   // 3
   console.log(
     JSON.stringify(arr)
       .replace(/\[|\]/g, '')
       .split(',')
-      .map(v => Number(v))
+      .map((v) => Number(v))
   )
   // 4
   let arr1 = arr
-  while (arr1.some(v => Array.isArray(v))) {
+  while (arr1.some((v) => Array.isArray(v))) {
     arr1 = [].concat(...arr1)
   }
   console.log(arr1)
@@ -157,7 +157,7 @@ function test5() {
 /* -------------------- 异步 ----------------- */
 ;(function () {
   function wait() {
-    return new Promise(resolve => setTimeout(resolve, 5 * 1000))
+    return new Promise((resolve) => setTimeout(resolve, 5 * 1000))
   }
 
   async function main() {
@@ -284,9 +284,9 @@ function test5() {
 /* -------------------- 不用加减乘除运算符求整数7倍 ----------------- */
 ;(function () {
   /* eval */
-  const test1 = num => eval(new Array(7).fill(num).join('+'))
+  const test1 = (num) => eval(new Array(7).fill(num).join('+'))
   /* Function */
-  const test2 = num =>
+  const test2 = (num) =>
     new Function(`return ${new Array(7).fill(num).join('+')}`)()
   console.log(test2(7))
 })
@@ -350,7 +350,7 @@ function test5() {
   }
 
   console.log(5)
-  async1().then(res => console.log(res))
+  async1().then((res) => console.log(res))
   console.log(6)
 })
 
@@ -395,7 +395,7 @@ function test5() {
       fn && fn()
     }
   }
-  const LazyMan = name => new LazyManClass(name)
+  const LazyMan = (name) => new LazyManClass(name)
 
   /* 1 */
   // LazyMan('Tony')
@@ -493,7 +493,103 @@ function test5() {
     ].map(Number)
   }
   console.log(test2(arr))
-})()
+})
+
+/* -------------------- 使用Promise实现一个异步流量控制的函数, 比如一共10个请求, 每个请求的快慢不同, 最多同时3个请求发出, 快的一个请求返回后, 就从剩下的7个请求里再找一个放进请求池里, 如此循环。 ----------------- */
+;(function () {
+  const list = Array(10)
+    .fill('')
+    .map((_, index) => {
+      return () =>
+        new Promise((r) => {
+          const time = Math.random() * 5 * 1000
+          console.log(index + 1, time, '执行啦')
+          setTimeout(() => {
+            console.log(`第${index + 1}个完成啦`)
+            r(index + 1)
+          }, time)
+        })
+    })
+  function controlFn(reqList, num) {
+    let curIndex = 0
+    let penddingNum = 0
+    let finishedNum = 0
+    const res = []
+    return new Promise((r) => {
+      const execute = () => {
+        if (curIndex >= reqList.length || penddingNum >= num) return
+        const index = curIndex
+        penddingNum++
+        const fn = reqList[curIndex++]
+        fn().then((data) => {
+          finishedNum++
+          penddingNum--
+          res[index] = data
+          if (finishedNum === reqList.length) {
+            r(res)
+          }
+          execute()
+        })
+        execute()
+      }
+      execute()
+    })
+  }
+  controlFn(list, 3).then((r) => {
+    console.log(r)
+  })
+})
+
+/* -------------------- 实现compose函数, 类似于koa的中间件洋葱模型 ----------------- */
+;(function () {
+  let middleware = []
+  middleware.push((next) => {
+    console.log(1)
+    next()
+    console.log(1.1)
+  })
+  middleware.push((next) => {
+    console.log(2)
+    next()
+    console.log(2.1)
+  })
+  middleware.push((next) => {
+    console.log(3)
+    next()
+    console.log(3.1)
+  })
+
+  let fn = compose(middleware)
+  fn()
+
+  /* 方式1 */
+  // function compose(middlewares) {
+  //   const len = middlewares.length
+  //   if (len < 1) return
+  //   let firstFn, nextFn
+  //   for (let i = len - 1; i >= 0; i--) {
+  //     if (i === len - 1) {
+  //       nextFn = () => middlewares[i](() => {})
+  //     } else {
+  //       const newFn = nextFn
+  //       nextFn = () => middlewares[i](newFn)
+  //       if (i === 0) firstFn = nextFn
+  //     }
+  //   }
+  //   return firstFn
+  // }
+  /* 方式2 */
+  function compose(middlewares) {
+    return () => {
+      const dispatch = (index) => {
+        if (index === middlewares.length) return () => {}
+        const fn = middlewares[index]
+        return fn(() => dispatch(index + 1))
+      }
+      dispatch(0)
+    }
+  }
+})
 
 /* -------------------- 编程题 ----------------- */
 // ;(function(){
