@@ -42,24 +42,37 @@
 
 ## 浏览器缓存
 
-- 是否存在强缓存
+- 缓存位置(优先级由高至低)
 
-  - 存在
-    - cache-control
-      - max-age: 时长
-        - 未过期，直接去缓存
-        - 过期，走协商缓存
-      - public: 客户端和服务端都可以缓存
-      - private: 只有客户端可以缓存
-      - no-cache: 不走强缓存
-      - no-store: 不走任何缓存(包括协商缓存)
-    - expires
-  - 不存在 走协商缓存
+  - Service Worker
+  - Memory Cache
+    - 主要是一些 css、js、图片等, 包括 preload 预加载的资源
+    - 不关心 http 头部字段
+  - Disk Cache
+    - 根据 http 头部字段去操作缓存
+  - Push Cache
+    - http2 的服务端推送
 
-- 协商缓存
-  - 是否存在 Etag
-    - 存在 => 发请求 携带 If-none-Match(Etag 的值) 如果一样返回 304 不一样返回 200
-    - 不存在
-      - 是否存在 Last-Modifield
-        - 存在 携带 In-Modified-since(Last-Modifield 的值) 与服务器的 Last-Modifield 比较 一样返回 304 不一样返回 200
-        - 不存在，返回 200
+- 缓存方式(强缓存和协商缓存)
+
+  - 是否存在强缓存
+
+    - 存在
+      - cache-control
+        - max-age: 时长
+          - 未过期，直接去缓存
+          - 过期，走协商缓存
+        - public: 客户端和服务端都可以缓存
+        - private: 只有客户端可以缓存
+        - no-cache: 不走强缓存
+        - no-store: 不走任何缓存(包括协商缓存)
+      - expires
+    - 不存在 走协商缓存
+
+  - 协商缓存
+    - 是否存在 Etag
+      - 存在 => 发请求 携带 If-none-Match(Etag 的值) 如果一样返回 304 不一样返回 200
+      - 不存在
+        - 是否存在 Last-Modifield
+          - 存在 携带 In-Modified-since(Last-Modifield 的值) 与服务器的 Last-Modifield 比较 一样返回 304 不一样返回 200
+          - 不存在，返回 200
