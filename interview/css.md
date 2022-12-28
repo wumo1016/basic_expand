@@ -195,3 +195,9 @@
 
 - `<img src="1.jpg" style="width:480px!important; max-width = 300px">`
 - `<img src="1.jpg" style="width:480px!important; transform: scale(300/480)">`
+
+## 换肤方案
+
+- css 样式覆盖, 通过切换 css 选择器实现
+- 引入多套样式主题, 通过 link 标签动态加载不同的样式主题
+- 通过 css var()函数定义颜色变量的方式
