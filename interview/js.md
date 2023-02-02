@@ -70,7 +70,7 @@ function _new(claszz, ...args) {
 
 - 数据属性
   - configurable: 是否可修改属性描述符的配置、是否可删除
-  - enumberable: 是否可枚举
+  - enumerable: 是否可枚举
   - writable: 是否可修改内存地址
   - value
 - 访问器属性
