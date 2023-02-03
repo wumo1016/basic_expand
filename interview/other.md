@@ -39,14 +39,17 @@
 
 ## 前端常见优化
 
-- 减少 http 请求 资源合并
+- 资源合并, 减少 http 请求
 - 资源压缩 gzip
 - 合理设置缓存
 - 使用 cdn 加速
 - dns-prefetch
+
 - css 在上 js 在下
 - 加载 css 时使用 link 而不是@import
+
 - 不影响显示的 js 文件使用 defer 或 async 异步加载
+
 - 图片懒加载
 
 ## 模块化的区别以及好处
