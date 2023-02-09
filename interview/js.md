@@ -281,7 +281,7 @@ function _new(claszz, ...args) {
 
 ## switch
 
-- switch 的 case 比较值用的是 == 而不是 ===
+- switch 的 case 比较值用的是 === 而不是 ==
 
 ## ES6 代码转成 ES5 代码的实现思路是什么
 
