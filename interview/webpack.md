@@ -41,10 +41,12 @@
   - 压缩 css(optimize-css-assets-webpack-plugin)
   - 压缩 js(terser-webpack-plugin)
 - 优化运行体验
+  - 分包(splitChunks)
+  - preload 预加载资源
 
-# 如何编写 Loader ? 介绍一下思路？
+# 如何编写 loader
 
-# 如何编写 Plugin ? 介绍一下思路？
+# 如何编写 plugin
 
 # Webpack optimize 有配置过吗？可以简单说说吗？
 
