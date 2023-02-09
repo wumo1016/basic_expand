@@ -48,6 +48,10 @@
 
 # 如何编写 plugin
 
+- 创建一个类
+- 获取 options
+- apply 函数
+
 # Webpack optimize 有配置过吗？可以简单说说吗？
 
 # Webpack 打包流程是怎样的？
