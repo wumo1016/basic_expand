@@ -106,7 +106,7 @@
 ## key 的作用
 
 - patch 过程中会根据 key 判断是否是同一个节点
-- 在 patchChildren 的最后机型乱序比对的时候 会 key-index 映射 用来找到 ke 复用的节点
+- 在 patchChildren 的最后机型乱序比对的时候 会 key-index 映射 用来找到 key 复用的节点
 - 所以如果列表会发生变化 则不能使用 index 作为 key
 
 ## 单页面的优缺点

@@ -160,12 +160,6 @@
   - `docker stop name/ID` 停止容器
   - `docker rm name/ID` 删除容器
 
-## webpack 常见 loader
-
-- 样式：style-loader、css-loader、less-loader、sass-loader 等
-- 文件：raw-loader、file-loader 、url-loader 等
-- 编译：babel-loader 、ts-loader 等
-
 ## 如果你接到一个项目如何从头开始的
 
 - 需求确认
@@ -188,10 +182,6 @@
 ## CSRF
 
 - 跨站请求伪造
-
-## webpack 热更新原理
-
-http://www.javascriptpeixun.cn/my/course/3588
 
 ## 为什么通常在发送数据埋点请求的时候使用的是 1x1 像素的透明 gif 图片
 
