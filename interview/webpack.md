@@ -26,7 +26,7 @@
 # loader 和 plugin
 
 - loader 一般针对特定类型的文件执行操作
-- plugin 在任务地方都可以执行
+- plugin 在任何地方都可以执行
 
 # Webpack 层面的性能优化
 
@@ -45,6 +45,9 @@
   - preload 预加载资源
 
 # 如何编写 loader
+
+- 就是一个函数
+- 最主要接收的参数就是 source, 其实就是将 source 转换为另一种形式的代码
 
 # 如何编写 plugin
 
@@ -65,5 +68,3 @@ http://www.javascriptpeixun.cn/my/course/3588
 # Webpack 和 Rollup 有什么相同点与不同点？
 
 # Webpack5 更新了哪些新特性？
-
-https://juejin.cn/post/7023242274876162084#heading-21
