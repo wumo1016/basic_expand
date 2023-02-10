@@ -56,3 +56,8 @@ body {
 ## 在 calc 中使用 scss 变量
 
 - 使用 `#{}` 包裹 例如: `height: calc(100% - #{$height})`
+
+## 盒子模型
+
+- 标准模型: content-box(content)
+- IE 盒子模型: border-box(width=content+padding+border)
