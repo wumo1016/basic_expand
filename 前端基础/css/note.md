@@ -61,3 +61,14 @@ body {
 
 - 标准模型: content-box(content)
 - IE 盒子模型: border-box(width=content+padding+border)
+
+## 浮动
+
+- 定义
+  - 浮动元素脱离了文档流
+  - 父容器的高度出现塌陷
+  - 对附近的元素造成改变, 使得布局混乱
+- 清除浮动
+  - 父级元素添加`overflow: hidden`
+  - 父级内部最后添加一个 div 设置样式`clear: both`
+  - 父级添加伪类`:after ::after` 设置样式`clear: both`
