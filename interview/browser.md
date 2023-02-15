@@ -76,3 +76,5 @@
         - 是否存在 Last-Modifield
           - 存在 携带 In-Modified-since(Last-Modifield 的值) 与服务器的 Last-Modifield 比较 一样返回 304 不一样返回 200
           - 不存在，返回 200
+
+## cookie 会自动删除吗
