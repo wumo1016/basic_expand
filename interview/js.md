@@ -326,3 +326,20 @@ function _new(claszz, ...args) {
 ## async await 的原理
 
 - generator + co 的结合
+
+## 判断对象是否具有属性的 5 种方法
+
+- in
+  - `prop in obj`
+  - 缺点: 原型属性也会返回 true
+- Reflect.has
+  - `Reflect.has(obj, prop)`
+  - 缺点: 原型属性也会返回 true
+- hasOwnProperty
+  - `obj.hasOwnProperty(prop)`
+  - 缺点: 通过 Object.create(null)创建的对象没有此方法
+- Object.prototype.hasOwnProperty
+  - `Object.prototype.hasOwnProperty.call(obj, prop)`
+  - 弥补了 hasOwnProperty 的缺陷
+- Object.hasOwn(2022)
+  - `Object.hasOwn(obj, prop)`
