@@ -206,5 +206,30 @@
 - 介绍
   - 是一个嵌入式的浏览器
 - 目前 JS 和客户端交互的常见方式
+
   - JSBridge
+
+  ```js
+  // H5 调用 Android 方法
+  function onAndroidFunction1(str) {
+    window.AndroidJSBridge.androidTestFunction1(str)
+  }
+  // Android 调用 H5 方法
+  window.onFunction = function (str) {
+    alert(str)
+    return 'onFunction 方法已经调用完成'
+  }
+  // H5 调用 IOS 方法
+  function onIOSFunction1(str) {
+    window.webkit.messageHandlers.IOSTestFunction1.postMessage({
+      msg: str
+    })
+  }
+  // IOS 回调 H5 方法
+  window.onFunctionIOS = function (str) {
+    alert(str)
+    return 'onFunctionIOS 方法已经调用完成'
+  }
+  ```
+
   - Schema url
