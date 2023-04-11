@@ -14,7 +14,15 @@
 - 12: December
 
 ## 程序员小山
-- bug修复之undefined
+
+- bug 修复之 undefined
+
 ## 渡一实战技巧
+
+- 1: css 的 steps 属性
+- 2: css 的 animation-play-state 属性
+- 3: css 的 sticky 粘性定位
+- 6
 - 150
+- 160
 - 161: 右键菜单的封装
