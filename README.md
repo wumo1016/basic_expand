@@ -26,3 +26,6 @@
 - 150
 - 160
 - 161: 右键菜单的封装
+
+
+## [逐字显示效果](https://codepen.io/Zhouzi/pen/JoRazP)
