@@ -1,78 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Component</title>
-  <style>
-    /* wm-button {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Component</title>
+    <style>
+      /* wm-button {
       --color: yellow
     } */
 
-    /* 也可使用 :root 全局的样式变量 */
-    :root {
-      --color: yellow
-    }
-  </style>
-</head>
-
-<body>
-
-  <wm-button type="primary">点我</wm-button>
-
-  <template id="btn">
-    <button class="wm-button">
-      <slot>默认</slot>
-    </button>
-  </template>
-
-  <script>
-    window.log = console.log
-    class WmButton extends HTMLElement {
-      constructor() {
-        super()
-        const shadow = this.attachShadow({
-          mode: 'open'
-        })
-        const benTem = document.querySelector('#btn')
-        const cloneTem = benTem.content.cloneNode(true) // 赋值一个节点 以便复用
-
-        const style = document.createElement('style')
-
-        // 获取标签属性
-        const type = this.getAttribute('type')
-        const btnList = {
-          'default': {
-            color: '#606266',
-            background: '#fff',
-            border: '1px solid #dcdfe6'
-          },
-          'primary': {
-            color: '#fff',
-            background: '#409eff',
-            border: '1px solid #409eff'
-          }
-        }
-        const typeStyle = btnList[type] || btnList['default']
-
-        style.textContent = `
-        .wm-button{
-          outline: none;
-          border-radius: 2px;
-          padding: 5px 10px;
-          color: var(--color, ${typeStyle.color});
-          background: var(--background-color, ${typeStyle.background});
-          border: var(--border, ${typeStyle.border});
-        }
-        `
-        shadow.appendChild(style)
-        shadow.appendChild(cloneTem)
+      /* 也可使用 :root 全局的样式变量 */
+      :root {
+        --color: yellow;
       }
-    }
-    // 自定义标签
-    window.customElements.define('wm-button', WmButton)
-  </script>
-</body>
+    </style>
+  </head>
 
+  <body>
+    <!-- 使用 -->
+    <wm-button type="primary">点我</wm-button>
+    <!-- 模板 -->
+    <template id="btn">
+      <button class="wm-button">
+        <slot>默认</slot>
+      </button>
+    </template>
+
+    <script>
+      window.log = console.log
+      class WmButton extends HTMLElement {
+        constructor() {
+          super()
+          // 1.将当前节点变成一个 Shadow DOM
+          const shadow = this.attachShadow({
+            mode: 'open'
+          })
+          // 2.拿到模板的内容并拷贝
+          const benTem = document.querySelector('#btn')
+          const cloneTem = benTem.content.cloneNode(true) // 赋值一个节点 以便复用
+          const style = document.createElement('style')
+          // 获取标签属性
+          const type = this.getAttribute('type')
+          const btnList = {
+            default: {
+              color: '#606266',
+              background: '#fff',
+              border: '1px solid #dcdfe6'
+            },
+            primary: {
+              color: '#fff',
+              background: '#409eff',
+              border: '1px solid #409eff'
+            }
+          }
+          const typeStyle = btnList[type] || btnList['default']
+          style.textContent = `
+            .wm-button{
+              outline: none;
+              border-radius: 2px;
+              padding: 5px 10px;
+              color: var(--color, ${typeStyle.color});
+              background: var(--background-color, ${typeStyle.background});
+              border: var(--border, ${typeStyle.border});
+            }
+          `
+          shadow.appendChild(style)
+          // 3.将内容添加进 Shadow DOM
+          shadow.appendChild(cloneTem)
+        }
+
+        connectedCallback() {
+          log('wm-button挂载完毕')
+        }
+      }
+      // 自定义标签
+      window.customElements.define('wm-button', WmButton)
+    </script>
+  </body>
 </html>
