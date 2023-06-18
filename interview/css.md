@@ -201,3 +201,10 @@
 - css 样式覆盖, 通过切换 css 选择器实现
 - 引入多套样式主题, 通过 link 标签动态加载不同的样式主题
 - 通过 css var()函数定义颜色变量的方式
+
+## 盒模型以及区别
+
+- W3C 盒模型（标准盒模型）: `box-sizing: content-box;`
+  - width 只包含内容宽, 不包含 padding 以及 border
+- IE 盒模型（怪异盒模型）: `box-sizing: border-box;`
+  - width 是内容 +padding + border 的总和
