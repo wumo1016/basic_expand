@@ -1,4 +1,5 @@
 ## nginx
+- try_files
 
 ## linux
 
