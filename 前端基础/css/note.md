@@ -72,3 +72,7 @@ body {
   - 父级元素添加`overflow: hidden`
   - 父级内部最后添加一个 div 设置样式`clear: both`
   - 父级添加伪类`:after ::after` 设置样式`clear: both`
+
+## position: sticky
+
+- 以最近的一个 overflow 不等于 visible 的父级元素为容器进行粘性定位的
