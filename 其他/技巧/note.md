@@ -12,6 +12,7 @@ findScroller(document.body)
 
 ## element 调试 popover 元素
 
+- 鼠标浮上去, 然后 ctrl+shift+p 调出 chrome 控制台, 输入 disabled javascript 禁用 js 后就可以查看啦(调试完后可以使用 enable javascript 启用)
 - 在控制台输入下面代码执行 时间是供选择元素的时间
 
 ```js
@@ -37,5 +38,4 @@ setTimeout(() => {
 - 在控制源代码 tab 栏中 左侧网页 top 文件右键点击在所有文件中搜索
 - 定位到相关文件
 - 在对应源文件的左下角有一个符号 `{}` 可以美化代码 然后就可以进行 debugger 了
-
 - 关联 sourcemap 文件
