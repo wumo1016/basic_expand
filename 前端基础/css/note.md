@@ -75,4 +75,5 @@ body {
 
 ## position: sticky
 
-- 以最近的一个 overflow 不等于 visible 的父级元素为容器进行粘性定位的
+- 以最近的一个 overflow 不等于 visible 的祖级元素为容器进行粘性定位的
+- 粘的位置不会超过父级的高度
