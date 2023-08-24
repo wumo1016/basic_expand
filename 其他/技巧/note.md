@@ -39,3 +39,5 @@ setTimeout(() => {
 - 定位到相关文件
 - 在对应源文件的左下角有一个符号 `{}` 可以美化代码 然后就可以进行 debugger 了
 - 关联 sourcemap 文件
+
+## github 浏览代码时 按中文句号可以直接切换到 web-vscode 编辑器进行编辑(前提是 github 已登录)
