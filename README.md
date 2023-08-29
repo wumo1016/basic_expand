@@ -19,6 +19,8 @@
 - 2022.2.22: HTML 缩放的缝隙
 - 2022.4.4: `利用继承改vue组件解决el-table中max-height为比例值`
 - 2022.5.3: 利用 json-bigint 处理数字 id 超长问题
+- 2022.6.4: MonacoEditor 代码编辑器
+- 2022.6.19: el-select 下拉错位
 
 ## 渡一实战技巧
 
