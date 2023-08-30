@@ -46,3 +46,7 @@ setTimeout(() => {
 
 - 双击打开文件
 - 双击 tab 标题
+
+## 搜索打包后的代码
+
+- 控制台-Network-下方打开 Search Tab 即可搜索
