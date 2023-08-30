@@ -49,4 +49,4 @@ setTimeout(() => {
 
 ## 搜索打包后的代码
 
-- 控制台-Network-下方打开 Search Tab 即可搜索
+- 控制台-Network-按快捷鍵 ctrl+shift+f 打开 Search Tab 搜索即可
