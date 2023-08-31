@@ -85,3 +85,7 @@ body {
 - 基于非 static 定位的父元素进行计算
 - 如果遇到 float 元素, 会让出一部分空间
   - 但如果 margin 足够大, 就不算遇到 float 元素了
+
+## aspect-ratio
+
+- 保持宽高比例
