@@ -50,3 +50,5 @@ setTimeout(() => {
 ## 搜索打包后的代码
 
 - 控制台-Network-按快捷鍵 ctrl+shift+f 打开 Search Tab 搜索即可
+
+## 使用 vscode 选中一段文本后, 按 ctrl+D 会选中下一个同样的文本, 连续有效
