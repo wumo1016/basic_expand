@@ -52,3 +52,5 @@ setTimeout(() => {
 - 控制台-Network-按快捷鍵 ctrl+shift+f 打开 Search Tab 搜索即可
 
 ## 使用 vscode 选中一段文本后, 按 ctrl+D 会选中下一个同样的文本, 连续有效
+
+## 数字与 undefined 进行比较时 永远都是 false 而 null 不是
