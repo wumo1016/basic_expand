@@ -13,6 +13,26 @@
   - isArray
 */
 
+/* ----------------------------------------- forEach、map跳出循环 ----------------------------------------- */
+;(function () {
+  const list = [1, 2, 3, 4, 5]
+  /* 方法1 */
+  // try {
+  //   list.forEach(it => {
+  //     if (it === 3) throw new Error('error')
+  //     console.log(it)
+  //   })
+  // } catch (error) {}
+
+  /* 方法2 */
+  list.forEach((it, index) => {
+    if (it === 3) return list.splice(index)
+    console.log(it)
+  })
+})()
+
+/* ----------------------------------------- 数组去重 ----------------------------------------- */
+
 /* ----------------------------------------- Array.from ----------------------------------------- */
 ;(function () {
   const map = new Map()
