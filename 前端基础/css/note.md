@@ -90,6 +90,10 @@ body {
 
 - 保持宽高比例
 
+## 设置 50% 的圆角
+
+- `border-radius: calc(infinity * 1px)`
+
 ## focus-within
 
 ## point-events
