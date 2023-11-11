@@ -38,6 +38,10 @@
         range.setStart(box, 0)
         range.setEnd(box, box.childNodes.length)
         const rangeWidth = range.getBoundingClientRect().width
+        const offsetWidth = rangeWidth - Math.floor(rangeWidth)
+        if (offsetWidth < 0.001) {
+          rangeWidth = Math.floor(rangeWidth)
+        }
         const { top, left, right, bottom } = getPadding(box)
         const horizontalPadding = left + right
         console.log(
