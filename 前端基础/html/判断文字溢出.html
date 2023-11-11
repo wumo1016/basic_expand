@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box,
+      .box1 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        box-sizing: border-box;
+        font-size: 11.2px;
+        padding: 0 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- https://mp.weixin.qq.com/s/kt3gCLrXcVmiaVoHsvEvNg -->
+    <div class="box" style="width: 98px">测试流程图显示</div>
+    <div class="box1" style="width: 98px">
+      <span class="content">测试流程图显示</span>
+    </div>
+    <script>
+      const box = document.querySelector('.box')
+
+      /* 方法一 */
+      ;(function () {
+        console.log(1, box.scrollWidth > box.offsetWidth, box.scrollWidth)
+      })()
+
+      /* 方法二 */
+      ;(function () {
+        const range = document.createRange()
+        range.setStart(box, 0)
+        range.setEnd(box, box.childNodes.length)
+        const rangeWidth = range.getBoundingClientRect().width
+        const { top, left, right, bottom } = getPadding(box)
+        const horizontalPadding = left + right
+        console.log(
+          2,
+          rangeWidth + horizontalPadding > box.offsetWidth,
+          rangeWidth + horizontalPadding
+        )
+      })()
+
+      /* 方法三 */
+      ;(function () {
+        const tempElement = document.createElement('div')
+        const style = window.getComputedStyle(box, null)
+        tempElement.style.cssText = `
+          position: absolute;
+          top: -9999px;
+          left: -9999px;
+          white-space: nowrap;
+          padding-left:${style.paddingLeft};
+          padding-right:${style.paddingRight};
+          font-size: ${style.fontSize};
+          font-family: ${style.fontFamily};
+          font-weight: ${style.fontWeight};
+          letter-spacing: ${style.letterSpacing};
+        `
+        tempElement.textContent = box.textContent
+        document.body.appendChild(tempElement)
+        console.log(
+          3,
+          tempElement.clientWidth > box.clientWidth,
+          tempElement.clientWidth
+        )
+        document.body.removeChild(tempElement)
+      })()
+
+      /* 方法4 */
+      ;(function () {
+        const box = document.querySelector('.box1')
+        const content = document.querySelector('.content')
+        const { top, left, right, bottom } = getPadding(box)
+        const horizontalPadding = left + right
+        console.log(
+          4,
+          content.offsetWidth + horizontalPadding > box.clientWidth,
+          content.offsetWidth + horizontalPadding
+        )
+      })()
+
+      /**
+       * @Author: wyb
+       * @Descripttion: 获取元素内边距
+       * @param {*} el
+       */
+      function getPadding(el) {
+        const style = window.getComputedStyle(el, null)
+        const paddingLeft = Number.parseInt(style.paddingLeft, 10) || 0
+        const paddingRight = Number.parseInt(style.paddingRight, 10) || 0
+        const paddingTop = Number.parseInt(style.paddingTop, 10) || 0
+        const paddingBottom = Number.parseInt(style.paddingBottom, 10) || 0
+        return {
+          left: paddingLeft,
+          right: paddingRight,
+          top: paddingTop,
+          bottom: paddingBottom
+        }
+      }
+    </script>
+  </body>
+</html>
