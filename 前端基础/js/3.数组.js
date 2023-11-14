@@ -1,16 +1,31 @@
 /* 方法
   - push pop shift unshift splice
   - map forEach
-  - filter find findIndex
+  - filter 
+  - find findIndex findLast findLastIndex
   - reduce reduceRight
   - some every
-  - flat
-  - includes indexOf lastIndexOf
+  - flat flatMap
+  - includes 
+  - indexOf lastIndexOf
   - concat
   - join
   - reverse
   - sort
   - isArray
+  - at
+  - of: 从给定的元素创建一个数组
+  - copyWithin(target, start, end)
+    - target: 开始替换的起始位置
+    - start(可选): 复制的起始位置
+    - end(可选): 复制的结束位置
+  - fill(value, start, end)
+    - value: 要填充的值
+    - start(可选): 填充的起始位置
+    - end(可选): 填充的结束位置
+  - with(index, value)(Node20开始支持)
+    - index: 要修改的值的索引
+    - value: 要替换的值
 */
 
 /* ----------------------------------------- forEach、map跳出循环 ----------------------------------------- */
@@ -29,7 +44,7 @@
     if (it === 3) return list.splice(index)
     console.log(it)
   })
-})()
+})
 
 /* ----------------------------------------- 数组去重 ----------------------------------------- */
 
@@ -53,7 +68,7 @@
   console.log(list.at(-1)) // 5
 })
 
-/* ----------------------------------------- flat、flatMap ----------------------------------------- */
+/* ----------------------------------------- flat flatMap ----------------------------------------- */
 /* 
 - 这两个方法不修改原数组 返回一个新数组
 - flatMap: 接收一个函数 对每个函数的返回值执行 flat (可等同于filter和map的结合)
@@ -128,9 +143,6 @@
   })
 })
 /* ----------------------------------------- 当对象使用 ----------------------------------------- */
-/* 
-- at: 可以是负数
-*/
 ;(function () {
   const list = []
   list['wew'] = {
@@ -141,4 +153,29 @@
   }
   console.log(list) // [ wew: { name: '张三' }, sdf: { name: '李四' } ]
   console.log(Object.values(list)) // [ { name: '张三' }, { name: '李四' } ]
+})
+
+/* ----------------------------------------- copyWithin ----------------------------------------- */
+;(function () {
+  const list = [1, 2, 3, 2, 4, 5]
+  list.copyWithin(1, 2, 3)
+  console.log(list) // [ 1, 3, 3, 2, 4, 5 ]
+})
+
+/* ----------------------------------------- fill ----------------------------------------- */
+;(function () {
+  const list = [1, 2, 3, 2, 4, 5]
+  list.fill(6, 1)
+  console.log(list) // [ 1, 6, 6, 6, 6, 6 ]
+})
+
+/* ----------------------------------------- of ----------------------------------------- */
+;(function () {
+  console.log(Array.of(1, 2, 3)) // [ 1, 2, 3 ]
+})
+
+/* ----------------------------------------- with ----------------------------------------- */
+;(function () {
+  const list = [1, 2, 3, 2, 4, 5]
+  console.log(list.with(3, 4))
 })
