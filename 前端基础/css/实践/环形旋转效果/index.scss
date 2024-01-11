@@ -1,0 +1,50 @@
+@use 'sass:math';
+
+$wid: 300px;
+$wid-half: math.div($wid, 2);
+$size: 100px;
+$size-half: math.div($size, 2);
+$angle: calc(360deg / 4);
+
+.box {
+  margin: auto;
+  margin-top: 300px;
+  width: $wid;
+  height: $wid;
+  border: 1px solid red;
+  border-radius: 50%;
+  position: relative;
+  animation: rotation 5s linear infinite;
+
+  [class^='item'] {
+    width: $size;
+    height: $size;
+    line-height: $size;
+    border: 1px solid red;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    top: -$size-half;
+    left: calc(50% - $size-half);
+    text-align: center;
+    transform-origin: center calc($wid-half + $size-half);
+  }
+
+  @for $i from 1 through 4 {
+    .item#{$i} {
+      $deg: $angle * $i;
+      transform: rotate($deg);
+      div {
+        --initDeg: #{$deg};
+        transform: rotate(-$deg);
+        animation: rotation 5s linear infinite reverse;
+      }
+    }
+  }
+}
+
+@keyframes rotation {
+  to {
+    transform: rotate(calc(360deg - var(--initDeg, 0deg)));
+  }
+}
