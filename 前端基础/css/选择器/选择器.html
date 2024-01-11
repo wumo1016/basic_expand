@@ -1,71 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+      /* href 属性以 https 开头的标签 */
+      a[href^='https'] {
+        color: red;
+      }
+      /* href 属性以 store 结尾的标签 */
+      a[href$='store'] {
+        color: green;
+      }
+      /* href 属性包含 aaa 的标签 */
+      a[href*='aaa'] {
+        color: pink;
+      }
+      /* 包含 test 属性的标签 */
+      div[test] {
+        color: blue;
+      }
+      /* test 属性值为 a 的标签 */
+      div[test='a'] {
+        color: red;
+      }
+      /* 第一个字符 */
+      .test::first-letter {
+        color: blue;
+      }
+      /* 第一行 */
+      .test::first-line {
+        color: yellow;
+      }
+      /* 选择的文本 */
+      .test1::selection {
+        color: blue;
+      }
+      /* placeholder文本 */
+      .test2::placeholder {
+        color: blue;
+      }
+    </style>
+  </head>
 
-    a[href^=https] {
-      color: red
-    }
+  <body>
+    <a href="https://www.baidu.com">q</a>
+    <a href="http://www.wuyibo.store">e</a>
+    <a href="http://www.aaa.qq">a</a>
+    <a href="http://www.aaa.qq">b</a>
 
-    a[href$=store] {
-      color: green
-    }
+    <div test>1</div>
+    <div test>2</div>
+    <div test="a">2</div>
 
-    a[href*=aaa] {
-      color: pink
-    }
-
-    div[test] {
-      color: blue;
-    }
-
-    div[test=a] {
-      color: red;
-    }
-
-    .test::first-letter {
-      color: blue;
-    }
-
-    .test::first-line {
-      color: yellow;
-    }
-
-    .test1::selection {
-      color: blue;
-    }
-
-    .test2::placeholder {
-      color: blue;
-    }
-  </style>
-</head>
-
-<body>
-  <a href="https://www.baidu.com">q</a>
-  <a href="http://www.wuyibo.store">e</a>
-  <a href="http://www.aaa.qq">a</a>
-  <a href="http://www.aaa.qq">b</a>
-
-  <div test>1</div>
-  <div test>2</div>
-  <div test="a">2</div>
-
-  <div class="test" style="width: 100px;">
-    阿卡点卡还得啊肯德基的话是独立访客数量分局书记副书记附件是肥肉
-  </div>
-  <div class="test1" style="width: 100px;">
-    阿卡点卡还得啊肯德基的话是独立访客数量分局书记副书记附件是肥肉
-  </div>
-  <input type="text" class="test2" placeholder="123456" />
-</body>
-
+    <div class="test" style="width: 100px">
+      阿卡点卡还得啊肯德基的话是独立访客数量分局书记副书记附件是肥肉
+    </div>
+    <div class="test1" style="width: 100px">
+      阿卡点卡还得啊肯德基的话是独立访客数量分局书记副书记附件是肥肉
+    </div>
+    <input type="text" class="test2" placeholder="123456" />
+  </body>
 </html>
