@@ -20,5 +20,8 @@
   "devDependencies": {
     "co": "^4.6.0",
     "lodash": "^4.17.21"
+  },
+  "dependencies": {
+    "localforage": "^1.10.0"
   }
 }
