@@ -39,3 +39,10 @@ const isDataType = (target, type) => {
   return Object.prototype.toString.call(target).slice(8, -1) === type
 }
 ```
+
+### 属性名的类型
+
+```js
+// obj.key [[GET]](obj, key, obj) - key一定是string
+// obj[key] [[GET]](obj, 是否是Symbol ? key : String(key), obj) - 第二个参数如果不是 Symbol 就使用String转成字符串
+```

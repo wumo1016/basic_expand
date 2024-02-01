@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        background-color: #000;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+      }
+      canvas {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas></canvas>
+    <script>
+      const canvas = document.querySelector('canvas')
+      const ctx = canvas.getContext('2d')
+
+      const getColor = () => {
+        const list = ['#409EFF', '#67C23A', '#E6A23C', '#F56C6C', '#409EFF']
+        return list[Math.floor(Math.random() * list.length)]
+      }
+
+      const getText = () => {
+        const str = 'abcdefghijklmnopqrstuvwxyz123456789'
+        return str[Math.floor(Math.random() * str.length)]
+      }
+
+      const fontSize = 20 * devicePixelRatio
+      const width = document.body.offsetWidth * devicePixelRatio
+      const height = document.body.offsetHeight * devicePixelRatio
+
+      canvas.width = width
+      canvas.height = height
+
+      const columnWidth = fontSize
+      const columnNum = Math.floor(width / columnWidth)
+
+      const charts = Array(columnNum).fill(0)
+
+      function draw() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.4)'
+        ctx.fillRect(0, 0, width, height)
+        for (let i = 0; i < columnNum; i++) {
+          ctx.fillStyle = getColor()
+          ctx.font = fontSize + 'px "Microsoft Yahei"'
+          const x = columnWidth * i
+          const y = (charts[i]++ + 1) * fontSize
+          ctx.fillText(getText(), x, y)
+          if (y >= height || Math.random() > 0.98) charts[i] = 0
+        }
+      }
+
+      setInterval(draw, 50)
+    </script>
+  </body>
+</html>

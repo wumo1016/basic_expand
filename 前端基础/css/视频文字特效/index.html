@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      video {
+        width: 100%;
+        height: 100%;
+      }
+      .text {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        font-size: 250px;
+        color: #000;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        letter-spacing: 50px;
+        padding-top: 20%;
+        background-color: #fff;
+        mix-blend-mode: screen;
+        /* A为自身，B为底色
+        黑色区域: 255 - (255 - 255)(255 - B)/255 = 255 - 白色
+        白色区域: 255 - (255 - 0)(255 - B)/255 = B - 底色
+        */
+      }
+      /* 
+      mix-blend-mode: f(颜色1,颜色2) = 新颜色 (混合颜色)
+        - screen: 255 - (255 - A)(255 - B)/255
+      */
+    </style>
+  </head>
+  <body>
+    <video src="./测试.mp4" autoplay muted loop></video>
+    <div class="text">中华有为</div>
+  </body>
+</html>
