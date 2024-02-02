@@ -208,3 +208,12 @@
   - width 只包含内容宽, 不包含 padding 以及 border
 - IE 盒模型（怪异盒模型）: `box-sizing: border-box;`
   - width 是内容 +padding + border 的总和
+
+## 获取元素宽度的区别
+
+- clientWidth
+  - 包含 content、padding
+- offsetWidth
+  - 包含 content、padding、border 以及竖直滚动条的宽度(如果存在)
+- scrollWidth
+  - 包含 content(真实的内容宽)、padding (不存在滚动条时相当于 clientWidth)
