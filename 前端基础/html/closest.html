@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 
+      - 介绍
+        - 匹配特定选择器且离当前元素最近的祖先元素(也可以是当前元素本身)
+     -->
+  </head>
+  <body>
+    <article>
+      <div id="div-01">
+        Here is div-01
+        <div id="div-02">
+          Here is div-02
+          <div id="div-03">Here is div-03</div>
+        </div>
+      </div>
+    </article>
+    <script>
+      const el = document.getElementById('div-03')
+      console.log(el.closest('#div-02')) // div-02
+      console.log(el.closest('div div')) // 返回最近的拥有 div 祖先元素的 div 祖先元素，这里的话就是 div-03
+      console.log(el.closest('article > div')) // 返回最近的拥有父元素 article 的 div 祖先元素，这里的话就是 div-01
+      console.log(el.closest(':not(div)')) // 返回最近的非 div 的祖先元素，这里的话就是最外层的 article
+    </script>
+  </body>
+</html>
