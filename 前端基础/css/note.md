@@ -97,3 +97,8 @@ body {
 ## focus-within
 
 ## point-events
+
+## inset
+
+- 对应 `top right bottom left` 的写法
+- 其他与简写语法与 maigin 对应
