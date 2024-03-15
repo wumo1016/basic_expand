@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ResizeObserver</title>
+  </head>
+  <body>
+    <!-- 
+      - 介绍
+        - 监视内容盒、边框盒、svg元素边界尺寸的变化
+      - 方法
+        - observe: (target, options)
+          - target: 监听的元素
+          - options
+            - box: 为监听的对象设置参数
+              - content-box: 内容区的大小（默认值）
+              - border-box: 边框的大小
+        - unobserve: (target) - 结束监听
+        - disconnect: 取消所有监听
+     -->
+
+    <div id="box1">123456</div>
+
+    <script>
+      const resizeObserver = new ResizeObserver(entries => {
+        for (const entry of entries) {
+          if (entry.contentBoxSize) {
+            console.log(entry.contentBoxSize[0]) // { inlineSize: 宽 blockSize: 高 }
+          }
+        }
+      })
+
+      resizeObserver.observe(box1)
+    </script>
+  </body>
+</html>
