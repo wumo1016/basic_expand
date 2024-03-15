@@ -3,7 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>createRange</title>
+    <title>Range</title>
+    <style>
+      p {
+        width: 200px;
+      }
+      #highlight {
+        background: yellow;
+        position: absolute;
+        z-index: -1;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <!-- https://developer.mozilla.org/zh-CN/docs/Web/API/Range
+      - 介绍
+        - 一个包含文本和文本节点一部分的文档片段
+      - 创建
+        - 通过 new Range 直接创建
+        - 通过 Document.createRange 创建
+        - 通过 Selection 的 getRangeAt 获取
+        - 通过 Document 的 caretRangeFromPoint 获取
+      - 属性
+        - collapsed: 表示起始位置是否相同
+        - startContainer: 开始的节点
+        - endContainer: 终点的节点
+        - startOffset: 表示 Range 在 startContainer 中的起始位置偏移量
+        - endOffset: 表示 Range 在 endContainer 中的结束位置偏移量
+      - 方法
+        - collapse: 将 Range 折叠到其边界的终点
+        - setStart: (startNode, offset) - 设置 Rnage 的开始位置
+        - setStartBefore: (referenceNode) - 设置 Rnage 的开始位置
+          - referenceNode: 相对 Node 之前
+        - setStartAfter: (referenceNode) - 设置 Rnage 的开始位置
+          - referenceNode: 相对 Node 之后
+        - setEnd: (endNode, endOffset) - 设置 Range 的结束位置
+        - setEndBefore: (referenceNode) - 设置 Rnage 的结束位置
+          - referenceNode: 相对 Node 之前
+        - setEndAfter: (referenceNode) - 设置 Rnage 的开结束位置
+          - referenceNode: 相对 Node 之后
+        - getBoundingClientRect: 返回一个 DOMRect 对象 
+     -->
+    <p>
+      This example positions a "highlight" rectangle behind the contents of a
+      range. The range's content <b>starts here</b> and continues on until it
+      <b>ends here</b>. The bounding client rectangle contains everything
+      selected in the range.
+    </p>
+    <div id="highlight"></div>
+    <script>
+      const range = new Range()
+      // const range = document.createRange()
+      range.setStartBefore(document.getElementsByTagName('b').item(0), 0)
+      range.setEndAfter(document.getElementsByTagName('b').item(1), 0)
+
+      /* 方式1 */
+      // const clientRect = range.getBoundingClientRect()
+      // const highlight = document.getElementById('highlight')
+
+      // highlight.style.left = `${clientRect.x}px`
+      // highlight.style.top = `${clientRect.y}px`
+      // highlight.style.width = `${clientRect.width}px`
+      // highlight.style.height = `${clientRect.height}px`
+
+      /* 方式2 */
+      const selection = document.getSelection()
+      selection.addRange(range)
+
+      console.log(selection.rangeCount)
+      console.log(selection.getRangeAt(0))
+    </script>
+  </body>
 </html>
