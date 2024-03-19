@@ -5,12 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web Component</title>
     <style>
-      /* wm-button {
-      --color: yellow
-    } */
-
-      /* 也可使用 :root 全局的样式变量 */
-      :root {
+      wm-button {
         --color: yellow;
       }
     </style>
@@ -18,7 +13,8 @@
 
   <body>
     <!-- 使用 -->
-    <wm-button type="primary">点我</wm-button>
+    <wm-button>按钮</wm-button>
+    <wm-button type="primary">按钮</wm-button>
     <!-- 模板 -->
     <template id="btn">
       <button class="wm-button">
@@ -59,8 +55,8 @@
               outline: none;
               border-radius: 2px;
               padding: 5px 10px;
-              color: var(--color, ${typeStyle.color});
-              background: var(--background-color, ${typeStyle.background});
+              color: ${typeStyle.color};
+              background:  ${typeStyle.background};
               border: var(--border, ${typeStyle.border});
             }
           `
