@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dispatchEvent</title>
+  </head>
+  <body>
+    <!-- 
+      - dispatchEvent: (event)
+      - CustomEvent: (type, options)
+        - type: 事件名称, 字符串, 区分大小写
+        - options:
+          - bubbles: 是否冒泡, 默认 false
+          - cancelable: 是否能被取消, 默认 false
+          - composed: 是否会在影子 DOM 根节点之外触发侦听器, 默认 false
+          - detail: 定义与事件相关的值
+     -->
+    <button id="btn1">按钮1</button>
+    <script>
+      btn1.addEventListener('click', () => {
+        document.dispatchEvent(
+          new CustomEvent('test', {
+            detail: {
+              name: 'wyb',
+              age: 18
+            }
+          })
+        )
+      })
+
+      document.addEventListener('test', e => {
+        console.log('test事件触发啦', e.detail)
+      })
+    </script>
+  </body>
+</html>
