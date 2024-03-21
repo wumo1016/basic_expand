@@ -86,6 +86,7 @@ function _new(claszz, ...args) {
   - 箭头函数内部的 this 直接指向定义时上层作用域的 this
   - 箭头函数的 this 在定义时就已经确定 后期即使通过 call 等也无法更改
   - 其实在编译的时候 箭头函数的 this 都被被变成一个变量(\_this) \_this = 上层作用域的 this
+- 不能修改 this
 - 没有 arguments 参数 使用 rest 参数代替
 - 不能作为构造函数 不能被 new
 - 不能使用 yield 命令 就是不能当作 generator 函数
