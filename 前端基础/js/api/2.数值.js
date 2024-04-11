@@ -34,9 +34,10 @@
 /* 
 - parseInt: 与全局方法一致(将指定基数的字符串转换为十进制数) => parseInt(string, radix)
 - parseFloat: 与全局方法一致(将字符串转换为浮点数)
-- isFinite: 判断是是否不是 Infinity
+- isFinite: (全局方法)判断是是否不是 Infinity
 - isInteger: 判断是否是整数
 - isSafeInteger: 判断是否是安全整数
+- toFixed: (digits) - 小数点后保留几位, 值为 0-100 (省略则为0), 返回值为字符串
 */
 ;(function () {
   console.log(Number.parseInt === parseInt)
@@ -60,7 +61,7 @@
 ;(function () {
   console.log(Math.trunc(1.23)) // 1
 
-  console.log(Math.trunc(100)) // 1
-  console.log(Math.trunc(-100)) // -1
+  console.log(Math.trunc(100)) // 100
+  console.log(Math.trunc(-100)) // -100
   console.log(Math.trunc(0)) // 0
 })

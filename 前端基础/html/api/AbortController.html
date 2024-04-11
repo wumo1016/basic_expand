@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 
+      - 实例属性
+        - signal: AbortSignal
+          - aborted: 是否已终止
+          - onabort
+          - reason
+      - 方法
+        - abort
+     -->
+  </head>
+  <body>
+    <button id="btn1">按钮1</button>
+    <button id="btn2">取消按钮1的监听</button>
+    <script>
+      /* 1.当作事件监听器使用 */
+      ;(function () {
+        const controller = new AbortController()
+        console.log(controller)
+
+        controller.signal.addEventListener(
+          'abort',
+          () => {
+            console.log(12456)
+          },
+          { once: true }
+        )
+        controller.abort()
+      })
+
+      /* 2.与 fetch 配置使用 */
+      ;(async function () {
+        const controller = new AbortController()
+        fetch('http://aa.bb.com', { signal: controller.signal }).catch(e => {
+          console.log(e.name === 'AbortError')
+        })
+        controller.abort() // 取消接口 (可以取消多个 与其绑定的请求都会被取消)
+      })
+
+      /* 3.与 addEventListener 配合使用 */
+      ;(async function () {
+        const controller = new AbortController()
+        btn1.addEventListener(
+          'click',
+          () => {
+            console.log('按钮1被点击啦')
+          },
+          { signal: controller.signal }
+        )
+        btn2.addEventListener('click', () => {
+          controller.abort() // 按钮1的事件监听将被取消
+        })
+      })()
+    </script>
+  </body>
+</html>

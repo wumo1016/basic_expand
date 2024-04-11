@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MutationObserver</title>
+  </head>
+  <body>
+    <!-- 
+      - MutationObserver: (callback)
+        - 一个回调函数，每当被指定的节点或子树以及配置项有 DOM 变动时会被调用
+        - callback: (mutationsList, observer)
+      - 方法：
+        - observe: (targetNode, config)
+          - targetNode: 要监测的节点
+          - config: 监测配置
+            - subtree: 会监听整个子树(包括所有节点的属性)
+            - childList: 会监听 target 中节点的新增和删除(如果 subtree 为 true, 会针对整个子树生效)
+            - attributes: 监听的节点所有属性值的变化
+            - attributeFilter: 声明哪些属性会被监听(attributes 会失效)
+        - disconnect: 停止监测(可通过调用 observe 重启)
+     -->
+    <button id="btn1">添加dom</button>
+    <button id="btn2">移除dom</button>
+    <div id="box1"></div>
+
+    <script>
+      const observe = new MutationObserver(mutationList => {
+        mutationList.forEach(mutation => {
+          switch (mutation.type) {
+            case 'childList':
+              /* 从树上添加或移除一个或更多的子节点；参见 mutation.addedNodes 与 mutation.removedNodes */
+              console.log('childList变化', mutation) // { addedNodes, removedNodes }
+              break
+            case 'attributes':
+              /* mutation.target 中某节点的一个属性值被更改；该属性名称在 mutation.attributeName 中，该属性之前的值为 mutation.oldValue */
+              console.log('attributes变化', mutation)
+              break
+          }
+        })
+      })
+
+      observe.observe(box1, {
+        attributes: true,
+        childList: true,
+        subtree: true
+      })
+
+      btn1.addEventListener('click', () => {
+        const div = document.createElement('div')
+        div.innerText = (Math.random() * 100).toFixed(0)
+        box1.appendChild(div)
+      })
+      btn2.addEventListener('click', () => {
+        const children = Array.from(box1.children)
+        if (children.length) {
+          box1.removeChild(children[0])
+        }
+      })
+    </script>
+  </body>
+</html>

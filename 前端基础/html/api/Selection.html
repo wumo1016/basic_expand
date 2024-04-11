@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selection</title>
+    <!-- https://developer.mozilla.org/zh-CN/docs/Web/API/Selection
+      - 属性：
+        - anchorNode: 选取起点节点
+        - focusNode: 选区终点节点
+
+        - anchorOffset: 选区起点在 anchorNode 中的位置偏移量
+        - focusOffset: 选区终点 focusNode 中的位置偏移量
+        - isCollapsed: 返回布尔值，用于判断起点和终点是否在同一位置
+        - rangeCount: 该选区包含的连续范围的数量
+        
+      - 方法：
+        - getRangeAt: (index) 返回选区包含的指定区域 Range 的引用
+          - index(必传): 从 0 开始
+        - addRange: (range) - 将一个区域对象添加到区
+        - toString: 返回当前选区的纯文本内容
+     -->
+  </head>
+  <body>
+    <div id="div1">1231342654</div>
+    <div>sfzsefgawagWe</div>
+    <script>
+      document.addEventListener('selectionchange', () => {
+        const selection = window.getSelection()
+
+        console.log(selection.anchorNode)
+        console.log(selection.focusNode)
+      })
+    </script>
+  </body>
+</html>

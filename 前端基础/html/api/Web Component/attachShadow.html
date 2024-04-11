@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>attachShadow</title>
+  </head>
+  <body>
+    <!-- 
+      - attachShadow: (ShadowRootInit)
+        - mode
+          - open: js可以访问根节点 // element.shadowRoot 返回一个 ShadowRoot 对象
+          - closed: 拒绝js从外部访问根节点 // element.shadowRoot 返回 null
+     -->
+    <div id="box1">
+      456
+      <span>123456</span>
+    </div>
+    <script>
+      const box1 = document.querySelector('#box1')
+      const childNodes = box1.childNodes
+      const shadow = box1.attachShadow({ mode: 'open' })
+      for (const node of Array.from(childNodes)) {
+        shadow.appendChild(node)
+      }
+    </script>
+  </body>
+</html>

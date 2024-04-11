@@ -54,3 +54,21 @@ setTimeout(() => {
 ## 使用 vscode 选中一段文本后, 按 ctrl+D 会选中下一个同样的文本, 连续有效
 
 ## 数字与 undefined 进行比较时 永远都是 false 而 null 不是
+
+## 字符串格式转换
+
+```ts
+function camelToKebab(str: string) {
+  return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+}
+```
+
+## 对象转样式
+
+```ts
+function objectToStyle(obj: { [key: string]: any }) {
+  return Object.keys(obj)
+    .map(key => `${this.camelToKebab(key)}: ${obj[key]};`)
+    .join(' ')
+}
+```

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>clamp</title>
+    <style>
+      .g-container {
+        position: relative;
+        margin: auto;
+        width: 300px;
+        height: 200px;
+        padding: 10px;
+        line-height: 2;
+        background: #999;
+        color: #fff;
+        text-align: justify;
+        border: 1px solid #000;
+        resize: vertical;
+        overflow: hidden;
+      }
+      .g-content {
+        width: 100%;
+        height: 100%;
+      }
+      .g-content::before {
+        content: '↑';
+        font-size: 30px;
+        cursor: pointer;
+        position: absolute;
+        /* 大于260时，取0；小于260时，取-9999 */
+        bottom: clamp(-9999px, calc(calc(100% - 260px) * 10000), 0px);
+        left: 50%;
+        transform: translate(-50%, 0);
+        transition: 0.3s;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+      - 介绍: clamp(MIN, VAL, MAX)
+        - MIN: 最小值
+        - VAL: 首选值
+        - MAX: 最大值
+      - 注意：
+        - 首选值小于最小值时，选择最小值
+        - 首选值介于最大值和最小值之间时，选择首选值
+        - 首选值大于最大值时，选择最大值
+     -->
+    <div class="g-container">
+      <div class="g-content">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, amet id
+        dignissimos nulla repellat doloribus porro illo ipsum accusantium
+        incidunt quos fuga, sapiente aspernatur quaerat voluptas praesentium sed
+        veritatis aliquam.
+      </div>
+    </div>
+  </body>
+</html>
