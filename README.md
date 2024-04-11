@@ -62,5 +62,6 @@
 
 ## 渡一前端提薪课
 
-- inspect 插件
+- Houdini
+- inspect 插件(vite-plugin-inspect)
 - vue 组件命名规范
