@@ -54,6 +54,14 @@
 - 142: 视频文字特效
 - 143: 代码雨效果
 
+145
+
 ## 程序员三千
 
-## [逐字显示效果](https://codepen.io/Zhouzi/pen/JoRazP)
+- [逐字显示效果](https://codepen.io/Zhouzi/pen/JoRazP)
+
+## 渡一前端提薪课
+
+- Houdini
+- inspect 插件(vite-plugin-inspect)
+- vue 组件命名规范

@@ -1,3 +1,7 @@
+## 编译 scss
+
+- `sass index.scss index.css -w`
+
 ## 修改 placeholder 样式
 
 ```css
