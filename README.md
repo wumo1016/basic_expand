@@ -65,3 +65,5 @@
 - Houdini
 - inspect 插件(vite-plugin-inspect)
 - vue 组件命名规范
+- 惰性函数
+- 浏览器自动播放策略

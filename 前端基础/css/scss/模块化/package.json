@@ -1,0 +1,6 @@
+{
+  "description": "",
+  "scripts": {
+    "start": "sass index.scss dist/index.css -w --no-source-map"
+  }
+}
