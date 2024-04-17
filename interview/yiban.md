@@ -10,8 +10,8 @@
 - 列举几个内置类型
 
 - 组件 v-model 的实现
-- computed 的可写模式怎么写
-- watch 的高级用法
+- computed 有哪些写法
+- watch 有哪些写法
 - watch 与 wacthEffect 的区别
 
 - vue-router 两种路由模式的区别
