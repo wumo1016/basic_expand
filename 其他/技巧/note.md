@@ -72,3 +72,16 @@ function objectToStyle(obj: { [key: string]: any }) {
     .join(' ')
 }
 ```
+
+## 下载线上图片到本地
+
+```js
+import path from 'path'
+import https from 'https'
+
+const https = require('https')
+const fileStream = fs.createWriteStream(path.join(__dirname, './test.png'))
+https.get(urls[0], res => {
+  res.pipe(fileStream)
+})
+```
