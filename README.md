@@ -60,10 +60,11 @@
 
 - [逐字显示效果](https://codepen.io/Zhouzi/pen/JoRazP)
 
-## 渡一前端提薪课
+## 渡一前端提薪课(23429113150)
 
 - Houdini
 - inspect 插件(vite-plugin-inspect)
 - vue 组件命名规范
 - 惰性函数
 - 浏览器自动播放策略
+- Sass 实现星空效果
