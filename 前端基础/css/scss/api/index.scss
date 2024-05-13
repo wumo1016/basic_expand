@@ -1,0 +1,21 @@
+/* 生成随机数 */
+div {
+  width: unquote('#{random(100)}px'); // 生成 0 - 100 的随机数
+}
+
+/* 函数 */
+@function getWidth($n) {
+  $w: unquote('#{$n}px');
+  @return $w;
+}
+
+div {
+  width: getWidth(50);
+}
+
+/* 循环 */
+@for $i from 10 through 12 {
+  div {
+    width: unquote('#{$i}px');
+  }
+}
