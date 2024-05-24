@@ -26,7 +26,7 @@ function test1() {
 
   function parse(obj, str) {
     str = str.replace(/\[(\d)\]/g, '.$1')
-    str.split('.').forEach((item) => {
+    str.split('.').forEach(item => {
       obj = obj[item]
     })
     return obj
@@ -44,18 +44,18 @@ function test2() {
     arr
       .toString()
       .split(',')
-      .map((v) => Number(v))
+      .map(v => Number(v))
   )
   // 3
   console.log(
     JSON.stringify(arr)
       .replace(/\[|\]/g, '')
       .split(',')
-      .map((v) => Number(v))
+      .map(v => Number(v))
   )
   // 4
   let arr1 = arr
-  while (arr1.some((v) => Array.isArray(v))) {
+  while (arr1.some(v => Array.isArray(v))) {
     arr1 = [].concat(...arr1)
   }
   console.log(arr1)
@@ -157,7 +157,7 @@ function test5() {
 /* -------------------- 异步 ----------------- */
 ;(function () {
   function wait() {
-    return new Promise((resolve) => setTimeout(resolve, 5 * 1000))
+    return new Promise(resolve => setTimeout(resolve, 5 * 1000))
   }
 
   async function main() {
@@ -284,9 +284,9 @@ function test5() {
 /* -------------------- 不用加减乘除运算符求整数7倍 ----------------- */
 ;(function () {
   /* eval */
-  const test1 = (num) => eval(new Array(7).fill(num).join('+'))
+  const test1 = num => eval(new Array(7).fill(num).join('+'))
   /* Function */
-  const test2 = (num) =>
+  const test2 = num =>
     new Function(`return ${new Array(7).fill(num).join('+')}`)()
   console.log(test2(7))
 })
@@ -350,7 +350,7 @@ function test5() {
   }
 
   console.log(5)
-  async1().then((res) => console.log(res))
+  async1().then(res => console.log(res))
   console.log(6)
 })
 
@@ -395,7 +395,7 @@ function test5() {
       fn && fn()
     }
   }
-  const LazyMan = (name) => new LazyManClass(name)
+  const LazyMan = name => new LazyManClass(name)
 
   /* 1 */
   // LazyMan('Tony')
@@ -501,7 +501,7 @@ function test5() {
     .fill('')
     .map((_, index) => {
       return () =>
-        new Promise((r) => {
+        new Promise(r => {
           const time = Math.random() * 5 * 1000
           console.log(index + 1, time, '执行啦')
           setTimeout(() => {
@@ -515,13 +515,13 @@ function test5() {
     let penddingNum = 0
     let finishedNum = 0
     const res = []
-    return new Promise((r) => {
+    return new Promise(r => {
       const execute = () => {
         if (curIndex >= reqList.length || penddingNum >= num) return
         const index = curIndex
         penddingNum++
         const fn = reqList[curIndex++]
-        fn().then((data) => {
+        fn().then(data => {
           finishedNum++
           penddingNum--
           res[index] = data
@@ -535,7 +535,7 @@ function test5() {
       execute()
     })
   }
-  controlFn(list, 3).then((r) => {
+  controlFn(list, 3).then(r => {
     console.log(r)
   })
 })
@@ -543,17 +543,17 @@ function test5() {
 /* -------------------- 实现compose函数, 类似于koa的中间件洋葱模型 ----------------- */
 ;(function () {
   let middleware = []
-  middleware.push((next) => {
+  middleware.push(next => {
     console.log(1)
     next()
     console.log(1.1)
   })
-  middleware.push((next) => {
+  middleware.push(next => {
     console.log(2)
     next()
     console.log(2.1)
   })
-  middleware.push((next) => {
+  middleware.push(next => {
     console.log(3)
     next()
     console.log(3.1)
@@ -581,7 +581,7 @@ function test5() {
   /* 方式2 */
   function compose(middlewares) {
     return () => {
-      const dispatch = (index) => {
+      const dispatch = index => {
         if (index === middlewares.length) return () => {}
         const fn = middlewares[index]
         return fn(() => dispatch(index + 1))
@@ -603,7 +603,15 @@ function test5() {
   })()
 })
 
-/* -------------------- 编程题 ----------------- */
-// ;(function(){
+/* -------------------- 连续赋值 ----------------- */
+;(function () {
+  var a = { n: 1 }
+  var b = a
+  a.x = a = { n: 2 }
 
-// })()
+  console.log(a.x)
+  console.log(b.x)
+})
+
+/* -------------------- 连续赋值 ----------------- */
+;(function () {})
