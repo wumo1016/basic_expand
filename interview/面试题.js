@@ -97,31 +97,42 @@ function test3() {
 /* ---------------------- 4.如何让 (a == 1 && a == 2 && a == 3) 的值为true ----------------------- */
 
 function test4() {
-  // 1
-  /* let value = 1
-  Object.defineProperty(window, 'a', {
-    get() {
-      return value++
+  /* 1 */
+  // let value = 1
+  // Object.defineProperty(window, 'a', {
+  //   get() {
+  //     return value++
+  //   }
+  // })
+
+  /*  2 */
+  // let i = 1
+  // let a = {
+  //   [Symbol.toPrimitive]: () => i++,
+  //   valueOf: () => i++,
+  //   toString: () => i++
+  // }
+
+  /* 3 */
+  // let value = 1
+  // let a = new Proxy({}, {
+  //   get() {
+  //     return () => value++
+  //   }
+  // })
+
+  /* 4 */
+  // let a = [1, 2, 3]
+  // a.valueOf = a.shift
+  // a.toString = a.shift
+
+  /* 5 */
+  var a = {
+    i: 1,
+    toString() {
+      return this.i++
     }
-  }) */
-  // 2
-  /* let i = 1
-  let a = {
-    [Symbol.toPrimitive]: () => i++,
-    valueOf: () => i++,
-    toString: () => i++
-  } */
-  // 3
-  /* let value = 1
-  let a = new Proxy({}, {
-    get() {
-      return () => value++
-    }
-  }) */
-  // 4
-  let a = [1, 2, 3]
-  a.valueOf = a.shift
-  a.toString = a.shift
+  }
 
   if (a == 1 && a == 2 && a == 3) {
     console.log('成功啦')
@@ -451,19 +462,6 @@ function test5() {
   obj.push(1)
   obj.push(2)
   console.log(obj) // [,, 1, 2, splice: ƒ, push: ƒ]
-})
-
-/* -------------------- 下面代码中 a 在什么情况下会打印 1 ----------------- */
-;(function () {
-  var a = {
-    i: 1,
-    toString() {
-      return this.i++
-    }
-  }
-  if (a == 1 && a == 2 && a == 3) {
-    console.log(1)
-  }
 })
 
 /* -------------------- 编程题 ----------------- */
