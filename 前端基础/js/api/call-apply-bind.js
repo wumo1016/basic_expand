@@ -55,6 +55,7 @@ Function.prototype.mybind = function (ctx, ...args1) {
     if (!ctx) {
       return func(...args2)
     }
+    if (new.target) return new func(...args1, ...args2)
     return func.call(ctx, ...args1, ...args2)
   }
 }
