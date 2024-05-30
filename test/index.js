@@ -6,15 +6,17 @@ function run() {
       dom.click()
     } else {
       dom.click()
-      const t = setInterval(() => {
-        const text = submit.innerText
-        if (text === '暂时缺货') {
-          clearInterval(t)
-          run()
-        } else if (text === '立即购买') {
-          clearInterval(t)
-          submit.click()
-        }
+      setTimeout(() => {
+        const t = setInterval(() => {
+          const text = submit.innerText
+          if (text === '暂时缺货') {
+            clearInterval(t)
+            run()
+          } else if (text === '立即购买') {
+            clearInterval(t)
+            submit.click()
+          }
+        }, 500)
       }, 500)
     }
   })
