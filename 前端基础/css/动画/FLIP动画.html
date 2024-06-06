@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <button onclick="test()">测试</button>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ul>
+    <script>
+      const ul = document.querySelector('ul')
+      const firstLi = document.querySelector('li')
+
+      const getTop = () => firstLi.getBoundingClientRect().top
+
+      const start = getTop()
+
+      function test() {
+        ul.appendChild(firstLi)
+        const end = getTop()
+        const dis = start - end
+        firstLi.style.transform = `translateY(${dis}px)`
+        requestAnimationFrame(() => {
+          firstLi.style.transition = `transform 0.5s`
+          firstLi.style.removeProperty('transform')
+          setTimeout(() => {
+            firstLi.style.removeProperty('transition')
+          }, 500)
+        })
+      }
+
+      function delay(time) {
+        let now = Date.now()
+        while (Date.now() - now < time) {}
+      }
+    </script>
+  </body>
+</html>
