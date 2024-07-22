@@ -611,5 +611,18 @@ function test5() {
   console.log(b.x)
 })
 
-/* -------------------- 连续赋值 ----------------- */
-;(function () {})
+/* -------------------- 连续向div中插入 100000 个div，如何让渲染不卡  ----------------- */
+;(function () {
+  let i = 0
+  const run = () => {
+    if (i > 100000) return
+    requestIdleCallback(idle => {
+      while (idle.timeRemaining() && i < 100000) {
+        const div = document.createElement('div')
+        div.innerHTML = i++
+        document.body.appendChild(div)
+      }
+      run()
+    })
+  }
+})
