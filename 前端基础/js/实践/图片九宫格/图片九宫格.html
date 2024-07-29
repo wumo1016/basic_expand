@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片九宫格</title>
+    <style>
+      .img-container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 600px;
+      }
+      .img-item {
+        width: 200px;
+        height: 200px;
+        transition: all 0.5s;
+        background-size: 600px 600px;
+        background-image: url(./bg.png);
+        background-position: var(--bgX, 0), 600px;
+        /* transform: translateX(var(--disX, 0)) translateY(var(--disY, 0)); */
+      }
+      .img-container:hover .img-item {
+        transform: translate(0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="img-container">
+      <div class="img-item"></div>
+      <div class="img-item"></div>
+      <div class="img-item"></div>
+      <div class="img-item"></div>
+      <div class="img-item"></div>
+      <div class="img-item"></div>
+      <div class="img-item"></div>
+      <div class="img-item"></div>
+      <div class="img-item"></div>
+    </div>
+    <script>
+      const items = document.querySelectorAll('.img-item')
+
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i]
+        const r = Math.floor(i / 3)
+        const c = i % 3
+        console.log(r, c)
+        items[i].style.setProperty('--bgX', `${-c * 100}%`)
+        items[i].style.setProperty('--bgY', `${-r * 100}%`)
+      }
+    </script>
+  </body>
+</html>
