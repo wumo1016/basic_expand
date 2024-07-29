@@ -297,8 +297,7 @@ function test5() {
   /* eval */
   const test1 = num => eval(new Array(7).fill(num).join('+'))
   /* Function */
-  const test2 = num =>
-    new Function(`return ${new Array(7).fill(num).join('+')}`)()
+  const test2 = num => new Function(`return ${new Array(7).fill(num).join('+')}`)()
   console.log(test2(7))
 })
 
@@ -426,12 +425,7 @@ function test5() {
   // I am eating diner
 
   /* 4 */
-  LazyMan('Tony')
-    .eat('lunch')
-    .eat('dinner')
-    .sleepFirst(5)
-    .sleep(3)
-    .eat('junk food')
+  LazyMan('Tony').eat('lunch').eat('dinner').sleepFirst(5).sleep(3).eat('junk food')
   // Hi I am Tony
   // 等待了5秒...
   // I am eating lunch
@@ -467,12 +461,7 @@ function test5() {
 /* -------------------- 编程题 ----------------- */
 ;(function () {
   // 编写一个程序将数组扁平化去并除其中重复部分数据，最终得到一个升序且不重复的数组
-  const arr = [
-    [1, 2, 2],
-    [3, 4, 5, [5, 6]],
-    [6, 7, 8, 9, [11, 12, [12, 13, [14]]]],
-    10
-  ]
+  const arr = [[1, 2, 2], [3, 4, 5, [5, 6]], [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10]
 
   /* 解法1 */
   function test1(list) {
@@ -625,4 +614,10 @@ function test5() {
       run()
     })
   }
+})
+
+/* -------------------- obj.x 和 obj[x] 的区别 ----------------- */
+;(function () {
+  // obj.x => [[GET]](obj, 'x', obj)
+  // obj[x] => [[GET]](obj, x是不是Symbol ? x : String(x), obj)
 })
