@@ -621,3 +621,29 @@ function test5() {
   // obj.x => [[GET]](obj, 'x', obj)
   // obj[x] => [[GET]](obj, x是不是Symbol ? x : String(x), obj)
 })
+
+/* -------------------- 是打印结果成立 ----------------- */
+;(function () {
+  /* 方法一 */
+  // Object.prototype[Symbol.iterator] = function* () {
+  //   for (const key in this) {
+  //     yield this[key]
+  //   }
+  // }
+
+  /* 方法二 */
+  // Object.prototype[Symbol.iterator] = function () {
+  //   return Object.values(this)[Symbol.iterator]()
+  // }
+
+  /* 方法三 */
+  Object.prototype[Symbol.iterator] = function* () {
+    yield* Object.values(this)
+  }
+
+  var [a, b] = {
+    a: 3,
+    b: 4
+  }
+  console.log(a, b) // 3, 4;
+})
