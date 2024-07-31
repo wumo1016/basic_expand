@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IntersectionObserver</title>
+    <style>
+      div {
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+      - IntersectionObserver(callback, config) 判断元素是否有交叉
+        - callback: 交叉状态发生变化时的回调
+        - config
+          - root: 目标元素跟谁有交叉
+            - null: 代表视口
+          - threshold: 0~1 阈值 就是目标元素离root多远时算交叉
+      - 方法：
+        - observe: (targetNode) 开始观察
+          - targetNode: 观测的元素
+        - unobserve: (targetNode) 取消观察
+          - targetNode: 观测的元素
+        - disconnect: 停止监测(可通过调用 observe 重启)
+     -->
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div id="test" style="border: 1px solid red">1</div>
+
+    <script>
+      const observe = new IntersectionObserver(
+        data => {
+          console.log('变化啦', data[0].isIntersecting)
+        },
+        {
+          root: null,
+          threshold: 0
+        }
+      )
+
+      observe.observe(document.querySelector('#test'))
+      observe.unobserve()
+    </script>
+  </body>
+</html>
