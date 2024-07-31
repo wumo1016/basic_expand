@@ -9,15 +9,17 @@
         display: flex;
         flex-wrap: wrap;
         width: 600px;
+        margin-top: 60px;
+        margin-left: 100px;
       }
       .img-item {
         width: 200px;
         height: 200px;
-        transition: all 0.5s;
+        transition: all 0.2s;
         background-size: 600px 600px;
         background-image: url(./bg.png);
-        background-position: var(--bgX, 0), 600px;
-        /* transform: translateX(var(--disX, 0)) translateY(var(--disY, 0)); */
+        background-position: var(--bgX, 0) var(--bgY, 0);
+        transform: translateX(var(--disX, 0)) translateY(var(--disY, 0));
       }
       .img-container:hover .img-item {
         transform: translate(0);
@@ -46,6 +48,8 @@
         console.log(r, c)
         items[i].style.setProperty('--bgX', `${-c * 100}%`)
         items[i].style.setProperty('--bgY', `${-r * 100}%`)
+        items[i].style.setProperty('--disX', `${(c - 1) * 12}px`)
+        items[i].style.setProperty('--disY', `${(r - 1) * 12}px`)
       }
     </script>
   </body>
