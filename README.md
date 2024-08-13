@@ -76,3 +76,5 @@
 - [一道解构的面试题](https://www.douyin.com/video/7385474923378085120)
 - [你不知道的阴影](https://www.douyin.com/video/7390301666555284747)
 - [标签化模板](https://www.douyin.com/video/7390671828030688553)
+- [Promise 的终极面试题](https://www.douyin.com/video/7393273060301950247)
+- [CSS 实现奥林匹配五环](https://www.douyin.com/video/7394387258603736330)
