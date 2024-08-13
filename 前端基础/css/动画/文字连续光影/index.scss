@@ -1,0 +1,32 @@
+html,
+body {
+  height: 100%;
+  background-color: #000;
+  padding-top: 160px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+div {
+  font-size: 60px;
+  color: #faebd7;
+  text-align: center;
+  span {
+    animation: colorChange 1s infinite alternate;
+  }
+}
+
+@keyframes colorChange {
+  to {
+    color: #ff0266;
+  }
+  from {
+    color: #faebd7;
+  }
+}
+
+@for $i from 1 through 8 {
+  span:nth-child(#{$i}) {
+    animation-delay: ($i - 1) * 0.2s;
+  }
+}
