@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>渐变</title>
+    <style>
+      body {
+        padding-top: 200px;
+      }
+      /* 线性渐变 */
+
+      /* 径向渐变 */
+
+      /* 锥形渐变 */
+      .box3 {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        margin: auto;
+        /* background: conic-gradient(red, blue); */
+        /* background: conic-gradient(red 60deg, blue 60deg); */
+        /* 0-60deg(red) 60-300deg(transparent) 300-360deg(red) */
+        background: conic-gradient(red 60deg, transparent 60deg 300deg, red 300deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box3"></div>
+  </body>
+</html>
