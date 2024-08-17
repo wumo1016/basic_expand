@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /* ----------------------------------------- console.table ----------------------------------------- */
+      /* 汇总成表格 */
+      console.table([
+        {
+          name: '张三',
+          age: 18
+        },
+        {
+          name: '李四',
+          age: 20
+        }
+      ])
+
+      /* ----------------------------------------- console.group ----------------------------------------- */
+      /* 分组, 汇总打印消息 */
+
+      const label = 'test'
+      // console.group(label) // 默认不折叠
+      console.groupCollapsed(label) // 默认折叠
+      console.log(1)
+      console.log(2)
+      console.log(3)
+      console.groupEnd(label)
+
+      /* ----------------------------------------- console.dir ----------------------------------------- */
+      /* 打印函数、元素等的对象结构 */
+      console.dir(function () {})
+      console.dir(document.body)
+
+      /* ----------------------------------------- console.trace ----------------------------------------- */
+      /* 查看调用堆栈 */
+      console.trace()
+
+      /* ----------------------------------------- 给打印消息添加样式 ----------------------------------------- */
+      /* 前面的 %c 会使用后面的样式 */
+      const style = `
+        padding: 5px;
+        background: pink;
+        color: white;
+        font-style: itaic;
+        border: 2px solid blue;
+        font-size: 20px;
+      `
+      console.log('%c欢迎来到中国', style)
+    </script>
+  </body>
+</html>
