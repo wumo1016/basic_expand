@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- 原文连接： https://juejin.cn/post/6918921604160290830 -->
+  <!-- clip-path边框动画 -->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./base.css" />
+    <title>Document</title>
+    <style>
+      .card {
+        width: 200px;
+        height: 200px;
+        margin: auto;
+        padding: 5px;
+        box-sizing: border-box;
+        background: repeating-linear-gradient(-45deg, red 0 10px, #fff 10px 20px, blue 20px 30px, #fff 30px 40px) -20px -20px /
+          200% 200%;
+        transition: all 0.2s;
+      }
+      .card:hover {
+        background-position: 0 0;
+      }
+      .content {
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <div class="content"></div>
+    </div>
+  </body>
+</html>
