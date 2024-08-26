@@ -78,3 +78,4 @@
 - [标签化模板](https://www.douyin.com/video/7390671828030688553)
 - [Promise 的终极面试题](https://www.douyin.com/video/7393273060301950247)
 - [CSS 实现奥林匹配五环](https://www.douyin.com/video/7394387258603736330)
+- [Performance 选项卡](https://www.douyin.com/video/7401054919765069091)
