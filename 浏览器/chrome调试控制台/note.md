@@ -11,3 +11,15 @@
   - 介绍: 当前选中元素监听了哪些事件
 
 ## Sources(源代码/来源)
+
+## Network
+
+- Preserve log(持久化日志)
+- Timeing
+  - Queueing: 进入排队的时间
+  - Stalled: 实际排队的时间
+  - Request sent: 请求发出的时间
+  - Waiting for server response: 从发出请求到客户端收到第一个字节的时间
+  - Content Download: 从收到第一个字节的时间到所有内容下载完成的时间
+
+## Performance
