@@ -647,3 +647,32 @@ function test5() {
   }
   console.log(a, b) // 3, 4;
 })
+
+/* -------------------- 不修改上面代码的情况下修改 obj ----------------- */
+;(function () {
+  const o = (function () {
+    const obj = {
+      a: 1,
+      b: 2
+    }
+    return {
+      get(key) {
+        return obj[key]
+      }
+    }
+  })()
+
+  // 修改 obj
+  Object.defineProperty(Object.prototype, 'test', {
+    get() {
+      return this
+    }
+  })
+
+  const obj = o.get('test')
+
+  obj.c = 3
+  obj.d = 4
+
+  console.log(obj)
+})()
