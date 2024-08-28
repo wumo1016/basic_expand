@@ -319,8 +319,7 @@ function _new(claszz, ...args) {
     - 4：请求已完成 且响应已经就绪
   ```js
   xhr.onreadysatechange = function () {
-    if ((xhr.readyState == 4 && xhr.status == 200) || xhr.status == 304)
-      console.log(xhr.responseXML)
+    if ((xhr.readyState == 4 && xhr.status == 200) || xhr.status == 304) console.log(xhr.responseXML)
   }
   ```
 
@@ -344,3 +343,8 @@ function _new(claszz, ...args) {
   - 弥补了 hasOwnProperty 的缺陷
 - Object.hasOwn(2022)
   - `Object.hasOwn(obj, prop)`
+
+## Math.floor 与 parseInt 的区别
+
+- `Math.floor`: 向下取整(永远向左)
+- `parseInt`: 向 0 取整数(负数向右、正数向左)
