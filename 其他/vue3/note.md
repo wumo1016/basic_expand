@@ -11,3 +11,21 @@ export type ButtonProps = ExtractPropTypes<typeof buttonProps>
 import { SetupContext } from 'vue'
 function useUtil(emit: SetupContext<ButtonEmits>['emit']) {}
 ```
+
+## 二次封装组件如何暴露原生组件的方法
+
+```ts
+defineExpose(
+  new Proxy(
+    {},
+    {
+      has(key) {
+        return key in refWidget.value
+      },
+      get(key) {
+        return refWidget.value?.[key]
+      }
+    }
+  )
+)
+```
