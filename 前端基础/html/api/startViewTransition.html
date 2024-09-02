@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>startViewTransition</title>
+    <!-- https://developer.mozilla.org/zh-CN/docs/Web/API/ViewTransition -->
+    <style>
+      html {
+        height: 100%;
+      }
+      :root {
+        background-color: #fff;
+      }
+      :root.dark {
+        background-color: #000;
+      }
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation: none;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="toogle(event)">切换主题</button>
+    <script>
+      function toogle(e) {
+        const transition = document.startViewTransition(() => {
+          document.documentElement.classList.toggle('dark')
+        })
+        const { clientX, clientY } = e
+
+        const tw = document.documentElement.clientWidth
+        const th = document.documentElement.clientHeight
+
+        const width = tw - clientX
+        const height = th - clientY
+
+        const dis = Math.hypot(Math.max(width, clientX), Math.max(height, clientY))
+
+        // 自定义动画
+        transition.ready.then(() => {
+          document.documentElement.animate(
+            {
+              clipPath: [`circle(0% at ${clientX}px ${clientY}px)`, `circle(${dis}px at ${clientX}px ${clientY}px)`]
+            },
+            {
+              duration: 300,
+              pseudoElement: '::view-transition-new(root)'
+            }
+          )
+        })
+      }
+    </script>
+  </body>
+</html>
