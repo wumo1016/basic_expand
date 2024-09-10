@@ -29,3 +29,15 @@ defineExpose(
   )
 )
 ```
+
+## 二次封装组件时不一样的插槽传递方案
+
+```vue
+<template>
+  <component :is="h(HelloWord, $attrs, $slots)">
+</template>
+<script lang="ts" setup>
+import HelloWord from './HelloWord.vue'
+import { h } from 'vue'
+</script>
+```
