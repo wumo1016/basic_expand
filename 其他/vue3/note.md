@@ -41,3 +41,19 @@ import HelloWord from './HelloWord.vue'
 import { h } from 'vue'
 </script>
 ```
+
+## 监听子组件的生命周期
+
+```vue
+<script setup>
+import Comp from './Comp.vue'
+const load = () => {
+  console.log('加载啦234')
+}
+</script>
+
+<template>
+  <!-- vue2中是 @hook:mounted -->
+  <Comp @vue:mounted="load" />
+</template>
+```
