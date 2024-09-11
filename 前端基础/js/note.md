@@ -46,3 +46,9 @@ const isDataType = (target, type) => {
 // obj.key [[GET]](obj, key, obj) - key一定是string
 // obj[key] [[GET]](obj, 是否是Symbol ? key : String(key), obj) - 第二个参数如果不是 Symbol 就使用String转成字符串
 ```
+
+## 图片加载兜底
+
+```html
+<img src="./img/default1.png" onerror="this.src='./img/default2.png'" />
+```
