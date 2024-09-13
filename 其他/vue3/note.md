@@ -57,3 +57,35 @@ const load = () => {
   <Comp @vue:mounted="load" />
 </template>
 ```
+
+## 3.5 优化
+
+- 1.props 解构与默认值
+
+```ts
+const { name: 'wyb' } = defineProps<{ name: string }>()
+```
+
+- 2.useId
+
+```ts
+import { useId } from 'vue'
+
+const id = useId()
+
+// 多个 createAApp 实例可能会重复, 可以添加添加前缀
+app.config.idPrefix = 'app1'
+```
+
+- 3.获取组件与 dom
+
+```vue
+<template>
+  <button ref="button">按钮</button>
+</template>
+<script lang="ts" setup>
+import { useTemplateRef } from 'vue'
+
+const el = useTemplateRef('button')
+</script>
+```
