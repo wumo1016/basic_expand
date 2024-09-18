@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinalizationRegistry</title>
+    <!-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/FinalizationRegistry -->
+  </head>
+  <body>
+    <button onclick="dd()">清空</button>
+    <script>
+      function test() {}
+
+      function dd() {
+        test = null
+      }
+
+      const cleanup = new FinalizationRegistry(key => {
+        console.log(key)
+      })
+
+      cleanup.register(a, 'test 被垃圾挥手啦')
+    </script>
+  </body>
+</html>
