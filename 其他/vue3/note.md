@@ -89,3 +89,5 @@ import { useTemplateRef } from 'vue'
 const el = useTemplateRef('button')
 </script>
 ```
+
+- 4.watch 的 deep 选项支持数字进行指定层级的监听
