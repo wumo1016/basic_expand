@@ -352,3 +352,11 @@ function _new(claszz, ...args) {
 ## 发出去的请求可以取消吗
 
 - 不可以(只是客户端不关心结果了, 但是服务端还是在继续执行的)
+
+## 如何判断一个是不是通过 new 调用的
+
+```js
+function test() {
+  console.log(new.target) // 如果有值, 就是通过 new 调用的
+}
+```
