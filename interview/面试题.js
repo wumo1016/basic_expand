@@ -675,4 +675,22 @@ function test5() {
   obj.d = 4
 
   console.log(obj)
+})
+
+/* -------------------- 编写代码使得结果成立 ----------------- */
+;(function () {
+  function createProxy(value = 0) {
+    return new Proxy(
+      {},
+      {
+        get(target, key) {
+          if (key === Symbol.toPrimitive) return () => value
+          return createProxy(value + Number(key))
+        }
+      }
+    )
+  }
+  const add = createProxy()
+  console.log(add[1][2][3] + 4) // 10
+  console.log(add[10][20] + 30) // 60
 })()
