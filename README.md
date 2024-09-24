@@ -62,14 +62,7 @@
 
 ## 渡一前端提薪课(23429113150)
 
-- ES6 函数的常见面试题
-- Houdini
-- inspect 插件(vite-plugin-inspect)
-- vue 组件命名规范
-- 惰性函数
-- 浏览器自动播放策略
-- Sass 实现星空效果
-- 零宽字符
+- [零宽字符](https://www.douyin.com/video/7366911664517664011)
 - [鼠标和键盘事件的常见问题(鼠标按下和抬起不触发, 键盘按着不放就会连续触发事件)](https://www.douyin.com/video/7376575091527683354)
 - [文字描边](https://www.douyin.com/video/7380272166144675098)
 - [图片九宫格](https://www.douyin.com/video/7385107340204313856)
@@ -80,3 +73,6 @@
 - [CSS 实现奥林匹配五环](https://www.douyin.com/video/7394387258603736330)
 - [Performance 选项卡](https://www.douyin.com/video/7401054919765069091)
 - [闭包代码的提权漏洞](https://www.douyin.com/video/7405146322715577652)
+- 请求的取消
+
+## 渡一前端必修课(jigaoyichou557)
