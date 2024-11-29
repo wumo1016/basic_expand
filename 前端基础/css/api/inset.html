@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>inset</title>
+    <style>
+      #tooltip {
+        background-color: #333;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="tooltip">I'm a tooltip</div>
+    <script>
+      const data = {
+        position: 'absolute',
+        left: '0',
+        top: '0',
+        margin: '0',
+        right: 'auto',
+        bottom: 'auto',
+        transform: 'translate(93px, 7px)'
+      }
+
+      Object.assign(tooltip.style, data)
+    </script>
+  </body>
+</html>
