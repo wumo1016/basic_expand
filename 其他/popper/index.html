@@ -9,19 +9,27 @@
     border-radius: 4px;
     font-size: 13px;
   }
+  .box {
+    display: flex;
+    justify-content: flex-end;
+  }
 </style>
 
-<button id="button" aria-describedby="tooltip">I'm a button</button>
-<div id="tooltip" role="tooltip">I'm a tooltip</div>
+<body>
+  <div class="box">
+    <button id="button" aria-describedby="tooltip">I'm a button</button>
+  </div>
+  <div id="tooltip" role="tooltip" style="width: 300px">I'm a tooltip</div>
 
-<script src="./index.js"></script>
-<script>
-  const button = document.querySelector('#button')
-  const tooltip = document.querySelector('#tooltip')
+  <script src="./index.js"></script>
+  <script>
+    const button = document.querySelector('#button')
+    const tooltip = document.querySelector('#tooltip')
 
-  // Pass the button, the tooltip, and some options, and Popper will do the
-  // magic positioning for you:
-  Popper.createPopper(button, tooltip, {
-    placement: 'right'
-  })
-</script>
+    // Pass the button, the tooltip, and some options, and Popper will do the
+    // magic positioning for you:
+    Popper.createPopper(button, tooltip, {
+      placement: 'bottom'
+    })
+  </script>
+</body>
