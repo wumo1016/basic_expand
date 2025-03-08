@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-size: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 
+      - initial:
+        - 介绍: 浏览器默认的初始值
+        - 适用场景: 当你希望某个元素的样式不受任何父元素或全局样式影响，并重置为该属性的默认值时，使用 initial 很方便
+      - inherit
+        - 介绍: 强制继承, 即使该属性默认不继承
+      - unset: 有继承就用继承的, 没有就用 initial
+      - revert: 恢复为浏览器默认样式或者用户样式(如果有的话, 例如通过层叠计算来的)
+    -->
+    <h1 style="font-size: initial">initial</h1>
+    <h1 style="font-size: unset">unset</h1>
+    <!-- 用户默认代理样式是 2em -->
+    <h1 style="font-size: revert">revert</h1>
+    <script></script>
+  </body>
+</html>
