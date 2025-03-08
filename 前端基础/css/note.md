@@ -107,22 +107,24 @@ body {
 - 对应 `top right bottom left` 的写法
 - 其他与简写语法与 maigin 对应
 
-## Computed Style
+## CSS 样式的计算过程(Computed Style)
 
-- 声明
-- 层叠
-  - 优先级
+- 确定声明值(自己写的)
+- 层叠(解决冲突)
+  - 重要性
     - 作者样式表 important
     - 代理样式表(默认) important
     - 作者样式表
     - 代理样式表(默认)
-  - 特殊性(?,?,?)
+  - 特殊性(优先级)(?,?,?,?)(多个就加 1)
+    - 内联 style
     - id 选择器数量
     - 类选择器、属性选择器、伪类选择器
     - 元素选择器、伪元素选择器
   - 源次性
     - 源码中书写的顺序
 - 继承
+  - 对仍然没有值的属性, 若可以继承, 则使用继承
 - 默认
 
 ## 包含块
@@ -132,3 +134,7 @@ body {
 ## margin-block-start
 
 ## text-combine-upright
+
+## 图片清晰度的问题
+
+- `原始尺寸(el.naturalWidth) = 样式尺寸 * 缩放倍率(devicePixelRatio)`
