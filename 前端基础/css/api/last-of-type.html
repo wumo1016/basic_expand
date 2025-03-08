@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>last-of-type</title>
+    <style>
+      /* 第一个这个类型的元素 */
+      /* p:first-of-type {
+        color: blue;
+      } */
+
+      /* 最后一个这个类型的元素 */
+      /* p:last-of-type {
+        color: red;
+      } */
+
+      /* 从最后一个对应的元素开始算 从 1 开始 */
+      /* p:nth-last-of-type(2) {
+        color: red;
+      } */
+
+      /* 从最后一个开始 该是什么元素前面就对应什么元素 */
+      p:nth-last-child(2) {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <span>123</span>
+      <p>段落1</p>
+      <span>456</span>
+      <p>段落2</p>
+      <span>不是段落</span>
+    </div>
+  </body>
+</html>
