@@ -19,3 +19,52 @@ div {
     width: unquote('#{$i}px');
   }
 }
+
+/* 混合 */
+@mixin flex($layout) {
+  display: flex;
+  justify-content: $layout;
+  align-items: $layout;
+  @content;
+}
+
+div {
+  @include flex(center) {
+    color: red;
+  }
+}
+
+/* 定义映射以及取值 */
+$breakPoints: (
+  phone: (
+    320px,
+    480px
+  ),
+  pad: (
+    768px,
+    1024px
+  ),
+  pc: (
+    1280px,
+    1440px
+  ),
+  desktop: 1920px
+);
+@mixin reponseTo($device) {
+  $config: map-get($breakPoints, $device);
+  @if length($config) == 1 {
+    @media (min-width: $config) {
+      @content;
+    }
+  } @else {
+    @media (min-width: nth($config, 1)) and (max-width: nth($config, 2)) {
+      @content;
+    }
+  }
+}
+
+div {
+  @include reponseTo(pc) {
+    color: red;
+  }
+}

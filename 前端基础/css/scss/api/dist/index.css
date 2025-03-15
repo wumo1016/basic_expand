@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* 生成随机数 */
 div {
-  width: 61px;
+  width: 53px;
 }
 
 /* 函数 */
@@ -20,4 +20,19 @@ div {
 
 div {
   width: 12px;
+}
+
+/* 混合 */
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+}
+
+/* 定义映射以及取值 */
+@media (min-width: 1280px) and (max-width: 1440px) {
+  div {
+    color: red;
+  }
 }
