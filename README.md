@@ -74,9 +74,10 @@
 - [Performance 选项卡](https://www.douyin.com/video/7401054919765069091)
 - [闭包代码的提权漏洞](https://www.douyin.com/video/7405146322715577652)
 - 请求的取消
-- 基于CSS变量的主题切换
+- 基于 CSS 变量的主题切换
 - 全局注册和局部注册的区别
 - initial、unset、revert 的区别
+- 代码风格
 
 ## 渡一前端必修课(jigaoyichou557)
 
