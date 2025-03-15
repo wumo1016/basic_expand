@@ -85,3 +85,11 @@ https.get(urls[0], res => {
   res.pipe(fileStream)
 })
 ```
+
+## 生成随机颜色
+
+```js
+function getRandomColor() {
+  return Math.random().toString(16).slice(2, 8).padEnd(6, '0')
+}
+```
