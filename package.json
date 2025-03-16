@@ -20,6 +20,7 @@
     "sass": "^1.69.7"
   },
   "dependencies": {
+    "colorthief": "^2.6.0",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21"
