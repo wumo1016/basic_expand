@@ -93,3 +93,8 @@ function getRandomColor() {
   return Math.random().toString(16).slice(2, 8).padEnd(6, '0')
 }
 ```
+
+## 获取图片的主要颜色
+
+- 统计图片的主要颜色
+- [colorthief](https://lokeshdhakar.com/projects/color-thief/)
