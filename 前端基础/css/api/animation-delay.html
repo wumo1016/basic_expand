@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>动画延迟</title>
+    <style>
+      .box {
+        width: 800px;
+        margin: 20px 100px;
+      }
+      .ball {
+        --delay: 0s;
+        width: 100px;
+        height: 100px;
+        margin-bottom: 20px;
+        background-color: red;
+        border-radius: 50%;
+        /* 动画名称 持续时间 匀速运动 停在目标位置 暂停 */
+        animation: move 1s linear forwards paused;
+        animation-delay: var(--delay);
+      }
+
+      @keyframes move {
+        to {
+          transform: translateX(200px);
+          background-color: blue;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="ball"></div>
+      <input type="range" min="0" max="1" step="0.01" value="0" />
+    </div>
+    <script>
+      const ball = document.querySelector('.ball')
+      const range = document.querySelector('input')
+      range.addEventListener('input', function (e) {
+        ball.setAttribute('style', `--delay: -${e.target.value}s`)
+      })
+    </script>
+  </body>
+</html>
