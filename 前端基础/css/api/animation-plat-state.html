@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>动画的暂停和恢复</title>
+    <style>
+      .box {
+        width: 800px;
+        margin: 20px 100px;
+      }
+      .ball {
+        --delay: 0s;
+        width: 100px;
+        height: 100px;
+        margin-bottom: 20px;
+        background-color: red;
+        border-radius: 50%;
+        /* 动画名称 持续时间 匀速运动 停在目标位置 暂停 */
+        animation: move 1s linear infinite;
+      }
+
+      @keyframes move {
+        to {
+          transform: translateX(200px);
+          background-color: blue;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="ball"></div>
+      <button id="paused">暂停</button>
+      <button id="start">开始</button>
+    </div>
+    <script>
+      const ball = document.querySelector('.ball')
+      const paused = document.querySelector('#paused')
+      const start = document.querySelector('#start')
+      paused.addEventListener('click', function () {
+        ball.style.animationPlayState = 'paused'
+      })
+      start.addEventListener('click', function () {
+        ball.style.animationPlayState = 'running'
+      })
+    </script>
+  </body>
+</html>
