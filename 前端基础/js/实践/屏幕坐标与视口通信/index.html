@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>屏幕坐标与视口通信</title>
+    <script src="./index.js"></script>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        position: relative;
+      }
+      .box {
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <script>
+      // 窗口通信
+      const channel = new BroadcastChannel('channel')
+
+      const card = document.querySelector('.box')
+
+      card.onmousedown = e => {
+        let x = e.pageX - card.offsetLeft
+        let y = e.pageY - card.offsetTop
+        window.onmousemove = e => {
+          card.style.left = e.pageX - x + 'px'
+          card.style.top = e.pageY - y + 'px'
+        }
+        window.onmouseup = () => {
+          window.onmousemove = null
+          window.onmouseup = null
+        }
+      }
+      // 窗口通信
+      // const channel = new BroadcastChannel('channel')
+      // channel.onmessage = e => {
+      //   console.log('接收到消息', e.data)
+      // }
+
+      function init() {
+        const url = new URL(location.href)
+        const color = url.searchParams.get('color') || '#000'
+        card.style.backgroundColor = color
+      }
+
+      init()
+
+      /* 
+      - file:///E:/wumo/basic_expand/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/js/%E5%AE%9E%E8%B7%B5/%E5%B1%8F%E5%B9%95%E5%9D%90%E6%A0%87%E4%B8%8E%E8%A7%86%E5%8F%A3%E9%80%9A%E4%BF%A1/index.html?color=red
+      - file:///E:/wumo/basic_expand/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/js/%E5%AE%9E%E8%B7%B5/%E5%B1%8F%E5%B9%95%E5%9D%90%E6%A0%87%E4%B8%8E%E8%A7%86%E5%8F%A3%E9%80%9A%E4%BF%A1/index.html?color=blue
+      - file:///E:/wumo/basic_expand/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/js/%E5%AE%9E%E8%B7%B5/%E5%B1%8F%E5%B9%95%E5%9D%90%E6%A0%87%E4%B8%8E%E8%A7%86%E5%8F%A3%E9%80%9A%E4%BF%A1/index.html?color=yellow
+      */
+    </script>
+  </body>
+</html>
