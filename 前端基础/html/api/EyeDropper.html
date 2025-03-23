@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EyeDropper</title>
+    <style></style>
+  </head>
+
+  <body>
+    <button id="button">取色器</button>
+
+    <script>
+      const btn = document.getElementById('button')
+      btn.addEventListener('click', async () => {
+        const dropper = new EyeDropper()
+        try {
+          const res = await dropper.open()
+          console.log(res) // {sRGBHex: '#000000'}
+        } catch (error) {}
+      })
+    </script>
+  </body>
+</html>
