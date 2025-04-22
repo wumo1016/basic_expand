@@ -3,7 +3,9 @@
   "version": "0.1.1",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "bun ./test/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wumo1016/basic_expand.git"
@@ -16,10 +18,15 @@
   },
   "homepage": "https://github.com/wumo1016/basic_expand#readme",
   "devDependencies": {
+    "bun": "^1.2.10",
+    "chalk": "^5.4.1",
     "co": "^4.6.0",
+    "ora": "^8.2.0",
+    "puppeteer": "^24.6.1",
     "sass": "^1.69.7"
   },
   "dependencies": {
+    "axios": "^1.8.4",
     "colorthief": "^2.6.0",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
