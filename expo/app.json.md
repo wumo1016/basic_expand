@@ -7,9 +7,17 @@
 ```json
 {
   "expo": {
+    "name": "plm-app", // app名称
+    "slug": "plm-app", // expo中的项目名称
     "android": {
       "dangerouslyAllowHTTP": true
     }
   }
 }
+```
+
+## 初始化项目 id
+
+```sh
+eas init -id [projectId]
 ```
