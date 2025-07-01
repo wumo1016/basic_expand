@@ -11,14 +11,21 @@
 - win+c: 复制
 - win+v: 粘贴
 - win+x: 剪切
-- command+back: 删除文件
-- command+option+back: 永久删除文件
+- cmd+back: 删除文件
+- cmd++option+back: 永久删除文件
+- cmd+h: 隐藏最前方的 app
+- cmd+option+h: 隐藏除最前方以外的所有 app
+- cmd+m: 最小化最前方 app 至程序坞
+- cmd+w: 关闭最前方 app
 
 ## 基础操作
 
 - 卸载程序: 打开程序管理，长按图标即可
-- 将 ctrl 键盘映射为 command 键: 设置 => 键盘 => 键盘快捷键 => 修饰键
-- 预览图片: 使用列表视图, 点击空格预览图片
+- 将 ctrl 键盘映射为 cmd 键: 设置 => 键盘 => 键盘快捷键 => 修饰键
+- 图片相关
+  - 使用列表视图, 点击空格预览图片
+  - 选中所有需要查看的图片, cmd+o 即可查看
+  - 双击图片, cmd+i 查看图片参数
 
 ## git 安装
 
