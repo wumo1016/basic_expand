@@ -156,7 +156,7 @@ FID First Input Delay(首次输入延迟) 用户首次和页面交互(单击链�
   - 通过 async、defer 异步加载文件
   - 缓存访问过的元素 减少获取元素
   - IntersectionObserver => `2.intersection.html`
-  - requestAnimationFrame requestIdleCallbac
+  - requestAnimationFrame requestIdleCallback
 
 ## LightHouse 使用
 
