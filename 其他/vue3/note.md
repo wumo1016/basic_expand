@@ -14,6 +14,8 @@ function useUtil(emit: SetupContext<ButtonEmits>['emit']) {}
 
 ## 二次封装组件如何暴露原生组件的方法
 
+- 方法 1
+
 ```ts
 defineExpose(
   new Proxy(
@@ -28,6 +30,15 @@ defineExpose(
     }
   )
 )
+```
+
+- 方法 2
+
+```ts
+const vm = getCurrentinstance()
+function setRef(ins) {
+  vm.expose = vm.exposeProxy = ins || {}
+}
 ```
 
 ## 二次封装组件时不一样的插槽传递方案
