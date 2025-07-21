@@ -69,6 +69,29 @@ const load = () => {
 </template>
 ```
 
+## customRef
+
+```ts
+export const loading = customRef((track, trigger) => {
+  let lodingCount = 1
+  return {
+    get() {
+      track()
+      return lodingCount > 1
+    },
+    set(value) {
+      if (value) {
+        loadlodingCount++
+      } else {
+        loadlodingCount--
+      }
+      loadlodingCount = Math.max(0, loadlodingCount)
+      trigger()
+    }
+  }
+})
+```
+
 ## 3.5 优化
 
 - 1.props 解构与默认值
