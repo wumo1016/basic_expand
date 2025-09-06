@@ -12,6 +12,13 @@ import { SetupContext } from 'vue'
 function useUtil(emit: SetupContext<ButtonEmits>['emit']) {}
 ```
 
+## 定义 provide 和 inject 的类型
+
+```ts
+import { InjectionKey } from 'vue'
+export const Inject_Key: InjectionKey<IInject_Ctx> = Symbol('FmeaDetailCtx')
+```
+
 ## 二次封装组件如何暴露原生组件的方法
 
 - 方法 1
@@ -51,6 +58,12 @@ function setRef(ins) {
 import HelloWord from './HelloWord.vue'
 import { h } from 'vue'
 </script>
+```
+
+## 二次封装组件暴露原生组件类型
+
+```ts
+defineExpose({} as ComponentInstance<typeof ElInput>)
 ```
 
 ## 监听子组件的生命周期
