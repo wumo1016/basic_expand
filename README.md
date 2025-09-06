@@ -76,10 +76,13 @@
 - [Performance 选项卡](https://www.douyin.com/video/7401054919765069091)
 - [闭包代码的提权漏洞](https://www.douyin.com/video/7405146322715577652)
 - 请求的取消
-- 基于 CSS 变量的主题切换
+- `新的分割线`
+- 2048 游戏核心逻辑
+- [屏幕坐标与窗口通信](https://www.douyin.com/video/7470490078356278547)
+- [基于 CSS 变量的主题切换](https://www.douyin.com/video/7471258233798216970)
 - 全局注册和局部注册的区别
 - initial、unset、revert 的区别
-- 代码风格
+- JS 中的文档注释
 
 ## 渡一前端必修课(jigaoyichou557)
 
