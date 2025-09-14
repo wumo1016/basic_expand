@@ -52,3 +52,7 @@ const isDataType = (target, type) => {
 ```html
 <img src="./img/default1.png" onerror="this.src='./img/default2.png'" />
 ```
+
+## 卫语句
+
+- 是一种编程技巧，用于提前返回函数，以避免嵌套过深的 if 语句
