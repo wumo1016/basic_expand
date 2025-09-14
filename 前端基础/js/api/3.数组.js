@@ -154,6 +154,14 @@
   console.log(list) // [ wew: { name: '张三' }, sdf: { name: '李四' } ]
   console.log(Object.values(list)) // [ { name: '张三' }, { name: '李四' } ]
 })
+;(function () {
+  const list = [1, 2]
+  const q = { m: 1, n: 2 }
+  const w = Object.assign(list, q)
+  const { m, n } = w
+  console.log(w) // [ 1, 2, m: 1, n: 2 ]
+  console.log(m, n) //  1 2
+})
 
 /* ----------------------------------------- copyWithin ----------------------------------------- */
 ;(function () {
