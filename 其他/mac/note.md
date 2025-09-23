@@ -17,6 +17,7 @@
 - cmd+option+h: 隐藏除最前方以外的所有 app
 - cmd+m: 最小化最前方 app 至程序坞
 - cmd+w: 关闭最前方 app
+- ctrl+shift+.: 显示隐藏文件夹
 
 ## 基础操作
 
