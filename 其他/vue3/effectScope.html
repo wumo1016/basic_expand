@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>effectScope</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="a"></div>
+    <div id="b"></div>
+    <div id="app">
+      <button @click="test('add')">加</button>
+      {{count}}
+      <button @click="test()">减</button>
+      <button @click="stop">停止</button>
+    </div>
+    <script>
+      const { createApp, ref, watch, effect, effectScope } = Vue
+      createApp({
+        setup() {
+          const count = ref(0)
+
+          const test = type => {
+            count.value = type === 'add' ? count.value + 1 : count.value - 1
+          }
+
+          const scope = effectScope()
+
+          scope.run(() => {
+            watch(count, (newVal, oldVal) => {
+              const a = document.getElementById('a')
+              a.innerHTML = newVal
+            })
+
+            effect(() => {
+              const b = document.getElementById('b')
+              b.innerHTML = count.value
+            })
+          })
+
+          const stop = () => {
+            scope.stop()
+          }
+
+          return {
+            count,
+            test,
+            stop
+          }
+        }
+      }).mount('#app')
+    </script>
+  </body>
+</html>
