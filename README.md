@@ -84,8 +84,10 @@
 - initial、unset、revert 的区别
 - JS 中的文档注释
 - `新的分割线`
-- Promise.try
-
+- 2025-09-22: Commonjs 的本质
+- 2025-10-03: 跨标签页的数据共享
+- 2025-10-09: 数据的流式获取
+- 2025-10-12: Promise.try
 
 ## 渡一前端必修课(jigaoyichou557)
 
