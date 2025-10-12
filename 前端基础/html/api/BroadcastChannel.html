@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BroadcastChannel</title>
+  </head>
+  <body>
+    <script>
+      /* 多个标签页使用同一个 BroadcastChannel 实例可以实现跨标签页通信 */
+      /* 监听消息 */
+      function listenMsg() {
+        const channel = new BroadcastChannel('channel')
+        channel.onmessage = e => {
+          console.log('接收到消息', e.data)
+        }
+      }
+      /* 发送消息 */
+      function sendMsg() {
+        const channel = new BroadcastChannel('channel')
+        channel.postMessage('hello')
+      }
+    </script>
+  </body>
+</html>
