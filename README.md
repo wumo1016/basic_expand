@@ -83,6 +83,9 @@
 - 全局注册和局部注册的区别
 - initial、unset、revert 的区别
 - JS 中的文档注释
+- `新的分割线`
+- Promise.try
+
 
 ## 渡一前端必修课(jigaoyichou557)
 
