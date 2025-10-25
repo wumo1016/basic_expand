@@ -22,25 +22,22 @@
 })
 
 /* ----------------------------------------- Number静态属性  ----------------------------------------- */
-/* 
-- MAX_SAFE_INTEGER: 最大安全整数(Math.pow(2, 53) - 1)(9007199254740991)
-- MIN_SAFE_INTEGER: 最小安全整数(-9007199254740991)
+/*
+- 静态属性
+  - MAX_SAFE_INTEGER: 最大安全整数(Math.pow(2, 53) - 1)(9007199254740991)
+  - MIN_SAFE_INTEGER: 最小安全整数(-9007199254740991)
+- 静态方法
+  - parseInt: 与全局方法一致(将指定基数的字符串转换为十进制数) => parseInt(string, radix)
+  - parseFloat: 与全局方法一致(将字符串转换为浮点数)
+  - isFinite: (全局方法)判断是是否不是 Infinity
+  - isInteger: 判断是否是整数
+  - isSafeInteger: 判断是否是安全整数
+  - toFixed: (digits) - 小数点后保留几位, 值为 0-100 (省略则为0), 返回值为字符串
 */
 ;(function () {
   console.log(Number.MAX_SAFE_INTEGER === 9007199254740991)
   console.log(Number.MIN_SAFE_INTEGER === -9007199254740991)
-})
 
-/* ----------------------------------------- Number静态方法  ----------------------------------------- */
-/* 
-- parseInt: 与全局方法一致(将指定基数的字符串转换为十进制数) => parseInt(string, radix)
-- parseFloat: 与全局方法一致(将字符串转换为浮点数)
-- isFinite: (全局方法)判断是是否不是 Infinity
-- isInteger: 判断是否是整数
-- isSafeInteger: 判断是否是安全整数
-- toFixed: (digits) - 小数点后保留几位, 值为 0-100 (省略则为0), 返回值为字符串
-*/
-;(function () {
   console.log(Number.parseInt === parseInt)
   console.log(Number.parseFloat === parseFloat)
 
@@ -54,10 +51,13 @@
   console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1)) // false
 })
 
-/* ----------------------------------------- Math静态方法  ----------------------------------------- */
+/* ----------------------------------------- Math  ----------------------------------------- */
 /* 
-- trunc: 去除小数部分
-- sign: 用于判断一个数是否大于0(大于0返回1 小于0返回-1 等于0返回0)
+- 静态方法
+  - trunc: 去除小数部分
+  - sign: 用于判断一个数是否大于0(大于0返回1 小于0返回-1 等于0返回0)
+  - max
+  - min
 */
 ;(function () {
   console.log(Math.trunc(1.23)) // 1
@@ -65,9 +65,17 @@
   console.log(Math.trunc(100)) // 100
   console.log(Math.trunc(-100)) // -100
   console.log(Math.trunc(0)) // 0
+
+  console.log(Math.max()) // -Infinity
+  console.log(Math.min()) // Infinity
 })
 
 /* ----------------------------------------- 进制转换  ----------------------------------------- */
 ;(function () {
-  console.log(255..toString(16)) // 小数可以调用 toString 方法, .0 可以简写
+  console.log((255).toString(16)) // 小数可以调用 toString 方法, .0 可以简写
+})
+
+/* ----------------------------------------- NaN  ----------------------------------------- */
+;(function () {
+  console.log(typeof NaN) // number
 })()
