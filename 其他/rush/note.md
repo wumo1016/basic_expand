@@ -1,3 +1,9 @@
+## 安装
+```bash
+npm i --global @microsoft/rush
+```
+
+
 ## 初始化项目
 
 ```bash
