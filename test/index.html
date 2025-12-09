@@ -7,17 +7,32 @@
     <title>Document</title>
     <style>
       .box {
-        width: 200px;
+        width: 500px;
         box-sizing: border-box;
+        background-color: #f00;
+        overflow-x: auto;
+        position: relative;
+      }
+      .box1 {
+        width: 1000px;
+        height: 300px;
+      }
+      .box2 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: blue;
       }
     </style>
   </head>
 
   <body>
     <div class="box">
-      水水水水水水水水水水水水水水水水水水水顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶反反复复烦烦烦烦烦烦烦烦烦烦烦烦烦
+      <div class="box1"></div>
+      <div class="box2"></div>
     </div>
-
     <script></script>
   </body>
 </html>
