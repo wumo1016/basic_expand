@@ -10,7 +10,7 @@
 
 ## 创建项目
 
-```sh
+````sh
 # 初始化项目
 npx create-expo-app@latest
 
@@ -30,19 +30,25 @@ eas build:configure
 npx expo install expo-dev-client
 
 # 添加以下 scripts 命令
-# "start": "npm run dev",
-# "dev": "expo start --dev-client",
-# "pre-build:android": "expo prebuild --platform android",
-# "dev-build:android": "npm run pre-build:android && eas build --profile development --platform android",
-# "build:android": "npm run pre-build:android && eas build --platform android"
+```json
+{
+  "start": "npm run dev",
+  "dev": "expo start --dev-client",
+  "pre-build:android": "expo prebuild --platform android",
+  "dev-build:android": "npm run pre-build:android && eas build --profile development --platform android",
+  "build:android": "npm run pre-build:android && eas build --platform android"
+}
+````
 
 # 本地存储处理
+
 npm i react-native-mmkv -S
 
 # 持久化缓存处理
+
 npm i @reduxjs/toolkit redux-persist react-redux -S
 
-```
+````
 
 ## 创建环境变量
 
@@ -52,7 +58,7 @@ npm i @reduxjs/toolkit redux-persist react-redux -S
 
 ```sh
 eas env:pull --environment development
-```
+````
 
 ## 打包支持 http 协议
 
