@@ -62,6 +62,8 @@
 
 - [逐字显示效果](https://codepen.io/Zhouzi/pen/JoRazP)
 
+- [离谱！它把国内模型全包场了，还一键集成！](https://www.douyin.com/video/7585134775980821795)
+
 ## 渡一前端提薪课(23429113150)
 
 - [零宽字符](https://www.douyin.com/video/7366911664517664011)
