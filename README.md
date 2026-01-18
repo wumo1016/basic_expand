@@ -116,6 +116,7 @@
 - [如何通过向量相似度算法匹配知识？如何结合用户问题生成答案？](https://www.douyin.com/video/7572023828306464009)
 - [为什么需要对知识库建立索引？索引如何建立？](https://www.douyin.com/video/7571706209791659291)
 - [RAG为什么是重要的AI技术？什么是RAG？如何实现RAG？](https://www.douyin.com/video/7571767756194958619)
+- 9-28
 
 git config user.name "wumo1016"
 git config user.email "760478279@qq.com"

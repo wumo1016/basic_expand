@@ -1,0 +1,18 @@
+{
+  "name": "demo-pnpm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.23.0",
+  "engines": {
+    "node": ">=21.0.0",
+    "pnpm": ">=10.23.0",
+    "npm": ">=9.6.7"
+  }
+}
