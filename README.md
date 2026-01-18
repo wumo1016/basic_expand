@@ -111,7 +111,7 @@
 - 2025-08-27: vue 组件封装终极版
 - 2025-10-07: vue 中如何优雅的处理按钮 loading
 
-## 渡一前端公开大师课(69691637803)(https://www.douyin.com/user/MS4wLjABAAAAKuAIiftuTMsdnH-9MyU8VZla5fmjhdY2Gd7tHueV25vzFnKs3lqLSV7xoPE7FTxi?from_tab_name=main&is_search=0&list_name=follow&nt=1)
+## [渡一前端公开大师课(69691637803)](https://www.douyin.com/user/MS4wLjABAAAAKuAIiftuTMsdnH-9MyU8VZla5fmjhdY2Gd7tHueV25vzFnKs3lqLSV7xoPE7FTxi?from_tab_name=main&is_search=0&list_name=follow&nt=1)
 
 - [如何通过向量相似度算法匹配知识？如何结合用户问题生成答案？](https://www.douyin.com/video/7572023828306464009)
 - [为什么需要对知识库建立索引？索引如何建立？](https://www.douyin.com/video/7571706209791659291)
