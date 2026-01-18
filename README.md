@@ -111,6 +111,9 @@
 - 2025-08-27: vue 组件封装终极版
 - 2025-10-07: vue 中如何优雅的处理按钮 loading
 
+## 渡一前端公开大师课(69691637803)
+
+- [RAG为什么是重要的AI技术？什么是RAG？如何实现RAG？](https://www.douyin.com/video/7571767756194958619)
 
 git config user.name "wumo1016"
 git config user.email "760478279@qq.com"
