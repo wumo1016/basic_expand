@@ -6,11 +6,11 @@
 
 - ctrl+空格: 切换输入法
 - shift+字母: 输入大写字母
-- win+空格: 打开聚焦搜索
-- win+tab: 切换应用
-- win+c: 复制
-- win+v: 粘贴
-- win+x: 剪切
+- cmd+空格: 打开聚焦搜索
+- cmd+tab: 切换应用
+- cmd+c: 复制
+- cmd+v: 粘贴
+- cmd+x: 剪切
 - cmd+back: 删除文件
 - cmd++option+back: 永久删除文件
 - cmd+h: 隐藏最前方的 app
@@ -18,6 +18,7 @@
 - cmd+m: 最小化最前方 app 至程序坞
 - cmd+w: 关闭最前方 app
 - ctrl+shift+.: 显示隐藏文件夹
+- cmd+～: 切换当前应用的多个窗口
 
 ## 基础操作
 
