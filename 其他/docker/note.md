@@ -154,3 +154,14 @@ start /w "" "Docker Desktop Installer.exe" install --installation-dir=E:\docker
   - `docker network ls`: 列出所有网络
   - `docker network rm [网络名/网络ID]`: 删除网络
   - `docker network inspect [网络名/网络ID]`: 查看网络详细信息
+
+## docker compose
+
+- 介绍
+  - 每个 docker compose 会自定创建一个子网
+- 常用命令
+  - `docker compose up -d`: 启动项目中的所有容器
+  - `docker compose down`: 停止并删除项目中的所有容器
+  - `docker compose stop`: 停止项目中的所有容器
+  - `docker compose ps`: 查看项目中的所有容器
+  - `docker compose logs [容器名]`: 查看容器的日志
