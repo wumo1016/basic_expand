@@ -59,3 +59,8 @@ const computedValue = useMemo(() => {
   </ScrollView>
 </KeyboardAvoidingView>
 ```
+
+## useState 与 useRef 的区别
+
+- useState 用于管理状态，每次状态更新时，组件会重新渲染
+- useRef 用于管理非状态值，不会触发组件重新渲染
