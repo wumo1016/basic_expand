@@ -64,3 +64,7 @@ const computedValue = useMemo(() => {
 
 - useState 用于管理状态，每次状态更新时，组件会重新渲染
 - useRef 用于管理非状态值，不会触发组件重新渲染
+
+## `position: absolute` 的问题
+
+- 子元素的宽高 100% 是根据父元素的 宽高 - 子元素的 padding 来计算的
