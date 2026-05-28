@@ -1,10 +1,30 @@
 ## 父调用字组件的方法
 
 - 子组件用 forwardRef 包裹
+
 - 子组件
 
 ```ts
+import { forwardRef } from 'react'
 
+const MyComponent = forwardRef((props, ref) => {
+  return (
+    <div ref={ref}>
+      <p>Hello, {props.name}!</p>
+    </div>
+  )
+})
+```
+
+- 父组件
+
+```ts
+  const MyComponentRef = useRef<MyComponent>(null)
+  return (
+    <div>
+      <MyComponent ref={MyComponentRef} name="Wumo" />
+    </div>
+  )
 ```
 
 ## setState 获取更新后的值
@@ -33,9 +53,9 @@ const computedValue = useMemo(() => {
 
 ## 类似 Provide 和 Inject 的效果
 
-- 父组件用 createContext 创建一个上下文
-- 父组件用 Provider.Provider 包裹子组件，传递值
-- 子组件用 useContext 消费值
+- 父组件用 `createContext` 创建一个上下文 `const TestContext =  createContext()`
+- 父组件用 `TestContext` 包裹子组件，传递值
+- 子组件用 `useContext(TestContext)` 消费值
 
 ## 表单输入最佳实践
 
@@ -68,3 +88,14 @@ const computedValue = useMemo(() => {
 ## `position: absolute` 的问题
 
 - 子元素的宽高 100% 是根据父元素的 宽高 - 子元素的 padding 来计算的
+
+## 函数组件使用方式的区别
+
+- `<FormWidget />`
+  - 创建新的组件实例
+  - 重渲染时 比较组件引用，引用变了就卸载重建
+  - DOM 销毁旧的，创建新的
+- `{renderWidget()}`
+  - 不创建新的组件实例
+  - 比较 JSX 类型，类型不变就就地更新
+  - 复用已有 DOM
