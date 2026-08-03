@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "bun ./test/index.js",
+    "test1": "bun ./test/index.ts",
     "build:cryptojs": "bun build ./tools/cryptojs-entry.js --outfile ./dist/crypto-js.bundle.js --format=esm --minify"
   },
   "repository": {
